@@ -57,21 +57,33 @@ class MaterialAddDialog(QtWidgets.QDialog):
         - classes가 있으면 가장 큰 cid + 1을 반환
         """
         try:
-            parent = self.parent()
-            if not parent:
+            # ★ 수정: MaterialAddDialog의 parent는 UserLabelingDialog이고,
+            # UserLabelingDialog의 parent가 MainWindow입니다.
+            parent = self.parent()  # UserLabelingDialog
+            main_window = None
+            
+            if parent:
+                # UserLabelingDialog의 parent가 MainWindow
+                main_window = parent.parent()
+                if main_window and not (hasattr(main_window, "_cache_primary_path") or hasattr(main_window, "_extract_src_path")):
+                    main_window = None
+            
+            if not main_window:
+                import logging
+                logging.warning("[MaterialAdd] MainWindow를 찾을 수 없습니다. 0부터 시작합니다.")
                 return 0
             
             # primary path 찾기
-            cfg = getattr(parent, "cfg", {})
+            cfg = getattr(main_window, "cfg", {})
             primary = None
             
             # _cache_primary_path 메서드가 있으면 사용
-            if hasattr(parent, "_cache_primary_path"):
-                primary = parent._cache_primary_path(cfg)
+            if hasattr(main_window, "_cache_primary_path"):
+                primary = main_window._cache_primary_path(cfg)
             
             # 없으면 _extract_src_path 시도
-            if not primary and hasattr(parent, "_extract_src_path"):
-                primary = parent._extract_src_path(cfg)
+            if not primary and hasattr(main_window, "_extract_src_path"):
+                primary = main_window._extract_src_path(cfg)
             
             # 여전히 없으면 data_path에서 찾기
             if not primary:
@@ -145,23 +157,29 @@ class MaterialAddDialog(QtWidgets.QDialog):
             description = self.textEdit_description.toPlainText().strip()
             
             # user_type 확인: MainWindow에서만 가져오기
-            parent = self.parent()
+            # ★ 수정: MaterialAddDialog의 parent는 UserLabelingDialog이고,
+            # UserLabelingDialog의 parent가 MainWindow입니다.
+            parent = self.parent()  # UserLabelingDialog
             main_window = None
             user_type = None
             
-            # UserLabelingDialog의 parent가 MainWindow
             if parent:
                 try:
+                    # UserLabelingDialog의 parent가 MainWindow
                     main_window = parent.parent()
-                    if main_window:
+                    if main_window and (hasattr(main_window, "_cache_primary_path") or hasattr(main_window, "_extract_src_path")):
                         user_type = getattr(main_window, "user_type", None)
+                    else:
+                        main_window = None
                 except Exception:
                     pass
             
             # MainWindow에서 user_type을 찾지 못하면 에러 발생
             if user_type not in ("personal", "server"):
                 import logging
-                logging.error("[MaterialAdd] MainWindow에서 user_type을 찾을 수 없습니다.")
+                logging.error("[MaterialAdd] MainWindow에서 user_type을 찾을 수 없습니다. parent=%s, main_window=%s", 
+                            type(parent).__name__ if parent else None,
+                            type(main_window).__name__ if main_window else None)
                 QtWidgets.QMessageBox.critical(
                     self, 
                     "오류", 

@@ -120,6 +120,7 @@ class MainWindow(QtWidgets.QMainWindow):
             dock_add_layer  = self.layersDock.add_layer,
             dock_has_layer  = getattr(self.layersDock, "has_layer", None),
             dock_remove_layer = getattr(self.layersDock, "remove_layer", None),
+            map_remove_rgb  = self._map_view.remove_rgb_image,  # RGB 이미지 제거 콜백
         )
 
         # 2) ★ SSOT 팔레트 1회 생성 (아래 새 함수)
@@ -166,7 +167,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self._init_recent_menu()
         self._refresh_recent_menu()
         
-        self._init_roi_toolbar()
         self.clsDock = None
         ## ROI 지정 구분
         self._active_roi_owner = ROIInputOwner.NONE
@@ -2320,46 +2320,6 @@ class MainWindow(QtWidgets.QMainWindow):
         except Exception as e:
             logging.exception("[Workspace] dialog finished cleanup failed")
 
-    def _init_roi_toolbar(self):
-        """★ 메인 창 상단에 ROI 툴바(Rect/Poly/Clear)를 만든다."""
-        tb = QtWidgets.QToolBar("ROI", self)
-        tb.setObjectName("toolBarROI")
-        tb.setIconSize(QtCore.QSize(16, 16))
-        tb.setMovable(True)
-        self.addToolBar(QtCore.Qt.TopToolBarArea, tb)
-
-        # 액션들(체크 가능)
-        self.act_roi_rect = QtWidgets.QAction("Rect", self)
-        self.act_roi_rect.setCheckable(True)
-        self.act_roi_poly = QtWidgets.QAction("Poly", self)
-        self.act_roi_poly.setCheckable(True)
-        self.act_roi_clear = QtWidgets.QAction("Clear", self)
-
-        # 배타 그룹(동시에 하나만)
-        ag = QtWidgets.QActionGroup(self)
-        ag.setExclusive(True)
-        ag.addAction(self.act_roi_rect)
-        ag.addAction(self.act_roi_poly)
-
-        # 툴바에 추가
-        tb.addAction(self.act_roi_rect)
-        tb.addAction(self.act_roi_poly)
-        tb.addSeparator()
-        tb.addAction(self.act_roi_clear)
-
-        # 시그널 연결
-        self.act_roi_rect.triggered.connect(lambda _: self._set_roi_mode_from_toolbar('rect'))   # ★ Rect 모드
-        self.act_roi_poly.triggered.connect(lambda _: self._set_roi_mode_from_toolbar('poly'))   # ★ Poly(자유형/다각형)
-        self.act_roi_clear.triggered.connect(lambda _: self._set_roi_mode_from_toolbar('none'))  # ★ 모드 해제
-
-        self.roiToolBar = tb
-        self._show_roi_toolbar(False)  # ★ 기본적으로 숨김 (Dialog 사용)
-
-    def _show_roi_toolbar(self, show: bool):
-        """★ ROI 툴바 표시/숨김"""
-        if hasattr(self, "roiToolBar") and self.roiToolBar:
-            self.roiToolBar.setVisible(bool(show))
-
     def _ensure_roi_controller(self) -> bool:
         """★ ROIController를 지연 생성. 이미지 없으면 False."""
         if getattr(self, "roi", None) is not None:
@@ -3272,9 +3232,12 @@ class MainWindow(QtWidgets.QMainWindow):
         )
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.clsDock)
 
-        # 닫기 금지(항상 켜두기)
+        # 닫기 기능 활성화 (사용자가 껐다 켰다 할 수 있도록)
         feats = self.clsDock.features()
-        self.clsDock.setFeatures(feats & ~QtWidgets.QDockWidget.DockWidgetClosable)
+        self.clsDock.setFeatures(feats | QtWidgets.QDockWidget.DockWidgetClosable)
+        
+        # View 메뉴에 토글 액션 추가 (껐다 켰다 할 수 있도록)
+        self._add_dock_to_view_menu(self.clsDock, "Pixel Classification")
 
         # ── 공통 기능 연결 ─────────────────────────────────────────
         # self.clsDock.requestClassify.connect(self._on_pixel_classify)
@@ -3310,6 +3273,35 @@ class MainWindow(QtWidgets.QMainWindow):
         except Exception:
             import logging
             logging.exception("[MainWindow] connect requestClearAnalysisRegion failed")
+    
+    def _add_dock_to_view_menu(self, dock: QtWidgets.QDockWidget, menu_text: str):
+        """View 메뉴에 Dock 토글 액션 추가"""
+        try:
+            menubar = self.menuBar()
+            view_menu = None
+            
+            # View 메뉴 찾기
+            for a in menubar.actions():
+                if a.text().replace("&", "").lower() in ("view", "보기"):
+                    view_menu = a.menu()
+                    break
+            
+            # View 메뉴가 없으면 생성
+            if view_menu is None:
+                view_menu = menubar.addMenu("View")
+            
+            # Dock의 토글 액션 가져오기 (QDockWidget이 자동으로 제공)
+            toggle_action = dock.toggleViewAction()
+            toggle_action.setText(menu_text)
+            toggle_action.setToolTip(f"{menu_text} Dock 표시/숨김")
+            
+            # View 메뉴에 추가 (이미 있으면 중복 추가 방지)
+            if toggle_action not in view_menu.actions():
+                view_menu.addAction(toggle_action)
+        except Exception:
+            import logging
+            logging.exception("[MainWindow] add dock to view menu failed")
+    
     def _on_start_class_rect_roi(self):
         if not self._ensure_class_roi_controller():
             QtWidgets.QMessageBox.information(self, "안내", "이미지를 먼저 로드하세요.")
@@ -4327,7 +4319,6 @@ class MainWindow(QtWidgets.QMainWindow):
         캐시가 ROI 서브(h,w,K)인 경우 전역좌표→ROI 로컬좌표로 변환 후 접근.
         Score는 extras 저장된 원시 거리 그대로 사용.
         """
-        
         try:
             if hasattr(self, "clsDock") and self.clsDock and \
             hasattr(self.clsDock, "is_analysis_mode_active") and \
@@ -4336,7 +4327,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 return
         except Exception:
             pass
-        
+
         try:
             tkc = getattr(self, "_class_topk_cids", None)
             tkv = getattr(self, "_class_topk_vals", None)
@@ -4362,34 +4353,59 @@ class MainWindow(QtWidgets.QMainWindow):
             cids = tkc[yy, xx, :]
             vals = tkv[yy, xx, :]
 
-            # 4) 메타 맵 (캐시 있으면 먼저 쓰고, 부족하면 한 번만 조회)
+            # 4) 메타 맵 준비
             meta_map = getattr(self, "_mtrl_meta", {}) or {}
-            missing = [int(c) for c in cids.tolist()
-                    if (int(c) not in meta_map and str(int(c)) not in meta_map)]
-            if missing:
+            user_type = getattr(self, "user_type", "server")
+
+            if user_type == "personal":
+                # personal: .resample.info 의 classes 사용
                 try:
-                    base_url = os.getenv('material_filtering_url')
-                    recs = search_material_filtering_list(base_url=base_url, mtrl_ids=missing)
-                    for rec in (recs or []):
-                        try:
-                            cid2 = int(rec.get('mtrl_cd'))
-                            meta_map[cid2] = {'name': rec.get('mtrl_nm', str(cid2)),
-                                            'desc': rec.get('desc', '')}
-                        except Exception:
-                            pass
+                    if not meta_map:
+                        primary = self._cache_primary_path(self.cfg) if hasattr(self, "cfg") else None
+                        if not primary and hasattr(self, "_extract_src_path"):
+                            primary = self._extract_src_path(self.cfg)
+                        if primary:
+                            classes_info = load_classes_from_info(primary)  # [(cid, name, desc), ...]
+                            for cid_i, name_i, desc_i in classes_info:
+                                meta_map[int(cid_i)] = {
+                                    "name": str(name_i),
+                                    "desc": str(desc_i) if desc_i is not None else "",
+                                }
+                    # 캐시 갱신
                     self._mtrl_meta = meta_map
                 except Exception:
-                    pass  # 메타 조회 실패해도 표시는 진행
+                    logging.exception("[TopK] personal: load_classes_from_info failed")
+            else:
+                # server: 기존 API 경로 유지
+                missing = [int(c) for c in cids.tolist()
+                        if (int(c) not in meta_map and str(int(c)) not in meta_map)]
+                if missing:
+                    try:
+                        base_url = os.getenv('material_filtering_url')
+                        recs = search_material_filtering_list(base_url=base_url, mtrl_ids=missing)
+                        for rec in (recs or []):
+                            try:
+                                cid2 = int(rec.get('mtrl_cd'))
+                                meta_map[cid2] = {
+                                    'name': rec.get('mtrl_nm', str(cid2)),
+                                    'desc': rec.get('desc', rec.get('dsc', '')),
+                                }
+                            except Exception:
+                                pass
+                        self._mtrl_meta = meta_map
+                    except Exception:
+                        # 메타 조회 실패해도 표시는 가능
+                        logging.exception("[TopK] server: material_filtering_list failed")
 
             # 5) rows 구성 (원시 score 그대로 표시)
             rows = []
             for i in range(K):
-                cid   = int(cids[i])
-                score = float(vals[i])            # RAW 그대로 (SAM은 라디안)
-                meta  = meta_map.get(cid) or meta_map.get(str(cid), {})
-                name  = meta.get('name', str(cid))
-                desc  = meta.get('desc', '')
-                rows.append((i+1, cid, f"{score:.6f}", name, desc))
+                cid = int(cids[i])
+                score = float(vals[i])  # RAW 그대로 (SAM은 라디안)
+                meta = meta_map.get(cid) or meta_map.get(str(cid), {}) or {}
+                name = meta.get('name', str(cid))
+                desc = meta.get('desc', '')
+                rows.append((i + 1, cid, f"{score:.6f}", name, desc))
 
             self._show_topk_dialog(rows, "선택 픽셀 분류 결과")
 
@@ -4398,6 +4414,7 @@ class MainWindow(QtWidgets.QMainWindow):
         except Exception:
             logging.exception("[TopK] show failed")
             QtWidgets.QMessageBox.information(self, "안내", "Top-K 정보를 만들 수 없습니다. 먼저 분류를 수행해 주세요.")
+
             
     def _on_cls_dock_visibility(self, visible: bool):
         """PixelClassificationDock이 보이면 클릭 모드 ON, 숨기면 OFF."""
@@ -5020,7 +5037,6 @@ class MainWindow(QtWidgets.QMainWindow):
         if hasattr(self, "clsDock") and self.clsDock and hasattr(self.clsDock, "set_roi_drawing_state"):
             self.clsDock.set_roi_drawing_state(True)
 
-        self._show_roi_toolbar(True)
         self._set_roi_mode_from_toolbar('rect')
         self.statusBar().showMessage("사각형 ROI: 드래그로 지정, 놓으면 완료.", 3000)
        

@@ -214,8 +214,7 @@ class PixelClassificationDock(QtWidgets.QDockWidget):
                 cls_text = "중복 클래스"
                 self._class_meta[cid_i] = {"name": "중복 클래스", "desc": desc_meta or ""}
             elif name_meta:
-                # name_meta만 표시 (class_id 제거)
-                cls_text = str(name_meta)
+                cls_text = f"{cid_i} - {name_meta}"
                 self._class_meta[cid_i] = {"name": name_meta, "desc": desc_meta or ""}
             else:
                 cls_text = str(cid_i)

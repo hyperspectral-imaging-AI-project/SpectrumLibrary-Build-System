@@ -24,7 +24,8 @@ class LayerManager:
                 map_add_layer, map_set_visible, map_remove_layer, map_reorder,
                 dock_add_layer,           # ← 단일 API
                 dock_has_layer=None,
-                dock_remove_layer=None):
+                dock_remove_layer=None,
+                map_remove_rgb=None):     # ← RGB 이미지 제거용 콜백
         self.map_add_layer = map_add_layer
         self.map_set_visible = map_set_visible
         self.map_remove_layer = map_remove_layer
@@ -32,6 +33,7 @@ class LayerManager:
         self.dock_add_layer = dock_add_layer
         self.dock_has_layer = dock_has_layer or (lambda name: False)
         self.dock_remove_layer = dock_remove_layer or (lambda name: None)
+        self.map_remove_rgb = map_remove_rgb or (lambda: None)  # RGB 제거 콜백
 
         self.recs: Dict[str, LayerRec] = {}
         # ★ 추가: 정렬/데이터 저장소
@@ -328,7 +330,10 @@ class LayerManager:
             # 2) 부모 맵 아이템도 제거(※ 누락 지점)
             if rec is not None:
                 try:
-                    if rec.map_item_name and rec.map_item_name != "RGB":
+                    if rec.map_item_name == "RGB":
+                        # RGB 베이스 이미지 제거
+                        self.map_remove_rgb()
+                    elif rec.map_item_name:
                         self.map_remove_layer(rec.map_item_name)
                 except Exception:
                     pass

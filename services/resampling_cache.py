@@ -290,7 +290,14 @@ def append_classes(
     cfg: Dict[str, Any],
     class_raw: Optional[Dict[int, np.ndarray]] = None,
     class_cr: Optional[Dict[int, np.ndarray]] = None,
+    *,
+    classes_metadata: Optional[Dict[int, Dict[str, Any]]] = None,
 ) -> bool:
+    """
+    personal 사용자용: 기존 .npz의 label_raw/label_cr에 새 라벨을 누적해서 저장.
+    - splib_raw/splib_cr/label_coords 등은 기존 값 유지
+    - .info의 classes도 (있다면) 누적/업데이트
+    """
     primary = _norm_path(primary_path)
     if not primary:
         return False
@@ -316,7 +323,7 @@ def append_classes(
             out[i] = np.interp(x_new, x_old, mat[i])
         return out
 
-    def _merge(dst: dict, add: Optional[dict]):
+    def _merge(dst: dict[int, np.ndarray], add: Optional[dict[int, np.ndarray]]):
         if not isinstance(add, dict):
             return
         for k, v in add.items():
@@ -338,49 +345,63 @@ def append_classes(
                     prev = _resample2d(prev, nbands)
                 dst[cid] = np.vstack([prev, m]).astype(np.float32)
 
-    # 기존 label_raw / label_cr 읽기
-    old_raw, old_cr = {}, {}
+    # 1) 기존 npz 로드
+    old_splib_raw = {}
+    old_splib_cr  = {}
+    old_label_raw = {}
+    old_label_cr  = {}
+    old_label_coords = {}
+
     if os.path.isfile(npz_path):
         z = np.load(npz_path, allow_pickle=True)
-        old_raw = _to_native(z["label_raw"]) if "label_raw" in z else {}
-        old_cr  = _to_native(z["label_cr"])  if "label_cr"  in z else {}
-        if not isinstance(old_raw, dict):
-            old_raw = {}
-        if not isinstance(old_cr, dict):
-            old_cr = {}
+        old_splib_raw = _to_native(z.get("splib_raw", {})) or {}
+        old_splib_cr  = _to_native(z.get("splib_cr", {})) or {}
+        old_label_raw = _to_native(z.get("label_raw", {})) or {}
+        old_label_cr  = _to_native(z.get("label_cr",  {})) or {}
+        if "label_coords" in z:
+            old_label_coords = _to_native(z["label_coords"]) or {}
 
-    new_raw = dict(old_raw)
-    new_cr  = dict(old_cr)
+    if not isinstance(old_label_raw, dict):
+        old_label_raw = {}
+    if not isinstance(old_label_cr, dict):
+        old_label_cr = {}
+
+    # 2) 라벨 누적
+    new_raw = dict(old_label_raw)
+    new_cr  = dict(old_label_cr)
     _merge(new_raw, class_raw)
     _merge(new_cr,  class_cr)
 
-    # 기존 npz의 다른 키(splib_* 등)는 그대로 유지
-    payload: Dict[str, Any] = {}
-    if os.path.isfile(npz_path):
-        z = np.load(npz_path, allow_pickle=True)
-        for key in z.files:
-            if key not in ("label_raw", "label_cr"):
-                payload[key] = z[key]
+    # 3) 다시 저장 (dict -> 0-D object 로)
+    np.savez(
+        npz_path,
+        splib_raw=_pack_obj(old_splib_raw),
+        splib_cr=_pack_obj(old_splib_cr),
+        label_raw=_pack_obj(new_raw),
+        label_cr=_pack_obj(new_cr),
+        label_coords=_pack_obj(old_label_coords),
+    )
 
-    payload["label_raw"] = np.asarray(new_raw, dtype=object)
-    payload["label_cr"]  = np.asarray(new_cr,  dtype=object)
-    np.savez(npz_path, **payload)
+    # 4) .info 업데이트 (classes 누적)
+    meta = {}
+    if os.path.isfile(info_path):
+        try:
+            with open(info_path, "r", encoding="utf-8") as f:
+                meta = json.load(f)
+        except Exception:
+            meta = {}
 
-    # 메타 정보 갱신
-    meta = {
-        "version": 1,
-        "primary_path": primary,
-        "nbands": nbands,
-        "updated": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "cache_key": make_cache_key(cfg),
-    }
-    try:
-        with open(info_path, "r", encoding="utf-8") as f:
-            old_meta = json.load(f)
-        old_meta.update(meta)
-        meta = old_meta
-    except Exception:
-        pass
+    meta.setdefault("version", 1)
+    meta.setdefault("primary_path", primary)
+    meta["nbands"] = nbands
+    meta["updated"] = time.strftime("%Y-%m-%d %H:%M:%S")
+    meta["cache_key"] = make_cache_key(cfg)
+
+    # 기존 classes 보존 + 신규/업데이트 반영
+    meta.setdefault("classes", {})
+    if classes_metadata:
+        for cid, info in classes_metadata.items():
+            meta["classes"][str(int(cid))] = info
 
     with open(info_path, "w", encoding="utf-8") as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
@@ -392,6 +413,7 @@ def append_classes(
         len(new_cr),
     )
     return True
+
 
 
 def load_classes_from_info(
@@ -427,7 +449,7 @@ def load_classes_from_info(
             try:
                 cid_int = int(cid_str)
                 mtrl_nm = str(info.get("mtrl_nm", f"Class {cid_int}"))
-                desc = info.get('desc')
+                desc = info.get("desc", info.get("dsc", ""))
                 result.append((cid_int, mtrl_nm, desc))
             except (TypeError, ValueError):
                 continue
@@ -438,7 +460,6 @@ def load_classes_from_info(
     except Exception as e:
         logging.exception(f"[load_classes_from_info] .info 파일 읽기 실패: {e}")
         return []
-
 
 def update_class_in_info(
     primary_path: Optional[str],

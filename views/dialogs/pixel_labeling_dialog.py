@@ -128,6 +128,9 @@ class PixelLabelingDialog(QDialog):
     def _wire_signals(self):
         self.btnUserLabeling.setCheckable(True)
         self.btnClassmapLabeling.setCheckable(True)
+        # 초기 상태를 명시적으로 unchecked로 설정
+        self.btnUserLabeling.setChecked(False)
+        self.btnClassmapLabeling.setChecked(False)
         self.btnUserLabeling.toggled.connect(self._on_user_labeling_toggled)
         self.btnClassmapLabeling.toggled.connect(self._on_classmap_labeling_toggled)
 

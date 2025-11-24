@@ -265,6 +265,22 @@ class MapView(QGraphicsView):
             pass
         self._apply_z()
 
+    def remove_rgb_image(self) -> None:
+        """RGB 베이스 이미지를 제거하고 빈 이미지로 설정."""
+        if hasattr(self, "_img_item") and self._img_item:
+            # 빈 QPixmap으로 설정하여 이미지 제거
+            from PyQt5.QtGui import QPixmap
+            self._img_item.setPixmap(QPixmap())
+            self._img_item.setVisible(False)
+            # 이미지 크기 초기화
+            self.img_w = 0
+            self.img_h = 0
+            # 레이어 순서에서 RGB 제거 (있는 경우)
+            try:
+                self._layer_order.remove("RGB")
+            except ValueError:
+                pass
+
     def set_layer_visible(self, name: str, on: bool) -> None:
         if name == "RGB":
             self._img_item.setVisible(bool(on))
