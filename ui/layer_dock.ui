@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LayersDock</class>
+ <widget class="QDockWidget" name="dockLayers">
+  <property name="windowTitle">
+   <string>Layers</string>
+  </property>
+  <property name="features">
+   <set>QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetMovable|QDockWidget::DockWidgetFloatable</set>
+  </property>
+  <property name="allowedAreas">
+   <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+  </property>
+  <widget class="QWidget" name="dockWidgetContents">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTreeWidget" name="tree">
+      <!-- 트리 헤더는 숨김 -->
+      <property name="headerHidden">
+       <bool>true</bool>
+      </property>
+      <!-- 드래그&드롭: 내부 이동 허용 -->
+      <property name="dragEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="acceptDrops">
+       <bool>true</bool>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::InternalMove</enum>
+      </property>
+      <property name="dropIndicatorShown">
+       <bool>true</bool>
+      </property>
+      <!-- 선택: 다중 선택 가능 -->
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ExtendedSelection</enum>
+      </property>
+      <!-- 더블클릭으로 폴더(부모) 펼침 -->
+      <property name="expandsOnDoubleClick">
+       <bool>true</bool>
+      </property>
+      <!-- 우클릭 컨텍스트 메뉴를 코드에서 처리 -->
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+      <!-- 성능 안정화(선택): 행 높이 고정 가정 -->
+      <property name="uniformRowHeights">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

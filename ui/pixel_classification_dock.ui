@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LayerPropertiesDock</class>
+ <widget class="QWidget" name="LayerPropertiesDock">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>310</width>
+    <height>588</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Layer Properties</string>
+  </property>
+  <layout class="QVBoxLayout" name="vl_root">
+   <property name="spacing">
+    <number>8</number>
+   </property>
+   <property name="leftMargin">
+    <number>8</number>
+   </property>
+   <property name="topMargin">
+    <number>8</number>
+   </property>
+   <property name="rightMargin">
+    <number>8</number>
+   </property>
+   <property name="bottomMargin">
+    <number>8</number>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="grpMetric">
+     <property name="title">
+      <string>SAD   τ(임계값) · δ(마진값)</string>
+     </property>
+     <layout class="QGridLayout" name="gl_metric">
+      <property name="horizontalSpacing">
+       <number>8</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>4</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblTau">
+        <property name="text">
+         <string>τ(임계)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="tauSpinBox">
+        <property name="decimals">
+         <number>5</number>
+        </property>
+        <property name="maximum">
+         <double>3.141590000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.001000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.020000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="lblDelta">
+        <property name="text">
+         <string>δ(마진)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QDoubleSpinBox" name="deltaSpinBox">
+        <property name="decimals">
+         <number>5</number>
+        </property>
+        <property name="maximum">
+         <double>3.141590000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.001000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.050000000000000</double>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="grpViewer">
+     <property name="title">
+      <string>viewer</string>
+     </property>
+     <layout class="QVBoxLayout" name="vl_viewer">
+      <item>
+       <widget class="QTableWidget" name="tableViewer">
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <property name="rowCount">
+         <number>0</number>
+        </property>
+        <property name="columnCount">
+         <number>4</number>
+        </property>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>Color</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Class</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Count</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Detail</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="grpThresholds">
+     <property name="title">
+      <string>임계 설정</string>
+     </property>
+     <layout class="QGridLayout" name="gl_thr">
+      <property name="horizontalSpacing">
+       <number>8</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>4</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="lblStrict">
+        <property name="text">
+         <string>Strict(최적)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QDoubleSpinBox" name="strictSpinBox">
+        <property name="decimals">
+         <number>5</number>
+        </property>
+        <property name="maximum">
+         <double>3.141590000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.001000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.020000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="lblBase">
+        <property name="text">
+         <string>Base(기본)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QDoubleSpinBox" name="baseSpinBox">
+        <property name="decimals">
+         <number>5</number>
+        </property>
+        <property name="maximum">
+         <double>3.141590000000000</double>
+        </property>
+        <property name="singleStep">
+         <double>0.001000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.050000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="btnApplyThresholds">
+        <property name="text">
+         <string>적용</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="btnResetOpacity">
+        <property name="text">
+         <string>초기화</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="grpValues">
+     <property name="title">
+      <string>값 표출</string>
+     </property>
+     <layout class="QHBoxLayout" name="hl_values">
+      <property name="spacing">
+       <number>8</number>
+      </property>
+      <item>
+       <widget class="QFrame" name="cardGreat">
+        <property name="styleSheet">
+         <string notr="true">QLabel#valGreat{font-size:20pt;font-weight:600;} QLabel#capGreat{color:#666;}</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <layout class="QVBoxLayout" name="vl_cardGreat">
+         <item>
+          <widget class="QLabel" name="capGreat">
+           <property name="text">
+            <string>Greatly Sim</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="valGreat">
+           <property name="text">
+            <string>-</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="cardMid">
+        <property name="styleSheet">
+         <string notr="true">QLabel#valMid{font-size:20pt;font-weight:600;} QLabel#capMid{color:#666;}</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <layout class="QVBoxLayout" name="vl_cardMid">
+         <item>
+          <widget class="QLabel" name="capMid">
+           <property name="text">
+            <string>Sim</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="valMid">
+           <property name="text">
+            <string>-</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="cardLittle">
+        <property name="styleSheet">
+         <string notr="true">QLabel#valLittle{font-size:20pt;font-weight:600;} QLabel#capLittle{color:#666;}</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <layout class="QVBoxLayout" name="vl_cardLittle">
+         <item>
+          <widget class="QLabel" name="capLittle">
+           <property name="text">
+            <string>Little Sim</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="valLittle">
+           <property name="text">
+            <string>-</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="grpAnalysis">
+     <property name="title">
+      <string>지정 영역 분석</string>
+     </property>
+     <layout class="QVBoxLayout" name="vl_analysis">
+      <item>
+       <widget class="QPushButton" name="btnViewAnalysisDetails">
+        <property name="text">
+         <string>선택한 영역 분석</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LabelingCandidateReviewDialog</class>
+ <widget class="QDialog" name="LabelingCandidateReviewDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>880</width>
+    <height>578</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>880</width>
+    <height>560</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>라벨링 후보 검증</string>
+  </property>
+  <layout class="QVBoxLayout" name="vl_root">
+   <property name="spacing">
+    <number>10</number>
+   </property>
+   <property name="leftMargin">
+    <number>12</number>
+   </property>
+   <property name="topMargin">
+    <number>12</number>
+   </property>
+   <property name="rightMargin">
+    <number>12</number>
+   </property>
+   <property name="bottomMargin">
+    <number>12</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="lblHeader">
+     <property name="styleSheet">
+      <string notr="true">QLabel{background:#111;color:#fff;padding:10px;border-radius:6px;}</string>
+     </property>
+     <property name="text">
+      <string>&lt;b&gt;라벨링 후보 검증&lt;/b&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="hl_main">
+     <property name="spacing">
+      <number>12</number>
+     </property>
+     <item>
+      <layout class="QVBoxLayout" name="vl_left">
+       <item>
+        <widget class="QLabel" name="lblLeftTitle">
+         <property name="text">
+          <string>• 전체 클래스 대상 분류 결과 Top 18</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="tableTopK">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="rowCount">
+          <number>0</number>
+         </property>
+         <property name="columnCount">
+          <number>6</number>
+         </property>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>#</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Class</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Metric</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>value</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Material Name</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Description</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="vl_right">
+       <item>
+        <widget class="QLabel" name="lblRightTitle">
+         <property name="text">
+          <string>• 분류 결과 상세보기</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="viewPreview">
+         <property name="minimumSize">
+          <size>
+           <width>280</width>
+           <height>260</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel{background:#f4f4f4;color:#666;}</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="text">
+          <string>미리보기</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="vl_plot">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="leftMargin">
+          <number>6</number>
+         </property>
+         <property name="topMargin">
+          <number>6</number>
+         </property>
+         <property name="rightMargin">
+          <number>6</number>
+         </property>
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="hl_buttons">
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>상세 분석</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="spacer_btns_left">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnChangeClass">
+       <property name="text">
+        <string>클래스 변경</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancel">
+       <property name="text">
+        <string>취소</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="spacer_btns_right">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

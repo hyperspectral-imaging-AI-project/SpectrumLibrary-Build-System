@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ViewerBandDialog</class>
+ <widget class="QDialog" name="ViewerBandDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>330</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>뷰어 대역 선택</string>
+  </property>
+  <layout class="QVBoxLayout" name="vl_root">
+   <!-- ✅ Qt Designer/pyuic가 지원하는 개별 마진 속성 -->
+   <property name="leftMargin">
+    <number>12</number>
+   </property>
+   <property name="topMargin">
+    <number>12</number>
+   </property>
+   <property name="rightMargin">
+    <number>12</number>
+   </property>
+   <property name="bottomMargin">
+    <number>12</number>
+   </property>
+
+   <!-- 상단: 모드 선택 -->
+   <item>
+    <layout class="QHBoxLayout" name="hl_mode">
+     <item>
+      <widget class="QRadioButton" name="radGray">
+       <property name="text">
+        <string>Gray Scale</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radRGB">
+       <property name="text">
+        <string>RGB</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="hs_mode_spacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+
+   <!-- 가운데: 스택(Gray / RGB) -->
+   <item>
+    <widget class="QStackedWidget" name="stack">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+
+     <!-- Page 0 : Gray -->
+     <widget class="QWidget" name="pageGray">
+      <layout class="QFormLayout" name="fl_gray">
+       <property name="formAlignment">
+        <set>Qt::AlignHCenter|Qt::AlignTop</set>
+       </property>
+       <property name="labelAlignment">
+        <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblGray">
+         <property name="text">
+          <string>Gray</string>
+         </property>
+         <property name="buddy">
+          <cstring>cboGray</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="cboGray">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <item><property name="text"><string>700.1</string></property></item>
+         <item><property name="text"><string>650.0</string></property></item>
+         <item><property name="text"><string>550.3</string></property></item>
+         <item><property name="text"><string>450.1</string></property></item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+
+     <!-- Page 1 : RGB -->
+     <widget class="QWidget" name="pageRGB">
+      <layout class="QFormLayout" name="fl_rgb">
+       <property name="formAlignment">
+        <set>Qt::AlignHCenter|Qt::AlignTop</set>
+       </property>
+       <property name="labelAlignment">
+        <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblR">
+         <property name="text">
+          <string>R</string>
+         </property>
+         <property name="buddy">
+          <cstring>cboR</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="cboR">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <item><property name="text"><string>700.1</string></property></item>
+         <item><property name="text"><string>680.0</string></property></item>
+         <item><property name="text"><string>650.0</string></property></item>
+        </widget>
+       </item>
+
+       <item row="1" column="0">
+        <widget class="QLabel" name="lblG">
+         <property name="text">
+          <string>G</string>
+         </property>
+         <property name="buddy">
+          <cstring>cboG</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="cboG">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <item><property name="text"><string>550.3</string></property></item>
+         <item><property name="text"><string>530.0</string></property></item>
+         <item><property name="text"><string>510.0</string></property></item>
+        </widget>
+       </item>
+
+       <item row="2" column="0">
+        <widget class="QLabel" name="lblB">
+         <property name="text">
+          <string>B</string>
+         </property>
+         <property name="buddy">
+          <cstring>cboB</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QComboBox" name="cboB">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <item><property name="text"><string>450.1</string></property></item>
+         <item><property name="text"><string>430.0</string></property></item>
+         <item><property name="text"><string>410.0</string></property></item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+
+   <!-- 하단 버튼 -->
+   <item>
+    <layout class="QHBoxLayout" name="hl_buttons">
+     <item>
+      <spacer name="hs_btn_spacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnOk">
+       <property name="text">
+        <string>완료</string>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancel">
+       <property name="text">
+        <string>취소</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+
+ <tabstops>
+  <tabstop>radGray</tabstop>
+  <tabstop>radRGB</tabstop>
+  <tabstop>cboGray</tabstop>
+  <tabstop>cboR</tabstop>
+  <tabstop>cboG</tabstop>
+  <tabstop>cboB</tabstop>
+  <tabstop>btnOk</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
+
+ <resources/>
+ <connections/>
+</ui>

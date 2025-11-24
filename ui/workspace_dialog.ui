@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WorkAreaSelectDialog</class>
+ <widget class="QDialog" name="WorkAreaSelectDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>240</width>
+    <height>380</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>240</width>
+    <height>380</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>작업 영역 선택</string>
+  </property>
+  <layout class="QVBoxLayout" name="vl_root">
+   <property name="spacing">
+    <number>10</number>
+   </property>
+   <property name="leftMargin">
+    <number>10</number>
+   </property>
+   <property name="topMargin">
+    <number>10</number>
+   </property>
+   <property name="rightMargin">
+    <number>10</number>
+   </property>
+   <property name="bottomMargin">
+    <number>10</number>
+   </property>
+   <item>
+    <layout class="QVBoxLayout" name="vl_shapes">
+     <property name="spacing">
+      <number>10</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="btnRect">
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>64</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>사각형</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoExclusive">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnPolygon">
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>64</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>다각형</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoExclusive">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnFreehand">
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>64</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>자유형</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="autoExclusive">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="hl_bottom">
+     <item>
+      <widget class="QPushButton" name="btnOk">
+       <property name="text">
+        <string>완료</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancel">
+       <property name="text">
+        <string>취소</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

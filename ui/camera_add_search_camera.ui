@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CameraListDialog</class>
+ <widget class="QDialog" name="CameraListDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>620</width>
+    <height>560</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>카메라 조회하기</string>
+  </property>
+
+  <layout class="QVBoxLayout" name="verticalLayout_root">
+   <!-- 상단: 파장 범위 입력 + 조회 -->
+   <item>
+    <layout class="QGridLayout" name="gridTop">
+     <item row="0" column="0" colspan="3">
+      <widget class="QLabel" name="labelCategory">
+       <property name="text">
+        <string>• 카메라 선택</string>
+       </property>
+      </widget>
+     </item>
+
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_StartWavelength">
+       <property name="text">
+        <string>Start Wavelength</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="lineEdit_StartWavelength">
+       <property name="placeholderText">
+        <string>예: 390.0</string>
+       </property>
+      </widget>
+     </item>
+
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_EndWavelength">
+       <property name="text">
+        <string>End Wavelength</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="lineEdit_EndWavelength">
+       <property name="placeholderText">
+        <string>예: 700.0</string>
+       </property>
+      </widget>
+     </item>
+
+     <item row="1" column="2" rowspan="2">
+      <widget class="QPushButton" name="pushButton_Query">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>36</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>조회</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+
+   <!-- 중간: 결과 테이블 (API로 채움) -->
+   <item>
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="rowCount">
+      <number>0</number>
+     </property>
+     <property name="columnCount">
+      <number>3</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>카메라 이름</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Wavelength</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>FWHM</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+
+   <!-- 하단: 확인 -->
+   <item>
+    <layout class="QHBoxLayout" name="layoutBottom">
+     <item>
+      <spacer name="horizontalSpacer_left">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_ok">
+       <property name="minimumSize">
+        <size>
+         <width>120</width>
+         <height>36</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>확인</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_right">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

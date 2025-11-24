@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WorkspaceMapWidget</class>
+ <widget class="QWidget" name="WorkspaceMapWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>770</width>
+    <height>622</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>작업 영역 맵 생성</string>
+  </property>
+  <layout class="QVBoxLayout" name="layout_root">
+   <property name="spacing">
+    <number>8</number>
+   </property>
+   <property name="leftMargin">
+    <number>8</number>
+   </property>
+   <property name="topMargin">
+    <number>8</number>
+   </property>
+   <property name="rightMargin">
+    <number>8</number>
+   </property>
+   <property name="bottomMargin">
+    <number>8</number>
+   </property>
+   <item>
+    <widget class="QFrame" name="frameHeader">
+     <property name="styleSheet">
+      <string>QFrame#frameHeader{background:#111111; border-radius:6px;} QLabel#labelTitle{color:#ffffff; font-weight:700; font-size:18pt;}</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <layout class="QHBoxLayout" name="layout_header">
+      <property name="leftMargin">
+       <number>12</number>
+      </property>
+      <property name="topMargin">
+       <number>8</number>
+      </property>
+      <property name="rightMargin">
+       <number>12</number>
+      </property>
+      <property name="bottomMargin">
+       <number>8</number>
+      </property>
+      <item>
+       <spacer name="sp_header_l">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelTitle">
+        <property name="text">
+         <string>작업 영역 맵 생성</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="sp_header_r">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frameBody">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <layout class="QHBoxLayout" name="layout_body">
+      <property name="spacing">
+       <number>12</number>
+      </property>
+      <property name="leftMargin">
+       <number>8</number>
+      </property>
+      <property name="topMargin">
+       <number>8</number>
+      </property>
+      <property name="rightMargin">
+       <number>8</number>
+      </property>
+      <property name="bottomMargin">
+       <number>8</number>
+      </property>
+      <item>
+       <widget class="QFrame" name="frameMap">
+        <property name="styleSheet">
+         <string>QFrame#frameMap{background:#f3f3f3; border:1px solid #d0d0d0; border-radius:6px;} QGraphicsView#graphicsViewMap{background:#eaeaea; border:8px solid #ffffff; border-radius:4px;}</string>
+        </property>
+        <layout class="QVBoxLayout" name="layout_map">
+         <property name="leftMargin">
+          <number>12</number>
+         </property>
+         <property name="topMargin">
+          <number>12</number>
+         </property>
+         <property name="rightMargin">
+          <number>12</number>
+         </property>
+         <property name="bottomMargin">
+          <number>12</number>
+         </property>
+         <item>
+          <widget class="QGraphicsView" name="graphicsViewMap">
+           <property name="minimumSize">
+            <size>
+             <width>520</width>
+             <height>520</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frameTools">
+        <property name="styleSheet">
+         <string>QFrame#frameTools{background:#f7f7f7; border:1px solid #dcdcdc; border-radius:6px;} QToolButton#btnZoomIn, QToolButton#btnZoomOut{min-width:28px; min-height:28px; border:1px solid #cfd3d7; border-radius:14px; background:#ffffff; font-weight:700;} QToolButton#btnZoomIn:hover, QToolButton#btnZoomOut:hover{background:#f0f2f4;}</string>
+        </property>
+        <layout class="QVBoxLayout" name="layout_tools">
+         <property name="spacing">
+          <number>16</number>
+         </property>
+         <property name="leftMargin">
+          <number>16</number>
+         </property>
+         <property name="topMargin">
+          <number>16</number>
+         </property>
+         <property name="rightMargin">
+          <number>16</number>
+         </property>
+         <property name="bottomMargin">
+          <number>16</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="btnRect">
+           <property name="minimumSize">
+            <size>
+             <width>140</width>
+             <height>110</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>사각형</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnPolygon">
+           <property name="minimumSize">
+            <size>
+             <width>140</width>
+             <height>110</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>다각형</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnFree">
+           <property name="minimumSize">
+            <size>
+             <width>140</width>
+             <height>110</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>자유형</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

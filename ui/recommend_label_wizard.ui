@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RecommendationWizard</class>
+ <widget class="QDialog" name="RecommendationWizard">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>900</width><height>560</height></rect>
+  </property>
+  <property name="minimumSize">
+   <size><width>820</width><height>520</height></size>
+  </property>
+  <property name="windowTitle">
+   <string>추천 픽셀 라벨링</string>
+  </property>
+
+  <layout class="QVBoxLayout" name="vl_root">
+   <property name="spacing"><number>10</number></property>
+   <property name="leftMargin"><number>12</number></property>
+   <property name="topMargin"><number>12</number></property>
+   <property name="rightMargin"><number>12</number></property>
+   <property name="bottomMargin"><number>12</number></property>
+
+   <!-- 헤더 단계 표시 -->
+   <item>
+    <layout class="QHBoxLayout" name="hl_header">
+     <item>
+      <widget class="QLabel" name="lblStep1">
+       <property name="text"><string>&lt;b&gt;1단계&lt;/b&gt;</string></property>
+      </widget>
+     </item>
+     <item><spacer name="sp_h1"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint"><size><width>40</width><height>20</height></size></property></spacer></item>
+     <item>
+      <widget class="QLabel" name="lblStep2">
+       <property name="text"><string>2단계</string></property>
+       <property name="enabled"><bool>false</bool></property>
+      </widget>
+     </item>
+     <item><spacer name="sp_h2"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint"><size><width>40</width><height>20</height></size></property></spacer></item>
+     <item>
+      <widget class="QLabel" name="lblStep3">
+       <property name="text"><string>3단계</string></property>
+       <property name="enabled"><bool>false</bool></property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+
+   <!-- 본문: 단계 스택 -->
+   <item>
+    <widget class="QStackedWidget" name="stackedMain">
+     <!-- STEP 1 -->
+     <widget class="QWidget" name="page_step1">
+      <layout class="QHBoxLayout" name="hl_step1" stretch="1,1">
+       <item>
+        <layout class="QVBoxLayout" name="vl_step1_left">
+         <item>
+          <layout class="QFormLayout" name="fl_map">
+           <property name="labelAlignment"><set>Qt::AlignLeft|Qt::AlignVCenter</set></property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="lblTargetMap">
+             <property name="text"><string>• 대상 분류 맵 선택</string></property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <layout class="QHBoxLayout" name="hl_map_combo">
+             <item>
+              <widget class="QComboBox" name="cboMap">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+
+         <item>
+          <widget class="QGroupBox" name="gbAlgo">
+           <property name="title"><string>• 라벨링 스펙트럼 추천 알고리즘 선택</string></property>
+           <layout class="QVBoxLayout" name="vl_algo">
+            <item>
+             <widget class="QRadioButton" name="rClustering">
+              <property name="text"><string>클러스터링</string></property>
+              <property name="checked"><bool>true</bool></property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="rSimilarity">
+              <property name="text"><string>유사도</string></property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item><spacer name="sp_v1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeHint"><size><width>20</width><height>40</height></size></property></spacer></item>
+        </layout>
+       </item>
+
+       <item>
+        <widget class="QGroupBox" name="gbAlgoDesc">
+         <property name="title"><string/></property>
+         <layout class="QVBoxLayout" name="vl_desc">
+          <item>
+           <widget class="QPlainTextEdit" name="txtAlgoDesc">
+            <property name="readOnly"><bool>true</bool></property>
+            <property name="plainText"><string>클러스터링 설명</string></property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+
+     <!-- STEP 2 -->
+     <widget class="QWidget" name="page_step2">
+      <layout class="QHBoxLayout" name="hl_step2" stretch="3,2">
+       <!-- 좌: 클래스 선택 -->
+       <item>
+        <widget class="QGroupBox" name="gbClasses">
+         <property name="title"><string>• 클래스 선택</string></property>
+         <layout class="QVBoxLayout" name="vl_classes">
+          <item>
+           <widget class="QTableWidget" name="tableClasses">
+            <property name="alternatingRowColors"><bool>true</bool></property>
+            <property name="selectionBehavior"><enum>QAbstractItemView::SelectRows</enum></property>
+            <property name="selectionMode"><enum>QAbstractItemView::SingleSelection</enum></property>
+            <property name="editTriggers"><set>QAbstractItemView::NoEditTriggers</set></property>
+            <column><property name="text"><string>#</string></property></column>
+            <column><property name="text"><string>■</string></property></column>
+            <column><property name="text"><string>Class</string></property></column>
+            <column><property name="text"><string>Name</string></property></column>
+            <column><property name="text"><string>Count</string></property></column>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- 우: 파라미터 -->
+       <item>
+        <widget class="QGroupBox" name="gbParams">
+         <property name="title"><string>• 알고리즘 파라미터 입력</string></property>
+         <layout class="QFormLayout" name="fl_params">
+          <item row="0" column="0">
+           <widget class="QLabel" name="lblInner">
+            <property name="text"><string>내반경</string></property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="txtInner">
+            <property name="text"><string>0.002</string></property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="lblOuter">
+            <property name="text"><string>외반경</string></property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="txtOuter">
+            <property name="text"><string>0.005</string></property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <spacer name="sp_params_v">
+            <property name="orientation"><enum>Qt::Vertical</enum></property>
+            <property name="sizeHint"><size><width>20</width><height>200</height></size></property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+
+     <!-- STEP 3 -->
+     <widget class="QWidget" name="page_step3">
+      <layout class="QHBoxLayout" name="hl_step3" stretch="3,4">
+       <!-- 좌: 그래프 영역 -->
+       <item>
+        <widget class="QGroupBox" name="gbPlot">
+         <property name="title"><string>• 장된 라벨링 데이터와의 비교 스펙트럼</string></property>
+         <layout class="QVBoxLayout" name="vl_plot">
+          <item>
+           <widget class="QWidget" name="plotArea">
+            <property name="minimumSize"><size><width>280</width><height>220</height></size></property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- 우: 추천 목록 -->
+       <item>
+        <widget class="QGroupBox" name="gbRec">
+         <property name="title"><string>• 추천 스펙트럼 목록</string></property>
+         <layout class="QVBoxLayout" name="vl_rec">
+          <item>
+           <widget class="QTableWidget" name="tableRec">
+            <property name="alternatingRowColors"><bool>true</bool></property>
+            <property name="selectionBehavior"><enum>QAbstractItemView::SelectRows</enum></property>
+            <property name="selectionMode"><enum>QAbstractItemView::SingleSelection</enum></property>
+            <column><property name="text"><string>#</string></property></column>
+            <column><property name="text"><string>Locate</string></property></column>
+            <column><property name="text"><string>Class</string></property></column>
+            <column><property name="text"><string>metric</string></property></column>
+            <column><property name="text"><string>value</string></property></column>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+
+   <!-- 풋터 버튼 -->
+   <item>
+    <layout class="QHBoxLayout" name="hl_footer">
+     <item><spacer name="sp_footer"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint"><size><width>40</width><height>20</height></size></property></spacer></item>
+     <item>
+      <widget class="QPushButton" name="btnPrev">
+       <property name="text"><string>이전</string></property>
+       <property name="enabled"><bool>false</bool></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnNext">
+       <property name="text"><string>다음</string></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnRegister">
+       <property name="text"><string>후보 등록</string></property>
+       <property name="visible"><bool>false</bool></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancel">
+       <property name="text"><string>취소</string></property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

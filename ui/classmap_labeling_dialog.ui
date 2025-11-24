@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ClassmapLabelingDialog</class>
+ <widget class="QDialog" name="ClassmapLabelingDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x><y>0</y><width>980</width><height>700</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size><width>900</width><height>620</height></size>
+  </property>
+  <property name="windowTitle">
+   <string>분류맵 기반 라벨링</string>
+  </property>
+  <layout class="QVBoxLayout" name="vl_root">
+   <property name="spacing"><number>10</number></property>
+   <property name="leftMargin"><number>8</number></property>
+   <property name="topMargin"><number>8</number></property>
+   <property name="rightMargin"><number>8</number></property>
+   <property name="bottomMargin"><number>8</number></property>
+
+   <!-- Header -->
+   <item>
+    <widget class="QLabel" name="lblHeader">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch><verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{background:#111;color:#fff;padding:12px;border-radius:8px;letter-spacing:1px;}</string>
+     </property>
+     <property name="text">
+      <string>&lt;b&gt;분류맵 기반 라벨링&lt;/b&gt;</string>
+     </property>
+     <property name="alignment"><set>Qt::AlignCenter</set></property>
+    </widget>
+   </item>
+
+   <!-- Top controls -->
+   <item>
+    <layout class="QHBoxLayout" name="hl_topControls">
+     <property name="spacing"><number>10</number></property>
+
+     <item>
+      <widget class="QLabel" name="lblTopTitle">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch><verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text"><string>• 대상 분류 맵 &amp; 클래스 선택</string></property>
+       <property name="styleSheet"><string notr="true">QLabel{font-weight:600;}</string></property>
+      </widget>
+     </item>
+
+     <item>
+      <widget class="QComboBox" name="cmbClassmap">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch><verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumWidth"><number>200</number></property>
+      </widget>
+     </item>
+
+     <item>
+      <widget class="QComboBox" name="cmbClassFilter">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch><verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumWidth"><number>160</number></property>
+       <item><property name="text"><string>모든 Class</string></property></item>
+      </widget>
+     </item>
+
+     <item>
+      <widget class="QLabel" name="lblBin">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch><verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text"><string>히스토그램 간격</string></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="sldBinStep">
+       <property name="orientation"><enum>Qt::Horizontal</enum></property>
+       <property name="minimum"><number>5</number></property>
+       <property name="maximum"><number>100</number></property>
+       <property name="value"><number>20</number></property>
+       <property name="toolTip"><string>히스토그램 bin 수 (5~100)</string></property>
+       <property name="minimumWidth"><number>140</number></property>
+      </widget>
+     </item>
+
+     <item>
+      <widget class="QLabel" name="lblMaxSamples">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch><verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text"><string>스펙트럼 시각화 최대 샘플</string></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="spnMaxSamples">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch><verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimum"><number>5</number></property>
+       <property name="maximum"><number>500</number></property>
+       <property name="value"><number>50</number></property>
+       <property name="minimumWidth"><number>80</number></property>
+      </widget>
+     </item>
+
+     <item>
+      <spacer name="sp_top">
+       <property name="orientation"><enum>Qt::Horizontal</enum></property>
+       <property name="sizeHint" stdset="0"><size><width>20</width><height>20</height></size></property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+
+   <!-- Row: Histogram + Spectrum -->
+   <item>
+    <layout class="QHBoxLayout" name="hl_hist_spec">
+     <property name="spacing"><number>12</number></property>
+
+     <!-- Histogram block -->
+     <item>
+      <layout class="QVBoxLayout" name="vl_histBlock">
+       <property name="spacing"><number>6</number></property>
+       <item>
+        <widget class="QFrame" name="frameHist">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch><verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+         <property name="styleSheet"><string notr="true">QFrame{background:#fafafa;border:1px solid #d0d0d0;border-radius:6px;}</string></property>
+         <layout class="QVBoxLayout" name="vl_hist">
+          <property name="leftMargin"><number>8</number></property>
+          <property name="topMargin"><number>8</number></property>
+          <property name="rightMargin"><number>8</number></property>
+          <property name="bottomMargin"><number>8</number></property>
+          <item>
+           <widget class="QWidget" name="histWidget">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch><verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize"><size><width>300</width><height>180</height></size></property>
+            <property name="styleSheet"><string notr="true">QWidget{background:#ffffff;}</string></property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblHistCaption">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch><verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text"><string>유사도 히스토그램</string></property>
+         <property name="styleSheet"><string notr="true">QLabel{color:#666;}</string></property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+
+     <!-- Spectrum block -->
+     <item>
+      <layout class="QVBoxLayout" name="vl_specBlock">
+       <property name="spacing"><number>6</number></property>
+       <item>
+        <widget class="QFrame" name="frameSpec">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch><verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+         <property name="styleSheet"><string notr="true">QFrame{background:#fafafa;border:1px solid #d0d0d0;border-radius:6px;}</string></property>
+         <layout class="QVBoxLayout" name="vl_spec">
+          <property name="leftMargin"><number>8</number></property>
+          <property name="topMargin"><number>8</number></property>
+          <property name="rightMargin"><number>8</number></property>
+          <property name="bottomMargin"><number>8</number></property>
+          <item>
+           <widget class="QWidget" name="spectrumWidget">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch><verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize"><size><width>360</width><height>180</height></size></property>
+            <property name="styleSheet"><string notr="true">QWidget{background:#ffffff;}</string></property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblSpecCaption">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch><verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text"><string>선택 픽셀 스펙트럼</string></property>
+         <property name="styleSheet"><string notr="true">QLabel{color:#666;}</string></property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+
+   <!-- Analyze button -->
+   <item>
+    <layout class="QHBoxLayout" name="hl_analyze">
+     <item>
+      <spacer name="sp_analyze_left">
+       <property name="orientation"><enum>Qt::Horizontal</enum></property>
+       <property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnAnalyzeSelectedClass">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch><verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize"><size><width>220</width><height>36</height></size></property>
+       <property name="styleSheet"><string notr="true">QPushButton{background:#f0f0f0;border:1px dashed #c44;border-radius:8px;} QPushButton:hover{background:#eaeaea;}</string></property>
+       <property name="text"><string>선택 클래스 분석</string></property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="sp_analyze_right">
+       <property name="orientation"><enum>Qt::Horizontal</enum></property>
+       <property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+
+   <!-- Bottom split -->
+   <item>
+    <widget class="QSplitter" name="splitBottom">
+     <property name="orientation"><enum>Qt::Horizontal</enum></property>
+
+     <!-- Left compare spectrum -->
+     <widget class="QFrame" name="frameCompareSpec">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch><verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+      <property name="styleSheet"><string notr="true">QFrame{background:#fafafa;border:1px solid #d0d0d0;border-radius:6px;}</string></property>
+      <layout class="QVBoxLayout" name="vl_compareSpec">
+       <property name="leftMargin"><number>8</number></property>
+       <property name="topMargin"><number>8</number></property>
+       <property name="rightMargin"><number>8</number></property>
+       <property name="bottomMargin"><number>8</number></property>
+       <property name="spacing"><number>6</number></property>
+
+       <item>
+        <widget class="QLabel" name="lblCompareTitle">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch><verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text"><string>• 저장된 라벨링 데이터와의 비교 스펙트럼</string></property>
+         <property name="styleSheet"><string notr="true">QLabel{font-weight:600;}</string></property>
+        </widget>
+       </item>
+
+       <item>
+        <widget class="QWidget" name="cmpSpectrumWidget">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch><verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize"><size><width>360</width><height>180</height></size></property>
+         <property name="styleSheet"><string notr="true">QWidget{background:#ffffff;}</string></property>
+        </widget>
+       </item>
+
+       <item>
+        <layout class="QHBoxLayout" name="hl_addRow">
+         <item>
+          <spacer name="sp_add_left">
+           <property name="orientation"><enum>Qt::Horizontal</enum></property>
+           <property name="sizeHint" stdset="0"><size><width>20</width><height>20</height></size></property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnAddSelectedToCandidates">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch><verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize"><size><width>80</width><height>30</height></size></property>
+           <property name="text"><string>추가</string></property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="sp_add_right">
+           <property name="orientation"><enum>Qt::Horizontal</enum></property>
+           <property name="sizeHint" stdset="0"><size><width>20</width><height>20</height></size></property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+
+     <!-- Right compare table -->
+     <widget class="QFrame" name="frameCompareTable">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch><verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+      <property name="styleSheet"><string notr="true">QFrame{background:#fafafa;border:1px solid #d0d0d0;border-radius:6px;}</string></property>
+      <layout class="QVBoxLayout" name="vl_compareTable">
+       <property name="leftMargin"><number>8</number></property>
+       <property name="topMargin"><number>8</number></property>
+       <property name="rightMargin"><number>8</number></property>
+       <property name="bottomMargin"><number>8</number></property>
+       <property name="spacing"><number>6</number></property>
+
+       <item>
+        <widget class="QLabel" name="lblCompareTableTitle">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch><verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text"><string>• 저장된 라벨링 데이터와의 비교 유사도</string></property>
+         <property name="styleSheet"><string notr="true">QLabel{font-weight:600;}</string></property>
+        </widget>
+       </item>
+
+       <item>
+        <widget class="QTableWidget" name="tableCompare">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch><verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="alternatingRowColors"><bool>true</bool></property>
+         <property name="selectionMode"><enum>QAbstractItemView::SingleSelection</enum></property>
+         <property name="selectionBehavior"><enum>QAbstractItemView::SelectRows</enum></property>
+         <property name="rowCount"><number>0</number></property>
+         <property name="columnCount"><number>6</number></property>
+         <attribute name="horizontalHeaderStretchLastSection"><bool>true</bool></attribute>
+         <column><property name="text"><string>☑</string></property></column>
+         <column><property name="text"><string>#</string></property></column>
+         <column><property name="text"><string>Locate</string></property></column>
+         <column><property name="text"><string>Class</string></property></column>
+         <column><property name="text"><string>metric</string></property></column>
+         <column><property name="text"><string>value</string></property></column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+
+   <!-- Footer buttons -->
+   <item>
+    <layout class="QHBoxLayout" name="hl_footer">
+     <item>
+      <spacer name="sp_foot_left">
+       <property name="orientation"><enum>Qt::Horizontal</enum></property>
+       <property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnRegisterCandidates">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch><verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize"><size><width>140</width><height>36</height></size></property>
+       <property name="styleSheet"><string notr="true">QPushButton{background:#f0f0f0;border:1px dashed #c44;border-radius:8px;} QPushButton:hover{background:#eaeaea;}</string></property>
+       <property name="text"><string>후보 등록</string></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch><verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize"><size><width>100</width><height>36</height></size></property>
+       <property name="text"><string>취소</string></property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

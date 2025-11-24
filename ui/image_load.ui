@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ImageLoadDialog</class>
+ <widget class="QDialog" name="ImageLoadDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>700</width>
+    <height>560</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Load Image</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_Main">
+   <property name="spacing">
+    <number>10</number>
+   </property>
+   <property name="leftMargin">
+    <number>10</number>
+   </property>
+   <property name="topMargin">
+    <number>10</number>
+   </property>
+   <property name="rightMargin">
+    <number>10</number>
+   </property>
+   <property name="bottomMargin">
+    <number>10</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_TopAll" stretch="1,1">
+     <property name="spacing">
+      <number>12</number>
+     </property>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_Left">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="groupBox_Files">
+         <property name="title">
+          <string>영상 포맷 &amp; 경로</string>
+         </property>
+         <layout class="QVBoxLayout" name="vbox_files">
+          <property name="spacing">
+           <number>8</number>
+          </property>
+          <property name="leftMargin">
+           <number>10</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>10</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_FileType">
+            <item>
+             <widget class="QRadioButton" name="radioButton_hdr_raw">
+              <property name="text">
+               <string>hdr &amp; raw</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_mat">
+              <property name="text">
+               <string>mat</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="spacer_filetype">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton">
+              <property name="text">
+               <string>개인 사용자</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButton_2">
+              <property name="text">
+               <string>서버 사용자</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="gridLayout_Files">
+            <property name="spacing">
+             <number>6</number>
+            </property>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_hdrFile">
+              <property name="text">
+               <string>hdr file</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="lineEdit_hdrFile"/>
+            </item>
+            <item row="0" column="2">
+             <widget class="QPushButton" name="pushButton_findHdr">
+              <property name="text">
+               <string>찾아보기...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_rawFile">
+              <property name="text">
+               <string>raw file</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="lineEdit_rawFile"/>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="pushButton_findRaw">
+              <property name="text">
+               <string>찾아보기...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_matFile">
+              <property name="text">
+               <string>mat file</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="lineEdit"/>
+            </item>
+            <item row="2" column="2">
+             <widget class="QPushButton" name="pushButton">
+              <property name="text">
+               <string>찾아보기...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hl_check">
+            <item>
+             <spacer name="spacer_check">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_2">
+              <property name="text">
+               <string>영상 확인</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_MapPath">
+         <property name="title">
+          <string>작업중인 맵 경로</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_MapPath">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_mapFile">
+            <property name="text">
+             <string>map file</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEdit_mapFile"/>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="pushButton_findMap">
+            <property name="text">
+             <string>찾아보기...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_Right">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="groupBox_MatMapping">
+         <property name="title">
+          <string>영상 H/W/C 입력</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_Mapping">
+          <property name="horizontalSpacing">
+           <number>8</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>6</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_axisH">
+            <property name="text">
+             <string>H 축</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboAxisH"/>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_axisW">
+            <property name="text">
+             <string>W 축</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QComboBox" name="comboAxisW"/>
+          </item>
+          <item row="0" column="4">
+           <widget class="QLabel" name="label_axisC">
+            <property name="text">
+             <string>C 축</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QComboBox" name="comboAxisC"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_Camera">
+         <property name="title">
+          <string>카메라 선택</string>
+         </property>
+         <layout class="QVBoxLayout" name="vbox_camera">
+          <property name="spacing">
+           <number>8</number>
+          </property>
+          <property name="leftMargin">
+           <number>10</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>10</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_Top">
+            <item>
+             <layout class="QFormLayout" name="formLayout_Wavelength">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_StartWavelength">
+                <property name="text">
+                 <string>Start Wavelength</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lineEdit_StartWavelength"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_EndWavelength">
+                <property name="text">
+                 <string>End Wavelength</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="lineEdit_EndWavelength"/>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer name="spacer_cam">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_Query">
+              <property name="text">
+               <string>조회</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="tableWidget">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::SingleSelection</enum>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectRows</enum>
+            </property>
+            <property name="rowCount">
+             <number>0</number>
+            </property>
+            <property name="columnCount">
+             <number>3</number>
+            </property>
+            <column>
+             <property name="text">
+              <string>카메라 이름</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Wavelength</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>FWHM</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_Bottom">
+     <item>
+      <spacer name="horizontalSpacer_Bottom">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_Load">
+       <property name="text">
+        <string>완료</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_Cancel">
+       <property name="text">
+        <string>취소</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

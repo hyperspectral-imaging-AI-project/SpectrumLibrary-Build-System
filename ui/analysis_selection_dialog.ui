@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AnalysisSelectionDialog</class>
+ <widget class="QDialog" name="AnalysisSelectionDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>980</width>
+    <height>640</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>지정 영역 분석</string>
+  </property>
+  <layout class="QVBoxLayout" name="vl_root">
+   <item>
+    <layout class="QHBoxLayout" name="hl_main" stretch="0,0">
+     <item>
+      <layout class="QVBoxLayout" name="vl_left">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="gb_roiTools">
+         <property name="title">
+          <string>지정 영역 분석</string>
+         </property>
+         <layout class="QVBoxLayout" name="vl_roiTools">
+          <item>
+           <layout class="QHBoxLayout" name="hl_endpoints">
+            <item>
+             <widget class="QPushButton" name="btn_plus">
+              <property name="text">
+               <string>+</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn_minus">
+              <property name="text">
+               <string>-</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn_reset">
+              <property name="text">
+               <string>초기화</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hl_modes">
+            <item>
+             <widget class="QPushButton" name="btn_pixel">
+              <property name="text">
+               <string>픽셀</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn_rect">
+              <property name="text">
+               <string>사각형</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn_free">
+              <property name="text">
+               <string>자유형</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <item>
+        <widget class="QGroupBox" name="gb_selectedPixels">
+         <property name="maximumSize">
+          <size>
+           <width>240</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>선택된 픽셀</string>
+         </property>
+         <layout class="QVBoxLayout" name="vl_sel">
+          <item>
+           <widget class="QTreeWidget" name="tw_selected">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <column>
+             <property name="text">
+              <string>항목</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </item>
+
+     <item>
+      <layout class="QVBoxLayout" name="vl_right">
+       <item>
+        <layout class="QGridLayout" name="grid_plots" rowstretch="0,0" columnstretch="0,0">
+         <property name="spacing">
+          <number>10</number>
+         </property>
+
+         <!-- 좌상단 그래프 프레임 (레이아웃만, 라벨 제거 / 마진 0) -->
+         <item row="0" column="0">
+          <widget class="QFrame" name="plot_tl">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>420</width>
+             <height>280</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <layout class="QVBoxLayout" name="vl_plot_tl">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <property name="spacing">
+             <number>0</number>
+            </property>
+           </layout>
+          </widget>
+         </item>
+
+         <!-- 우상단 그래프 프레임 (레이아웃만, 라벨 제거 / 마진 0) -->
+         <item row="0" column="1">
+          <widget class="QFrame" name="plot_tr">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>420</width>
+             <height>280</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <layout class="QVBoxLayout" name="vl_plot_tr">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <property name="spacing">
+             <number>0</number>
+            </property>
+           </layout>
+          </widget>
+         </item>
+
+         <!-- 좌하단: 히스토그램/클래스 선택 -->
+         <item row="1" column="0">
+          <widget class="QFrame" name="panel_class_hist">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>420</width>
+             <height>280</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <layout class="QVBoxLayout" name="vl_class_hist">
+            <item>
+             <layout class="QHBoxLayout" name="hl_classbar">
+              <item>
+               <widget class="QLabel" name="lbl_target">
+                <property name="text">
+                 <string>• 대상 분류 맵 &amp; 클래스 선택</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="cb_intermediate_target">
+                <item>
+                 <property name="text">
+                  <string>classification</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="cb_class_range">
+                <property name="minimumContentsLength">
+                 <number>14</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="hl_hist_opt">
+              <item><widget class="QLabel" name="lbl_bin"><property name="text"><string>히스토그램 간격</string></property></widget></item>
+              <item><widget class="QSlider" name="sld_bins"><property name="orientation"><enum>Qt::Horizontal</enum></property></widget></item>
+              <item><widget class="QLabel" name="lbl_topk"><property name="text"><string>스펙트럼 시각화 최대 샘플</string></property></widget></item>
+              <item><widget class="QSpinBox" name="sb_max_samples"><property name="minimum"><number>1</number></property><property name="maximum"><number>1000</number></property><property name="value"><number>50</number></property></widget></item>
+              <item><widget class="QToolButton" name="btn_hist_more"><property name="text"><string>▾</string></property></widget></item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="gb_hist">
+              <property name="title">
+               <string>히스토그램</string>
+              </property>
+              <layout class="QVBoxLayout" name="vl_hist_box">
+               <item>
+                <widget class="QLabel" name="lbl_hist">
+                 <property name="minimumSize">
+                  <size>
+                   <width>400</width>
+                   <height>220</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Histogram Area</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+
+         <!-- 우하단: 보조 그래프(원하면 라벨 유지) -->
+         <item row="1" column="1">
+          <widget class="QFrame" name="plot_br">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>420</width>
+             <height>280</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <layout class="QVBoxLayout" name="vl_plot_br">
+            <property name="leftMargin"><number>0</number></property>
+            <property name="topMargin"><number>0</number></property>
+            <property name="rightMargin"><number>0</number></property>
+            <property name="bottomMargin"><number>0</number></property>
+            <property name="spacing"><number>0</number></property>
+            <item>
+             <widget class="QLabel" name="lbl_plot_br">
+              <property name="text">
+               <string>그래프 (우하단)</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+
+       <item>
+        <layout class="QHBoxLayout" name="hl_bottom">
+         <item>
+          <spacer name="sp_bottom_left">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox"/>
+         </item>
+         <item>
+          <spacer name="sp_bottom_mid">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_apply">
+           <property name="minimumSize">
+            <size>
+             <width>160</width>
+             <height>56</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>설정</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_cancel">
+           <property name="minimumSize">
+            <size>
+             <width>160</width>
+             <height>56</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>취소</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>681</width>
+    <height>588</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Hyperspectral Library Labeling Service</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>30</y>
+      <width>501</width>
+      <height>471</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>681</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionCamera_Add"/>
+    <addaction name="actionImage_Load"/>
+    <addaction name="actionRecent_Files"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuClassification">
+    <property name="title">
+     <string>Classification</string>
+    </property>
+    <addaction name="action"/>
+    <addaction name="actionROI"/>
+    <addaction name="action_2"/>
+    <addaction name="action_3"/>
+   </widget>
+   <widget class="QMenu" name="menuLabeling">
+    <property name="title">
+     <string>Labeling</string>
+    </property>
+    <addaction name="action_4"/>
+    <addaction name="action_5"/>
+   </widget>
+   <widget class="QMenu" name="menuOthers">
+    <property name="title">
+     <string>Others</string>
+    </property>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuClassification"/>
+   <addaction name="menuLabeling"/>
+   <addaction name="menuOthers"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionCamera_Add">
+   <property name="text">
+    <string>Camera Add</string>
+   </property>
+  </action>
+  <action name="actionImage_Load">
+   <property name="text">
+    <string>Image Load</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>분류 맵 생성</string>
+   </property>
+  </action>
+  <action name="actionROI">
+   <property name="text">
+    <string>ROI 맵 생성</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>(유사도) 확산 맵 생성</string>
+   </property>
+  </action>
+  <action name="action_3">
+   <property name="text">
+    <string>(분류맵) 확산 맵 생성</string>
+   </property>
+  </action>
+  <action name="actionRecent_Files">
+   <property name="text">
+    <string>Recent Files</string>
+   </property>
+  </action>
+  <action name="action_4">
+   <property name="text">
+    <string>픽셀 라벨링</string>
+   </property>
+  </action>
+  <action name="action_6">
+   <property name="text">
+    <string>사용자 지정 라벨링</string>
+   </property>
+  </action>
+  <action name="action_5">
+   <property name="text">
+    <string>라벨링 데이터베이스 탐색</string>
+   </property>
+  </action>
+  <action name="action_7">
+   <property name="text">
+    <string>평균 스펙트럼 라벨링</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
