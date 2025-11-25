@@ -372,8 +372,8 @@ def image_check_and_save(
         rgb_pth = os.path.join(save_path, f'{name}.png')
         
         # # raw_image 저장
-        # data = {'data':raw_image}
-        # safe_save_mat(img_pth, data)
+        data = {'data':raw_image}
+        safe_save_mat(img_pth, data)
         
         Image.fromarray(rgb_image, mode = 'RGB').save(rgb_pth)
         

@@ -2274,55 +2274,10 @@ class AnalysisSelectionDialog(QDialog):
                     if getattr(self.spectrumWidgetTL, "on_pick", None) is not self._on_tl_line_picked:
                         self.spectrumWidgetTL.on_pick = self._on_tl_line_picked
 
-            # 1) 포커스 저장 + BR 업데이트
+            # 포커스 저장
             self._focused_point = (y, x)
-            self._update_br_spectrum(y, x)
 
-            # 2) Histogram: 클릭 픽셀의 클래스 기준으로 히스토그램 변경 + bin 강조
-            try:
-                cid = int(self._classmap[y, x])
-                import time
-                # 콤보를 사용자가 직접 바꾼 직후만 잠시 보호
-                if time.time() >= getattr(self, "_hist_user_locked_until", 0.0):
-                    # (a) 콤보/히스토그램을 해당 클래스 cid 로 변경
-                    self._set_hist_class_combo_to(cid, update_hist=True)
-            except Exception:
-                cid = None
-
-            # (b) 현재 top1 값이 들어가는 bin 강조
-            try:
-                cache = getattr(self, "_hist_cache", None)
-                if cache is None or cache.get("edges") is None:
-                    self._update_histogram()
-                    cache = getattr(self, "_hist_cache", None)
-                if cache and cache.get("edges") is not None and self._topk_vals is not None:
-                    edges = cache["edges"]
-                    v = float(self._topk_vals[y, x, 0])
-                    j = np.searchsorted(edges, v, side="right") - 1
-                    j = max(0, min(len(edges) - 2, j))
-                    self._highlight_hist_bin(int(j))
-            except Exception:
-                logging.exception("[AnalysisDialog] TL-bin highlight failed")
-
-            # 3) TR: reference 전체 표시 + 클릭 reference 만 빨간 강조
-            red_keys = set()
-            if callable(self._match_provider):
-                try:
-                    if cid is None:
-                        cid = int(self._classmap[y, x])
-                    ref = self._match_provider(int(y), int(x), int(cid))
-                    if ref is not None:
-                        k = np.round(np.asarray(ref, dtype=np.float32).reshape(-1), 6).tobytes()
-                        red_keys.add(k)
-                except Exception:
-                    pass
-
-            if hasattr(self, "_update_tr_refs_from_checked"):
-                self._update_tr_refs_from_checked(red_keys)
-            else:
-                self._update_tr_region_used_refs()
-
-            # 4) 트리/지도 동기화 (멀티선택 포함)
+            # 현재 TL에서 선택된 모든 픽셀 → points로 수집
             pts = []
             metas = getattr(self.spectrumWidgetTL, "_metas", []) or []
             sel   = getattr(self.spectrumWidgetTL, "_selected_indices", []) or []
@@ -2334,11 +2289,13 @@ class AnalysisSelectionDialog(QDialog):
             if not pts:
                 pts = [(y, x)]
 
-            self._mark_tree_selection(pts)
-            self._update_mapview_red_markers()
+            # ✅ TL / TR / Histogram / BR / Layer / MapView를 한 번에 동기화
+            self._focus_source = 'tl'
+            self._apply_focus_from_points(pts)
 
         except Exception:
             logging.exception("[AnalysisDialog] _on_tl_line_picked failed")
+
 
     def _on_tr_line_picked(self, meta: dict, event, multi: bool):
         """
@@ -2392,28 +2349,47 @@ class AnalysisSelectionDialog(QDialog):
 
     def _reset_tw_selected_colors(self):
         """트리 항목 색을 팔레트(또는 기본값)로 되돌림"""
-        if not self.twSelected: 
+        if not self.twSelected:
             return
+
         root_cnt = self.twSelected.topLevelItemCount()
         for r in range(root_cnt):
             top = self.twSelected.topLevelItem(r)
-            if not top: continue
-            # 부모(Class) 색 복원
+            if not top:
+                continue
+
+            # 1) Class 노드 색 복원
             cid = self._cid_from_top_item_text(top.text(0))
             if self._palette and (cid in self._palette):
                 top.setForeground(0, QtGui.QBrush(self._palette[cid]))
             else:
                 top.setForeground(0, QtGui.QBrush(QtGui.QColor(Qt.black)))
 
-            # 자식(좌표) 색 복원
+            # 2) Label 노드 + Pixel 노드 색 복원
             for i in range(top.childCount()):
-                ch = top.child(i)
-                if not ch: continue
+                label_item = top.child(i)
+                if not label_item:
+                    continue
+
+                # Label 노드 색
                 if self._palette and (cid in self._palette):
-                    c = QtGui.QColor(self._palette[cid]); c.setAlpha(220)
-                    ch.setForeground(0, QtGui.QBrush(c))
+                    c_label = QtGui.QColor(self._palette[cid])
+                    c_label.setAlpha(220)
+                    label_item.setForeground(0, QtGui.QBrush(c_label))
                 else:
-                    ch.setForeground(0, QtGui.QBrush(QtGui.QColor(Qt.darkGray)))
+                    label_item.setForeground(0, QtGui.QBrush(QtGui.QColor(Qt.darkGray)))
+
+                # Pixel 노드 색
+                for j in range(label_item.childCount()):
+                    leaf = label_item.child(j)
+                    if not leaf:
+                        continue
+                    if self._palette and (cid in self._palette):
+                        c_child = QtGui.QColor(self._palette[cid])
+                        c_child.setAlpha(200)
+                        leaf.setForeground(0, QtGui.QBrush(c_child))
+                    else:
+                        leaf.setForeground(0, QtGui.QBrush(QtGui.QColor(Qt.darkGray)))
 
     def _mark_tree_selection(self, points: List[Tuple[int,int]]):
         """지정 좌표 리스트를 트리에서 빨간색으로 강조"""
@@ -2846,6 +2822,7 @@ class AnalysisSelectionDialog(QDialog):
             except Exception: pass
 
             # ========= TL(빨강) 오버레이 =========
+            # TL 그래프에서 선택된(체크된) 부분만 기준으로 빨간색 표시
             tl_points: List[Tuple[int, int]] = []
             if isinstance(self.spectrumWidgetTL, SpectrumWidget):
                 selected_indices = getattr(self.spectrumWidgetTL, "_selected_indices", []) or []
@@ -3330,6 +3307,8 @@ class AnalysisSelectionDialog(QDialog):
                 if y is not None and x is not None and (int(y), int(x)) in want:
                     red_indices.append(i)
         self.spectrumWidgetTL.set_selected_indices(red_indices)
+        # ★ TL 선택 변경 시 Layer 빨간색 표시 동기화
+        self._update_mapview_red_markers()
 
     def _ref_keys_for_points(self, points: List[Tuple[int, int]]) -> set:
         """points에 해당하는 픽셀들이 사용하는 reference key 집합 계산."""
@@ -3394,23 +3373,29 @@ class AnalysisSelectionDialog(QDialog):
         - TR: 체크집합 전체 reference 표시 + points의 reference만 빨강 강조
         - HIST: points의 top1 값이 포함된 bin(들) 강조
         """
-        # 히스토그램 bin 클릭 시: 체크된 클래스들의 모든 스펙트럼을 유지하고, bin에 해당하는 픽셀만 빨간색으로 표시
-        # 1) 먼저 체크된 클래스들의 모든 스펙트럼을 TL 그래프에 표시 (트리 기반)
+        # 1) TL 전체 스펙 갱신 (트리 체크 기준)
         if hasattr(self, '_refresh_spectra_from_tree'):
             self._refresh_spectra_from_tree()
         
-        # 2) bin에 해당하는 픽셀들의 스펙트럼만 빨간색으로 선택
+        # 2) TL에서 points에 해당하는 라인만 '선택(빨강)'
         self._select_tl_by_points(points)
-        # TR 전체 표시 + 강조키
+
+        # 3) TR: 전체 reference + points 기준 빨강 강조
         red_ref_keys = self._ref_keys_for_points(points)
-        self._update_tr_refs_from_checked(red_ref_keys)   # ← 기존 구현 재사용(전체 표시 + 빨강 강조)
-        # BR (우하단) 그래프 업데이트: 해당 클래스의 라벨링 데이터 + TL에서 선택된 픽셀 스펙트럼
+        self._update_tr_refs_from_checked(red_ref_keys)
+
+        # 4) BR: 라벨링 데이터 + TL 선택 픽셀 스펙
         self._update_br_from_points(points)
-        # HIST 강조
+
+        # 5) Histogram: points의 top1 값이 속한 bin 강조
         self._hist_highlight_points(points)
-        # 지도 동기화
+
+        # 6) 지도 오버레이 동기화
         self._update_mapview_red_markers()
+
+        # 7) ★ Layer 트리에서 동일 픽셀 빨간색 표시
         self._mark_tree_selection(points)
+
 
     def _set_hist_class_combo_to(self, cid: int, update_hist: bool = True):
         if cid is None or cid < 0 or self.cbClassRange is None:

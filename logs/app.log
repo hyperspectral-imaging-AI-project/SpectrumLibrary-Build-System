@@ -9844,3 +9844,748 @@ ValueError: too many values to unpack (expected 2)
 2025-11-24 17:30:01,770 INFO: Resampling 완료 — splib_raw:0, splib_cr:0, label_raw:1, label_cr:0
 2025-11-24 17:33:10,293 INFO: [PixelLabeling] personal: .info 파일에서 1개 클래스 로드 완료
 2025-11-24 17:33:14,543 INFO: [PixelLabeling] personal: .info 파일에서 1개 클래스 로드 완료
+2025-11-25 15:22:02,501 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 15:22:02,542 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 15:22:02,544 INFO: icon.rcc not found (skip)
+2025-11-25 15:22:23,261 INFO: [ResampleCache] cached result loaded
+2025-11-25 15:22:23,262 INFO: [ResampleCache] loaded: splib_raw=0, splib_cr=0, label_raw=2, label_cr=0
+2025-11-25 15:22:23,262 INFO: [Resampling] personal 사용자: 캐시 파일에서 데이터 로드 (API resampling 없음)
+2025-11-25 15:22:23,263 INFO: [Resampling] personal user: loaded from cache (no API resampling)
+2025-11-25 15:22:23,263 INFO: [ResampleCache] personal 사용자: 기존 캐시 파일에서 데이터 로드 완료
+2025-11-25 15:22:23,263 INFO: [rebuild] label_raw input: 2 classes, samples={0: 36, 1: 13}
+2025-11-25 15:22:23,264 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-11-25 15:22:23,265 INFO: [_norm_entries] splib_raw: input dict with 0 keys
+2025-11-25 15:22:23,265 WARNING: [_norm_entries] splib_raw: output is empty!
+2025-11-25 15:22:23,266 INFO: [_norm_entries] splib_cr: input dict with 0 keys
+2025-11-25 15:22:23,266 WARNING: [_norm_entries] splib_cr: output is empty!
+2025-11-25 15:22:23,266 INFO: [_norm_entries] label_raw: input dict with 2 keys
+2025-11-25 15:22:23,266 INFO: [_norm_entries] label_raw: output 2 classes, 49 total samples
+2025-11-25 15:22:23,266 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-11-25 15:22:23,267 WARNING: [_norm_entries] label_cr: output is empty!
+2025-11-25 15:22:23,267 INFO: [rebuild] after _norm_entries: label_raw_norm=2 classes, label_cr_norm=0 classes
+2025-11-25 15:22:23,268 INFO: [rebuild] classes: splib_raw=0, splib_cr=0, label_raw=2, label_cr=0, lib=2
+2025-11-25 15:22:23,268 INFO: [rebuild] label_raw=2 classes / 49 samples, label_cr=0 classes / 0 samples, lib=2 classes / 49 samples
+2025-11-25 15:22:23,268 INFO: [Rebuild] lib=2 classes, labeling_lib=2 classes
+2025-11-25 15:22:23,270 INFO: Resampling 완료 — splib_raw:0, splib_cr:0, label_raw:2, label_cr:0
+2025-11-25 15:27:02,305 INFO: [Classification] personal: .info 기반 id_to_name 적용 (2개)
+2025-11-25 15:27:10,815 INFO: [AnalysisDialog] Found 3 comboboxes: ['cb_intermediate_target', 'cb_class_range', 'comboBox']
+2025-11-25 15:27:10,816 ERROR: [class combo] cbClassRange not found in UI
+2025-11-25 15:27:10,816 WARNING: [AnalysisDialog] Found cb_class_range by alternative method
+2025-11-25 15:27:10,958 INFO: [Analysis] dialog opened: HxW=320x1800, mask_sum=0
+2025-11-25 15:27:11,030 INFO: [MainWindow] (pixel mode) connecting analysisMaskChanged signal
+2025-11-25 15:27:11,030 INFO: [MainWindow] (pixel mode) analysisMaskChanged signal connected
+2025-11-25 15:27:11,030 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 15:27:11,031 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:27:11,031 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:27:11,032 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 15:27:11,176 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(320, 1800)
+2025-11-25 15:27:11,177 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:27:11,179 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-25 15:27:11,179 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-25 15:27:11,184 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-25 15:27:13,266 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 15:27:13,267 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:27:13,267 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:27:13,268 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 15:27:13,463 INFO: [Analysis] 분석 영역 초기화 완료
+2025-11-25 15:27:15,076 INFO: [PixelLabeling] personal: .info 파일에서 2개 클래스 로드 완료
+2025-11-25 15:27:16,226 INFO: [UserLabeling] 초기 클래스 로드(personal): 2개
+2025-11-25 15:27:16,227 INFO: [UserLabeling] personal: .info 파일에서 2개 클래스 로드 완료
+2025-11-25 15:27:38,357 INFO: [PixelLabeling] personal: .info 파일에서 2개 클래스 로드 완료
+2025-11-25 15:27:45,015 INFO: [UserLabeling] 초기 클래스 로드(personal): 2개
+2025-11-25 15:27:45,016 INFO: [UserLabeling] personal: .info 파일에서 2개 클래스 로드 완료
+2025-11-25 15:39:27,075 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 15:39:27,098 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 15:39:27,099 INFO: icon.rcc not found (skip)
+2025-11-25 15:39:45,141 INFO: [ResampleCache] cached result loaded
+2025-11-25 15:39:45,142 INFO: [ResampleCache] loaded: splib_raw=0, splib_cr=0, label_raw=2, label_cr=0
+2025-11-25 15:39:45,142 INFO: [Resampling] personal 사용자: 캐시 파일에서 데이터 로드 (API resampling 없음)
+2025-11-25 15:39:45,142 INFO: [Resampling] personal user: loaded from cache (no API resampling)
+2025-11-25 15:39:45,142 INFO: [ResampleCache] personal 사용자: 기존 캐시 파일에서 데이터 로드 완료
+2025-11-25 15:39:45,143 INFO: [rebuild] label_raw input: 2 classes, samples={0: 36, 1: 13}
+2025-11-25 15:39:45,143 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-11-25 15:39:45,143 INFO: [_norm_entries] splib_raw: input dict with 0 keys
+2025-11-25 15:39:45,143 WARNING: [_norm_entries] splib_raw: output is empty!
+2025-11-25 15:39:45,144 INFO: [_norm_entries] splib_cr: input dict with 0 keys
+2025-11-25 15:39:45,144 WARNING: [_norm_entries] splib_cr: output is empty!
+2025-11-25 15:39:45,144 INFO: [_norm_entries] label_raw: input dict with 2 keys
+2025-11-25 15:39:45,144 INFO: [_norm_entries] label_raw: output 2 classes, 49 total samples
+2025-11-25 15:39:45,145 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-11-25 15:39:45,145 WARNING: [_norm_entries] label_cr: output is empty!
+2025-11-25 15:39:45,145 INFO: [rebuild] after _norm_entries: label_raw_norm=2 classes, label_cr_norm=0 classes
+2025-11-25 15:39:45,145 INFO: [rebuild] classes: splib_raw=0, splib_cr=0, label_raw=2, label_cr=0, lib=2
+2025-11-25 15:39:45,145 INFO: [rebuild] label_raw=2 classes / 49 samples, label_cr=0 classes / 0 samples, lib=2 classes / 49 samples
+2025-11-25 15:39:45,145 INFO: [Rebuild] lib=2 classes, labeling_lib=2 classes
+2025-11-25 15:39:45,146 INFO: Resampling 완료 — splib_raw:0, splib_cr:0, label_raw:2, label_cr:0
+2025-11-25 15:39:53,474 INFO: [Classification] personal: .info 기반 id_to_name 적용 (2개)
+2025-11-25 15:40:00,208 INFO: [Classification] personal: .info 기반 id_to_name 적용 (2개)
+2025-11-25 15:40:02,763 INFO: [AnalysisDialog] Found 3 comboboxes: ['cb_intermediate_target', 'cb_class_range', 'comboBox']
+2025-11-25 15:40:02,763 ERROR: [class combo] cbClassRange not found in UI
+2025-11-25 15:40:02,764 WARNING: [AnalysisDialog] Found cb_class_range by alternative method
+2025-11-25 15:40:02,889 INFO: [Analysis] dialog opened: HxW=320x1800, mask_sum=0
+2025-11-25 15:40:02,955 INFO: [MainWindow] (pixel mode) connecting analysisMaskChanged signal
+2025-11-25 15:40:02,955 INFO: [MainWindow] (pixel mode) analysisMaskChanged signal connected
+2025-11-25 15:40:02,956 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 15:40:02,956 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:40:02,956 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:40:02,957 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 15:40:03,112 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(320, 1800)
+2025-11-25 15:40:03,113 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:40:03,115 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-25 15:40:03,116 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-25 15:40:03,122 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-25 15:40:03,274 INFO: [Analysis] dialog opened: HxW=320x1800, mask_sum=0
+2025-11-25 15:40:03,329 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-25 15:40:03,329 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-25 15:40:03,339 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-25 15:40:05,166 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(630, 129, 75, 35)
+2025-11-25 15:40:05,167 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=2625, rect=PyQt5.QtCore.QRect(630, 129, 75, 35)
+2025-11-25 15:40:05,168 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(630, 129, 75, 35)
+2025-11-25 15:40:05,176 INFO: [hist_apply] source=combo-populate, cid=1
+2025-11-25 15:40:05,176 INFO: [AnalysisDialog] update_histogram start: cid=1, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:40:09,686 INFO: [AnalysisDialog] mask updated: shape=(320, 1800), sum=2625
+2025-11-25 15:40:09,688 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=2625, shape=(320, 1800)
+2025-11-25 15:40:09,688 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:40:17,604 INFO: [hist_apply] source=combo-set, cid=1
+2025-11-25 15:40:17,604 INFO: [AnalysisDialog] update_histogram start: cid=1, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:40:24,982 INFO: [hist_apply] source=combo-set, cid=1
+2025-11-25 15:40:24,982 INFO: [AnalysisDialog] update_histogram start: cid=1, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:40:33,047 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 15:40:33,047 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:40:33,048 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:40:33,048 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 15:40:33,225 INFO: [Analysis] 분석 영역 초기화 완료
+2025-11-25 15:40:37,151 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 15:40:37,171 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 15:40:37,172 INFO: icon.rcc not found (skip)
+2025-11-25 15:40:52,950 INFO: [ResampleCache] cached result loaded
+2025-11-25 15:40:52,950 INFO: [ResampleCache] loaded: splib_raw=0, splib_cr=0, label_raw=2, label_cr=0
+2025-11-25 15:40:52,951 INFO: [Resampling] personal 사용자: 캐시 파일에서 데이터 로드 (API resampling 없음)
+2025-11-25 15:40:52,952 INFO: [Resampling] personal user: loaded from cache (no API resampling)
+2025-11-25 15:40:52,952 INFO: [ResampleCache] personal 사용자: 기존 캐시 파일에서 데이터 로드 완료
+2025-11-25 15:40:52,952 INFO: [rebuild] label_raw input: 2 classes, samples={0: 36, 1: 13}
+2025-11-25 15:40:52,953 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-11-25 15:40:52,953 INFO: [_norm_entries] splib_raw: input dict with 0 keys
+2025-11-25 15:40:52,953 WARNING: [_norm_entries] splib_raw: output is empty!
+2025-11-25 15:40:52,953 INFO: [_norm_entries] splib_cr: input dict with 0 keys
+2025-11-25 15:40:52,954 WARNING: [_norm_entries] splib_cr: output is empty!
+2025-11-25 15:40:52,954 INFO: [_norm_entries] label_raw: input dict with 2 keys
+2025-11-25 15:40:52,954 INFO: [_norm_entries] label_raw: output 2 classes, 49 total samples
+2025-11-25 15:40:52,954 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-11-25 15:40:52,954 WARNING: [_norm_entries] label_cr: output is empty!
+2025-11-25 15:40:52,955 INFO: [rebuild] after _norm_entries: label_raw_norm=2 classes, label_cr_norm=0 classes
+2025-11-25 15:40:52,955 INFO: [rebuild] classes: splib_raw=0, splib_cr=0, label_raw=2, label_cr=0, lib=2
+2025-11-25 15:40:52,955 INFO: [rebuild] label_raw=2 classes / 49 samples, label_cr=0 classes / 0 samples, lib=2 classes / 49 samples
+2025-11-25 15:40:52,955 INFO: [Rebuild] lib=2 classes, labeling_lib=2 classes
+2025-11-25 15:40:52,956 INFO: Resampling 완료 — splib_raw:0, splib_cr:0, label_raw:2, label_cr:0
+2025-11-25 15:41:22,734 INFO: [Classification] personal: .info 기반 id_to_name 적용 (2개)
+2025-11-25 15:41:24,684 INFO: [AnalysisDialog] Found 3 comboboxes: ['cb_intermediate_target', 'cb_class_range', 'comboBox']
+2025-11-25 15:41:24,684 ERROR: [class combo] cbClassRange not found in UI
+2025-11-25 15:41:24,684 WARNING: [AnalysisDialog] Found cb_class_range by alternative method
+2025-11-25 15:41:24,812 INFO: [Analysis] dialog opened: HxW=320x1800, mask_sum=0
+2025-11-25 15:41:24,879 INFO: [MainWindow] (pixel mode) connecting analysisMaskChanged signal
+2025-11-25 15:41:24,879 INFO: [MainWindow] (pixel mode) analysisMaskChanged signal connected
+2025-11-25 15:41:24,880 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 15:41:24,880 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:41:24,881 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:41:24,881 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 15:41:25,026 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(320, 1800)
+2025-11-25 15:41:25,027 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:41:25,030 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-25 15:41:25,031 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-25 15:41:25,036 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-25 15:41:27,757 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(946, 108, 12, 24)
+2025-11-25 15:41:27,758 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=288, rect=PyQt5.QtCore.QRect(946, 108, 12, 24)
+2025-11-25 15:41:27,758 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(946, 108, 12, 24)
+2025-11-25 15:41:27,768 INFO: [hist_apply] source=combo-populate, cid=1
+2025-11-25 15:41:27,769 INFO: [AnalysisDialog] update_histogram start: cid=1, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:41:28,588 INFO: [AnalysisDialog] mask updated: shape=(320, 1800), sum=288
+2025-11-25 15:41:28,588 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=288, shape=(320, 1800)
+2025-11-25 15:41:28,589 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:41:30,431 INFO: [hist_apply] source=combo-set, cid=1
+2025-11-25 15:41:30,431 INFO: [AnalysisDialog] update_histogram start: cid=1, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:42:45,394 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 15:42:45,395 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:42:45,396 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:42:45,397 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 15:42:45,616 INFO: [Analysis] 분석 영역 초기화 완료
+2025-11-25 15:42:46,902 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 15:42:46,921 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 15:42:46,922 INFO: icon.rcc not found (skip)
+2025-11-25 15:42:56,952 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 13
+2025-11-25 15:42:56,988 INFO: [ResampleCache] cached result loaded
+2025-11-25 15:42:56,988 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-11-25 15:42:56,989 INFO: [rebuild] label_raw input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 15:42:56,989 INFO: [rebuild] label_cr input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 15:42:56,989 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-25 15:42:56,996 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-25 15:42:56,997 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-25 15:42:57,003 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-25 15:42:57,004 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-11-25 15:42:57,005 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-25 15:42:57,005 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-11-25 15:42:57,005 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-25 15:42:57,006 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-25 15:42:57,016 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-11-25 15:42:57,016 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1831 classes / 4302 samples
+2025-11-25 15:42:57,024 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-11-25 15:42:57,027 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-11-25 15:43:10,329 INFO: [AnalysisDialog] Found 3 comboboxes: ['cb_intermediate_target', 'cb_class_range', 'comboBox']
+2025-11-25 15:43:10,330 ERROR: [class combo] cbClassRange not found in UI
+2025-11-25 15:43:10,330 WARNING: [AnalysisDialog] Found cb_class_range by alternative method
+2025-11-25 15:43:10,461 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-11-25 15:43:10,530 INFO: [MainWindow] (pixel mode) connecting analysisMaskChanged signal
+2025-11-25 15:43:10,530 INFO: [MainWindow] (pixel mode) analysisMaskChanged signal connected
+2025-11-25 15:43:10,530 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 15:43:10,530 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:43:10,530 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:43:10,530 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 15:43:10,726 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(500, 500)
+2025-11-25 15:43:10,726 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:43:10,729 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-25 15:43:10,729 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-25 15:43:10,734 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-25 15:43:14,513 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(140, 268, 6, 4)
+2025-11-25 15:43:14,514 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=24, rect=PyQt5.QtCore.QRect(140, 268, 6, 4)
+2025-11-25 15:43:14,514 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(140, 268, 6, 4)
+2025-11-25 15:43:14,520 INFO: [hist_apply] source=combo-populate, cid=2229
+2025-11-25 15:43:14,520 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:14,912 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=24
+2025-11-25 15:43:14,913 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=24, shape=(500, 500)
+2025-11-25 15:43:14,913 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:43:21,965 INFO: [hist_apply] source=combo-set, cid=2457
+2025-11-25 15:43:21,966 INFO: [AnalysisDialog] update_histogram start: cid=2457, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:24,540 INFO: [hist_apply] source=combo-set, cid=2229
+2025-11-25 15:43:24,540 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:24,891 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-11-25 15:43:28,631 INFO: [hist_apply] source=combo-set, cid=2446
+2025-11-25 15:43:28,631 INFO: [AnalysisDialog] update_histogram start: cid=2446, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:28,938 INFO: [Analysis] labeling_raw_lib 에 cid=2446 데이터가 없습니다.
+2025-11-25 15:43:32,190 INFO: [hist_apply] source=combo-set, cid=2446
+2025-11-25 15:43:32,191 INFO: [AnalysisDialog] update_histogram start: cid=2446, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:32,503 INFO: [Analysis] labeling_raw_lib 에 cid=2446 데이터가 없습니다.
+2025-11-25 15:43:34,902 INFO: [hist_apply] source=combo-set, cid=2459
+2025-11-25 15:43:34,903 INFO: [AnalysisDialog] update_histogram start: cid=2459, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:35,765 INFO: [hist_apply] source=combo-set, cid=2446
+2025-11-25 15:43:35,765 INFO: [AnalysisDialog] update_histogram start: cid=2446, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:36,065 INFO: [Analysis] labeling_raw_lib 에 cid=2446 데이터가 없습니다.
+2025-11-25 15:43:39,559 INFO: [hist_apply] source=combo-set, cid=2459
+2025-11-25 15:43:39,560 INFO: [AnalysisDialog] update_histogram start: cid=2459, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:43,248 INFO: [hist_apply] source=combo-set, cid=2459
+2025-11-25 15:43:43,249 INFO: [AnalysisDialog] update_histogram start: cid=2459, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:46,181 INFO: [hist_apply] source=combo-set, cid=2459
+2025-11-25 15:43:46,182 INFO: [AnalysisDialog] update_histogram start: cid=2459, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:48,706 INFO: [hist_apply] source=combo-set, cid=2459
+2025-11-25 15:43:48,706 INFO: [AnalysisDialog] update_histogram start: cid=2459, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:49,561 INFO: [hist_apply] source=combo-set, cid=2459
+2025-11-25 15:43:49,562 INFO: [AnalysisDialog] update_histogram start: cid=2459, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:50,941 INFO: [hist_apply] source=combo-set, cid=2459
+2025-11-25 15:43:50,941 INFO: [AnalysisDialog] update_histogram start: cid=2459, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:52,449 INFO: [hist_apply] source=combo-set, cid=2459
+2025-11-25 15:43:52,450 INFO: [AnalysisDialog] update_histogram start: cid=2459, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:54,056 INFO: [hist_apply] source=combo-set, cid=2459
+2025-11-25 15:43:54,057 INFO: [AnalysisDialog] update_histogram start: cid=2459, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:55,704 INFO: [hist_apply] source=combo-set, cid=2457
+2025-11-25 15:43:55,705 INFO: [AnalysisDialog] update_histogram start: cid=2457, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:57,563 INFO: [hist_apply] source=combo-set, cid=2229
+2025-11-25 15:43:57,564 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:43:57,852 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-11-25 15:44:00,183 INFO: [hist_apply] source=combo-set, cid=2229
+2025-11-25 15:44:00,184 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:44:00,529 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-11-25 15:44:00,679 INFO: [hist_apply] source=combo-set, cid=2459
+2025-11-25 15:44:00,679 INFO: [AnalysisDialog] update_histogram start: cid=2459, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:44:09,117 INFO: [Analysis] spectrum_lib_raw/all 이 비어 있습니다.
+2025-11-25 15:44:09,117 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-11-25 15:44:09,172 INFO: [hist_apply] source=combo-set, cid=2229
+2025-11-25 15:44:09,173 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:44:10,286 INFO: [Analysis] spectrum_lib_raw/all 이 비어 있습니다.
+2025-11-25 15:44:10,286 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-11-25 15:44:10,334 INFO: [hist_apply] source=combo-set, cid=2229
+2025-11-25 15:44:10,334 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:44:10,960 INFO: [Analysis] spectrum_lib_raw/all 이 비어 있습니다.
+2025-11-25 15:44:11,106 INFO: [hist_apply] source=combo-set, cid=2457
+2025-11-25 15:44:11,106 INFO: [AnalysisDialog] update_histogram start: cid=2457, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:45:06,487 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 15:45:06,487 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:45:06,488 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:45:06,488 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 15:45:06,764 INFO: [Analysis] 분석 영역 초기화 완료
+2025-11-25 15:45:08,115 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 15:45:08,146 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 15:45:08,147 INFO: icon.rcc not found (skip)
+2025-11-25 15:45:15,662 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 13
+2025-11-25 15:45:15,673 INFO: [ResampleCache] cached result loaded
+2025-11-25 15:45:15,673 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-11-25 15:45:15,673 INFO: [rebuild] label_raw input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 15:45:15,674 INFO: [rebuild] label_cr input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 15:45:15,674 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-25 15:45:15,681 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-25 15:45:15,681 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-25 15:45:15,688 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-25 15:45:15,688 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-11-25 15:45:15,689 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-25 15:45:15,690 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-11-25 15:45:15,690 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-25 15:45:15,690 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-25 15:45:15,701 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-11-25 15:45:15,701 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1831 classes / 4302 samples
+2025-11-25 15:45:15,710 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-11-25 15:45:15,711 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-11-25 15:45:30,050 INFO: [AnalysisDialog] Found 3 comboboxes: ['cb_intermediate_target', 'cb_class_range', 'comboBox']
+2025-11-25 15:45:30,050 ERROR: [class combo] cbClassRange not found in UI
+2025-11-25 15:45:30,051 WARNING: [AnalysisDialog] Found cb_class_range by alternative method
+2025-11-25 15:45:30,183 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-11-25 15:45:30,246 INFO: [MainWindow] (pixel mode) connecting analysisMaskChanged signal
+2025-11-25 15:45:30,246 INFO: [MainWindow] (pixel mode) analysisMaskChanged signal connected
+2025-11-25 15:45:30,246 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 15:45:30,247 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:45:30,247 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:45:30,247 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 15:45:30,448 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(500, 500)
+2025-11-25 15:45:30,449 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:45:30,452 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-25 15:45:30,452 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-25 15:45:30,458 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-25 15:45:32,544 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(77, 381, 9, 6)
+2025-11-25 15:45:32,545 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=54, rect=PyQt5.QtCore.QRect(77, 381, 9, 6)
+2025-11-25 15:45:32,546 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(77, 381, 9, 6)
+2025-11-25 15:45:32,551 INFO: [hist_apply] source=combo-populate, cid=2177
+2025-11-25 15:45:32,551 INFO: [AnalysisDialog] update_histogram start: cid=2177, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:45:33,034 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=54
+2025-11-25 15:45:33,035 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=54, shape=(500, 500)
+2025-11-25 15:45:33,035 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:45:34,472 INFO: [hist_apply] source=combo-set, cid=2229
+2025-11-25 15:45:34,472 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:45:34,861 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-11-25 15:45:38,034 INFO: [hist_apply] source=combo-set, cid=2457
+2025-11-25 15:45:38,034 INFO: [AnalysisDialog] update_histogram start: cid=2457, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:45:41,752 INFO: [hist_apply] source=combo-set, cid=2457
+2025-11-25 15:45:41,752 INFO: [AnalysisDialog] update_histogram start: cid=2457, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:45:45,633 INFO: [hist_apply] source=combo-set, cid=2457
+2025-11-25 15:45:45,633 INFO: [AnalysisDialog] update_histogram start: cid=2457, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:45:46,795 INFO: [hist_apply] source=combo-set, cid=2457
+2025-11-25 15:45:46,796 INFO: [AnalysisDialog] update_histogram start: cid=2457, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:45:48,585 INFO: [hist_apply] source=combo-set, cid=2457
+2025-11-25 15:45:48,586 INFO: [AnalysisDialog] update_histogram start: cid=2457, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:45:51,440 INFO: [hist_apply] source=combo-set, cid=2457
+2025-11-25 15:45:51,440 INFO: [AnalysisDialog] update_histogram start: cid=2457, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:49:19,003 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 15:49:19,003 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:49:19,004 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:49:19,004 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 15:49:19,316 INFO: [Analysis] 분석 영역 초기화 완료
+2025-11-25 15:49:20,577 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 15:49:20,598 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 15:49:20,599 INFO: icon.rcc not found (skip)
+2025-11-25 15:49:28,667 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 13
+2025-11-25 15:49:28,679 INFO: [ResampleCache] cached result loaded
+2025-11-25 15:49:28,679 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-11-25 15:49:28,679 INFO: [rebuild] label_raw input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 15:49:28,680 INFO: [rebuild] label_cr input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 15:49:28,680 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-25 15:49:28,690 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-25 15:49:28,691 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-25 15:49:28,699 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-25 15:49:28,699 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-11-25 15:49:28,700 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-25 15:49:28,700 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-11-25 15:49:28,701 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-25 15:49:28,701 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-25 15:49:28,711 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-11-25 15:49:28,712 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1831 classes / 4302 samples
+2025-11-25 15:49:28,719 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-11-25 15:49:28,720 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-11-25 15:49:41,608 INFO: [AnalysisDialog] Found 3 comboboxes: ['cb_intermediate_target', 'cb_class_range', 'comboBox']
+2025-11-25 15:49:41,609 ERROR: [class combo] cbClassRange not found in UI
+2025-11-25 15:49:41,609 WARNING: [AnalysisDialog] Found cb_class_range by alternative method
+2025-11-25 15:49:41,732 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-11-25 15:49:41,798 INFO: [MainWindow] (pixel mode) connecting analysisMaskChanged signal
+2025-11-25 15:49:41,799 INFO: [MainWindow] (pixel mode) analysisMaskChanged signal connected
+2025-11-25 15:49:41,799 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 15:49:41,799 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:49:41,799 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:49:41,800 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 15:49:42,007 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(500, 500)
+2025-11-25 15:49:42,008 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:49:42,010 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-25 15:49:42,011 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-25 15:49:42,017 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-25 15:49:44,333 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(139, 288, 9, 9)
+2025-11-25 15:49:44,334 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=81, rect=PyQt5.QtCore.QRect(139, 288, 9, 9)
+2025-11-25 15:49:44,334 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(139, 288, 9, 9)
+2025-11-25 15:49:44,340 INFO: [hist_apply] source=combo-populate, cid=2177
+2025-11-25 15:49:44,340 INFO: [AnalysisDialog] update_histogram start: cid=2177, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:49:44,880 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=81
+2025-11-25 15:49:44,881 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=81, shape=(500, 500)
+2025-11-25 15:49:44,881 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:49:46,274 INFO: [hist_apply] source=combo-set, cid=2229
+2025-11-25 15:49:46,275 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:49:46,696 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-11-25 15:49:48,945 INFO: [hist_apply] source=combo-set, cid=2260
+2025-11-25 15:49:48,946 INFO: [AnalysisDialog] update_histogram start: cid=2260, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:49:49,362 INFO: [Analysis] labeling_raw_lib 에 cid=2260 데이터가 없습니다.
+2025-11-25 15:49:50,645 INFO: [hist_apply] source=combo-set, cid=2282
+2025-11-25 15:49:50,645 INFO: [AnalysisDialog] update_histogram start: cid=2282, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:49:51,032 INFO: [Analysis] labeling_raw_lib 에 cid=2282 데이터가 없습니다.
+2025-11-25 15:51:32,706 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 15:51:32,708 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:51:32,708 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:51:32,709 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 15:51:32,954 INFO: [Analysis] 분석 영역 초기화 완료
+2025-11-25 15:51:34,228 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 15:51:34,251 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 15:51:34,252 INFO: icon.rcc not found (skip)
+2025-11-25 15:51:41,726 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 13
+2025-11-25 15:51:41,737 INFO: [ResampleCache] cached result loaded
+2025-11-25 15:51:41,737 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-11-25 15:51:41,737 INFO: [rebuild] label_raw input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 15:51:41,738 INFO: [rebuild] label_cr input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 15:51:41,738 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-25 15:51:41,743 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-25 15:51:41,744 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-25 15:51:41,752 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-25 15:51:41,752 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-11-25 15:51:41,752 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-25 15:51:41,753 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-11-25 15:51:41,753 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-25 15:51:41,753 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-25 15:51:41,763 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-11-25 15:51:41,763 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1831 classes / 4302 samples
+2025-11-25 15:51:41,772 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-11-25 15:51:41,774 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-11-25 15:51:54,319 INFO: [AnalysisDialog] Found 3 comboboxes: ['cb_intermediate_target', 'cb_class_range', 'comboBox']
+2025-11-25 15:51:54,320 ERROR: [class combo] cbClassRange not found in UI
+2025-11-25 15:51:54,320 WARNING: [AnalysisDialog] Found cb_class_range by alternative method
+2025-11-25 15:51:54,448 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-11-25 15:51:54,509 INFO: [MainWindow] (pixel mode) connecting analysisMaskChanged signal
+2025-11-25 15:51:54,510 INFO: [MainWindow] (pixel mode) analysisMaskChanged signal connected
+2025-11-25 15:51:54,510 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 15:51:54,510 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:51:54,511 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:51:54,511 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 15:51:54,712 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(500, 500)
+2025-11-25 15:51:54,712 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:51:54,715 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-25 15:51:54,716 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-25 15:51:54,722 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-25 15:51:54,941 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-11-25 15:51:54,945 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-11-25 15:51:54,993 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-25 15:51:54,993 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-25 15:51:55,004 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-25 15:51:55,145 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-25 15:51:55,145 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-25 15:51:55,156 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-25 15:51:57,150 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(134, 278, 7, 10)
+2025-11-25 15:51:57,151 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=70, rect=PyQt5.QtCore.QRect(134, 278, 7, 10)
+2025-11-25 15:51:57,151 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(134, 278, 7, 10)
+2025-11-25 15:51:57,155 INFO: [hist_apply] source=combo-populate, cid=2229
+2025-11-25 15:51:57,156 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:51:57,684 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=70
+2025-11-25 15:51:57,685 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=70, shape=(500, 500)
+2025-11-25 15:51:57,685 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:51:59,041 INFO: [hist_apply] source=combo-set, cid=2229
+2025-11-25 15:51:59,041 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:51:59,486 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-11-25 15:52:01,032 INFO: [hist_apply] source=combo-set, cid=2322
+2025-11-25 15:52:01,033 INFO: [AnalysisDialog] update_histogram start: cid=2322, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:52:01,451 INFO: [Analysis] labeling_raw_lib 에 cid=2322 데이터가 없습니다.
+2025-11-25 15:52:03,915 INFO: [hist_apply] source=combo-set, cid=2457
+2025-11-25 15:52:03,916 INFO: [AnalysisDialog] update_histogram start: cid=2457, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:52:13,780 INFO: [hist_apply] source=combo-set, cid=2260
+2025-11-25 15:52:13,780 INFO: [AnalysisDialog] update_histogram start: cid=2260, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:52:14,160 INFO: [Analysis] labeling_raw_lib 에 cid=2260 데이터가 없습니다.
+2025-11-25 15:52:16,996 INFO: [hist_apply] source=combo-set, cid=2282
+2025-11-25 15:52:16,997 INFO: [AnalysisDialog] update_histogram start: cid=2282, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:52:17,372 INFO: [Analysis] labeling_raw_lib 에 cid=2282 데이터가 없습니다.
+2025-11-25 15:52:18,782 INFO: [AnalysisDialog] update_histogram start: cid=2282, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:52:18,849 INFO: [AnalysisDialog] update_histogram start: cid=2282, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:52:18,900 INFO: [AnalysisDialog] update_histogram start: cid=2282, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:52:19,980 INFO: [Analysis] labeling_raw_lib 에 cid=2282 데이터가 없습니다.
+2025-11-25 15:52:25,918 INFO: [_on_class_range_changed] CALLED: idx=7, cbClassRange=Found, objectName=cb_class_range
+2025-11-25 15:52:25,918 INFO: [class_range] changed: idx=7, text='Class 2459 (낮은 고도의 식생)', cid=2459
+2025-11-25 15:52:25,919 INFO: [hist_apply] source=combo-change, cid=2459
+2025-11-25 15:52:25,919 INFO: [AnalysisDialog] update_histogram start: cid=2459, mask_set=True, topk_set=True, mode=combo
+2025-11-25 15:52:36,686 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 15:52:36,687 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 15:52:36,687 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 15:52:36,688 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 15:52:36,837 INFO: [Analysis] 분석 영역 초기화 완료
+2025-11-25 15:52:46,113 INFO: [UserLabeling] 초기 클래스 로드(server): 2479개
+2025-11-25 16:00:30,869 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 16:00:30,894 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 16:00:30,894 INFO: icon.rcc not found (skip)
+2025-11-25 16:00:38,328 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 13
+2025-11-25 16:00:38,342 INFO: [ResampleCache] cached result loaded
+2025-11-25 16:00:38,342 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-11-25 16:00:38,342 INFO: [rebuild] label_raw input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:00:38,343 INFO: [rebuild] label_cr input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:00:38,343 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-25 16:00:38,351 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-25 16:00:38,352 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-25 16:00:38,359 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-25 16:00:38,360 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-11-25 16:00:38,360 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-25 16:00:38,361 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-11-25 16:00:38,361 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-25 16:00:38,361 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-25 16:00:38,374 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-11-25 16:00:38,375 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1831 classes / 4302 samples
+2025-11-25 16:00:38,384 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-11-25 16:00:38,386 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-11-25 16:00:51,406 INFO: [AnalysisDialog] Found 3 comboboxes: ['cb_intermediate_target', 'cb_class_range', 'comboBox']
+2025-11-25 16:00:51,407 ERROR: [class combo] cbClassRange not found in UI
+2025-11-25 16:00:51,407 WARNING: [AnalysisDialog] Found cb_class_range by alternative method
+2025-11-25 16:00:51,537 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-11-25 16:00:51,598 INFO: [MainWindow] (pixel mode) connecting analysisMaskChanged signal
+2025-11-25 16:00:51,599 INFO: [MainWindow] (pixel mode) analysisMaskChanged signal connected
+2025-11-25 16:00:51,600 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 16:00:51,600 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 16:00:51,600 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-11-25 16:00:51,601 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 16:00:51,807 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(500, 500)
+2025-11-25 16:00:51,808 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 16:00:51,810 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-25 16:00:51,810 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-25 16:00:51,816 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-25 16:00:53,918 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(132, 289, 12, 9)
+2025-11-25 16:00:53,918 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=108, rect=PyQt5.QtCore.QRect(132, 289, 12, 9)
+2025-11-25 16:00:53,919 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(132, 289, 12, 9)
+2025-11-25 16:00:53,922 INFO: [hist_apply] source=combo-populate, cid=2229
+2025-11-25 16:00:53,923 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-11-25 16:00:54,505 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=108
+2025-11-25 16:00:54,505 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=108, shape=(500, 500)
+2025-11-25 16:00:54,505 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 16:00:57,967 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-11-25 16:00:59,412 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 16:00:59,413 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 16:00:59,413 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 16:00:59,413 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 16:00:59,560 INFO: [Analysis] 분석 영역 초기화 완료
+2025-11-25 16:01:02,083 INFO: [UserLabeling] 초기 클래스 로드(server): 2479개
+2025-11-25 16:03:37,089 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 16:03:37,109 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 16:03:37,110 INFO: icon.rcc not found (skip)
+2025-11-25 16:03:44,064 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 13
+2025-11-25 16:03:44,073 INFO: [ResampleCache] cached result loaded
+2025-11-25 16:03:44,073 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-11-25 16:03:44,074 INFO: [rebuild] label_raw input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:03:44,074 INFO: [rebuild] label_cr input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:03:44,074 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-25 16:03:44,080 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-25 16:03:44,081 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-25 16:03:44,087 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-25 16:03:44,088 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-11-25 16:03:44,088 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-25 16:03:44,089 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-11-25 16:03:44,089 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-25 16:03:44,089 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-25 16:03:44,100 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-11-25 16:03:44,101 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1831 classes / 4302 samples
+2025-11-25 16:03:44,109 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-11-25 16:03:44,110 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-11-25 16:04:00,139 INFO: [AnalysisDialog] Found 3 comboboxes: ['cb_intermediate_target', 'cb_class_range', 'comboBox']
+2025-11-25 16:04:00,140 ERROR: [class combo] cbClassRange not found in UI
+2025-11-25 16:04:00,140 WARNING: [AnalysisDialog] Found cb_class_range by alternative method
+2025-11-25 16:04:00,261 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-11-25 16:04:00,322 INFO: [MainWindow] (pixel mode) connecting analysisMaskChanged signal
+2025-11-25 16:04:00,322 INFO: [MainWindow] (pixel mode) analysisMaskChanged signal connected
+2025-11-25 16:04:00,322 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 16:04:00,322 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 16:04:00,323 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-11-25 16:04:00,323 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 16:04:00,519 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(500, 500)
+2025-11-25 16:04:00,519 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 16:04:00,522 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-25 16:04:00,522 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-25 16:04:00,527 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-25 16:04:02,586 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(147, 287, 8, 4)
+2025-11-25 16:04:02,587 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=32, rect=PyQt5.QtCore.QRect(147, 287, 8, 4)
+2025-11-25 16:04:02,588 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(147, 287, 8, 4)
+2025-11-25 16:04:02,593 INFO: [hist_apply] source=combo-populate, cid=2229
+2025-11-25 16:04:02,593 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-11-25 16:04:03,017 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=32
+2025-11-25 16:04:03,017 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=32, shape=(500, 500)
+2025-11-25 16:04:03,018 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 16:04:03,985 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-11-25 16:04:08,113 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-11-25 16:04:09,022 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-11-25 16:04:10,303 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-11-25 16:04:11,855 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-11-25 16:04:15,460 INFO: [_on_class_range_changed] CALLED: idx=2, cbClassRange=Found, objectName=cb_class_range
+2025-11-25 16:04:15,460 INFO: [class_range] changed: idx=2, text='Class 2459 (낮은 고도의 식생)', cid=2459
+2025-11-25 16:04:15,461 INFO: [hist_apply] source=combo-change, cid=2459
+2025-11-25 16:04:15,461 INFO: [AnalysisDialog] update_histogram start: cid=2459, mask_set=True, topk_set=True, mode=combo
+2025-11-25 16:04:17,591 INFO: [_on_class_range_changed] CALLED: idx=0, cbClassRange=Found, objectName=cb_class_range
+2025-11-25 16:04:17,592 INFO: [class_range] changed: idx=0, text='Class 2229 (히아신스 잎 (DWO-3-DEL-2a))', cid=2229
+2025-11-25 16:04:17,592 INFO: [hist_apply] source=combo-change, cid=2229
+2025-11-25 16:04:17,592 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-11-25 16:04:19,345 INFO: [_on_class_range_changed] CALLED: idx=1, cbClassRange=Found, objectName=cb_class_range
+2025-11-25 16:04:19,345 INFO: [class_range] changed: idx=1, text='Class 2457 (소나무)', cid=2457
+2025-11-25 16:04:19,346 INFO: [hist_apply] source=combo-change, cid=2457
+2025-11-25 16:04:19,346 INFO: [AnalysisDialog] update_histogram start: cid=2457, mask_set=True, topk_set=True, mode=combo
+2025-11-25 16:04:20,336 INFO: [AnalysisDialog] update_histogram start: cid=2457, mask_set=True, topk_set=True, mode=combo
+2025-11-25 16:04:20,409 INFO: [AnalysisDialog] update_histogram start: cid=2457, mask_set=True, topk_set=True, mode=combo
+2025-11-25 16:04:23,322 INFO: [_on_class_range_changed] CALLED: idx=2, cbClassRange=Found, objectName=cb_class_range
+2025-11-25 16:04:23,323 INFO: [class_range] changed: idx=2, text='Class 2459 (낮은 고도의 식생)', cid=2459
+2025-11-25 16:04:23,324 INFO: [hist_apply] source=combo-change, cid=2459
+2025-11-25 16:04:23,324 INFO: [AnalysisDialog] update_histogram start: cid=2459, mask_set=True, topk_set=True, mode=combo
+2025-11-25 16:04:38,683 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 16:04:38,683 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 16:04:38,684 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 16:04:38,684 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 16:04:38,817 INFO: [Analysis] 분석 영역 초기화 완료
+2025-11-25 16:04:42,118 INFO: [UserLabeling] 초기 클래스 로드(server): 2479개
+2025-11-25 16:05:11,838 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 16:05:11,862 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 16:05:11,863 INFO: icon.rcc not found (skip)
+2025-11-25 16:05:33,284 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 13
+2025-11-25 16:05:33,296 INFO: [ResampleCache] cached result loaded
+2025-11-25 16:05:33,296 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-11-25 16:05:33,296 INFO: [rebuild] label_raw input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:05:33,297 INFO: [rebuild] label_cr input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:05:33,297 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-25 16:05:33,303 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-25 16:05:33,304 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-25 16:05:33,311 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-25 16:05:33,311 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-11-25 16:05:33,312 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-25 16:05:33,312 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-11-25 16:05:33,313 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-25 16:05:33,313 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-25 16:05:33,322 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-11-25 16:05:33,322 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1831 classes / 4302 samples
+2025-11-25 16:05:33,329 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-11-25 16:05:33,331 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-11-25 16:05:50,862 INFO: [UserLabeling] 초기 클래스 로드(server): 2479개
+2025-11-25 16:07:31,053 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 16:07:31,071 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 16:07:31,072 INFO: icon.rcc not found (skip)
+2025-11-25 16:07:37,603 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 13
+2025-11-25 16:07:37,614 INFO: [ResampleCache] cached result loaded
+2025-11-25 16:07:37,614 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-11-25 16:07:37,614 INFO: [rebuild] label_raw input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:07:37,615 INFO: [rebuild] label_cr input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:07:37,615 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-25 16:07:37,621 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-25 16:07:37,622 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-25 16:07:37,628 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-25 16:07:37,629 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-11-25 16:07:37,629 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-25 16:07:37,630 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-11-25 16:07:37,631 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-25 16:07:37,631 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-25 16:07:37,641 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-11-25 16:07:37,641 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1831 classes / 4302 samples
+2025-11-25 16:07:37,649 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-11-25 16:07:37,651 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-11-25 16:07:52,460 INFO: [UserLabeling] 초기 클래스 로드(server): 2479개
+2025-11-25 16:08:31,703 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 16:08:31,724 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 16:08:31,724 INFO: icon.rcc not found (skip)
+2025-11-25 16:08:39,081 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 13
+2025-11-25 16:08:39,093 INFO: [ResampleCache] cached result loaded
+2025-11-25 16:08:39,094 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-11-25 16:08:39,094 INFO: [rebuild] label_raw input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:08:39,094 INFO: [rebuild] label_cr input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:08:39,095 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-25 16:08:39,100 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-25 16:08:39,101 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-25 16:08:39,106 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-25 16:08:39,107 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-11-25 16:08:39,107 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-25 16:08:39,107 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-11-25 16:08:39,108 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-25 16:08:39,108 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-25 16:08:39,119 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-11-25 16:08:39,120 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1831 classes / 4302 samples
+2025-11-25 16:08:39,127 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-11-25 16:08:39,129 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-11-25 16:08:48,536 INFO: [UserLabeling] 초기 클래스 로드(server): 2479개
+2025-11-25 16:10:34,059 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 16:10:34,080 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 16:10:34,081 INFO: icon.rcc not found (skip)
+2025-11-25 16:10:45,062 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 13
+2025-11-25 16:10:45,077 INFO: [ResampleCache] cached result loaded
+2025-11-25 16:10:45,078 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-11-25 16:10:45,078 INFO: [rebuild] label_raw input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:10:45,078 INFO: [rebuild] label_cr input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:10:45,078 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-25 16:10:45,084 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-25 16:10:45,085 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-25 16:10:45,092 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-25 16:10:45,093 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-11-25 16:10:45,094 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-25 16:10:45,094 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-11-25 16:10:45,095 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-25 16:10:45,095 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-25 16:10:45,106 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-11-25 16:10:45,106 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1831 classes / 4302 samples
+2025-11-25 16:10:45,115 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-11-25 16:10:45,116 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-11-25 16:10:57,883 INFO: [UserLabeling] 초기 클래스 로드(server): 2479개
+2025-11-25 16:11:32,627 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 16:11:32,648 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 16:11:32,649 INFO: icon.rcc not found (skip)
+2025-11-25 16:12:10,799 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 13
+2025-11-25 16:12:10,809 INFO: [ResampleCache] cached result loaded
+2025-11-25 16:12:10,810 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-11-25 16:12:10,810 INFO: [rebuild] label_raw input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:12:10,810 INFO: [rebuild] label_cr input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:12:10,811 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-25 16:12:10,816 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-25 16:12:10,817 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-25 16:12:10,822 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-25 16:12:10,822 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-11-25 16:12:10,823 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-25 16:12:10,823 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-11-25 16:12:10,824 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-25 16:12:10,824 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-25 16:12:10,834 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-11-25 16:12:10,835 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1831 classes / 4302 samples
+2025-11-25 16:12:10,843 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-11-25 16:12:10,844 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-11-25 16:12:14,606 INFO: [UserLabeling] 초기 클래스 로드(server): 2479개
+2025-11-25 16:12:36,087 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-25 16:12:36,108 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-25 16:12:36,108 INFO: icon.rcc not found (skip)
+2025-11-25 16:13:08,846 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 13
+2025-11-25 16:13:08,855 INFO: [ResampleCache] cached result loaded
+2025-11-25 16:13:08,855 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-11-25 16:13:08,855 INFO: [rebuild] label_raw input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:13:08,856 INFO: [rebuild] label_cr input: 21 classes, samples={2457: 52, 2458: 15, 2459: 20, 2460: 14, 2476: 2}
+2025-11-25 16:13:08,856 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-25 16:13:08,863 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-25 16:13:08,864 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-25 16:13:08,872 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-25 16:13:08,873 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-11-25 16:13:08,873 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-25 16:13:08,874 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-11-25 16:13:08,874 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-25 16:13:08,874 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-25 16:13:08,884 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-11-25 16:13:08,885 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1831 classes / 4302 samples
+2025-11-25 16:13:08,892 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-11-25 16:13:08,894 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-11-25 16:13:20,665 INFO: [AnalysisDialog] Found 3 comboboxes: ['cb_intermediate_target', 'cb_class_range', 'comboBox']
+2025-11-25 16:13:20,666 ERROR: [class combo] cbClassRange not found in UI
+2025-11-25 16:13:20,666 WARNING: [AnalysisDialog] Found cb_class_range by alternative method
+2025-11-25 16:13:20,789 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-11-25 16:13:20,849 INFO: [MainWindow] (pixel mode) connecting analysisMaskChanged signal
+2025-11-25 16:13:20,849 INFO: [MainWindow] (pixel mode) analysisMaskChanged signal connected
+2025-11-25 16:13:20,849 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 16:13:20,849 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 16:13:20,850 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-11-25 16:13:20,850 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 16:13:21,051 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(500, 500)
+2025-11-25 16:13:21,051 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 16:13:21,054 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-25 16:13:21,054 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-25 16:13:21,060 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-25 16:13:21,669 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-25 16:13:21,669 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-25 16:13:21,670 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-25 16:13:21,670 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-25 16:13:21,815 INFO: [Analysis] 분석 영역 초기화 완료
+2025-11-25 16:13:24,602 INFO: [UserLabeling] 초기 클래스 로드(server): 2479개

@@ -848,38 +848,74 @@ class MapView(QGraphicsView):
 
             self._seed_markers.append((ti, cross))
             
-    # === 컨텍스트별 작은 십자+번호 마커 ===
+    # === 컨텍스트별 픽셀 마커 (중심 빨강 + 주변 검정 + 작은 번호) ===
     def add_ctx_marker(self, ctx: str, y: int, x: int, number: int,
-                    color: Optional[QtGui.QColor] = None, size: int = 3):
+                       color: Optional[QtGui.QColor] = None, size: int = 1):
+        """
+        ctx   : 마커 그룹 이름 (예: 'ANALYSIS_CLASS_ALL')
+        (y,x) : 이미지 좌표
+        number: 표시할 번호
+        color : 중심 픽셀 색 (기본 빨간색)
+        size  : 중심에서 몇 픽셀 반경까지 검은 테두리를 만들지 (기본 1 → 3x3)
+        """
         sc = self.scene()
-        if sc is None: return
+        if sc is None:
+            return
+
         H, W = int(self.img_h), int(self.img_w)
-        if not (0 <= y < H and 0 <= x < W): return
+        if not (0 <= y < H and 0 <= x < W):
+            return
+
         px, py = float(x), float(y)
 
-        # 색상
-        col = color or QtGui.QColor(255, 255, 255)
-        pen = QtGui.QPen(col); pen.setWidthF(1.0)
+        # ----- 중심 빨간색 + 주변 검정 픽셀 패치 생성 -----
+        radius = max(1, int(size))           # 1이면 3x3, 2면 5x5
+        dim = 2 * radius + 1                 # 패치 한 변 길이
+        img = QImage(dim, dim, QImage.Format_ARGB32)
+        img.fill(Qt.transparent)
 
-        # 십자
-        h = sc.addLine(px - size, py, px + size, py, pen)
-        v = sc.addLine(px, py - size, px, py + size, pen)
-        for it in (h, v):
-            it.setZValue(1e6 + 1)
-            it.setAcceptedMouseButtons(Qt.NoButton)
-            it.setFlag(QtWidgets.QGraphicsItem.ItemIsSelectable, False)
-            it.setFlag(QtWidgets.QGraphicsItem.ItemIsMovable, False)
+        center_color = color or QtGui.QColor(255, 0, 0)  # 중심 빨간색
+        border_color = QtGui.QColor(0, 0, 0)             # 주변 검정
 
-        # 작은 번호(흰글씨)
+        for j in range(dim):
+            for i in range(dim):
+                if i == radius and j == radius:
+                    # 중심 픽셀 → 빨간색
+                    img.setPixelColor(i, j, center_color)
+                else:
+                    # 주변 픽셀 → 검정
+                    img.setPixelColor(i, j, border_color)
+
+        pm = QPixmap.fromImage(img)
+        patch_item = QtWidgets.QGraphicsPixmapItem(pm)
+        patch_item.setZValue(1e6 + 1)
+        # 중심이 (x,y)에 오도록 좌상단을 (x-radius, y-radius)에 배치
+        patch_item.setPos(px - radius, py - radius)
+        patch_item.setAcceptedMouseButtons(Qt.NoButton)
+        patch_item.setFlag(QtWidgets.QGraphicsItem.ItemIsSelectable, False)
+        patch_item.setFlag(QtWidgets.QGraphicsItem.ItemIsMovable, False)
+        sc.addItem(patch_item)
+
+        # ----- 번호: 기존보다 더 작게 (예: 6pt) -----
         txt = QtWidgets.QGraphicsSimpleTextItem(str(int(number)))
-        f = txt.font(); f.setPointSizeF(8.0); txt.setFont(f)
+        f = txt.font()
+        f.setPointSizeF(1.0)  # ★ 기존 8.0 → 6.0 로 더 줄임
+        f.setBold(True)        # 🔹 볼드 적용
+        txt.setFont(f)
         txt.setBrush(QtGui.QBrush(Qt.white))
-        txt.setPos(px + size + 1, py - size - 7)
+        # 필요하면 외곽선도 추가 가능 (가독성용)
+        # pen = QtGui.QPen(QtGui.QColor(0, 0, 0)); pen.setWidthF(1.0)
+        # txt.setPen(pen)
+
+        # 중심 픽셀 오른쪽 위쪽에 살짝 붙이기
+        txt.setPos(px + radius + 1, py + radius - 5)
         txt.setZValue(1e6 + 2)
         txt.setAcceptedMouseButtons(Qt.NoButton)
         sc.addItem(txt)
 
-        self._marker_layers.setdefault(ctx, []).append((h, v, txt))
+        # 기존 구조 유지: (첫 번째, 두 번째, 텍스트) 튜플 저장
+        # 두 번째는 더 이상 안 쓰므로 None 넣어도 clear_ctx_markers와 호환됨
+        self._marker_layers.setdefault(ctx, []).append((patch_item, None, txt))
 
     def clear_ctx_markers(self, ctx: str):
         layer = self._marker_layers.get(ctx, [])
