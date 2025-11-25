@@ -9819,3 +9819,28 @@ ValueError: too many values to unpack (expected 2)
 2025-11-24 17:08:38,500 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
 2025-11-24 17:08:38,500 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
 2025-11-24 17:08:38,645 INFO: [Analysis] 분석 영역 초기화 완료
+2025-11-24 17:29:54,808 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-24 17:29:54,831 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-24 17:29:54,832 INFO: icon.rcc not found (skip)
+2025-11-24 17:30:01,764 INFO: [ResampleCache] cached result loaded
+2025-11-24 17:30:01,765 INFO: [ResampleCache] loaded: splib_raw=0, splib_cr=0, label_raw=1, label_cr=0
+2025-11-24 17:30:01,765 INFO: [Resampling] personal 사용자: 캐시 파일에서 데이터 로드 (API resampling 없음)
+2025-11-24 17:30:01,766 INFO: [Resampling] personal user: loaded from cache (no API resampling)
+2025-11-24 17:30:01,766 INFO: [ResampleCache] personal 사용자: 기존 캐시 파일에서 데이터 로드 완료
+2025-11-24 17:30:01,766 INFO: [rebuild] label_raw input: 1 classes, samples={0: 1}
+2025-11-24 17:30:01,767 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-11-24 17:30:01,767 INFO: [_norm_entries] splib_raw: input dict with 0 keys
+2025-11-24 17:30:01,767 WARNING: [_norm_entries] splib_raw: output is empty!
+2025-11-24 17:30:01,767 INFO: [_norm_entries] splib_cr: input dict with 0 keys
+2025-11-24 17:30:01,767 WARNING: [_norm_entries] splib_cr: output is empty!
+2025-11-24 17:30:01,768 INFO: [_norm_entries] label_raw: input dict with 1 keys
+2025-11-24 17:30:01,768 INFO: [_norm_entries] label_raw: output 1 classes, 1 total samples
+2025-11-24 17:30:01,768 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-11-24 17:30:01,768 WARNING: [_norm_entries] label_cr: output is empty!
+2025-11-24 17:30:01,769 INFO: [rebuild] after _norm_entries: label_raw_norm=1 classes, label_cr_norm=0 classes
+2025-11-24 17:30:01,769 INFO: [rebuild] classes: splib_raw=0, splib_cr=0, label_raw=1, label_cr=0, lib=1
+2025-11-24 17:30:01,769 INFO: [rebuild] label_raw=1 classes / 1 samples, label_cr=0 classes / 0 samples, lib=1 classes / 1 samples
+2025-11-24 17:30:01,769 INFO: [Rebuild] lib=1 classes, labeling_lib=1 classes
+2025-11-24 17:30:01,770 INFO: Resampling 완료 — splib_raw:0, splib_cr:0, label_raw:1, label_cr:0
+2025-11-24 17:33:10,293 INFO: [PixelLabeling] personal: .info 파일에서 1개 클래스 로드 완료
+2025-11-24 17:33:14,543 INFO: [PixelLabeling] personal: .info 파일에서 1개 클래스 로드 완료

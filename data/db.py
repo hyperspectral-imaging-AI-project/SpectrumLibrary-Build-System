@@ -371,9 +371,9 @@ def image_check_and_save(
         img_pth = os.path.join(save_path, f'{name}.mat')
         rgb_pth = os.path.join(save_path, f'{name}.png')
         
-        # raw_image 저장
-        data = {'data':raw_image}
-        safe_save_mat(img_pth, data)
+        # # raw_image 저장
+        # data = {'data':raw_image}
+        # safe_save_mat(img_pth, data)
         
         Image.fromarray(rgb_image, mode = 'RGB').save(rgb_pth)
         
@@ -405,6 +405,7 @@ def image_check_and_save(
         return data[0]['img_cd']
     
 def send_label_add(api_base: str, targets: Dict, timeout: float = 10.0) -> Dict[str, Any]:
+    
     """
     프로그램 라벨_등록 API 호출
     - api_base: 예) "http://183.98.149.222:18000/program-service/label-add"
