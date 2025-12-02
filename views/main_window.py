@@ -14,8 +14,9 @@ from itertools import chain
 from views.dialogs.image_load import ImageLoadDialog
 from views.dialogs.camera_add import CameraAddDialog
 from views.docks.layer_dock import LayersDock
+from views.docks.unmixing_dock import UnmixingDock
 from views.mapview import MapView
-from data.db import image_check_and_save, search_material_filtering_list, send_label_add
+from data.db import image_check_and_save, search_material_filtering_list, send_label_add, call_unmixing
 from core.vis import make_rgb
 from core.resampling_service import resampling, perform_continuum_removal
 from core.autoclass import classify_cube, UNKNOWN, MULTIPLE           # ★ 추가
@@ -49,11 +50,13 @@ from services.spec_library import build_library_from_spec_libs
 from dataclasses import dataclass
 from PyQt5 import QtCore
 from views.dialogs.viewer_band_dialog import ViewerBandDialog
+from views.dialogs.unmixing_dialog import UnmixingDialog
 # ★ LABEL STORE / LABEL CODE 추가
 from services.label_store import LabelStore
 from models.labels import LabelRow
 from services.label_code import make_label_code
 import pandas as pd  # 패치 추출 헬퍼에서 NaN 판별용
+
 ANALYSIS_LAYER_NAME = "analysis.mask"  # 한 장만 쓴다
 RGB_LAYER_NAME = "image.rgb"  # RGB 베이스 레이어 내부 식별자
 RGB_LAYER_DISPLAY_NAME = "image.rgb"  # Layers Dock에 표시할 이름 (원하는 이름으로 변경 가능)
@@ -168,6 +171,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self._refresh_recent_menu()
         
         self.clsDock = None
+        self.unmixingDock = None
         ## ROI 지정 구분
         self._active_roi_owner = ROIInputOwner.NONE
         self._label_local_rows = []   # 세션 메모리 캐시 (리스트<dict>)
@@ -252,6 +256,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self._workspace_temp_mask: Optional[np.ndarray] = None
         self._workspace_temp_rect: Optional[QtCore.QRect] = None
         self.label_store: Optional[LabelStore] = None
+        
+        # --- Unmixing 상태 ---
+        self.unmixing_endmembers = None      # np.ndarray (K, C) 등
+        self.unmixing_abundance_map = None   # np.ndarray (H, W, K)
+        self.unmixing_threshold = None       # float (0~1)
+        self.unmixing_class_mapping: Dict[int, int] = {}  # endmember index -> class id
 
     # -----------------------------
     # UI
@@ -315,6 +325,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self._bind_action("action_2", self.on_diffusion_dialog_run)  # ★ 유사도 확산 맵 생성
         self._bind_action("action_4", self.on_pixel_labeling_dialog_run)  # ★ 선택 픽셀 라벨링
         self._bind_action("action_5", self.on_classmap_labeling_dialog_run)  # ★ 라벨링 데이터베이스 탐색
+        self._bind_action("action_8", self.on_unmixing_dialog_run)  # ★ 분광 혼합 분석 맵 생성
 
     def _wire_manager_signals(self):
         lm = self.layer_manager
@@ -811,6 +822,228 @@ class MainWindow(QtWidgets.QMainWindow):
         except Exception as e:
             logging.exception("[Labeling] dialog run failed")
             QtWidgets.QMessageBox.critical(self, "오류", f"라벨링 다이얼로그 실행 중 오류가 발생했습니다: {e}")
+
+    @QtCore.pyqtSlot()
+    def on_unmixing_dialog_run(self):
+        """분광 혼합 분석 맵 생성 다이얼로그 실행"""
+        try:
+            # 0) 이미지 로드 가드
+            if not hasattr(self, "rgb_image") or self.rgb_image is None:
+                QtWidgets.QMessageBox.information(self, "안내", "먼저 이미지를 로드하세요.")
+                return
+
+            # 1) 다이얼로그 생성
+            dlg = UnmixingDialog(parent=self, ui_dir=self.app_dir / "ui")
+            self._unmixing_dialog = dlg
+
+            # 2) 신호 연결
+            dlg.unmixing_requested.connect(self._on_unmixing_requested)
+
+            # 3) 모델리스로 표시
+            dlg.setModal(False)
+            dlg.setWindowModality(Qt.NonModal)
+            dlg.show()
+
+        except Exception as e:
+            logging.exception("[Unmixing] dialog run failed")
+            QtWidgets.QMessageBox.critical(self, "오류", f"분광 혼합 분석 다이얼로그 실행 중 오류가 발생했습니다: {e}")
+
+    def _on_unmixing_requested(self, params: dict):
+        """분광 혼합 분석 실행 요청 처리 + Classmap 생성"""
+        try:
+            endmember_count = int(params.get("endmember_count", 3))
+            # Dialog에서는 0.0~1.0으로 받지만, 혹시 80 같은 값이 들어와도 퍼센트로 처리
+            raw_thr = params.get("threshold", 0.8)
+            try:
+                raw_thr = float(raw_thr)
+            except Exception:
+                raw_thr = 0.8
+
+            # 0~1 범위로 정규화
+            threshold = raw_thr / 100.0 if raw_thr > 1.0 else raw_thr
+            threshold = max(0.0, min(1.0, threshold))
+
+            logging.info(
+                f"[Unmixing] Requested: endmember_count={endmember_count}, threshold={threshold:.3f}"
+            )
+
+            # 0) 이미지/ROI 체크
+            if not hasattr(self, "cfg") or "data" not in self.cfg:
+                QtWidgets.QMessageBox.information(self, "안내", "먼저 이미지를 로드하세요.")
+                return
+
+            cube = self.cfg["data"]
+            H, W = cube.shape[:2]
+
+            # 작업 영역 사각형이 있으면 그 영역 사용, 없으면 전체
+            rect = getattr(self, "current_selection_rect", None)
+            if rect is not None and rect.isValid():
+                st_x = int(rect.x())
+                st_y = int(rect.y())
+                ed_x = st_x + int(rect.width())
+                ed_y = st_y + int(rect.height())
+            else:
+                st_x, st_y = 0, 0
+                ed_x, ed_y = W, H
+
+            # 1) image_cd, base_url 준비
+            img_cd = getattr(self, "image_cd", None)
+            if img_cd is None:
+                QtWidgets.QMessageBox.warning(self, "경고", "image_cd가 없습니다. 먼저 HSI를 로드하세요.")
+                return
+
+            base_url = os.getenv("unmixing_inference_url")
+            if not base_url:
+                QtWidgets.QMessageBox.warning(
+                    self, "경고",
+                    "UNMIXING_API_URL 환경변수가 설정되어 있지 않습니다.\n"
+                    "분광 혼합 분석 API URL을 설정해 주세요."
+                )
+                return
+
+            # 2) API 호출
+            self.statusBar().showMessage("분광 혼합 분석 API 호출 중...", 3000)
+            endmembers, abundance_map = call_unmixing(
+                base_url=base_url,
+                img_cd=int(img_cd),
+                st_x=st_x, st_y=st_y,
+                ed_x=ed_x, ed_y=ed_y,
+                num_endmembers=endmember_count,
+                # timeout=30,
+            )
+
+            # 3) 결과를 numpy로 변환해서 보관
+            self.unmixing_endmembers = np.asarray(endmembers, dtype=np.float32)
+            A = np.asarray(abundance_map, dtype=np.float32)
+
+            # abundance_map shape 정규화: (H, W, K)로 맞추기
+            if A.ndim == 3:
+                if A.shape[0] == H and A.shape[1] == W:
+                    # (H, W, K)
+                    self.unmixing_abundance_map = A
+                elif A.shape[1] == H and A.shape[2] == W:
+                    # (K, H, W) → (H, W, K)
+                    self.unmixing_abundance_map = np.moveaxis(A, 0, 2)
+                else:
+                    raise RuntimeError(f"abundance_map shape 예상과 다름: {A.shape}, 이미지=({H},{W})")
+            else:
+                raise RuntimeError(f"abundance_map ndim=3이 아님: {A.shape}")
+
+            self.unmixing_threshold = threshold
+
+            logging.info(
+                "[Unmixing] API done: endmembers.shape=%s, abundance_map.shape=%s",
+                getattr(self.unmixing_endmembers, "shape", None),
+                getattr(self.unmixing_abundance_map, "shape", None),
+            )
+
+            # 4) Unmixing classmap 생성/등록
+            # 4) Unmixing classmap 생성/등록
+            self._build_unmixing_classmap_from_abundance(threshold)
+
+            # 5) Unmixing Dock 표시 + 클래스 옵션 + 결과 전달
+            self._show_unmixing_dock(endmember_count, threshold)
+
+            try:
+                if hasattr(self, "unmixingDock") and self.unmixingDock:
+                    # 5-1) 클래스 옵션 (CID, 물질명) 생성
+                    try:
+                        class_options = self._build_class_options_for_labeling()  # [(cid, name), ...]
+                    except Exception:
+                        logging.exception("[Unmixing] build_class_options_for_labeling failed")
+                        class_options = []
+
+                    # 5-2) Dock에 클래스 옵션 넘기기 (Class 콤보박스 채우기)
+                    if class_options and hasattr(self.unmixingDock, "set_class_options"):
+                        self.unmixingDock.set_class_options(class_options)
+
+                    # 5-3) 파장 정보도 Dock으로 전달 (EndmemberDetailDialog에서 사용)
+                    wl = self.cfg.get("wavelength") or self.cfg.get("wavelength_list")
+                    if wl is not None and hasattr(self.unmixingDock, "set_wavelengths"):
+                        try:
+                            self.unmixingDock.set_wavelengths(np.asarray(wl))
+                        except Exception:
+                            logging.exception("[Unmixing] set_wavelengths to dock failed")
+
+                    # 5-4) Unmixing 결과 전달
+                    if hasattr(self.unmixingDock, "set_results"):
+                        self.unmixingDock.set_results(
+                            endmembers=self.unmixing_endmembers,
+                            abundance_map=self.unmixing_abundance_map,
+                            threshold=threshold,
+                        )
+
+            except Exception:
+                logging.exception("[Unmixing] set_results/set_class_options to dock failed")
+
+            self.statusBar().showMessage(
+                f"분광 혼합 분석 완료 — endmembers: {self.unmixing_endmembers.shape}, "
+                f"abundance_map: {self.unmixing_abundance_map.shape}, "
+                f"threshold={threshold:.3f}",
+                4000,
+            )
+
+        except Exception as e:
+            logging.exception("[Unmixing] request handling failed")
+            QtWidgets.QMessageBox.critical(
+                self, "오류",
+                f"분광 혼합 분석 실행 중 오류가 발생했습니다:\n{e}"
+            )
+
+    def _init_unmixing_dock(self):
+        """UnmixingDock 생성 및 초기화"""
+        if self.unmixingDock is not None:
+            return
+        
+        self.unmixingDock = UnmixingDock(
+            parent=self,
+            ui_dir=self.app_dir / "ui",
+        )
+        self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.unmixingDock)
+        
+        # 닫기 기능 활성화
+        feats = self.unmixingDock.features()
+        self.unmixingDock.setFeatures(feats | QtWidgets.QDockWidget.DockWidgetClosable)
+        
+        # View 메뉴에 토글 액션 추가
+        self._add_dock_to_view_menu(self.unmixingDock, "Unmixing Analysis")
+        
+        # 초기에는 숨김 상태
+        self.unmixingDock.hide()
+
+        # ★ 임계값 변경 시그널 연결 (UnmixingDock 쪽에 thresholdChanged 시그널이 있다고 가정)
+        try:
+            self.unmixingDock.thresholdChanged.connect(self._on_unmixing_threshold_changed)
+            self.unmixingDock.classMappingApplied.connect(self._on_unmixing_class_mapping_applied)
+        except Exception:
+            logging.exception("[Unmixing] connect thresholdChanged failed")
+
+
+    def _show_unmixing_dock(self, endmember_count: int, threshold: float):
+        """Unmixing Dock 표시"""
+        try:
+            # Dock 보장(없으면 생성)
+            if not hasattr(self, "unmixingDock") or self.unmixingDock is None:
+                self._init_unmixing_dock()
+            
+            # 파라미터 설정
+            self.unmixingDock.set_endmember_count(endmember_count)
+            self.unmixingDock.set_threshold(threshold)
+            
+            # Dock 표시
+            self.unmixingDock.setVisible(True)
+            if self.unmixingDock.parent() is None or self.unmixingDock.isFloating():
+                self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.unmixingDock)
+                self.unmixingDock.setFloating(False)
+            
+            self.unmixingDock.raise_()
+            self.unmixingDock.activateWindow()
+            
+            self.statusBar().showMessage("Unmixing Analysis Dock 활성화", 2000)
+            
+        except Exception as e:
+            logging.exception("[Unmixing] dock show failed")
+            QtWidgets.QMessageBox.warning(self, "경고", "Unmixing Analysis Dock 표시에 실패했습니다.")
             
     def _merge_label_sources(
         self,
@@ -6630,6 +6863,87 @@ class MainWindow(QtWidgets.QMainWindow):
         # server 사용자: API + 라이브러리 기반
         return self._build_class_options_for_labeling()
 
+    def _build_unmixing_classmap_from_abundance(self, threshold: float, mapping: Optional[Dict[int, int]] = None):
+        A = self.unmixing_abundance_map  # (H, W, K)
+        if A is None:
+            ...
+        H, W, K = A.shape
+        A = np.nan_to_num(A, nan=0.0, posinf=0.0, neginf=0.0)
+        A = np.clip(A, 0.0, 1.0)
+
+        hit = (A >= float(threshold))
+        cnt = hit.sum(axis=2)
+        winner = A.argmax(axis=2).astype(np.int32)  # endmember index 0..K-1
+
+        classmap = np.full((H, W), UNKNOWN, dtype=np.int32)
+
+        # 매핑 함수: endmember index -> 실제 class id
+        if mapping is None:
+            mapping = {}
+
+        # winner를 class id로 변환한 배열
+        cid_map = np.vectorize(lambda em: mapping.get(int(em), int(em)))(winner)
+
+        # 적용
+        classmap[cnt == 1] = cid_map[cnt == 1]
+        classmap[cnt >  1] = MULTIPLE
+
+        used_cids = sorted(int(c) for c in np.unique(classmap) if c >= 0)
+
+        self._augment_palette_for(used_cids, push_renderer=True, push_dock=True)
+
+        # id_to_name는 기존 스펙트럼 라이브러리 이름 맵을 사용
+        id_to_name = self._norm_id_to_name()
+        self._register_map_semantics("unmixing", metric="abundance", distance=False)
+
+        # 기존 unmixing 레이어를 지우고 다시 등록
+        # (아예 Layer/Map에서 지우고 다시 저장하는 방식)
+        try:
+            self.layer_manager.remove("unmixing")
+        except Exception:
+            pass
+
+        self.layer_manager.register_classmap(
+            name="unmixing",
+            classmap_i32=classmap,
+            class_ids=used_cids,
+            visible=True,
+            id_to_name=id_to_name,
+        )
+
+        self.unmixing_classmap = classmap
+
+            
+    @QtCore.pyqtSlot(float)
+    def _on_unmixing_threshold_changed(self, new_thr: float):
+        """
+        UnmixingDock에서 임계값을 바꿀 때 호출되는 슬롯.
+        new_thr: 0~1 (또는 0~100, 둘 다 처리)
+        """
+        try:
+            # 퍼센트 값도 허용 (예: 80 → 0.8)
+            thr = float(new_thr)
+            thr = thr / 100.0 if thr > 1.0 else thr
+            thr = max(0.0, min(1.0, thr))
+
+            if getattr(self, "unmixing_abundance_map", None) is None:
+                self.statusBar().showMessage("Unmixing 결과가 없어 임계값 변경을 적용할 수 없습니다.", 2000)
+                return
+
+            self.unmixing_threshold = thr
+            self._build_unmixing_classmap_from_abundance(thr)
+        except Exception:
+            logging.exception("[Unmixing] threshold changed handler failed")
+            
+    @QtCore.pyqtSlot(dict)
+    def _on_unmixing_class_mapping_applied(self, mapping: dict):
+        """
+        UnmixingDock에서 엔드멤버→클래스 매핑이 넘어옴.
+        mapping: {endmember_index: class_id}
+        """
+        self.unmixing_class_mapping = {int(k): int(v) for k, v in mapping.items()}
+        thr = getattr(self, "unmixing_threshold", 0.8)
+        self._build_unmixing_classmap_from_abundance(thr, mapping=self.unmixing_class_mapping)
 # 단독 실행 테스트용(선택)
 if __name__ == "__main__":
     import sys

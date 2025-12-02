@@ -31,7 +31,7 @@
      <x>0</x>
      <y>0</y>
      <width>681</width>
-     <height>18</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -52,6 +52,7 @@
     <addaction name="actionROI"/>
     <addaction name="action_2"/>
     <addaction name="action_3"/>
+    <addaction name="action_8"/>
    </widget>
    <widget class="QMenu" name="menuLabeling">
     <property name="title">
@@ -134,6 +135,11 @@
   <action name="action_7">
    <property name="text">
     <string>평균 스펙트럼 라벨링</string>
+   </property>
+  </action>
+  <action name="action_8">
+   <property name="text">
+    <string>분광 혼합 분석 맵 생성</string>
    </property>
   </action>
  </widget>

@@ -302,15 +302,28 @@ class MapView(QGraphicsView):
         """
         new_order_top_to_bottom: 트리에 보이는 순서(위→아래)
         내부 Z적용은 아래→위가 필요하므로 여기서 뒤집어 저장한다.
+        ★ 수정: Layers Dock 순서를 그대로 따르고, 가시성이 꺼진 레이어는 제외
         """
         have = {"RGB"} | set(self._layer_items.keys())
-        # 1) 존재하는 항목만 보존(Top→Bottom)
+        # 1) new_order_top_to_bottom에 있는 레이어만 순서대로 보존 (Layers Dock 순서 유지)
         ordered_tb = [nm for nm in new_order_top_to_bottom if nm in have]
-        # 2) 누락 항목은 말미에 보존
-        for nm in (["RGB"] + list(self._layer_items.keys())):
-            if nm not in ordered_tb:
-                ordered_tb.append(nm)
-        # 3) 내부 저장은 Bottom→Top
+        
+        # 2) ★ 가시성이 꺼진 레이어는 _layer_order에서 제외하고 setVisible(False) 설정
+        # (2번 그려지는 문제 방지)
+        current_visible = set(ordered_tb)
+        for nm in list(self._layer_items.keys()):
+            if nm not in current_visible:
+                it = self._layer_items.get(nm)
+                if it:
+                    it.setVisible(False)
+        
+        # RGB도 new_order_top_to_bottom에 없으면 가시성 해제
+        if "RGB" not in current_visible:
+            if self._img_item is not None:
+                self._img_item.setVisible(False)
+        
+        # 3) 내부 저장은 Bottom→Top (Z-order: 아래→위)
+        # new_order_top_to_bottom이 위→아래 순서이므로, reversed하면 아래→위가 됨
         self._layer_order = list(reversed(ordered_tb))
         self._apply_z()
 

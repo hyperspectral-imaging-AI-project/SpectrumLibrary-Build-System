@@ -484,7 +484,7 @@ class SearchLabelingDatabaseDialog(QtWidgets.QDialog):
         return self._personal_class_meta
     
     def _init_combobox(self):
-        """콤보박스 초기화: personal은 .info, server는 기존 방식."""
+        """콤보박스 초기화: personal은 .info, server는 기존 방식(+타입 방어)."""
         combo = self._root.comboBox_Class
         combo.clear()
         
@@ -493,37 +493,70 @@ class SearchLabelingDatabaseDialog(QtWidgets.QDialog):
 
         user_type = getattr(self._main_window, "user_type", "server")
 
+        # ------------------------
+        # 1) personal 모드: .info 기반
+        # ------------------------
         if user_type == "personal":
             options = getattr(self._main_window, "_resolve_current_class_options", None)
             class_options = options() if callable(options) else []
+            # _resolve_current_class_options(personal) → [(cid, name, desc), ...] 형태
             for cid_opt, name_opt, _ in class_options:
                 combo.addItem(f"{name_opt}", int(cid_opt))
             if combo.count() > 0:
                 combo.setCurrentIndex(0)
             return
 
-        # server: 기존 로직 유지
+        # ------------------------
+        # 2) server 모드: splib*/label*/lib 에서 cid 수집
+        # ------------------------
         class_ids = set()
-        if hasattr(self._main_window, 'splib_raw') and self._main_window.splib_raw:
-            class_ids.update(self._main_window.splib_raw.keys())
-        if hasattr(self._main_window, 'splib_cr') and self._main_window.splib_cr:
-            class_ids.update(self._main_window.splib_cr.keys())
-        if hasattr(self._main_window, 'label_raw') and self._main_window.label_raw:
-            class_ids.update(self._main_window.label_raw.keys())
-        if hasattr(self._main_window, 'label_cr') and self._main_window.label_cr:
-            class_ids.update(self._main_window.label_cr.keys())
-        if hasattr(self._main_window, 'lib') and self._main_window.lib:
-            class_ids.update(self._main_window.lib.keys())
-        
+
+        def _extend_class_ids(src: Any):
+            """splib_raw/splib_cr/label_raw/label_cr/lib가 dict 또는 list일 때 안전하게 cid를 수집."""
+            nonlocal class_ids
+            if src is None:
+                return
+
+            # dict 형태: {cid: ...}
+            if isinstance(src, dict):
+                for k in src.keys():
+                    try:
+                        class_ids.add(int(k))
+                    except Exception:
+                        continue
+                return
+
+            # list/tuple/ndarray: [ {mtrl_cd/ cid / class_id: ...}, ... ] 형식일 수 있음
+            if isinstance(src, (list, tuple, np.ndarray)):
+                for rec in src:
+                    if not isinstance(rec, dict):
+                        continue
+                    cid = rec.get("mtrl_cd") or rec.get("cid") or rec.get("class_id")
+                    try:
+                        class_ids.add(int(cid))
+                    except Exception:
+                        continue
+
+        # 각 소스에서 cid 수집 (타입에 상관 없이 안전하게)
+        _extend_class_ids(getattr(self._main_window, "splib_raw", None))
+        _extend_class_ids(getattr(self._main_window, "splib_cr", None))
+        _extend_class_ids(getattr(self._main_window, "label_raw", None))
+        _extend_class_ids(getattr(self._main_window, "label_cr", None))
+        _extend_class_ids(getattr(self._main_window, "lib", None))
+
         sorted_ids = sorted(class_ids)
+
+        # Material 정보 한 번에 가져오기
         material_info_dict = self._fetch_material_info_batch(sorted_ids)
+
         for cid in sorted_ids:
             material_info = material_info_dict.get(cid, {})
             name = material_info.get("name", f"Class {cid}")
             combo.addItem(f"{cid} - {name}", cid)
-        
+
         if combo.count() > 0:
             combo.setCurrentIndex(0)
+
     
     def _on_class_selected(self, index: int):
         """콤보박스에서 클래스 선택 시: 현재 클래스 ID만 저장"""
@@ -895,6 +928,8 @@ class SearchLabelingDatabaseDialog(QtWidgets.QDialog):
     def _collect_spectra_for_class(self, cid: int) -> List[Dict]:
         """
         주어진 클래스 ID에 대한 스펙트럼 리스트 생성 (테이블/그래프용)
+        - splib_raw/splib_cr/label_raw/label_cr가 dict 또는 list/ndarray 모두 올 수 있으므로
+          타입을 방어적으로 처리한다.
         """
         # Material 정보 가져오기
         material_info = self._fetch_material_info(cid)
@@ -902,108 +937,160 @@ class SearchLabelingDatabaseDialog(QtWidgets.QDialog):
         material_description = material_info.get("description", "")
 
         spectra_list: List[Dict] = []
-
-        # 스펙트럼 라이브러리에서 데이터 수집
-        if hasattr(self._main_window, 'splib_raw') and self._main_window.splib_raw:
-            if cid in self._main_window.splib_raw:
-                arr = self._main_window.splib_raw[cid]  # (N, C)
-                if arr.ndim == 2:
-                    for i in range(arr.shape[0]):
-                        spectra_list.append({
-                            "cid": cid,
-                            "spectrum": arr[i],
-                            "from": "Spectrum Library (Raw)",
-                            "material_name": material_name,
-                            "description": material_description,
-                            "index": i,
-                            "type": "splib_raw",
-                        })
-
-        if hasattr(self._main_window, 'splib_cr') and self._main_window.splib_cr:
-            if cid in self._main_window.splib_cr:
-                arr = self._main_window.splib_cr[cid]  # (N, C)
-                if arr.ndim == 2:
-                    for i in range(arr.shape[0]):
-                        spectra_list.append({
-                            "cid": cid,
-                            "spectrum": arr[i],
-                            "from": "Spectrum Library (CR)",
-                            "material_name": material_name,
-                            "description": material_description,
-                            "index": i,
-                            "type": "splib_cr",
-                        })
-
-        # 라벨링 데이터에서 데이터 수집
         label_coords = getattr(self._main_window, 'label_coords', {})
 
-        if hasattr(self._main_window, 'label_raw') and self._main_window.label_raw:
-            if cid in self._main_window.label_raw:
-                arr = self._main_window.label_raw[cid]  # (N, C)
-                if arr.ndim == 2:
-                    coords_list = label_coords.get(cid, [])
-                    for i in range(arr.shape[0]):
-                        img_x, img_y, img_cd = None, None, None
-                        if i < len(coords_list):
-                            coord_data = coords_list[i]
-                        elif coords_list:
-                            coord_data = coords_list[0]
-                        else:
-                            coord_data = []
+        def _get_array_for_cid(container: Any, cid_val: int, prefer_key: Optional[str] = None) -> Optional[np.ndarray]:
+            """
+            container가 dict 또는 list[dict] 등일 때, 해당 cid의 (N,C) 배열을 반환.
+            prefer_key가 있으면 먼저 그 키(ref/rfl)를 우선.
+            """
+            if container is None:
+                return None
 
-                        if len(coord_data) >= 2:
-                            img_x, img_y = coord_data[0], coord_data[1]
-                        if len(coord_data) >= 3:
-                            img_cd = coord_data[2]
+            # dict 형태: {cid: (N,C) or 1D}
+            if isinstance(container, dict):
+                for k, v in container.items():
+                    try:
+                        if int(k) != int(cid_val):
+                            continue
+                    except Exception:
+                        continue
+                    arr = np.asarray(v)
+                    if arr.ndim == 1:
+                        arr = arr[None, :]
+                    if arr.ndim != 2:
+                        return None
+                    return arr
+                return None
 
-                        spectra_list.append({
-                            "cid": cid,
-                            "spectrum": arr[i],
-                            "from": "Labeling",
-                            "material_name": material_name,
-                            "description": material_description,
-                            "index": i,
-                            "type": "label_raw",
-                            "label_index": i,
-                            "img_x": img_x,
-                            "img_y": img_y,
-                            "img_cd": img_cd,
-                        })
+            # list/tuple/ndarray: [ {mtrl_cd/cid/class_id, ref/rfl: ...}, ... ]
+            if isinstance(container, (list, tuple, np.ndarray)):
+                blocks = []
+                for rec in container:
+                    if not isinstance(rec, dict):
+                        continue
+                    c = rec.get("mtrl_cd") or rec.get("cid") or rec.get("class_id")
+                    try:
+                        if int(c) != int(cid_val):
+                            continue
+                    except Exception:
+                        continue
 
-        if hasattr(self._main_window, 'label_cr') and self._main_window.label_cr:
-            if cid in self._main_window.label_cr:
-                arr = self._main_window.label_cr[cid]  # (N, C)
-                if arr.ndim == 2:
-                    coords_list = label_coords.get(cid, [])
-                    for i in range(arr.shape[0]):
-                        img_x, img_y, img_cd = None, None, None
-                        if i < len(coords_list):
-                            coord_data = coords_list[i]
-                        elif coords_list:
-                            coord_data = coords_list[0]
-                        else:
-                            coord_data = []
+                    spec = None
+                    if prefer_key:
+                        spec = rec.get(prefer_key)
+                    if spec is None:
+                        spec = rec.get("ref") or rec.get("rfl")
+                    if spec is None:
+                        continue
 
-                        if len(coord_data) >= 2:
-                            img_x, img_y = coord_data[0], coord_data[1]
-                        if len(coord_data) >= 3:
-                            img_cd = coord_data[2]
+                    arr = np.asarray(spec)
+                    if arr.ndim == 1:
+                        arr = arr[None, :]
+                    if arr.ndim != 2:
+                        continue
+                    blocks.append(arr)
 
-                        spectra_list.append({
-                            "cid": cid,
-                            "spectrum": arr[i],
-                            "from": "Labeling",
-                            "material_name": material_name,
-                            "description": material_description,
-                            "index": i,
-                            "type": "label_cr",
-                            "label_index": i,
-                            "img_x": img_x,
-                            "img_y": img_y,
-                            "img_cd": img_cd,
-                        })
+                if not blocks:
+                    return None
+                return np.vstack(blocks)
+
+            return None
+
+        # 1) 스펙트럼 라이브러리 (Raw)
+        arr = _get_array_for_cid(getattr(self._main_window, 'splib_raw', None), cid, prefer_key="ref")
+        if arr is not None and arr.ndim == 2:
+            for i in range(arr.shape[0]):
+                spectra_list.append({
+                    "cid": cid,
+                    "spectrum": arr[i],
+                    "from": "Spectrum Library (Raw)",
+                    "material_name": material_name,
+                    "description": material_description,
+                    "index": i,
+                    "type": "splib_raw",
+                })
+
+        # 2) 스펙트럼 라이브러리 (CR)
+        arr = _get_array_for_cid(getattr(self._main_window, 'splib_cr', None), cid, prefer_key="ref")
+        if arr is not None and arr.ndim == 2:
+            for i in range(arr.shape[0]):
+                spectra_list.append({
+                    "cid": cid,
+                    "spectrum": arr[i],
+                    "from": "Spectrum Library (CR)",
+                    "material_name": material_name,
+                    "description": material_description,
+                    "index": i,
+                    "type": "splib_cr",
+                })
+
+        # 3) 라벨링 데이터 (Raw)
+        arr = _get_array_for_cid(getattr(self._main_window, 'label_raw', None), cid, prefer_key="rfl")
+        if arr is not None and arr.ndim == 2:
+            coords_list = label_coords.get(cid, [])
+            for i in range(arr.shape[0]):
+                img_x, img_y, img_cd = None, None, None
+                if i < len(coords_list):
+                    coord_data = coords_list[i]
+                elif coords_list:
+                    coord_data = coords_list[0]
+                else:
+                    coord_data = []
+
+                if len(coord_data) >= 2:
+                    img_x, img_y = coord_data[0], coord_data[1]
+                if len(coord_data) >= 3:
+                    img_cd = coord_data[2]
+
+                spectra_list.append({
+                    "cid": cid,
+                    "spectrum": arr[i],
+                    "from": "Labeling",
+                    "material_name": material_name,
+                    "description": material_description,
+                    "index": i,
+                    "type": "label_raw",
+                    "label_index": i,
+                    "img_x": img_x,
+                    "img_y": img_y,
+                    "img_cd": img_cd,
+                })
+
+        # 4) 라벨링 데이터 (CR)
+        arr = _get_array_for_cid(getattr(self._main_window, 'label_cr', None), cid, prefer_key="rfl")
+        if arr is not None and arr.ndim == 2:
+            coords_list = label_coords.get(cid, [])
+            for i in range(arr.shape[0]):
+                img_x, img_y, img_cd = None, None, None
+                if i < len(coords_list):
+                    coord_data = coords_list[i]
+                elif coords_list:
+                    coord_data = coords_list[0]
+                else:
+                    coord_data = []
+
+                if len(coord_data) >= 2:
+                    img_x, img_y = coord_data[0], coord_data[1]
+                if len(coord_data) >= 3:
+                    img_cd = coord_data[2]
+
+                spectra_list.append({
+                    "cid": cid,
+                    "spectrum": arr[i],
+                    "from": "Labeling",
+                    "material_name": material_name,
+                    "description": material_description,
+                    "index": i,
+                    "type": "label_cr",
+                    "label_index": i,
+                    "img_x": img_x,
+                    "img_y": img_y,
+                    "img_cd": img_cd,
+                })
 
         return spectra_list
+
 
     def _rebuild_table_and_plot(self):
         """self._table_rows 기준으로 테이블과 스펙트럼 그래프를 다시 그림"""

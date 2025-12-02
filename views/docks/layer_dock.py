@@ -382,7 +382,7 @@ class LayersDock(QDockWidget):
         state = item.checkState(0)
 
         if is_parent:
-            # 부모 클릭: Checked/Unchecked → 자식 전체에 동일 적용
+            # 부모 클릭: Checked/Unchecked → 부모 자체 + 자식 전체에 동일 적용
             if state in (Qt.Checked, Qt.Unchecked):
                 want_on = (state == Qt.Checked)
                 self._block_item_changed = True
@@ -390,7 +390,13 @@ class LayersDock(QDockWidget):
                     ch.setCheckState(0, Qt.Checked if want_on else Qt.Unchecked)
                 self._block_item_changed = False
 
+                # 부모 자체의 가시성도 변경
                 if callable(self._on_visible_change):
+                    try:
+                        self._on_visible_change(self._item_key(item), want_on)
+                    except Exception:
+                        pass
+                    # 자식들도 처리 (viewer 자식은 LayerManager에서 무시됨)
                     for ch in self._iter_children(item):
                         try:
                             self._on_visible_change(self._item_key(ch), want_on)

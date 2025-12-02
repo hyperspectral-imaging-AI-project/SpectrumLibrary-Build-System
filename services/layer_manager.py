@@ -158,28 +158,12 @@ class LayerManager:
             self._top_order.remove(name)
         self._top_order.insert(0, name)
 
-        # ★ 부모 전체 합성 오버레이도 함께 올리기 (없애지 않음, 기본 비가시 + 중복 제거)
-        try:
-            # 0) 이전 부모 합성 레이어 제거(중복/잔존 방지)
-            old_parent = self.recs.get(name)
-            if old_parent and old_parent.map_item_name and old_parent.map_item_name != "RGB":
-                try:
-                    self.map_remove_layer(old_parent.map_item_name)
-                except Exception:
-                    pass
-
-            # 1) 새 부모 합성 생성
-            rgba_all = self.renderer.classmap_rgba(cm, alpha=180)
-            parent_item = self.map_add_layer(name, rgba_all, 1.0, False)
-
-            # 2) 기본 비가시로 등록(자식 토글이 즉시 반영되도록)
-            self.recs[name] = LayerRec(
-                name=name, type="classmap.parent", parent=None,
-                map_item_name=parent_item, visible=False
-            )
-            self.map_set_visible(parent_item, False)
-        except Exception:
-            pass
+        # ★ QGIS 스타일: 부모는 '그룹'만 담당, 실제 map 아이템은 없음
+        self.recs[name] = LayerRec(
+            name=name, type="classmap.parent", parent=None,
+            map_item_name=None,   # ← 중요: 부모는 실제 map 레이어를 가지지 않음
+            visible=bool(visible) # 초기 visible 상태는 그룹의 ON/OFF 의미로만 사용
+        )
 
         # 4) 실제 등장 클래스(UNKNOWN 포함) 추출
         present = set(int(i) for i in np.unique(cm))
@@ -306,11 +290,42 @@ class LayerManager:
 
     # ---- 가시성/정렬/삭제 ----
     def set_visible(self, dock_name: str, visible: bool):
+        # viewer 자식 항목(|viewer| 포함)은 정보 표시용이므로 무시
+        if "|viewer|" in dock_name:
+            return
+
         rec = self.recs.get(dock_name)
-        if not rec: return
+        if not rec:
+            import logging
+            logging.debug(f"[LayerManager] set_visible: 레이어 '{dock_name}'를 찾을 수 없습니다.")
+            return
+
+        # ★ 1) classmap 부모인 경우: 자식 레이어들의 visible만 토글
+        if rec.type == "classmap.parent":
+            rec.visible = bool(visible)
+            for name, child in self.recs.items():
+                if child.parent == dock_name:
+                    child.visible = bool(visible)
+                    if child.map_item_name:
+                        try:
+                            self.map_set_visible(child.map_item_name, bool(visible))
+                        except Exception:
+                            pass
+            self._apply_order_to_map()
+            return
+
+        # ★ 2) 그 외 (RGB / overlay / classmap child 등): 기존 로직 유지
         target = "RGB" if rec.map_item_name == "RGB" else rec.map_item_name
-        self.map_set_visible(target, visible)
-        rec.visible = visible
+        try:
+            if target:
+                self.map_set_visible(target, visible)
+            rec.visible = visible
+            self._apply_order_to_map()
+        except Exception as e:
+            import logging
+            logging.exception(
+                f"[LayerManager] set_visible 실패: dock_name={dock_name}, target={target}, visible={visible}"
+            )
 
     def remove(self, dock_name: str):
         rec = self.recs.get(dock_name)
@@ -386,7 +401,7 @@ class LayerManager:
         """
         현재 self._top_order(위→아래)를 기준으로 평탄화된 위→아래 Map 레이어 이름 목록을 만들어
         주입받은 map_reorder(...)에 전달한다.
-        - rgb_base: parent의 map_item_name('RGB') 포함
+        - rgb_base: parent의 map_item_name('RGB') 포함 (가시성 확인)
         - classmap: 부모는 자체 픽셀이 없고 자식('parent/cid')들만 포함
         - overlay/mask: 부모 자신을 포함
         """
@@ -397,17 +412,22 @@ class LayerManager:
                 children_by_parent.setdefault(v.parent, []).append(k)
 
         flat_names: list[str] = []
+        
         for parent in self._top_order:
             prec = self.recs.get(parent)
 
             # 1) 부모 자체가 실제 맵 아이템을 가지면 포함 (rgb_base/overlay 등)
+            # ★ 수정: 모든 레이어는 가시성이 True일 때만 레이어 목록에 포함
+            # RGB도 Layers Dock 순서대로 추가 (특별 처리 없음)
             if prec and prec.map_item_name:
-                flat_names.append(prec.map_item_name)
+                if prec.visible:
+                    flat_names.append(prec.map_item_name)
 
             # 2) 자식들(주로 classmap children). 정책상 이름 정렬로 고정
+            # ★ 수정: 자식 레이어도 가시성이 True일 때만 포함
             for ch in sorted(children_by_parent.get(parent, [])):
                 crec = self.recs.get(ch)
-                if crec and crec.map_item_name:
+                if crec and crec.map_item_name and crec.visible:
                     flat_names.append(crec.map_item_name)
 
         try:

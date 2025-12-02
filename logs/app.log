@@ -10589,3 +10589,1906 @@ ValueError: too many values to unpack (expected 2)
 2025-11-25 16:13:21,670 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
 2025-11-25 16:13:21,815 INFO: [Analysis] 분석 영역 초기화 완료
 2025-11-25 16:13:24,602 INFO: [UserLabeling] 초기 클래스 로드(server): 2479개
+2025-11-26 11:02:13,398 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 11:02:13,446 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 11:02:13,448 INFO: icon.rcc not found (skip)
+2025-11-26 13:38:06,757 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 2981, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 405, in image_check_and_save
+    return data[0]['img_cd']
+KeyError: 0
+2025-11-26 13:38:06,780 INFO: [ResampleCache] 캐시 파일이 없습니다. primary=E:\botswana\Botswana.mat
+2025-11-26 13:40:21,730 INFO: [Resampling] API+compute 134.95s
+2025-11-26 13:40:21,730 INFO: [ResampleCache] 저장 시도: npz_path=E:\botswana\Botswana.mat.resample.npz, label_raw=0 classes, label_cr=0 classes
+2025-11-26 13:40:21,786 INFO: [ResampleCache] .npz 파일 저장 완료: E:\botswana\Botswana.mat.resample.npz (크기: 4977235 bytes)
+2025-11-26 13:40:21,790 INFO: [ResampleCache] .info 파일 저장 완료: E:\botswana\Botswana.mat.resample.info (classes: 0개)
+2025-11-26 13:40:21,790 INFO: [ResampleCache] resampling 결과를 캐시에 저장했습니다.
+2025-11-26 13:40:21,791 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 13:40:21,826 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 13:40:21,827 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 13:40:21,863 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 13:40:21,864 INFO: [_norm_entries] label_raw: input list/tuple with 238 items
+2025-11-26 13:40:21,867 INFO: [_norm_entries] label_raw: output 16 classes, 238 total samples
+2025-11-26 13:40:21,867 INFO: [_norm_entries] label_cr: input list/tuple with 238 items
+2025-11-26 13:40:21,871 INFO: [_norm_entries] label_cr: output 16 classes, 238 total samples
+2025-11-26 13:40:21,872 INFO: [rebuild] after _norm_entries: label_raw_norm=16 classes, label_cr_norm=16 classes
+2025-11-26 13:40:21,913 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=16, label_cr=16, lib=1825
+2025-11-26 13:40:21,914 INFO: [rebuild] label_raw=16 classes / 238 samples, label_cr=16 classes / 238 samples, lib=1825 classes / 4094 samples
+2025-11-26 13:40:21,943 INFO: [Rebuild] lib=1825 classes, labeling_lib=16 classes
+2025-11-26 13:40:21,951 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:238, label_cr:238
+2025-11-26 13:40:22,436 INFO: [RegionGrowing] HSI data set: (1476, 256, 145)
+2025-11-26 13:40:22,436 INFO: [RegionGrowing] Service initialized with HSI data
+2025-11-26 14:05:05,908 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 14:05:05,951 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 14:05:05,952 INFO: icon.rcc not found (skip)
+2025-11-26 14:05:16,921 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\botswana\Botswana.mat -> 15
+2025-11-26 14:05:16,969 INFO: [ResampleCache] cached result loaded
+2025-11-26 14:05:16,969 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=238, label_cr=238
+2025-11-26 14:05:16,969 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 14:05:16,978 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 14:05:16,978 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 14:05:16,989 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 14:05:16,990 INFO: [_norm_entries] label_raw: input list/tuple with 238 items
+2025-11-26 14:05:16,991 INFO: [_norm_entries] label_raw: output 16 classes, 238 total samples
+2025-11-26 14:05:16,991 INFO: [_norm_entries] label_cr: input list/tuple with 238 items
+2025-11-26 14:05:16,992 INFO: [_norm_entries] label_cr: output 16 classes, 238 total samples
+2025-11-26 14:05:16,992 INFO: [rebuild] after _norm_entries: label_raw_norm=16 classes, label_cr_norm=16 classes
+2025-11-26 14:05:17,003 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=16, label_cr=16, lib=1825
+2025-11-26 14:05:17,003 INFO: [rebuild] label_raw=16 classes / 238 samples, label_cr=16 classes / 238 samples, lib=1825 classes / 4094 samples
+2025-11-26 14:05:17,011 INFO: [Rebuild] lib=1825 classes, labeling_lib=16 classes
+2025-11-26 14:05:17,012 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:238, label_cr:238
+2025-11-26 14:20:22,018 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 14:20:22,038 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 14:20:22,039 INFO: icon.rcc not found (skip)
+2025-11-26 14:20:38,830 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 2981, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 405, in image_check_and_save
+    return data[0]['img_cd']
+KeyError: 0
+2025-11-26 14:20:38,862 INFO: [ResampleCache] cached result loaded
+2025-11-26 14:20:38,862 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=238, label_cr=238
+2025-11-26 14:20:38,862 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 14:20:38,882 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 14:20:38,884 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 14:20:38,897 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 14:20:38,898 INFO: [_norm_entries] label_raw: input list/tuple with 238 items
+2025-11-26 14:20:38,899 INFO: [_norm_entries] label_raw: output 16 classes, 238 total samples
+2025-11-26 14:20:38,900 INFO: [_norm_entries] label_cr: input list/tuple with 238 items
+2025-11-26 14:20:38,901 INFO: [_norm_entries] label_cr: output 16 classes, 238 total samples
+2025-11-26 14:20:38,901 INFO: [rebuild] after _norm_entries: label_raw_norm=16 classes, label_cr_norm=16 classes
+2025-11-26 14:20:38,925 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=16, label_cr=16, lib=1825
+2025-11-26 14:20:38,926 INFO: [rebuild] label_raw=16 classes / 238 samples, label_cr=16 classes / 238 samples, lib=1825 classes / 4094 samples
+2025-11-26 14:20:38,942 INFO: [Rebuild] lib=1825 classes, labeling_lib=16 classes
+2025-11-26 14:20:38,944 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:238, label_cr:238
+2025-11-26 14:34:08,306 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 14:34:08,324 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 14:34:08,325 INFO: icon.rcc not found (skip)
+2025-11-26 14:35:02,835 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\botswana\Botswana.mat -> 16
+2025-11-26 14:35:02,849 INFO: [ResampleCache] cached result loaded
+2025-11-26 14:35:02,849 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=238, label_cr=238
+2025-11-26 14:35:02,849 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 14:35:02,857 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 14:35:02,857 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 14:35:02,867 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 14:35:02,868 INFO: [_norm_entries] label_raw: input list/tuple with 238 items
+2025-11-26 14:35:02,869 INFO: [_norm_entries] label_raw: output 16 classes, 238 total samples
+2025-11-26 14:35:02,869 INFO: [_norm_entries] label_cr: input list/tuple with 238 items
+2025-11-26 14:35:02,870 INFO: [_norm_entries] label_cr: output 16 classes, 238 total samples
+2025-11-26 14:35:02,870 INFO: [rebuild] after _norm_entries: label_raw_norm=16 classes, label_cr_norm=16 classes
+2025-11-26 14:35:02,879 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=16, label_cr=16, lib=1825
+2025-11-26 14:35:02,880 INFO: [rebuild] label_raw=16 classes / 238 samples, label_cr=16 classes / 238 samples, lib=1825 classes / 4094 samples
+2025-11-26 14:35:02,887 INFO: [Rebuild] lib=1825 classes, labeling_lib=16 classes
+2025-11-26 14:35:02,888 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:238, label_cr:238
+2025-11-26 14:38:38,384 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 14:38:38,406 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 14:38:38,407 INFO: icon.rcc not found (skip)
+2025-11-26 14:38:47,534 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\botswana\Botswana.mat -> 16
+2025-11-26 14:38:47,550 INFO: [ResampleCache] cached result loaded
+2025-11-26 14:38:47,551 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=238, label_cr=238
+2025-11-26 14:38:47,551 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 14:38:47,560 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 14:38:47,561 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 14:38:47,571 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 14:38:47,572 INFO: [_norm_entries] label_raw: input list/tuple with 238 items
+2025-11-26 14:38:47,573 INFO: [_norm_entries] label_raw: output 16 classes, 238 total samples
+2025-11-26 14:38:47,573 INFO: [_norm_entries] label_cr: input list/tuple with 238 items
+2025-11-26 14:38:47,574 INFO: [_norm_entries] label_cr: output 16 classes, 238 total samples
+2025-11-26 14:38:47,574 INFO: [rebuild] after _norm_entries: label_raw_norm=16 classes, label_cr_norm=16 classes
+2025-11-26 14:38:47,583 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=16, label_cr=16, lib=1825
+2025-11-26 14:38:47,584 INFO: [rebuild] label_raw=16 classes / 238 samples, label_cr=16 classes / 238 samples, lib=1825 classes / 4094 samples
+2025-11-26 14:38:47,592 INFO: [Rebuild] lib=1825 classes, labeling_lib=16 classes
+2025-11-26 14:38:47,594 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:238, label_cr:238
+2025-11-26 14:50:40,928 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 14:50:40,947 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 14:50:40,948 INFO: icon.rcc not found (skip)
+2025-11-26 14:51:04,902 WARNING: [LayerManager] set_visible: 레이어 'image.rgb'를 찾을 수 없습니다. 등록된 레이어: []
+2025-11-26 14:51:06,223 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\botswana\Botswana.mat -> 16
+2025-11-26 14:51:06,277 INFO: [ResampleCache] cached result loaded
+2025-11-26 14:51:06,278 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=238, label_cr=238
+2025-11-26 14:51:06,278 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 14:51:06,288 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 14:51:06,289 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 14:51:06,303 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 14:51:06,303 INFO: [_norm_entries] label_raw: input list/tuple with 238 items
+2025-11-26 14:51:06,304 INFO: [_norm_entries] label_raw: output 16 classes, 238 total samples
+2025-11-26 14:51:06,305 INFO: [_norm_entries] label_cr: input list/tuple with 238 items
+2025-11-26 14:51:06,306 INFO: [_norm_entries] label_cr: output 16 classes, 238 total samples
+2025-11-26 14:51:06,306 INFO: [rebuild] after _norm_entries: label_raw_norm=16 classes, label_cr_norm=16 classes
+2025-11-26 14:51:06,319 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=16, label_cr=16, lib=1825
+2025-11-26 14:51:06,319 INFO: [rebuild] label_raw=16 classes / 238 samples, label_cr=16 classes / 238 samples, lib=1825 classes / 4094 samples
+2025-11-26 14:51:06,330 INFO: [Rebuild] lib=1825 classes, labeling_lib=16 classes
+2025-11-26 14:51:06,332 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:238, label_cr:238
+2025-11-26 14:51:20,873 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|R'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:20,874 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|G'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:20,874 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|B'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:21,327 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|R'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:21,327 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|G'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:21,328 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|B'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:21,679 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|R'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:21,680 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|G'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:21,680 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|B'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:21,824 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|R'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:21,824 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|G'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:21,826 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|B'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:23,421 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|R'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:23,422 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|G'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:23,422 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|B'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:23,985 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|R'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:23,986 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|G'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:23,987 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|B'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:24,576 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|R'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:24,576 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|G'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:24,577 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|B'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:24,824 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|R'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:24,825 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|G'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:24,825 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|B'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:25,082 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|R'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:25,083 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|G'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:25,083 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|B'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:25,408 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|R'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:25,409 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|G'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:25,409 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|B'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:25,755 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|R'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:25,755 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|G'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:25,756 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|B'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:26,061 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|R'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:26,062 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|G'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:26,062 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|B'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:26,250 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|R'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:26,250 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|G'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:51:26,250 WARNING: [LayerManager] set_visible: 레이어 'image.rgb|viewer|B'를 찾을 수 없습니다. 등록된 레이어: ['image.rgb']
+2025-11-26 14:52:27,131 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 14:52:27,151 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 14:52:27,151 INFO: icon.rcc not found (skip)
+2025-11-26 14:52:35,608 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\botswana\Botswana.mat -> 16
+2025-11-26 14:52:35,623 INFO: [ResampleCache] cached result loaded
+2025-11-26 14:52:35,624 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=238, label_cr=238
+2025-11-26 14:52:35,624 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 14:52:35,632 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 14:52:35,632 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 14:52:35,642 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 14:52:35,643 INFO: [_norm_entries] label_raw: input list/tuple with 238 items
+2025-11-26 14:52:35,644 INFO: [_norm_entries] label_raw: output 16 classes, 238 total samples
+2025-11-26 14:52:35,644 INFO: [_norm_entries] label_cr: input list/tuple with 238 items
+2025-11-26 14:52:35,645 INFO: [_norm_entries] label_cr: output 16 classes, 238 total samples
+2025-11-26 14:52:35,645 INFO: [rebuild] after _norm_entries: label_raw_norm=16 classes, label_cr_norm=16 classes
+2025-11-26 14:52:35,654 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=16, label_cr=16, lib=1825
+2025-11-26 14:52:35,654 INFO: [rebuild] label_raw=16 classes / 238 samples, label_cr=16 classes / 238 samples, lib=1825 classes / 4094 samples
+2025-11-26 14:52:35,661 INFO: [Rebuild] lib=1825 classes, labeling_lib=16 classes
+2025-11-26 14:52:35,663 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:238, label_cr:238
+2025-11-26 14:58:02,243 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 14:58:02,265 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 14:58:02,266 INFO: icon.rcc not found (skip)
+2025-11-26 14:58:19,673 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\botswana\Botswana.mat -> 16
+2025-11-26 14:58:19,688 INFO: [ResampleCache] cached result loaded
+2025-11-26 14:58:19,688 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=238, label_cr=238
+2025-11-26 14:58:19,688 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 14:58:19,695 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 14:58:19,696 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 14:58:19,706 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 14:58:19,707 INFO: [_norm_entries] label_raw: input list/tuple with 238 items
+2025-11-26 14:58:19,708 INFO: [_norm_entries] label_raw: output 16 classes, 238 total samples
+2025-11-26 14:58:19,708 INFO: [_norm_entries] label_cr: input list/tuple with 238 items
+2025-11-26 14:58:19,709 INFO: [_norm_entries] label_cr: output 16 classes, 238 total samples
+2025-11-26 14:58:19,709 INFO: [rebuild] after _norm_entries: label_raw_norm=16 classes, label_cr_norm=16 classes
+2025-11-26 14:58:19,720 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=16, label_cr=16, lib=1825
+2025-11-26 14:58:19,720 INFO: [rebuild] label_raw=16 classes / 238 samples, label_cr=16 classes / 238 samples, lib=1825 classes / 4094 samples
+2025-11-26 14:58:19,727 INFO: [Rebuild] lib=1825 classes, labeling_lib=16 classes
+2025-11-26 14:58:19,729 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:238, label_cr:238
+2025-11-26 14:59:01,014 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 14:59:01,034 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 14:59:01,035 INFO: icon.rcc not found (skip)
+2025-11-26 14:59:14,818 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\botswana\Botswana.mat -> 16
+2025-11-26 14:59:14,856 INFO: [ResampleCache] cached result loaded
+2025-11-26 14:59:14,856 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=238, label_cr=238
+2025-11-26 14:59:14,856 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 14:59:14,882 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 14:59:14,882 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 14:59:14,903 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 14:59:14,903 INFO: [_norm_entries] label_raw: input list/tuple with 238 items
+2025-11-26 14:59:14,906 INFO: [_norm_entries] label_raw: output 16 classes, 238 total samples
+2025-11-26 14:59:14,906 INFO: [_norm_entries] label_cr: input list/tuple with 238 items
+2025-11-26 14:59:14,908 INFO: [_norm_entries] label_cr: output 16 classes, 238 total samples
+2025-11-26 14:59:14,908 INFO: [rebuild] after _norm_entries: label_raw_norm=16 classes, label_cr_norm=16 classes
+2025-11-26 14:59:14,926 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=16, label_cr=16, lib=1825
+2025-11-26 14:59:14,927 INFO: [rebuild] label_raw=16 classes / 238 samples, label_cr=16 classes / 238 samples, lib=1825 classes / 4094 samples
+2025-11-26 14:59:14,937 INFO: [Rebuild] lib=1825 classes, labeling_lib=16 classes
+2025-11-26 14:59:14,939 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:238, label_cr:238
+2025-11-26 14:59:49,989 INFO: [UserLabeling] 초기 클래스 로드(server): 2479개
+2025-11-26 15:00:05,128 INFO: [MaterialAdd] user_type: server
+2025-11-26 15:00:05,163 INFO: [UserLabeling] server: API에서 클래스 정보 가져오기 시도
+2025-11-26 15:00:05,502 INFO: [UserLabeling] server: API에서 2480개 클래스 로드 완료
+2025-11-26 15:00:05,508 INFO: [UserLabeling] 전역 콤보박스에서 새로 생성된 클래스 선택: mtrl_cd=2479, index=2479
+2025-11-26 15:00:25,176 INFO: [UserLabeling] server 사용자: API 호출 시도
+2025-11-26 15:00:34,265 INFO: [LabelRegister] processing rows: count=10, crC=None, C=145
+2025-11-26 15:00:34,270 INFO: [LabelRegister] add_raw: 1 classes, add_cr: 1 classes (crC=None)
+2025-11-26 15:00:34,270 INFO: [rebuild] label_raw input: 17 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-11-26 15:00:34,271 INFO: [rebuild] label_cr input: 17 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-11-26 15:00:34,271 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-26 15:00:34,276 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-26 15:00:34,276 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-26 15:00:34,282 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-26 15:00:34,282 INFO: [_norm_entries] label_raw: input dict with 17 keys
+2025-11-26 15:00:34,283 INFO: [_norm_entries] label_raw: output 17 classes, 248 total samples
+2025-11-26 15:00:34,283 INFO: [_norm_entries] label_cr: input dict with 17 keys
+2025-11-26 15:00:34,283 INFO: [_norm_entries] label_cr: output 17 classes, 248 total samples
+2025-11-26 15:00:34,284 INFO: [rebuild] after _norm_entries: label_raw_norm=17 classes, label_cr_norm=17 classes
+2025-11-26 15:00:34,293 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=17, label_cr=17, lib=1827
+2025-11-26 15:00:34,294 INFO: [rebuild] label_raw=17 classes / 248 samples, label_cr=17 classes / 248 samples, lib=1827 classes / 4116 samples
+2025-11-26 15:00:34,325 INFO: [LabelRegister] 저장 시도: primary=E:\botswana\Botswana.mat, label_raw=17 classes, label_cr=17 classes
+2025-11-26 15:00:34,325 INFO: [ResampleCache] 저장 시도: npz_path=E:\botswana\Botswana.mat.resample.npz, label_raw=17 classes, label_cr=17 classes
+2025-11-26 15:00:34,336 INFO: [ResampleCache] .npz 파일 저장 완료: E:\botswana\Botswana.mat.resample.npz (크기: 2528221 bytes)
+2025-11-26 15:00:34,337 INFO: [LabelRegister] 저장 성공: E:\botswana\Botswana.mat.resample.npz
+2025-11-26 15:00:34,338 INFO: [LabelRegister] done: label_raw=17, label_cr=17, lib=1827
+2025-11-26 15:00:46,192 INFO: [UserLabeling] 초기 클래스 로드(server): 2480개
+2025-11-26 15:20:23,534 INFO: [UserLabeling] 초기 클래스 로드(server): 2480개
+2025-11-26 15:21:07,564 INFO: [MaterialAdd] user_type: server
+2025-11-26 15:21:07,640 INFO: [UserLabeling] server: API에서 클래스 정보 가져오기 시도
+2025-11-26 15:21:07,802 INFO: [UserLabeling] server: API에서 2481개 클래스 로드 완료
+2025-11-26 15:21:07,810 INFO: [UserLabeling] 전역 콤보박스에서 새로 생성된 클래스 선택: mtrl_cd=2480, index=2480
+2025-11-26 15:21:12,570 INFO: [UserLabeling] server 사용자: API 호출 시도
+2025-11-26 15:21:23,264 INFO: [LabelRegister] processing rows: count=10, crC=None, C=145
+2025-11-26 15:21:23,267 INFO: [LabelRegister] add_raw: 1 classes, add_cr: 1 classes (crC=None)
+2025-11-26 15:21:23,268 INFO: [rebuild] label_raw input: 18 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-11-26 15:21:23,268 INFO: [rebuild] label_cr input: 18 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-11-26 15:21:23,268 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-26 15:21:23,273 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-26 15:21:23,273 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-26 15:21:23,279 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-26 15:21:23,279 INFO: [_norm_entries] label_raw: input dict with 18 keys
+2025-11-26 15:21:23,280 INFO: [_norm_entries] label_raw: output 18 classes, 258 total samples
+2025-11-26 15:21:23,280 INFO: [_norm_entries] label_cr: input dict with 18 keys
+2025-11-26 15:21:23,280 INFO: [_norm_entries] label_cr: output 18 classes, 258 total samples
+2025-11-26 15:21:23,280 INFO: [rebuild] after _norm_entries: label_raw_norm=18 classes, label_cr_norm=18 classes
+2025-11-26 15:21:23,290 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=18, label_cr=18, lib=1828
+2025-11-26 15:21:23,290 INFO: [rebuild] label_raw=18 classes / 258 samples, label_cr=18 classes / 258 samples, lib=1828 classes / 4136 samples
+2025-11-26 15:21:23,332 INFO: [LabelRegister] 저장 시도: primary=E:\botswana\Botswana.mat, label_raw=18 classes, label_cr=18 classes
+2025-11-26 15:21:23,333 INFO: [ResampleCache] 저장 시도: npz_path=E:\botswana\Botswana.mat.resample.npz, label_raw=18 classes, label_cr=18 classes
+2025-11-26 15:21:23,345 INFO: [ResampleCache] .npz 파일 저장 완료: E:\botswana\Botswana.mat.resample.npz (크기: 2539995 bytes)
+2025-11-26 15:21:23,345 INFO: [LabelRegister] 저장 성공: E:\botswana\Botswana.mat.resample.npz
+2025-11-26 15:21:23,345 INFO: [LabelRegister] done: label_raw=18, label_cr=18, lib=1828
+2025-11-26 15:21:31,790 INFO: [UserLabeling] 초기 클래스 로드(server): 2481개
+2025-11-26 15:21:42,368 INFO: [MaterialAdd] user_type: server
+2025-11-26 15:21:43,451 INFO: [UserLabeling] server: API에서 클래스 정보 가져오기 시도
+2025-11-26 15:21:44,577 INFO: [UserLabeling] server: API에서 2482개 클래스 로드 완료
+2025-11-26 15:21:44,583 INFO: [UserLabeling] 전역 콤보박스에서 새로 생성된 클래스 선택: mtrl_cd=2481, index=2481
+2025-11-26 15:22:01,537 INFO: [UserLabeling] server 사용자: API 호출 시도
+2025-11-26 15:22:05,951 INFO: [LabelRegister] processing rows: count=10, crC=None, C=145
+2025-11-26 15:22:05,954 INFO: [LabelRegister] add_raw: 1 classes, add_cr: 1 classes (crC=None)
+2025-11-26 15:22:05,954 INFO: [rebuild] label_raw input: 19 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-11-26 15:22:05,955 INFO: [rebuild] label_cr input: 19 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-11-26 15:22:05,955 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-26 15:22:05,960 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-26 15:22:05,961 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-26 15:22:05,966 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-26 15:22:05,967 INFO: [_norm_entries] label_raw: input dict with 19 keys
+2025-11-26 15:22:05,967 INFO: [_norm_entries] label_raw: output 19 classes, 268 total samples
+2025-11-26 15:22:05,967 INFO: [_norm_entries] label_cr: input dict with 19 keys
+2025-11-26 15:22:05,968 INFO: [_norm_entries] label_cr: output 19 classes, 268 total samples
+2025-11-26 15:22:05,968 INFO: [rebuild] after _norm_entries: label_raw_norm=19 classes, label_cr_norm=19 classes
+2025-11-26 15:22:05,978 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=19, label_cr=19, lib=1829
+2025-11-26 15:22:05,979 INFO: [rebuild] label_raw=19 classes / 268 samples, label_cr=19 classes / 268 samples, lib=1829 classes / 4156 samples
+2025-11-26 15:22:06,021 INFO: [LabelRegister] 저장 시도: primary=E:\botswana\Botswana.mat, label_raw=19 classes, label_cr=19 classes
+2025-11-26 15:22:06,021 INFO: [ResampleCache] 저장 시도: npz_path=E:\botswana\Botswana.mat.resample.npz, label_raw=19 classes, label_cr=19 classes
+2025-11-26 15:22:06,033 INFO: [ResampleCache] .npz 파일 저장 완료: E:\botswana\Botswana.mat.resample.npz (크기: 2551768 bytes)
+2025-11-26 15:22:06,033 INFO: [LabelRegister] 저장 성공: E:\botswana\Botswana.mat.resample.npz
+2025-11-26 15:22:06,033 INFO: [LabelRegister] done: label_raw=19, label_cr=19, lib=1829
+2025-11-26 15:22:17,663 INFO: [UserLabeling] 초기 클래스 로드(server): 2482개
+2025-11-26 15:22:52,731 INFO: [MaterialAdd] user_type: server
+2025-11-26 15:22:52,806 INFO: [UserLabeling] server: API에서 클래스 정보 가져오기 시도
+2025-11-26 15:22:52,963 INFO: [UserLabeling] server: API에서 2483개 클래스 로드 완료
+2025-11-26 15:22:52,969 INFO: [UserLabeling] 전역 콤보박스에서 새로 생성된 클래스 선택: mtrl_cd=2482, index=2482
+2025-11-26 15:22:55,014 INFO: [UserLabeling] server 사용자: API 호출 시도
+2025-11-26 15:23:02,852 INFO: [LabelRegister] processing rows: count=10, crC=None, C=145
+2025-11-26 15:23:02,856 INFO: [LabelRegister] add_raw: 1 classes, add_cr: 1 classes (crC=None)
+2025-11-26 15:23:02,856 INFO: [rebuild] label_raw input: 20 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-11-26 15:23:02,856 INFO: [rebuild] label_cr input: 20 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-11-26 15:23:02,857 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-26 15:23:02,861 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-26 15:23:02,861 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-26 15:23:02,867 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-26 15:23:02,867 INFO: [_norm_entries] label_raw: input dict with 20 keys
+2025-11-26 15:23:02,868 INFO: [_norm_entries] label_raw: output 20 classes, 278 total samples
+2025-11-26 15:23:02,868 INFO: [_norm_entries] label_cr: input dict with 20 keys
+2025-11-26 15:23:02,869 INFO: [_norm_entries] label_cr: output 20 classes, 278 total samples
+2025-11-26 15:23:02,869 INFO: [rebuild] after _norm_entries: label_raw_norm=20 classes, label_cr_norm=20 classes
+2025-11-26 15:23:02,878 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=20, label_cr=20, lib=1830
+2025-11-26 15:23:02,878 INFO: [rebuild] label_raw=20 classes / 278 samples, label_cr=20 classes / 278 samples, lib=1830 classes / 4176 samples
+2025-11-26 15:23:02,923 INFO: [LabelRegister] 저장 시도: primary=E:\botswana\Botswana.mat, label_raw=20 classes, label_cr=20 classes
+2025-11-26 15:23:02,923 INFO: [ResampleCache] 저장 시도: npz_path=E:\botswana\Botswana.mat.resample.npz, label_raw=20 classes, label_cr=20 classes
+2025-11-26 15:23:02,935 INFO: [ResampleCache] .npz 파일 저장 완료: E:\botswana\Botswana.mat.resample.npz (크기: 2563541 bytes)
+2025-11-26 15:23:02,935 INFO: [LabelRegister] 저장 성공: E:\botswana\Botswana.mat.resample.npz
+2025-11-26 15:23:02,935 INFO: [LabelRegister] done: label_raw=20, label_cr=20, lib=1830
+2025-11-26 15:23:18,514 INFO: [UserLabeling] 초기 클래스 로드(server): 2483개
+2025-11-26 15:23:29,714 INFO: [MaterialAdd] user_type: server
+2025-11-26 15:23:30,800 INFO: [UserLabeling] server: API에서 클래스 정보 가져오기 시도
+2025-11-26 15:23:31,918 INFO: [UserLabeling] server: API에서 2484개 클래스 로드 완료
+2025-11-26 15:23:31,926 INFO: [UserLabeling] 전역 콤보박스에서 새로 생성된 클래스 선택: mtrl_cd=2483, index=2483
+2025-11-26 15:23:56,658 INFO: [UserLabeling] server 사용자: API 호출 시도
+2025-11-26 15:24:08,237 INFO: [LabelRegister] processing rows: count=10, crC=None, C=145
+2025-11-26 15:24:08,240 INFO: [LabelRegister] add_raw: 1 classes, add_cr: 1 classes (crC=None)
+2025-11-26 15:24:08,241 INFO: [rebuild] label_raw input: 21 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-11-26 15:24:08,241 INFO: [rebuild] label_cr input: 21 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-11-26 15:24:08,241 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-11-26 15:24:08,247 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-11-26 15:24:08,248 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-11-26 15:24:08,253 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-11-26 15:24:08,254 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-11-26 15:24:08,254 INFO: [_norm_entries] label_raw: output 21 classes, 288 total samples
+2025-11-26 15:24:08,254 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-11-26 15:24:08,255 INFO: [_norm_entries] label_cr: output 21 classes, 288 total samples
+2025-11-26 15:24:08,255 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-26 15:24:08,263 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-11-26 15:24:08,264 INFO: [rebuild] label_raw=21 classes / 288 samples, label_cr=21 classes / 288 samples, lib=1831 classes / 4196 samples
+2025-11-26 15:24:08,318 INFO: [LabelRegister] 저장 시도: primary=E:\botswana\Botswana.mat, label_raw=21 classes, label_cr=21 classes
+2025-11-26 15:24:08,319 INFO: [ResampleCache] 저장 시도: npz_path=E:\botswana\Botswana.mat.resample.npz, label_raw=21 classes, label_cr=21 classes
+2025-11-26 15:24:08,330 INFO: [ResampleCache] .npz 파일 저장 완료: E:\botswana\Botswana.mat.resample.npz (크기: 2575314 bytes)
+2025-11-26 15:24:08,330 INFO: [LabelRegister] 저장 성공: E:\botswana\Botswana.mat.resample.npz
+2025-11-26 15:24:08,331 INFO: [LabelRegister] done: label_raw=21, label_cr=21, lib=1831
+2025-11-26 15:27:29,785 INFO: [UserLabeling] 초기 클래스 로드(server): 2484개
+2025-11-26 15:29:24,974 INFO: [AnalysisDialog] Found 3 comboboxes: ['cb_intermediate_target', 'cb_class_range', 'comboBox']
+2025-11-26 15:29:24,974 ERROR: [class combo] cbClassRange not found in UI
+2025-11-26 15:29:24,975 WARNING: [AnalysisDialog] Found cb_class_range by alternative method
+2025-11-26 15:29:25,081 INFO: [Analysis] dialog opened: HxW=1476x256, mask_sum=0
+2025-11-26 15:29:25,136 INFO: [MainWindow] (pixel mode) connecting analysisMaskChanged signal
+2025-11-26 15:29:25,136 INFO: [MainWindow] (pixel mode) analysisMaskChanged signal connected
+2025-11-26 15:29:25,136 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-26 15:29:25,137 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-26 15:29:25,137 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-11-26 15:29:25,137 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-26 15:29:25,367 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(1476, 256)
+2025-11-26 15:29:25,368 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-26 15:29:25,370 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-26 15:29:25,371 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-26 15:29:25,376 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-26 15:30:04,064 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-26 15:30:04,065 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-26 15:30:04,065 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-26 15:30:04,065 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-26 15:30:04,195 INFO: [Analysis] 분석 영역 초기화 완료
+2025-11-26 15:30:09,783 INFO: [Analysis] dialog opened: HxW=1476x256, mask_sum=0
+2025-11-26 15:30:09,835 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-26 15:30:09,835 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-26 15:30:09,844 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-26 15:30:11,554 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-26 15:30:11,555 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-26 15:30:11,555 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-26 15:30:11,555 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-26 15:30:11,688 INFO: [Analysis] 분석 영역 초기화 완료
+2025-11-26 15:30:31,735 INFO: [Analysis] dialog opened: HxW=1476x256, mask_sum=0
+2025-11-26 15:30:31,786 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-11-26 15:30:31,787 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-11-26 15:30:31,797 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-11-26 15:30:34,080 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-11-26 15:30:34,081 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-11-26 15:30:34,081 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-11-26 15:30:34,082 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-11-26 15:30:34,207 INFO: [Analysis] 분석 영역 초기화 완료
+2025-11-26 15:31:44,977 INFO: [UserLabeling] 초기 클래스 로드(server): 2484개
+2025-11-26 15:36:31,048 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 15:36:31,069 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 15:36:31,070 INFO: icon.rcc not found (skip)
+2025-11-26 15:37:14,952 WARNING: [RGB] wavelength 길이(103) != C(102)
+2025-11-26 15:37:27,094 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 2981, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 405, in image_check_and_save
+    return data[0]['img_cd']
+KeyError: 0
+2025-11-26 15:37:27,098 INFO: [ResampleCache] 캐시 파일이 없습니다. primary=E:\pavia_university\Pavia.mat
+2025-11-26 15:57:05,051 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 15:57:05,071 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 15:57:05,072 INFO: icon.rcc not found (skip)
+2025-11-26 15:58:15,876 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 2981, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 405, in image_check_and_save
+    return data[0]['img_cd']
+KeyError: 0
+2025-11-26 15:58:15,890 INFO: [ResampleCache] 캐시 파일이 없습니다. primary=E:\pavia_university\PaviaU.mat
+2025-11-26 16:00:23,071 INFO: [Resampling] API+compute 127.18s
+2025-11-26 16:00:23,071 INFO: [ResampleCache] 저장 시도: npz_path=E:\pavia_university\PaviaU.mat.resample.npz, label_raw=0 classes, label_cr=0 classes
+2025-11-26 16:00:23,150 INFO: [ResampleCache] .npz 파일 저장 완료: E:\pavia_university\PaviaU.mat.resample.npz (크기: 3778267 bytes)
+2025-11-26 16:00:23,152 INFO: [ResampleCache] .info 파일 저장 완료: E:\pavia_university\PaviaU.mat.resample.info (classes: 0개)
+2025-11-26 16:00:23,153 INFO: [ResampleCache] resampling 결과를 캐시에 저장했습니다.
+2025-11-26 16:00:23,154 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 16:00:23,187 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 16:00:23,189 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 16:00:23,231 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 16:00:23,233 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-11-26 16:00:23,238 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-26 16:00:23,238 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-11-26 16:00:23,244 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-26 16:00:23,244 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-26 16:00:23,288 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-11-26 16:00:23,289 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-11-26 16:00:23,314 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-11-26 16:00:23,320 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-11-26 16:00:23,474 INFO: [RegionGrowing] HSI data set: (610, 340, 103)
+2025-11-26 16:00:23,475 INFO: [RegionGrowing] Service initialized with HSI data
+2025-11-26 16:08:29,780 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 16:08:29,802 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 16:08:29,803 INFO: icon.rcc not found (skip)
+2025-11-26 16:08:36,349 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 18
+2025-11-26 16:08:36,396 INFO: [ResampleCache] cached result loaded
+2025-11-26 16:08:36,396 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-11-26 16:08:36,396 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 16:08:36,403 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 16:08:36,403 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 16:08:36,411 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 16:08:36,412 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-11-26 16:08:36,413 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-26 16:08:36,413 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-11-26 16:08:36,414 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-26 16:08:36,415 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-26 16:08:36,424 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-11-26 16:08:36,424 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-11-26 16:08:36,431 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-11-26 16:08:36,433 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-11-26 16:13:44,514 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 16:13:44,537 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 16:13:44,538 INFO: icon.rcc not found (skip)
+2025-11-26 16:13:51,334 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 18
+2025-11-26 16:13:51,347 INFO: [ResampleCache] cached result loaded
+2025-11-26 16:13:51,347 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-11-26 16:13:51,348 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 16:13:51,354 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 16:13:51,355 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 16:13:51,363 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 16:13:51,364 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-11-26 16:13:51,365 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-26 16:13:51,365 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-11-26 16:13:51,366 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-26 16:13:51,366 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-26 16:13:51,376 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-11-26 16:13:51,376 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-11-26 16:13:51,383 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-11-26 16:13:51,385 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-11-26 16:15:12,399 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 16:15:12,420 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 16:15:12,420 INFO: icon.rcc not found (skip)
+2025-11-26 16:15:25,672 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 18
+2025-11-26 16:15:25,686 INFO: [ResampleCache] cached result loaded
+2025-11-26 16:15:25,687 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-11-26 16:15:25,687 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 16:15:25,694 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 16:15:25,695 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 16:15:25,705 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 16:15:25,706 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-11-26 16:15:25,707 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-26 16:15:25,707 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-11-26 16:15:25,708 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-26 16:15:25,709 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-26 16:15:25,720 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-11-26 16:15:25,720 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-11-26 16:15:25,726 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-11-26 16:15:25,728 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-11-26 16:18:42,939 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 16:18:42,957 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 16:18:42,957 INFO: icon.rcc not found (skip)
+2025-11-26 16:18:51,184 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 18
+2025-11-26 16:18:51,198 INFO: [ResampleCache] cached result loaded
+2025-11-26 16:18:51,198 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-11-26 16:18:51,199 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 16:18:51,206 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 16:18:51,206 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 16:18:51,217 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 16:18:51,218 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-11-26 16:18:51,219 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-26 16:18:51,220 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-11-26 16:18:51,221 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-26 16:18:51,221 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-26 16:18:51,232 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-11-26 16:18:51,232 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-11-26 16:18:51,240 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-11-26 16:18:51,241 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-11-26 16:19:19,515 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 16:19:19,535 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 16:19:19,536 INFO: icon.rcc not found (skip)
+2025-11-26 16:19:36,973 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 18
+2025-11-26 16:19:36,988 INFO: [ResampleCache] cached result loaded
+2025-11-26 16:19:36,988 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-11-26 16:19:36,988 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 16:19:36,994 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 16:19:36,995 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 16:19:37,005 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 16:19:37,006 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-11-26 16:19:37,007 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-26 16:19:37,008 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-11-26 16:19:37,009 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-26 16:19:37,009 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-26 16:19:37,019 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-11-26 16:19:37,019 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-11-26 16:19:37,027 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-11-26 16:19:37,028 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-11-26 16:19:56,735 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 16:19:56,755 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 16:19:56,755 INFO: icon.rcc not found (skip)
+2025-11-26 16:20:03,517 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 18
+2025-11-26 16:20:03,532 INFO: [ResampleCache] cached result loaded
+2025-11-26 16:20:03,532 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-11-26 16:20:03,533 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 16:20:03,540 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 16:20:03,541 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 16:20:03,552 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 16:20:03,553 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-11-26 16:20:03,555 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-26 16:20:03,555 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-11-26 16:20:03,557 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-26 16:20:03,557 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-26 16:20:03,568 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-11-26 16:20:03,568 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-11-26 16:20:03,575 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-11-26 16:20:03,576 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-11-26 16:20:24,881 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 16:20:24,902 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 16:20:24,903 INFO: icon.rcc not found (skip)
+2025-11-26 16:20:37,158 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 18
+2025-11-26 16:20:37,178 INFO: [ResampleCache] cached result loaded
+2025-11-26 16:20:37,179 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-11-26 16:20:37,179 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 16:20:37,188 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 16:20:37,189 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 16:20:37,203 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 16:20:37,204 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-11-26 16:20:37,205 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-26 16:20:37,205 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-11-26 16:20:37,206 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-26 16:20:37,207 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-26 16:20:37,221 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-11-26 16:20:37,222 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-11-26 16:20:37,234 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-11-26 16:20:37,236 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-11-26 16:22:05,961 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 16:22:05,986 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 16:22:05,987 INFO: icon.rcc not found (skip)
+2025-11-26 16:22:24,618 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 16:22:24,645 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 16:22:24,645 INFO: icon.rcc not found (skip)
+2025-11-26 16:22:37,805 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 18
+2025-11-26 16:22:37,820 INFO: [ResampleCache] cached result loaded
+2025-11-26 16:22:37,820 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-11-26 16:22:37,821 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 16:22:37,828 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 16:22:37,829 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 16:22:37,839 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 16:22:37,840 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-11-26 16:22:37,841 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-26 16:22:37,842 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-11-26 16:22:37,843 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-26 16:22:37,843 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-26 16:22:37,853 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-11-26 16:22:37,854 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-11-26 16:22:37,862 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-11-26 16:22:37,863 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-11-26 16:24:28,729 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-11-26 16:24:28,747 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-11-26 16:24:28,749 INFO: icon.rcc not found (skip)
+2025-11-26 16:24:43,049 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 18
+2025-11-26 16:24:43,062 INFO: [ResampleCache] cached result loaded
+2025-11-26 16:24:43,062 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-11-26 16:24:43,063 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-11-26 16:24:43,070 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-11-26 16:24:43,071 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-11-26 16:24:43,081 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-11-26 16:24:43,082 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-11-26 16:24:43,083 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-11-26 16:24:43,083 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-11-26 16:24:43,084 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-11-26 16:24:43,085 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-11-26 16:24:43,094 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-11-26 16:24:43,095 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-11-26 16:24:43,102 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-11-26 16:24:43,104 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-11-26 16:26:02,494 INFO: [UserLabeling] 초기 클래스 로드(server): 2484개
+2025-12-01 09:29:27,186 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 09:29:27,247 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 09:29:27,248 INFO: icon.rcc not found (skip)
+2025-12-01 09:29:37,561 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 18
+2025-12-01 09:29:37,611 INFO: [ResampleCache] cached result loaded
+2025-12-01 09:29:37,611 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-12-01 09:29:37,611 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-01 09:29:37,618 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-01 09:29:37,619 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-01 09:29:37,649 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-01 09:29:37,650 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-12-01 09:29:37,651 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-12-01 09:29:37,651 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-12-01 09:29:37,654 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-12-01 09:29:37,654 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-01 09:29:37,662 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-12-01 09:29:37,668 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-12-01 09:29:37,682 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-12-01 09:29:37,686 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-12-01 13:40:00,882 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 13:40:00,923 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 13:40:00,924 INFO: icon.rcc not found (skip)
+2025-12-01 13:40:11,203 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 18
+2025-12-01 13:40:11,244 INFO: [ResampleCache] cached result loaded
+2025-12-01 13:40:11,245 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-12-01 13:40:11,245 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-01 13:40:11,255 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-01 13:40:11,256 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-01 13:40:11,270 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-01 13:40:11,270 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-12-01 13:40:11,272 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-12-01 13:40:11,272 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-12-01 13:40:11,273 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-12-01 13:40:11,274 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-01 13:40:11,287 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-12-01 13:40:11,287 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-12-01 13:40:11,298 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-12-01 13:40:11,300 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-12-01 13:40:19,209 INFO: [Unmixing] Requested with params: endmember_count=5, threshold=0.8
+2025-12-01 13:45:22,874 INFO: [Unmixing] Requested with params: endmember_count=5, threshold=0.7
+2025-12-01 14:31:17,108 INFO: [Unmixing] Requested with params: endmember_count=3, threshold=0.8
+2025-12-01 15:05:22,852 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 15:05:22,872 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 15:05:22,873 INFO: icon.rcc not found (skip)
+2025-12-01 15:05:45,044 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\botswana\Botswana.mat -> 16
+2025-12-01 15:05:45,076 INFO: [ResampleCache] cached result loaded
+2025-12-01 15:05:45,076 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-12-01 15:05:45,077 INFO: [rebuild] label_raw input: 21 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-12-01 15:05:45,077 INFO: [rebuild] label_cr input: 21 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-12-01 15:05:45,077 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-12-01 15:05:45,083 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-12-01 15:05:45,084 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-12-01 15:05:45,089 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-12-01 15:05:45,090 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-12-01 15:05:45,091 INFO: [_norm_entries] label_raw: output 21 classes, 288 total samples
+2025-12-01 15:05:45,091 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-12-01 15:05:45,092 INFO: [_norm_entries] label_cr: output 21 classes, 288 total samples
+2025-12-01 15:05:45,092 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-01 15:05:45,101 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-12-01 15:05:45,102 INFO: [rebuild] label_raw=21 classes / 288 samples, label_cr=21 classes / 288 samples, lib=1831 classes / 4196 samples
+2025-12-01 15:05:45,110 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-12-01 15:05:45,112 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-12-01 15:08:17,116 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 15:08:17,138 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 15:08:17,139 INFO: icon.rcc not found (skip)
+2025-12-01 15:08:27,328 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\botswana\Botswana.mat -> 16
+2025-12-01 15:08:27,340 INFO: [ResampleCache] cached result loaded
+2025-12-01 15:08:27,341 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-12-01 15:08:27,341 INFO: [rebuild] label_raw input: 21 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-12-01 15:08:27,341 INFO: [rebuild] label_cr input: 21 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-12-01 15:08:27,342 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-12-01 15:08:27,347 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-12-01 15:08:27,347 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-12-01 15:08:27,353 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-12-01 15:08:27,354 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-12-01 15:08:27,354 INFO: [_norm_entries] label_raw: output 21 classes, 288 total samples
+2025-12-01 15:08:27,354 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-12-01 15:08:27,355 INFO: [_norm_entries] label_cr: output 21 classes, 288 total samples
+2025-12-01 15:08:27,355 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-01 15:08:27,364 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-12-01 15:08:27,365 INFO: [rebuild] label_raw=21 classes / 288 samples, label_cr=21 classes / 288 samples, lib=1831 classes / 4196 samples
+2025-12-01 15:08:27,372 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-12-01 15:08:27,374 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-12-01 15:08:45,737 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 15:08:45,756 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 15:08:45,757 INFO: icon.rcc not found (skip)
+2025-12-01 15:09:26,260 INFO: [ResampleCache] cached result loaded
+2025-12-01 15:09:26,261 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-12-01 15:09:26,261 INFO: [Resampling] personal 사용자: 캐시 파일에서 데이터 로드 (API resampling 없음)
+2025-12-01 15:09:26,261 INFO: [Resampling] personal user: loaded from cache (no API resampling)
+2025-12-01 15:09:26,261 INFO: [ResampleCache] personal 사용자: 기존 캐시 파일에서 데이터 로드 완료
+2025-12-01 15:09:26,262 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-01 15:09:26,268 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-01 15:09:26,268 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-01 15:09:26,276 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-01 15:09:26,277 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-12-01 15:09:26,278 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-12-01 15:09:26,278 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-12-01 15:09:26,279 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-12-01 15:09:26,279 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-01 15:09:26,287 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-12-01 15:09:26,288 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-12-01 15:09:26,294 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-12-01 15:09:26,295 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-12-01 15:09:26,353 INFO: [RegionGrowing] HSI data set: (610, 340, 103)
+2025-12-01 15:09:26,354 INFO: [RegionGrowing] Service initialized with HSI data
+2025-12-01 15:09:35,146 INFO: [PixelLabeling] personal: .info 파일에서 0개 클래스 로드 완료
+2025-12-01 15:14:45,829 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 15:14:45,852 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 15:14:45,853 INFO: icon.rcc not found (skip)
+2025-12-01 15:15:18,179 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3072, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 405, in image_check_and_save
+    return data[0]['img_cd']
+KeyError: 0
+2025-12-01 15:15:18,197 INFO: [ResampleCache] cached result loaded
+2025-12-01 15:15:18,197 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-12-01 15:15:18,197 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-01 15:15:18,204 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-01 15:15:18,205 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-01 15:15:18,212 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-01 15:15:18,213 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-12-01 15:15:18,214 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-12-01 15:15:18,214 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-12-01 15:15:18,215 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-12-01 15:15:18,215 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-01 15:15:18,224 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-12-01 15:15:18,224 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-12-01 15:15:18,231 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-12-01 15:15:18,233 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-12-01 15:15:18,293 INFO: [RegionGrowing] HSI data set: (610, 340, 103)
+2025-12-01 15:15:18,294 INFO: [RegionGrowing] Service initialized with HSI data
+2025-12-01 16:24:48,069 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 16:24:48,089 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 16:24:48,090 INFO: icon.rcc not found (skip)
+2025-12-01 16:24:49,195 ERROR: MainWindow import failed: name 'REMOTE_TMP_DIR' is not defined
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\app.py", line 102, in main
+    from views.main_window import MainWindow  # type: ignore
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 14, in <module>
+    from views.dialogs.image_load import ImageLoadDialog
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\dialogs\image_load.py", line 13, in <module>
+    from data.db import get_camera_list
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 13, in <module>
+    from data.sftp_code import *
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\sftp_code.py", line 31, in <module>
+    remote_tmp_dir: str = REMOTE_TMP_DIR,
+NameError: name 'REMOTE_TMP_DIR' is not defined
+2025-12-01 16:25:30,151 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 16:25:30,171 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 16:25:30,172 INFO: icon.rcc not found (skip)
+2025-12-01 16:25:31,269 ERROR: MainWindow import failed: name 'REMOTE_TMP_DIR' is not defined
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\app.py", line 102, in main
+    from views.main_window import MainWindow  # type: ignore
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 14, in <module>
+    from views.dialogs.image_load import ImageLoadDialog
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\dialogs\image_load.py", line 13, in <module>
+    from data.db import get_camera_list
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 13, in <module>
+    from data.sftp_code import *
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\sftp_code.py", line 31, in <module>
+    remote_tmp_dir: str = REMOTE_TMP_DIR,
+NameError: name 'REMOTE_TMP_DIR' is not defined
+2025-12-01 16:25:47,026 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 16:25:47,047 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 16:25:47,048 INFO: icon.rcc not found (skip)
+2025-12-01 16:25:48,071 ERROR: MainWindow import failed: name 'REMOTE_TMP_DIR' is not defined
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\app.py", line 102, in main
+    from views.main_window import MainWindow  # type: ignore
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 14, in <module>
+    from views.dialogs.image_load import ImageLoadDialog
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\dialogs\image_load.py", line 13, in <module>
+    from data.db import get_camera_list
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 13, in <module>
+    from data.sftp_code import *
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\sftp_code.py", line 31, in <module>
+    remote_tmp_dir: str = REMOTE_TMP_DIR,
+NameError: name 'REMOTE_TMP_DIR' is not defined
+2025-12-01 16:25:56,828 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 16:25:56,855 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 16:25:56,855 INFO: icon.rcc not found (skip)
+2025-12-01 16:25:58,175 ERROR: MainWindow import failed: No module named 'data.sftp_code'
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\app.py", line 102, in main
+    from views.main_window import MainWindow  # type: ignore
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 14, in <module>
+    from views.dialogs.image_load import ImageLoadDialog
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\dialogs\image_load.py", line 13, in <module>
+    from data.db import get_camera_list
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 13, in <module>
+    from data.sftp_code import *
+ModuleNotFoundError: No module named 'data.sftp_code'
+2025-12-01 16:26:08,099 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 16:26:08,127 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 16:26:08,128 INFO: icon.rcc not found (skip)
+2025-12-01 16:26:17,711 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 17
+2025-12-01 16:26:17,731 INFO: [ResampleCache] cached result loaded
+2025-12-01 16:26:17,731 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-12-01 16:26:17,732 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-01 16:26:17,740 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-01 16:26:17,741 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-01 16:26:17,753 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-01 16:26:17,753 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-12-01 16:26:17,755 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-12-01 16:26:17,755 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-12-01 16:26:17,756 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-12-01 16:26:17,757 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-01 16:26:17,768 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-12-01 16:26:17,769 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-12-01 16:26:17,830 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-12-01 16:26:17,831 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-12-01 16:26:41,006 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 16:26:41,027 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 16:26:41,028 INFO: icon.rcc not found (skip)
+2025-12-01 16:26:48,689 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 17
+2025-12-01 16:26:48,702 INFO: [ResampleCache] cached result loaded
+2025-12-01 16:26:48,703 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-12-01 16:26:48,703 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-01 16:26:48,710 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-01 16:26:48,710 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-01 16:26:48,718 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-01 16:26:48,719 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-12-01 16:26:48,720 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-12-01 16:26:48,720 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-12-01 16:26:48,721 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-12-01 16:26:48,721 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-01 16:26:48,731 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-12-01 16:26:48,731 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-12-01 16:26:48,787 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-12-01 16:26:48,788 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-12-01 16:27:08,862 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 16:27:08,880 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 16:27:08,880 INFO: icon.rcc not found (skip)
+2025-12-01 16:27:16,838 INFO: [ResampleCache] 캐시 파일이 없습니다. primary=E:\pavia_university\PaviaU.mat
+2025-12-01 16:27:16,839 INFO: [Resampling] personal 사용자: 캐시 파일에서 데이터 로드 (API resampling 없음)
+2025-12-01 16:27:16,839 INFO: [Resampling] personal user: loaded from cache (no API resampling)
+2025-12-01 16:27:16,839 INFO: [ResampleCache] 저장 시도: npz_path=E:\pavia_university\PaviaU.mat.resample.npz, label_raw=0 classes, label_cr=0 classes
+2025-12-01 16:27:16,852 INFO: [ResampleCache] .npz 파일 저장 완료: E:\pavia_university\PaviaU.mat.resample.npz (크기: 2009 bytes)
+2025-12-01 16:27:16,853 INFO: [ResampleCache] 기존 classes 정보 보존: 0개 클래스
+2025-12-01 16:27:16,854 INFO: [ResampleCache] .info 파일 저장 완료: E:\pavia_university\PaviaU.mat.resample.info (classes: 0개)
+2025-12-01 16:27:16,854 INFO: [ResampleCache] 빈 캐시 파일 생성 완료 (personal user)
+2025-12-01 16:27:16,854 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-01 16:27:16,855 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-01 16:27:16,855 INFO: [_norm_entries] splib_raw: input dict with 0 keys
+2025-12-01 16:27:16,855 WARNING: [_norm_entries] splib_raw: output is empty!
+2025-12-01 16:27:16,855 INFO: [_norm_entries] splib_cr: input dict with 0 keys
+2025-12-01 16:27:16,856 WARNING: [_norm_entries] splib_cr: output is empty!
+2025-12-01 16:27:16,856 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-01 16:27:16,856 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-01 16:27:16,856 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-01 16:27:16,857 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-01 16:27:16,857 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-01 16:27:16,857 INFO: [rebuild] classes: splib_raw=0, splib_cr=0, label_raw=0, label_cr=0, lib=0
+2025-12-01 16:27:16,857 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=0 classes / 0 samples
+2025-12-01 16:27:16,857 INFO: [Rebuild] lib=0 classes, labeling_lib=0 classes
+2025-12-01 16:27:16,858 INFO: Resampling 완료 — splib_raw:0, splib_cr:0, label_raw:0, label_cr:0
+2025-12-01 16:27:45,511 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 16:27:45,544 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 16:27:45,546 INFO: icon.rcc not found (skip)
+2025-12-01 16:28:08,401 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 17
+2025-12-01 16:28:08,421 INFO: [ResampleCache] 캐시 파일이 없습니다. primary=E:\pavia_university\PaviaU.mat
+2025-12-01 16:29:15,769 INFO: [Resampling] API+compute 67.35s
+2025-12-01 16:29:15,770 INFO: [ResampleCache] 저장 시도: npz_path=E:\pavia_university\PaviaU.mat.resample.npz, label_raw=0 classes, label_cr=0 classes
+2025-12-01 16:29:15,800 INFO: [ResampleCache] .npz 파일 저장 완료: E:\pavia_university\PaviaU.mat.resample.npz (크기: 3778267 bytes)
+2025-12-01 16:29:15,802 INFO: [ResampleCache] 기존 classes 정보 보존: 0개 클래스
+2025-12-01 16:29:15,803 INFO: [ResampleCache] .info 파일 저장 완료: E:\pavia_university\PaviaU.mat.resample.info (classes: 0개)
+2025-12-01 16:29:15,803 INFO: [ResampleCache] resampling 결과를 캐시에 저장했습니다.
+2025-12-01 16:29:15,803 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-01 16:29:15,816 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-01 16:29:15,817 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-01 16:29:15,831 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-01 16:29:15,832 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-12-01 16:29:15,836 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-12-01 16:29:15,836 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-12-01 16:29:15,838 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-12-01 16:29:15,839 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-01 16:29:15,852 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-12-01 16:29:15,852 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-12-01 16:29:15,864 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-12-01 16:29:15,866 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-12-01 16:29:15,962 INFO: [RegionGrowing] HSI data set: (610, 340, 103)
+2025-12-01 16:29:15,962 INFO: [RegionGrowing] Service initialized with HSI data
+2025-12-01 16:36:02,649 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 16:36:02,671 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 16:36:02,671 INFO: icon.rcc not found (skip)
+2025-12-01 16:36:57,179 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 16:36:57,196 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 16:36:57,197 INFO: icon.rcc not found (skip)
+2025-12-01 16:37:05,694 INFO: Connected (version 2.0, client OpenSSH_9.6p1)
+2025-12-01 16:37:05,835 INFO: Authentication (password) successful!
+2025-12-01 16:37:05,992 INFO: [chan 0] Opened sftp connection (server version 3)
+2025-12-01 16:37:05,999 INFO: [chan 0] sftp session closed.
+2025-12-01 16:37:06,000 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 357, in _ensure_remote_dir
+    sftp.listdir(current)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 218, in listdir
+    return [f.filename for f in self.listdir_attr(path)]
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 239, in listdir_attr
+    t, msg = self._request(CMD_OPENDIR, path)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 857, in _request
+    return self._read_response(num)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 909, in _read_response
+    self._convert_status(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 938, in _convert_status
+    raise IOError(errno.ENOENT, text)
+FileNotFoundError: [Errno 2] No such file
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3072, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 500, in image_check_and_save
+    remote_mat_path = sftp_upload_then_move(str(local_mat_path))
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 395, in sftp_upload_then_move
+    _ensure_remote_dir(sftp, remote_tmp_dir)
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 359, in _ensure_remote_dir
+    sftp.mkdir(current)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 460, in mkdir
+    self._request(CMD_MKDIR, path, attr)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 857, in _request
+    return self._read_response(num)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 909, in _read_response
+    self._convert_status(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 940, in _convert_status
+    raise IOError(errno.EACCES, text)
+PermissionError: [Errno 13] Permission denied
+2025-12-01 16:37:06,051 INFO: [ResampleCache] cached result loaded
+2025-12-01 16:37:06,051 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-12-01 16:37:06,052 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-01 16:37:06,058 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-01 16:37:06,059 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-01 16:37:06,066 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-01 16:37:06,067 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-12-01 16:37:06,068 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-12-01 16:37:06,068 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-12-01 16:37:06,069 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-12-01 16:37:06,069 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-01 16:37:06,079 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-12-01 16:37:06,080 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-12-01 16:37:06,136 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-12-01 16:37:06,137 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-12-01 17:14:35,826 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 17:14:35,853 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 17:14:35,854 INFO: icon.rcc not found (skip)
+2025-12-01 17:14:45,906 INFO: Connected (version 2.0, client OpenSSH_9.6p1)
+2025-12-01 17:14:46,045 INFO: Authentication (password) successful!
+2025-12-01 17:14:46,197 INFO: [chan 0] Opened sftp connection (server version 3)
+2025-12-01 17:14:46,204 INFO: [chan 0] sftp session closed.
+2025-12-01 17:14:46,205 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 357, in _ensure_remote_dir
+    sftp.listdir(current)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 218, in listdir
+    return [f.filename for f in self.listdir_attr(path)]
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 239, in listdir_attr
+    t, msg = self._request(CMD_OPENDIR, path)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 857, in _request
+    return self._read_response(num)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 909, in _read_response
+    self._convert_status(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 938, in _convert_status
+    raise IOError(errno.ENOENT, text)
+FileNotFoundError: [Errno 2] No such file
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3072, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 500, in image_check_and_save
+    remote_mat_path = sftp_upload_then_move(str(local_mat_path))
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 395, in sftp_upload_then_move
+    _ensure_remote_dir(sftp, remote_tmp_dir)
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 359, in _ensure_remote_dir
+    sftp.mkdir(current)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 460, in mkdir
+    self._request(CMD_MKDIR, path, attr)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 857, in _request
+    return self._read_response(num)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 909, in _read_response
+    self._convert_status(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 940, in _convert_status
+    raise IOError(errno.EACCES, text)
+PermissionError: [Errno 13] Permission denied
+2025-12-01 17:14:46,228 INFO: [ResampleCache] cached result loaded
+2025-12-01 17:14:46,229 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-12-01 17:14:46,229 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-01 17:14:46,237 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-01 17:14:46,237 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-01 17:14:46,247 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-01 17:14:46,247 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-12-01 17:14:46,248 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-12-01 17:14:46,249 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-12-01 17:14:46,250 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-12-01 17:14:46,250 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-01 17:14:46,261 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-12-01 17:14:46,262 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-12-01 17:14:46,316 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-12-01 17:14:46,317 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-12-01 17:16:32,812 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 17:16:32,835 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 17:16:32,835 INFO: icon.rcc not found (skip)
+2025-12-01 17:16:41,049 INFO: Connected (version 2.0, client OpenSSH_9.6p1)
+2025-12-01 17:16:41,190 INFO: Authentication (password) successful!
+2025-12-01 17:16:41,341 INFO: [chan 0] Opened sftp connection (server version 3)
+2025-12-01 17:16:41,350 INFO: [chan 0] sftp session closed.
+2025-12-01 17:16:41,351 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 357, in _ensure_remote_dir
+    sftp.listdir(current)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 218, in listdir
+    return [f.filename for f in self.listdir_attr(path)]
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 239, in listdir_attr
+    t, msg = self._request(CMD_OPENDIR, path)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 857, in _request
+    return self._read_response(num)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 909, in _read_response
+    self._convert_status(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 938, in _convert_status
+    raise IOError(errno.ENOENT, text)
+FileNotFoundError: [Errno 2] No such file
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3072, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 500, in image_check_and_save
+    remote_mat_path = sftp_upload_then_move(str(local_mat_path))
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 395, in sftp_upload_then_move
+    _ensure_remote_dir(sftp, remote_tmp_dir)
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 359, in _ensure_remote_dir
+    sftp.mkdir(current)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 460, in mkdir
+    self._request(CMD_MKDIR, path, attr)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 857, in _request
+    return self._read_response(num)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 909, in _read_response
+    self._convert_status(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\paramiko\sftp_client.py", line 940, in _convert_status
+    raise IOError(errno.EACCES, text)
+PermissionError: [Errno 13] Permission denied
+2025-12-01 17:16:41,373 INFO: [ResampleCache] cached result loaded
+2025-12-01 17:16:41,374 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-12-01 17:16:41,374 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-01 17:16:41,381 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-01 17:16:41,382 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-01 17:16:41,391 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-01 17:16:41,391 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-12-01 17:16:41,392 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-12-01 17:16:41,393 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-12-01 17:16:41,393 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-12-01 17:16:41,394 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-01 17:16:41,404 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-12-01 17:16:41,404 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-12-01 17:16:41,456 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-12-01 17:16:41,458 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-12-01 17:21:23,716 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 17:21:23,738 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 17:21:23,739 INFO: icon.rcc not found (skip)
+2025-12-01 17:21:33,012 INFO: Connected (version 2.0, client OpenSSH_9.6p1)
+2025-12-01 17:21:33,143 INFO: Authentication (password) successful!
+2025-12-01 17:21:33,302 INFO: [chan 0] Opened sftp connection (server version 3)
+2025-12-01 17:21:36,936 INFO: [chan 0] sftp session closed.
+2025-12-01 17:21:36,952 INFO: Connected (version 2.0, client OpenSSH_9.6p1)
+2025-12-01 17:21:37,094 INFO: Authentication (password) successful!
+2025-12-01 17:21:37,251 INFO: [chan 0] Opened sftp connection (server version 3)
+2025-12-01 17:21:37,406 INFO: [chan 0] sftp session closed.
+2025-12-01 17:21:37,435 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3072, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 547, in image_check_and_save
+    img_cd = result.get("img_cd")
+AttributeError: 'list' object has no attribute 'get'
+2025-12-01 17:21:37,456 INFO: [ResampleCache] cached result loaded
+2025-12-01 17:21:37,457 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-12-01 17:21:37,457 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-01 17:21:37,471 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-01 17:21:37,472 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-01 17:21:37,483 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-01 17:21:37,484 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-12-01 17:21:37,485 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-12-01 17:21:37,486 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-12-01 17:21:37,488 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-12-01 17:21:37,489 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-01 17:21:37,568 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-12-01 17:21:37,568 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-12-01 17:21:37,580 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-12-01 17:21:37,581 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-12-01 17:24:51,467 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-01 17:24:51,486 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-01 17:24:51,487 INFO: icon.rcc not found (skip)
+2025-12-01 17:24:57,836 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-01 17:24:57,848 INFO: [ResampleCache] cached result loaded
+2025-12-01 17:24:57,849 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=341, label_cr=341
+2025-12-01 17:24:57,849 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-01 17:24:57,856 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-01 17:24:57,857 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-01 17:24:57,868 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-01 17:24:57,869 INFO: [_norm_entries] label_raw: input list/tuple with 341 items
+2025-12-01 17:24:57,870 INFO: [_norm_entries] label_raw: output 21 classes, 341 total samples
+2025-12-01 17:24:57,871 INFO: [_norm_entries] label_cr: input list/tuple with 341 items
+2025-12-01 17:24:57,872 INFO: [_norm_entries] label_cr: output 21 classes, 341 total samples
+2025-12-01 17:24:57,873 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-01 17:24:57,883 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=21, label_cr=21, lib=1830
+2025-12-01 17:24:57,884 INFO: [rebuild] label_raw=21 classes / 341 samples, label_cr=21 classes / 341 samples, lib=1830 classes / 4300 samples
+2025-12-01 17:24:57,941 INFO: [Rebuild] lib=1830 classes, labeling_lib=21 classes
+2025-12-01 17:24:57,943 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:341, label_cr:341
+2025-12-02 09:26:53,639 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 09:26:53,686 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 09:26:53,688 INFO: icon.rcc not found (skip)
+2025-12-02 09:27:00,882 INFO: Note: NumExpr detected 16 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2025-12-02 09:27:00,882 INFO: NumExpr defaulting to 8 threads.
+2025-12-02 09:27:11,571 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 09:27:11,579 ERROR: [ResampleCache] load failed — ignore and recompute
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\services\resampling_cache.py", line 169, in try_load_cache
+    splib_raw = _to_native(z["splib_raw"])
+                           ~^^^^^^^^^^^^^
+  File "C:\Users\pde15\anaconda3\Lib\site-packages\numpy\lib\npyio.py", line 253, in __getitem__
+    return format.read_array(bytes,
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pde15\anaconda3\Lib\site-packages\numpy\lib\format.py", line 793, in read_array
+    array = pickle.load(fp, **pickle_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'numpy._core.multiarray'
+2025-12-02 09:27:11,583 INFO: [ResampleCache] 캐시 파일이 없습니다. primary=E:\pavia_university\PaviaU.mat
+2025-12-02 09:28:21,376 INFO: [Resampling] API+compute 69.77s
+2025-12-02 09:28:21,377 INFO: [ResampleCache] 저장 시도: npz_path=E:\pavia_university\PaviaU.mat.resample.npz, label_raw=0 classes, label_cr=0 classes
+2025-12-02 09:28:21,398 INFO: [ResampleCache] .npz 파일 저장 완료: E:\pavia_university\PaviaU.mat.resample.npz (크기: 3276546 bytes)
+2025-12-02 09:28:21,398 INFO: [ResampleCache] 기존 classes 정보 보존: 0개 클래스
+2025-12-02 09:28:21,399 INFO: [ResampleCache] .info 파일 저장 완료: E:\pavia_university\PaviaU.mat.resample.info (classes: 0개)
+2025-12-02 09:28:21,400 INFO: [ResampleCache] resampling 결과를 캐시에 저장했습니다.
+2025-12-02 09:28:21,400 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 09:28:21,400 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 09:28:21,401 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 09:28:21,413 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 09:28:21,414 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 09:28:21,430 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 09:28:21,430 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 09:28:21,431 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 09:28:21,431 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 09:28:21,431 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 09:28:21,431 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 09:28:21,444 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 09:28:21,444 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 09:28:21,456 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 09:28:21,458 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 09:28:27,742 ERROR: [Search Labeling Database] dialog run failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 1981, in on_classmap_labeling_dialog_run
+    dlg = SearchLabelingDatabaseDialog(parent=self, ui_dir=self.app_dir / "ui")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\dialogs\search_labeling_database.py", line 272, in __init__
+    self._init_combobox()
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\dialogs\search_labeling_database.py", line 508, in _init_combobox
+    class_ids.update(self._main_window.splib_raw.keys())
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'keys'
+2025-12-02 09:29:16,813 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 09:29:16,830 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 09:29:16,831 INFO: icon.rcc not found (skip)
+2025-12-02 09:29:19,303 INFO: Note: NumExpr detected 16 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2025-12-02 09:29:19,304 INFO: NumExpr defaulting to 8 threads.
+2025-12-02 09:29:25,949 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 09:29:25,991 INFO: [ResampleCache] cached result loaded
+2025-12-02 09:29:25,992 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 09:29:25,992 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 09:29:25,992 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 09:29:25,993 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 09:29:26,001 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 09:29:26,002 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 09:29:26,013 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 09:29:26,014 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 09:29:26,014 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 09:29:26,014 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 09:29:26,015 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 09:29:26,015 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 09:29:26,025 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 09:29:26,026 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 09:29:26,083 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 09:29:26,084 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 09:29:29,781 ERROR: [Search Labeling Database] dialog run failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 1981, in on_classmap_labeling_dialog_run
+    dlg = SearchLabelingDatabaseDialog(parent=self, ui_dir=self.app_dir / "ui")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\dialogs\search_labeling_database.py", line 272, in __init__
+    self._init_combobox()
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\dialogs\search_labeling_database.py", line 508, in _init_combobox
+    class_ids.update(self._main_window.splib_raw.keys())
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'keys'
+2025-12-02 09:32:27,748 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 09:32:27,766 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 09:32:27,767 INFO: icon.rcc not found (skip)
+2025-12-02 09:32:31,092 INFO: Note: NumExpr detected 16 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2025-12-02 09:32:31,092 INFO: NumExpr defaulting to 8 threads.
+2025-12-02 09:32:35,681 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 09:32:35,713 INFO: [ResampleCache] cached result loaded
+2025-12-02 09:32:35,713 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 09:32:35,714 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 09:32:35,714 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 09:32:35,714 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 09:32:35,723 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 09:32:35,724 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 09:32:35,735 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 09:32:35,735 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 09:32:35,736 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 09:32:35,736 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 09:32:35,736 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 09:32:35,736 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 09:32:35,746 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 09:32:35,746 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 09:32:35,808 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 09:32:35,810 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 09:35:43,259 INFO: [Unmixing] Requested with params: endmember_count=3, threshold=0.8
+2025-12-02 09:38:35,654 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 09:38:35,708 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 09:38:35,709 INFO: icon.rcc not found (skip)
+2025-12-02 09:38:39,484 INFO: Note: NumExpr detected 16 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2025-12-02 09:38:39,484 INFO: NumExpr defaulting to 8 threads.
+2025-12-02 09:39:12,091 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 09:39:12,142 INFO: [ResampleCache] cached result loaded
+2025-12-02 09:39:12,143 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 09:39:12,143 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 09:39:12,144 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 09:39:12,144 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 09:39:12,152 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 09:39:12,153 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 09:39:12,181 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 09:39:12,182 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 09:39:12,182 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 09:39:12,182 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 09:39:12,183 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 09:39:12,183 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 09:39:12,192 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 09:39:12,193 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 09:39:12,251 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 09:39:12,252 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 09:40:38,623 INFO: [Unmixing] Requested with params: endmember_count=3, threshold=0.8
+2025-12-02 09:47:35,600 INFO: [UserLabeling] 초기 클래스 로드(server): 2479개
+2025-12-02 09:47:51,501 INFO: [UserLabeling] 초기 클래스 로드(server): 2479개
+2025-12-02 09:47:57,637 INFO: [UserLabeling] server 사용자: API 호출 시도
+2025-12-02 10:06:15,188 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 10:06:15,209 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 10:06:15,210 INFO: icon.rcc not found (skip)
+2025-12-02 10:06:18,786 INFO: Note: NumExpr detected 16 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+2025-12-02 10:06:18,786 INFO: NumExpr defaulting to 8 threads.
+2025-12-02 10:06:23,952 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 10:06:24,000 INFO: [ResampleCache] cached result loaded
+2025-12-02 10:06:24,001 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 10:06:24,001 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 10:06:24,001 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 10:06:24,001 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 10:06:24,009 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 10:06:24,009 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 10:06:24,021 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 10:06:24,022 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 10:06:24,022 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 10:06:24,022 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 10:06:24,022 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 10:06:24,023 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 10:06:24,082 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 10:06:24,082 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 10:06:24,089 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 10:06:24,091 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 14:15:08,364 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 14:15:08,402 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 14:15:08,403 INFO: icon.rcc not found (skip)
+2025-12-02 14:15:10,577 ERROR: MainWindow import failed: API 처리 실패(code=None): None
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\app.py", line 102, in main
+    from views.main_window import MainWindow  # type: ignore
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 14, in <module>
+    from views.dialogs.image_load import ImageLoadDialog
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\dialogs\image_load.py", line 13, in <module>
+    from data.db import get_camera_list
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 661, in <module>
+    call_unmixing(img_cd = 16,base_url = unmixing_inference_url, st_x = 400, st_y = 400, ed_x = 500, ed_y = 500, num_endmembers = 5)
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 653, in call_unmixing
+    raise RuntimeError(f"API 처리 실패(code={data.get('code')}): {data.get('message')}")
+RuntimeError: API 처리 실패(code=None): None
+2025-12-02 14:15:28,453 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 14:15:28,480 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 14:15:28,481 INFO: icon.rcc not found (skip)
+2025-12-02 14:15:59,766 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 14:15:59,824 INFO: [ResampleCache] cached result loaded
+2025-12-02 14:15:59,824 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 14:15:59,825 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 14:15:59,825 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 14:15:59,825 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 14:15:59,832 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 14:15:59,833 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 14:15:59,842 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 14:15:59,843 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 14:15:59,843 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 14:15:59,843 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 14:15:59,844 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 14:15:59,844 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 14:15:59,853 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 14:15:59,853 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 14:15:59,901 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 14:15:59,902 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 14:53:06,214 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 14:53:06,236 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 14:53:06,237 INFO: icon.rcc not found (skip)
+2025-12-02 14:53:29,790 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 14:53:29,818 INFO: [ResampleCache] cached result loaded
+2025-12-02 14:53:29,819 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 14:53:29,819 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 14:53:29,819 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 14:53:29,820 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 14:53:29,826 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 14:53:29,826 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 14:53:29,836 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 14:53:29,836 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 14:53:29,837 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 14:53:29,837 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 14:53:29,837 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 14:53:29,837 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 14:53:29,846 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 14:53:29,846 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 14:53:29,901 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 14:53:29,902 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 14:53:37,475 INFO: [Unmixing] Requested: endmember_count=5, threshold=0.700
+2025-12-02 14:53:59,019 ERROR: [Unmixing] request handling failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 927, in _on_unmixing_requested
+    raise RuntimeError(f"abundance_map shape 예상과 다름: {A.shape}, 이미지=({H},{W})")
+RuntimeError: abundance_map shape 예상과 다름: (339, 340, 5), 이미지=(610,340)
+2025-12-02 14:55:47,821 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 14:55:47,841 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 14:55:47,842 INFO: icon.rcc not found (skip)
+2025-12-02 14:55:55,208 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 14:55:55,276 INFO: [ResampleCache] cached result loaded
+2025-12-02 14:55:55,276 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 14:55:55,278 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 14:55:55,278 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 14:55:55,278 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 14:55:55,303 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 14:55:55,304 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 14:55:55,328 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 14:55:55,329 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 14:55:55,329 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 14:55:55,329 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 14:55:55,330 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 14:55:55,330 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 14:55:55,352 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 14:55:55,353 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 14:55:55,425 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 14:55:55,427 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 14:56:22,265 INFO: [Unmixing] Requested: endmember_count=3, threshold=0.800
+2025-12-02 14:56:39,966 ERROR: [Unmixing] request handling failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 927, in _on_unmixing_requested
+    raise RuntimeError(f"abundance_map shape 예상과 다름: {A.shape}, 이미지=({H},{W})")
+RuntimeError: abundance_map shape 예상과 다름: (339, 340, 3), 이미지=(610,340)
+2025-12-02 15:00:31,717 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 15:00:31,740 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 15:00:31,741 INFO: icon.rcc not found (skip)
+2025-12-02 15:00:41,297 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 15:00:41,324 INFO: [ResampleCache] cached result loaded
+2025-12-02 15:00:41,325 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 15:00:41,325 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 15:00:41,326 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 15:00:41,326 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 15:00:41,333 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 15:00:41,334 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 15:00:41,342 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 15:00:41,343 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 15:00:41,343 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 15:00:41,344 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 15:00:41,344 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 15:00:41,344 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 15:00:41,352 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 15:00:41,353 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 15:00:41,409 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 15:00:41,411 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 15:00:43,454 INFO: [Unmixing] Requested: endmember_count=3, threshold=0.800
+2025-12-02 15:01:13,469 ERROR: [Unmixing] request handling failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 565, in getresponse
+    httplib_response = super().getresponse()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1375, in getresponse
+    response.begin()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 279, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\socket.py", line 717, in readinto
+    return self._sock.recv_into(b)
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='183.98.149.222', port=18000): Read timed out. (read timeout=30)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 630, in call_unmixing
+    resp = requests.post(url, json=payload, headers=headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 713, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='183.98.149.222', port=18000): Read timed out. (read timeout=30)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 905, in _on_unmixing_requested
+    endmembers, abundance_map = call_unmixing(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 632, in call_unmixing
+    raise RuntimeError(f"API 요청 실패: {e}")
+RuntimeError: API 요청 실패: HTTPConnectionPool(host='183.98.149.222', port=18000): Read timed out. (read timeout=30)
+2025-12-02 15:02:52,943 INFO: [Unmixing] Requested: endmember_count=3, threshold=0.800
+2025-12-02 15:03:23,721 ERROR: [Unmixing] request handling failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 927, in _on_unmixing_requested
+    raise RuntimeError(f"abundance_map shape 예상과 다름: {A.shape}, 이미지=({H},{W})")
+RuntimeError: abundance_map shape 예상과 다름: (609, 339, 3), 이미지=(610,340)
+2025-12-02 15:10:06,135 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 15:10:06,159 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 15:10:06,159 INFO: icon.rcc not found (skip)
+2025-12-02 15:10:12,915 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 15:10:12,944 INFO: [ResampleCache] cached result loaded
+2025-12-02 15:10:12,944 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 15:10:12,945 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 15:10:12,945 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 15:10:12,945 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 15:10:12,953 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 15:10:12,954 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 15:10:12,963 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 15:10:12,964 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 15:10:12,964 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 15:10:12,964 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 15:10:12,965 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 15:10:12,965 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 15:10:12,973 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 15:10:12,974 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 15:10:13,030 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 15:10:13,031 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 15:10:15,780 INFO: [Unmixing] Requested: endmember_count=3, threshold=0.800
+2025-12-02 15:10:44,467 INFO: [Unmixing] API done: endmembers.shape=(3, 103), abundance_map.shape=(610, 340, 3)
+2025-12-02 15:10:44,468 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=3, thr=0.800
+2025-12-02 15:11:57,123 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=3, thr=0.700
+2025-12-02 15:12:01,036 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=3, thr=0.600
+2025-12-02 15:12:03,365 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=3, thr=0.500
+2025-12-02 15:12:48,988 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=3, thr=0.900
+2025-12-02 15:12:51,746 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=3, thr=1.000
+2025-12-02 15:13:05,884 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=3, thr=0.800
+2025-12-02 15:13:10,320 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=3, thr=0.900
+2025-12-02 15:19:55,752 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 15:19:55,775 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 15:19:55,777 INFO: icon.rcc not found (skip)
+2025-12-02 15:20:43,471 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 15:20:43,499 INFO: [ResampleCache] cached result loaded
+2025-12-02 15:20:43,500 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 15:20:43,500 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 15:20:43,500 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 15:20:43,500 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 15:20:43,508 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 15:20:43,509 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 15:20:43,518 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 15:20:43,520 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 15:20:43,520 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 15:20:43,521 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 15:20:43,521 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 15:20:43,521 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 15:20:43,529 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 15:20:43,530 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 15:20:43,591 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 15:20:43,592 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 15:20:53,218 INFO: [Unmixing] Requested: endmember_count=5, threshold=0.470
+2025-12-02 15:21:23,250 ERROR: [Unmixing] request handling failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 565, in getresponse
+    httplib_response = super().getresponse()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1375, in getresponse
+    response.begin()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 279, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\socket.py", line 717, in readinto
+    return self._sock.recv_into(b)
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\util.py", line 39, in reraise
+    raise value
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='183.98.149.222', port=18000): Read timed out. (read timeout=30)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 630, in call_unmixing
+    resp = requests.post(url, json=payload, headers=headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 713, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='183.98.149.222', port=18000): Read timed out. (read timeout=30)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 905, in _on_unmixing_requested
+    endmembers, abundance_map = call_unmixing(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 632, in call_unmixing
+    raise RuntimeError(f"API 요청 실패: {e}")
+RuntimeError: API 요청 실패: HTTPConnectionPool(host='183.98.149.222', port=18000): Read timed out. (read timeout=30)
+2025-12-02 15:25:23,390 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 15:25:23,412 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 15:25:23,413 INFO: icon.rcc not found (skip)
+2025-12-02 15:25:32,398 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 15:25:32,426 INFO: [ResampleCache] cached result loaded
+2025-12-02 15:25:32,427 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 15:25:32,427 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 15:25:32,427 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 15:25:32,428 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 15:25:32,435 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 15:25:32,436 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 15:25:32,446 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 15:25:32,446 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 15:25:32,446 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 15:25:32,447 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 15:25:32,447 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 15:25:32,447 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 15:25:32,456 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 15:25:32,457 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 15:25:32,518 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 15:25:32,519 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 15:25:36,810 INFO: [Unmixing] Requested: endmember_count=5, threshold=0.800
+2025-12-02 15:25:36,810 ERROR: [Unmixing] request handling failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 905, in _on_unmixing_requested
+    endmembers, abundance_map = call_unmixing(
+TypeError: call_unmixing() got an unexpected keyword argument 'timeout'
+2025-12-02 15:25:56,510 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 15:25:56,532 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 15:25:56,533 INFO: icon.rcc not found (skip)
+2025-12-02 15:26:08,730 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 15:26:08,757 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 15:26:08,758 INFO: icon.rcc not found (skip)
+2025-12-02 15:26:24,525 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 15:26:24,556 INFO: [ResampleCache] cached result loaded
+2025-12-02 15:26:24,557 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 15:26:24,557 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 15:26:24,557 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 15:26:24,558 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 15:26:24,565 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 15:26:24,566 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 15:26:24,577 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 15:26:24,578 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 15:26:24,578 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 15:26:24,578 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 15:26:24,579 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 15:26:24,579 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 15:26:24,588 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 15:26:24,589 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 15:26:24,646 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 15:26:24,647 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 15:26:30,244 INFO: [Unmixing] Requested: endmember_count=5, threshold=0.800
+2025-12-02 15:27:00,716 INFO: [Unmixing] API done: endmembers.shape=(5, 103), abundance_map.shape=(610, 340, 5)
+2025-12-02 15:27:00,717 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=5, thr=0.800
+2025-12-02 15:37:37,941 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=5, thr=0.700
+2025-12-02 15:39:29,917 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=5, thr=0.700
+2025-12-02 15:55:04,864 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 15:55:04,884 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 15:55:04,885 INFO: icon.rcc not found (skip)
+2025-12-02 15:55:21,503 INFO: Connected (version 2.0, client OpenSSH_9.6p1)
+2025-12-02 15:55:21,656 INFO: Authentication (password) successful!
+2025-12-02 15:55:21,819 INFO: [chan 0] Opened sftp connection (server version 3)
+2025-12-02 15:55:31,223 INFO: [chan 0] sftp session closed.
+2025-12-02 15:55:31,238 INFO: Connected (version 2.0, client OpenSSH_9.6p1)
+2025-12-02 15:55:31,377 INFO: Authentication (password) successful!
+2025-12-02 15:55:31,537 INFO: [chan 0] Opened sftp connection (server version 3)
+2025-12-02 15:55:31,953 INFO: [chan 0] sftp session closed.
+2025-12-02 15:55:31,988 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3190, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 547, in image_check_and_save
+    img_cd = result.get("img_cd")
+AttributeError: 'list' object has no attribute 'get'
+2025-12-02 15:55:32,074 INFO: [ResampleCache] cached result loaded
+2025-12-02 15:55:32,075 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21
+2025-12-02 15:55:32,075 INFO: [rebuild] label_raw input: 21 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-12-02 15:55:32,075 INFO: [rebuild] label_cr input: 21 classes, samples={2460: 14, 2461: 15, 2462: 15, 2463: 15, 2464: 15}
+2025-12-02 15:55:32,076 INFO: [_norm_entries] splib_raw: input dict with 1810 keys
+2025-12-02 15:55:32,092 INFO: [_norm_entries] splib_raw: output 1810 classes, 1810 total samples
+2025-12-02 15:55:32,093 INFO: [_norm_entries] splib_cr: input dict with 1810 keys
+2025-12-02 15:55:32,106 INFO: [_norm_entries] splib_cr: output 1810 classes, 1810 total samples
+2025-12-02 15:55:32,107 INFO: [_norm_entries] label_raw: input dict with 21 keys
+2025-12-02 15:55:32,108 INFO: [_norm_entries] label_raw: output 21 classes, 288 total samples
+2025-12-02 15:55:32,108 INFO: [_norm_entries] label_cr: input dict with 21 keys
+2025-12-02 15:55:32,109 INFO: [_norm_entries] label_cr: output 21 classes, 288 total samples
+2025-12-02 15:55:32,109 INFO: [rebuild] after _norm_entries: label_raw_norm=21 classes, label_cr_norm=21 classes
+2025-12-02 15:55:32,131 INFO: [rebuild] classes: splib_raw=1810, splib_cr=1810, label_raw=21, label_cr=21, lib=1831
+2025-12-02 15:55:32,135 INFO: [rebuild] label_raw=21 classes / 288 samples, label_cr=21 classes / 288 samples, lib=1831 classes / 4196 samples
+2025-12-02 15:55:32,156 INFO: [Rebuild] lib=1831 classes, labeling_lib=21 classes
+2025-12-02 15:55:32,161 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:21, label_cr:21
+2025-12-02 15:55:38,554 INFO: [Unmixing] Requested: endmember_count=3, threshold=0.800
+2025-12-02 15:55:42,618 INFO: [Unmixing] Requested: endmember_count=3, threshold=0.800
+2025-12-02 15:55:47,234 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 15:55:47,252 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 15:55:47,253 INFO: icon.rcc not found (skip)
+2025-12-02 15:55:57,520 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 15:55:57,565 INFO: [ResampleCache] cached result loaded
+2025-12-02 15:55:57,566 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 15:55:57,567 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 15:55:57,567 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 15:55:57,567 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 15:55:57,574 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 15:55:57,575 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 15:55:57,585 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 15:55:57,586 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 15:55:57,586 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 15:55:57,587 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 15:55:57,587 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 15:55:57,588 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 15:55:57,597 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 15:55:57,597 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 15:55:57,655 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 15:55:57,657 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 15:56:00,930 INFO: [Unmixing] Requested: endmember_count=3, threshold=0.800
+2025-12-02 15:56:30,276 INFO: [Unmixing] API done: endmembers.shape=(3, 103), abundance_map.shape=(610, 340, 3)
+2025-12-02 15:56:30,276 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=3, thr=0.800
+2025-12-02 15:56:34,967 ERROR: [UnmixingDock] Detail dialog failed for index 0: EndmemberDetailDialog.set_endmember_data() got an unexpected keyword argument 'results'
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\docks\unmixing_dock.py", line 269, in _on_detail_clicked
+    dlg.set_endmember_data(
+TypeError: EndmemberDetailDialog.set_endmember_data() got an unexpected keyword argument 'results'
+2025-12-02 16:02:32,250 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 16:02:32,272 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 16:02:32,273 INFO: icon.rcc not found (skip)
+2025-12-02 16:03:01,496 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 16:03:01,523 INFO: [ResampleCache] cached result loaded
+2025-12-02 16:03:01,523 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 16:03:01,524 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 16:03:01,524 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 16:03:01,525 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 16:03:01,530 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 16:03:01,532 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 16:03:01,541 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 16:03:01,542 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 16:03:01,543 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 16:03:01,543 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 16:03:01,544 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 16:03:01,544 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 16:03:01,552 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 16:03:01,553 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 16:03:01,605 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 16:03:01,606 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 16:03:07,422 INFO: [Unmixing] Requested: endmember_count=5, threshold=0.800
+2025-12-02 16:03:37,032 INFO: [Unmixing] API done: endmembers.shape=(5, 103), abundance_map.shape=(610, 340, 5)
+2025-12-02 16:03:37,033 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=5, thr=0.800
+2025-12-02 16:07:10,350 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 16:07:10,372 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 16:07:10,373 INFO: icon.rcc not found (skip)
+2025-12-02 16:07:48,286 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 16:07:48,314 INFO: [ResampleCache] cached result loaded
+2025-12-02 16:07:48,315 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 16:07:48,315 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 16:07:48,315 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 16:07:48,316 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 16:07:48,322 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 16:07:48,323 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 16:07:48,332 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 16:07:48,333 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 16:07:48,334 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 16:07:48,334 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 16:07:48,334 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 16:07:48,335 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 16:07:48,342 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 16:07:48,342 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 16:07:48,398 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 16:07:48,399 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 16:07:52,214 INFO: [Unmixing] Requested: endmember_count=3, threshold=0.800
+2025-12-02 16:08:21,340 INFO: [Unmixing] API done: endmembers.shape=(3, 103), abundance_map.shape=(610, 340, 3)
+2025-12-02 16:08:21,341 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=3, thr=0.800
+2025-12-02 16:10:59,441 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 16:10:59,462 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 16:10:59,463 INFO: icon.rcc not found (skip)
+2025-12-02 16:11:16,157 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 16:11:16,186 INFO: [ResampleCache] cached result loaded
+2025-12-02 16:11:16,186 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 16:11:16,187 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 16:11:16,187 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 16:11:16,187 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 16:11:16,196 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 16:11:16,197 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 16:11:16,205 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 16:11:16,206 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 16:11:16,206 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 16:11:16,206 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 16:11:16,207 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 16:11:16,207 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 16:11:16,214 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 16:11:16,215 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 16:11:16,268 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 16:11:16,270 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 16:11:20,078 INFO: [Unmixing] Requested: endmember_count=5, threshold=0.800
+2025-12-02 16:11:50,051 INFO: [Unmixing] API done: endmembers.shape=(5, 103), abundance_map.shape=(610, 340, 5)
+2025-12-02 16:11:50,051 INFO: [Unmixing] build classmap from abundance: H=610, W=340, K=5, thr=0.800
+2025-12-02 16:13:48,057 INFO: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-02 16:20:42,663 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 16:20:42,696 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 16:20:42,698 INFO: icon.rcc not found (skip)
+2025-12-02 16:20:56,122 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 16:20:56,153 INFO: [ResampleCache] cached result loaded
+2025-12-02 16:20:56,154 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 16:20:56,154 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 16:20:56,155 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 16:20:56,155 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 16:20:56,162 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 16:20:56,163 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 16:20:56,173 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 16:20:56,173 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 16:20:56,173 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 16:20:56,173 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 16:20:56,174 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 16:20:56,174 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 16:20:56,183 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 16:20:56,184 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 16:20:56,241 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 16:20:56,241 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 16:21:01,119 INFO: [Unmixing] Requested: endmember_count=5, threshold=0.800
+2025-12-02 16:21:32,669 INFO: [Unmixing] API done: endmembers.shape=(5, 103), abundance_map.shape=(610, 340, 5)
+2025-12-02 16:21:32,869 ERROR: [Unmixing] set_results to dock failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 949, in _on_unmixing_requested
+    self.unmixingDock.set_results(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\docks\unmixing_dock.py", line 196, in set_results
+    self.set_endmember_table(rows)
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\docks\unmixing_dock.py", line 147, in set_endmember_table
+    for cid, name in self._class_options:
+AttributeError: 'UnmixingDock' object has no attribute '_class_options'. Did you mean: 'set_class_options'?
+2025-12-02 16:24:35,065 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 16:24:35,085 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 16:24:35,086 INFO: icon.rcc not found (skip)
+2025-12-02 16:24:47,462 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 16:24:47,491 INFO: [ResampleCache] cached result loaded
+2025-12-02 16:24:47,492 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 16:24:47,492 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 16:24:47,493 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 16:24:47,493 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 16:24:47,500 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 16:24:47,500 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 16:24:47,511 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 16:24:47,512 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 16:24:47,512 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 16:24:47,513 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 16:24:47,513 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 16:24:47,513 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 16:24:47,523 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 16:24:47,524 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 16:24:47,582 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 16:24:47,583 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 16:24:54,977 INFO: [Unmixing] Requested: endmember_count=5, threshold=0.800
+2025-12-02 16:25:25,154 INFO: [Unmixing] API done: endmembers.shape=(5, 103), abundance_map.shape=(610, 340, 5)
+2025-12-02 16:38:41,375 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 16:38:41,398 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 16:38:41,399 INFO: icon.rcc not found (skip)
+2025-12-02 16:38:48,656 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 16:38:48,683 INFO: [ResampleCache] cached result loaded
+2025-12-02 16:38:48,684 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 16:38:48,684 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 16:38:48,684 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 16:38:48,685 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 16:38:48,692 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 16:38:48,693 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 16:38:48,702 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 16:38:48,703 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 16:38:48,703 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 16:38:48,704 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 16:38:48,704 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 16:38:48,704 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 16:38:48,713 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 16:38:48,713 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 16:38:48,761 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 16:38:48,762 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 16:38:54,151 INFO: [Unmixing] Requested: endmember_count=5, threshold=0.800
+2025-12-02 16:39:25,552 INFO: [Unmixing] API done: endmembers.shape=(5, 103), abundance_map.shape=(610, 340, 5)
+2025-12-02 16:41:32,098 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 16:41:32,121 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 16:41:32,122 INFO: icon.rcc not found (skip)
+2025-12-02 16:41:41,363 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 16:41:41,396 INFO: [ResampleCache] cached result loaded
+2025-12-02 16:41:41,396 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 16:41:41,397 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 16:41:41,397 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 16:41:41,397 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 16:41:41,404 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 16:41:41,405 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 16:41:41,413 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 16:41:41,415 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 16:41:41,415 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 16:41:41,415 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 16:41:41,416 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 16:41:41,416 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 16:41:41,425 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 16:41:41,426 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 16:41:41,480 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 16:41:41,482 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 16:41:46,511 INFO: [Unmixing] Requested: endmember_count=5, threshold=0.800
+2025-12-02 16:42:16,558 INFO: [Unmixing] API done: endmembers.shape=(5, 103), abundance_map.shape=(610, 340, 5)
+2025-12-02 16:47:38,281 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-02 16:47:38,305 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-02 16:47:38,305 INFO: icon.rcc not found (skip)
+2025-12-02 16:47:46,048 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\pavia_university\PaviaU.mat -> 16
+2025-12-02 16:47:46,094 INFO: [ResampleCache] cached result loaded
+2025-12-02 16:47:46,094 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-02 16:47:46,095 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-02 16:47:46,095 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-02 16:47:46,095 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-02 16:47:46,107 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-02 16:47:46,108 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-02 16:47:46,122 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-02 16:47:46,123 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-02 16:47:46,123 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-02 16:47:46,124 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-02 16:47:46,125 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-02 16:47:46,125 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-02 16:47:46,138 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-02 16:47:46,138 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-02 16:47:46,202 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-02 16:47:46,203 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-02 16:47:52,155 INFO: [Unmixing] Requested: endmember_count=5, threshold=0.800
+2025-12-02 16:48:22,537 INFO: [Unmixing] API done: endmembers.shape=(5, 103), abundance_map.shape=(610, 340, 5)

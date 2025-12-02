@@ -322,87 +322,234 @@ def search_material_filtering_list(
         })
     return out
 
+import paramiko
+from pathlib import Path
+import hashlib
+from datetime import datetime
+from pathlib import Path
+from typing import Optional
+
+import numpy as np
+import requests
+from PIL import Image
+
+# === 환경 설정 ===
+SFTP_HOST = "gnew-office.tplinkdns.com"
+SFTP_PORT = 22
+SFTP_USER = "shjung"
+SFTP_PASSWORD = "!gnew007"
+
+REMOTE_TMP_DIR   = "/disk1/explainSystem/tmp"  # 임시
+REMOTE_FINAL_DIR = "/disk1/explainSystem/img"  # 최종
+
+def _ensure_remote_dir(sftp: paramiko.SFTPClient, path: str) -> None:
+    """
+    SFTP 상에서 주어진 디렉터리가 없으면 계층적으로 생성.
+    """
+    # Path.as_posix() 로 / 기반 path 로 맞춤
+    parts = Path(path).as_posix().split("/")
+    current = ""
+    for part in parts:
+        if not part:
+            continue
+        current += "/" + part
+        try:
+            sftp.listdir(current)
+        except IOError:
+            sftp.mkdir(current)
+
+
+def sftp_upload_then_move(
+    local_path: str,
+    remote_tmp_dir: str = REMOTE_TMP_DIR,
+    remote_final_dir: str = REMOTE_FINAL_DIR,
+    host: str = SFTP_HOST,
+    port: int = SFTP_PORT,
+    username: str = SFTP_USER,
+    password: str = SFTP_PASSWORD,
+    target_filename: Optional[str] = None,
+) -> str:
+    """
+    1) 로컬 파일을 SFTP 임시 경로(remote_tmp_dir)에 업로드
+    2) 업로드 성공 시 최종 경로(remote_final_dir)로 rename
+    3) 최종 원격 경로를 문자열로 반환
+
+    예: /data/incoming/abc.mat -> /data/final/abc.mat
+    """
+    local_path = Path(local_path)
+    if not local_path.exists():
+        raise FileNotFoundError(f"로컬 파일 없음: {local_path}")
+
+    if target_filename is None:
+        target_filename = local_path.name
+
+    remote_tmp_path = f"{remote_tmp_dir.rstrip('/')}/{target_filename}"
+    remote_final_path = f"{remote_final_dir.rstrip('/')}/{target_filename}"
+
+    transport = paramiko.Transport((host, port))
+    transport.connect(username=username, password=password)
+    sftp = paramiko.SFTPClient.from_transport(transport)
+
+    try:
+        # 디렉터리 보장
+        _ensure_remote_dir(sftp, remote_tmp_dir)
+        _ensure_remote_dir(sftp, remote_final_dir)
+
+        # 1. 임시 경로 업로드
+        sftp.put(str(local_path), remote_tmp_path)
+
+        # 2. 최종 경로로 rename (move)
+        sftp.rename(remote_tmp_path, remote_final_path)
+
+        return remote_final_path
+    finally:
+        sftp.close()
+        transport.close()
+
 def image_check_and_save(
-    check_url:str,
-    save_url:str,
-    raw_image:np.array,
-    rgb_image:np.array,
-    save_path : str,
-    cmr_cd:int,
-    timeout:float = 10.0,
-):
+    check_url: str,
+    save_url: str,
+    raw_image: np.ndarray,
+    rgb_image: np.ndarray,
+    save_path: str,
+    cmr_cd: int,
+    timeout: float = 10.0,
+) -> str:
+    
     """
-    check_url : 영상 등록 여부 확인
-    save_url : Save를 진행한 후 이미지 코드를 갖게 됨
-    raw_image : 초분광 이미지
-    rgb_image : RGB 이미지
+    check_url : 영상 등록 여부 확인용 API
+    save_url  : 이미지 정보 저장 API (img_cd 반환)
+    raw_image : 초분광 이미지 (H, W, B)
+    rgb_image : RGB 이미지 (H, W, 3)
+
+    동작:
+      1) rgb_image의 hash로 중복 여부 확인
+      2) 이미 존재하면 img_cd 바로 반환
+      3) 없으면 .mat, .png 로컬 저장 후
+         - SFTP에 업로드(임시 디렉터리 → 최종 디렉터리로 이동)
+         - 최종 SFTP 경로를 payload에 넣어 save_url 호출
+         - save_url 결과에서 img_cd 반환
     """
+    import os  # 필요한 경우
+
     def hash_array(arr: np.ndarray) -> str:
         return hashlib.md5(arr.tobytes()).hexdigest()
-    
+
+    # ---------- 1. 중복 체크 ----------
     url = check_url.rstrip("/")
     hash_value = hash_array(rgb_image)
-    
+
     payload = {"img_hash": hash_value}
     _headers = {
         "Content-Type": "application/json",
     }
+
     try:
         resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
         resp.raise_for_status()
         data = resp.json()
     except requests.RequestException as e:
-        raise RuntimeError(f"HTTP error: {e}") from e
+        raise RuntimeError(f"HTTP error (check_url): {e}") from e
     except ValueError as e:
-        raise RuntimeError(f"Invalid JSON response: {e}") from e
+        raise RuntimeError(f"Invalid JSON response (check_url): {e}") from e
 
     # 기본 스키마 검증/정규화
     code = data.get("status_code")
     if code != 200:
-        raise RuntimeError(f"API error: code={code}, message={data.get('message')}")
+        raise RuntimeError(
+            f"API error (check_url): code={code}, message={data.get('message')}"
+        )
+
     result = data.get("result") or []
     if not isinstance(result, list):
-        raise RuntimeError("API response 'result' is not a list")
-    
-    if result[0]['exist_yn'] == 1:
-        return result[0]['img_cd']
-    elif result[0]['exist_yn'] == 0:
-        name = datetime.now().strftime('%Y%m%d-%H%M%S')
-        img_pth = os.path.join(save_path, f'{name}.mat')
-        rgb_pth = os.path.join(save_path, f'{name}.png')
-        
-        # # raw_image 저장
-        data = {'data':raw_image}
-        safe_save_mat(img_pth, data)
-        
-        Image.fromarray(rgb_image, mode = 'RGB').save(rgb_pth)
-        
-        h, w, b = raw_image.shape
-        
-        url = save_url
-        
-        payload = {"cmr_cd": cmr_cd,
-                   "img_pth":img_pth,
-                   'rgb_pth':rgb_pth,
-                   'img_x_sz':h,
-                   'img_y_sz':w,
-                   'img_z_sz':b,
-                   'img_hash':hash_value}
-        
-        _headers = {
-            "Content-Type": "application/json",
-        }
-        
-        try:
-            resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
-            resp.raise_for_status()
-            data = resp.json()
-        except requests.RequestException as e:
-            raise RuntimeError(f"HTTP error: {e}") from e
-        except ValueError as e:
-            raise RuntimeError(f"Invalid JSON response: {e}") from e        
-        
-        return data[0]['img_cd']
+        raise RuntimeError("API response 'result' is not a list (check_url)")
+    if not result:
+        raise RuntimeError("API response 'result' is empty list (check_url)")
+
+    first = result[0]
+    exist_yn = first.get("exist_yn")
+
+    # ---------- 2. 이미 존재하는 경우: img_cd 반환 ----------
+    if exist_yn == 1:
+        img_cd = first.get("img_cd")
+        if img_cd is None:
+            raise RuntimeError("API response missing 'img_cd' while exist_yn == 1")
+        return img_cd
+
+    # ---------- 3. 존재하지 않는 경우: 저장 로직 ----------
+    if exist_yn != 0:
+        raise RuntimeError(f"Unexpected exist_yn value: {exist_yn}")
+
+    # 로컬 저장 경로 준비
+    save_dir = Path(save_path)
+    save_dir.mkdir(parents=True, exist_ok=True)
+
+    name = datetime.now().strftime("%Y%m%d-%H%M%S")
+    local_mat_path = save_dir / f"{name}.mat"
+    local_rgb_path = save_dir / f"{name}.png"
+
+    # 3-1) raw_image .mat 로컬 저장
+    mat_data = {"data": raw_image}
+    safe_save_mat(str(local_mat_path), mat_data)
+
+    # 3-2) rgb_image .png 로컬 저장
+    Image.fromarray(rgb_image.astype(np.uint8), mode="RGB").save(str(local_rgb_path))
+
+    # 3-3) SFTP로 업로드 후 최종 경로 받기
+    #      (필요 없으면 이 부분 주석 처리하고, 바로 local_mat_path / local_rgb_path 사용해도 됨)
+    remote_mat_path = sftp_upload_then_move(str(local_mat_path))
+    remote_rgb_path = sftp_upload_then_move(str(local_rgb_path))
+
+    # 이미지 사이즈
+    h, w, b = raw_image.shape  # H, W, Bands
+
+    # ---------- 4. save_url 호출 ----------
+    url = save_url.rstrip("/")
+    payload = {
+        "cmr_cd": cmr_cd,
+        # 여기서 img_pth, rgb_pth 를 SFTP 최종 경로 기준으로 보냄
+        "img_pth": remote_mat_path,   # 또는 str(local_mat_path) 로 바꾸면 로컬 경로 사용
+        "rgb_pth": remote_rgb_path,   # 마찬가지
+        "img_x_sz": h,
+        "img_y_sz": w,
+        "img_z_sz": b,
+        "img_hash": hash_value,
+    }
+
+    try:
+        resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+        resp.raise_for_status()
+        data = resp.json()
+    except requests.RequestException as e:
+        raise RuntimeError(f"HTTP error (save_url): {e}") from e
+    except ValueError as e:
+        raise RuntimeError(f"Invalid JSON response (save_url): {e}") from e
+
+    # save_url 의 응답 구조는 실제 API 스펙에 따라 다를 수 있음
+    # 예: {"status_code":200, "result": {"img_cd":123}} 형태라면 아래처럼 조정 필요
+    # 여기서는 원래 코드에 맞춰 data[0]['img_cd'] 를 그대로 사용하되, 방어 코드 추가
+
+    if isinstance(data, list):
+        if not data:
+            raise RuntimeError("save_url response is empty list")
+        img_cd = data[0].get("img_cd")
+        if img_cd is None:
+            raise RuntimeError("save_url response missing 'img_cd'")
+        return img_cd
+    elif isinstance(data, dict):
+        # 만약 dict 형태라면 이런 식으로 처리 (필요에 따라 수정)
+        if data.get("status_code") != 200:
+            raise RuntimeError(
+                f"API error (save_url): code={data.get('status_code')}, "
+                f"message={data.get('message')}"
+            )
+        result = data.get("result") or {}
+        img_cd = result.get("img_cd")
+        if img_cd is None:
+            raise RuntimeError("save_url response missing 'img_cd' in 'result'")
+        return img_cd
+    else:
+        raise RuntimeError(f"Unexpected response type from save_url: {type(data)}")
     
 def send_label_add(api_base: str, targets: Dict, timeout: float = 10.0) -> Dict[str, Any]:
     
@@ -447,5 +594,70 @@ def material_code_name(api_base:str, timeout :float = 10.0):
     return result
 
 
+def call_unmixing(
+    base_url : str,
+    img_cd: int,
+    st_x: int,
+    st_y: int,
+    ed_x: int,
+    ed_y: int,
+    num_endmembers: int,
+    # timeout: int = 30,
+) -> Dict[str, Any]:
+    """
+    프로그램 주분 분광혼합분석 API 호출 함수
+
+    http://{APIIP}:{port}/program-service/inference/unmixing
+    """
+    
+    url = base_url
+
+    headers = {
+        "Content-Type": "application/json",
+    }
+
+    payload = {
+        "img_cd": img_cd,
+        "st_h": st_y,
+        "st_w": st_x,
+        "ed_h": ed_y,
+        "ed_w": ed_x,
+        "num_endmembers": num_endmembers,
+    }
+    print(payload)
+
+    try:
+        resp = requests.post(url, json=payload, headers=headers)
+    except requests.RequestException as e:
+        raise RuntimeError(f"API 요청 실패: {e}")
+
+    # HTTP 에러 코드(4xx, 5xx) 체크
+    if not resp.ok:
+        raise RuntimeError(f"HTTP {resp.status_code} 에러: {resp.text}")
+
+    data = resp.json()
+
+    # 명세서 기준 응답 구조:
+    # {
+    #   "code": 200,
+    #   "message": "정상",
+    #   "result": [
+    #       {
+    #           "endmember": [...],
+    #           "abondance_map": [...]
+    #       }
+    #   ]
+    # }
+    
+
+    if data.get("status_code") != 200:
+        raise RuntimeError(f"API 처리 실패(code={data.get('code')}): {data.get('message')}")
+    
+    elif data.get("status_code") == 200:
+        return data['result'][0]['endmember'], data['result'][0]['abondance_map']
+        # return data['result']['endmember'], data['result']['abondance_map'] 
+
 # print(search_labeling_data(st_wv = 399.109985, ed_wv = 991.539978, base_url = 'http://183.98.149.222:18000/program-service/label-list'))
 # print(material_code_name(api_base = "http://183.98.149.222:18000/program-service/material-list/name"))
+# unmixing_inference_url = 'http://183.98.149.222:18000/program-service/inference/unmixing'
+# print(call_unmixing(img_cd = 16,base_url = unmixing_inference_url, st_x = 200, st_y = 200, ed_x = 300, ed_y = 300, num_endmembers = 5))
