@@ -130,34 +130,45 @@ class UnmixingDock(QtWidgets.QDockWidget):
         """
         에드멤버 테이블 설정
         Args:
-            endmembers: [{"index": int, "class_id": int, ...}, ...] 형태를 권장
+            endmembers: [{"index": int, "class_id": int|None, ...}, ...] 형태를 권장
         """
         if not self.tableEndmember:
             return
 
         self.tableEndmember.setRowCount(len(endmembers))
         for i, em in enumerate(endmembers):
-            # # 컬럼
-            index_item = QtWidgets.QTableWidgetItem(str(em.get("index", i + 1)))
+            # ----- 1) # 컬럼 -----
+            index_val = em.get("index", i + 1)
+            index_item = QtWidgets.QTableWidgetItem(str(index_val))
             index_item.setFlags(index_item.flags() & ~Qt.ItemIsEditable)
             self.tableEndmember.setItem(i, 0, index_item)
 
-            # Class 컬럼: 콤보박스
+            # ----- 2) Class 콤보박스 -----
             combo = QtWidgets.QComboBox(self.tableEndmember)
             combo.setEditable(False)
 
-            # 옵션: "물질명"만 보이고, data에는 cid 저장
+            # 옵션: 텍스트는 '물질명', data에는 cid
             for cid, name in self._class_options:
-                combo.addItem(str(name), cid)   # ← 텍스트는 물질명만
+                combo.addItem(str(name), cid)
 
-            # 기본 선택값: class_id가 있으면 거기 맞추기
+            # 기본 선택 CID 결정
             default_cid = em.get("class_id", None)
+
+            # (A) row 정보에 class_id가 있다면 그걸 우선 사용
             if default_cid is not None:
                 try:
                     default_cid = int(default_cid)
                 except ValueError:
                     default_cid = None
 
+            # (B) class_id가 비어 있으면, # 번호(=index)에 맞는 순번의 클래스를 자동으로 선택
+            # 예: 1행(#=1) → _class_options[0]의 cid, 2행 → _class_options[1]의 cid ...
+            if default_cid is None and self._class_options:
+                # index_val은 1-based, 리스트는 0-based 이므로 -1
+                idx_in_options = max(0, min(index_val - 1, len(self._class_options) - 1))
+                default_cid = self._class_options[idx_in_options][0]
+
+            # 실제 콤보박스 선택 반영
             if default_cid is not None:
                 idx_match = combo.findData(default_cid)
                 if idx_match >= 0:
@@ -165,13 +176,14 @@ class UnmixingDock(QtWidgets.QDockWidget):
 
             self.tableEndmember.setCellWidget(i, 1, combo)
 
-            # Detail 버튼
+            # ----- 3) Detail 버튼 -----
             detail_btn = QtWidgets.QPushButton("Detail")
             detail_btn.setProperty("index", i)
             detail_btn.clicked.connect(lambda checked, idx=i: self._on_detail_clicked(idx))
             self.tableEndmember.setCellWidget(i, 2, detail_btn)
 
         self.tableEndmember.resizeColumnsToContents()
+
 
     # MainWindow에서 직접 결과를 넘겨줄 때 사용할 통합 메서드
     def set_results(self, endmembers: Any, abundance_map: Any, threshold: float):
