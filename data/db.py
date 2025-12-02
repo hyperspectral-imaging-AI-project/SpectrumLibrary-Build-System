@@ -269,7 +269,6 @@ def search_labeling_data(
     resp = requests.post(base_url, headers=headers, json=body, timeout=timeout)
     resp.raise_for_status()
     data = resp.json()
-    print(data)
     if int(data.get("status_code", 0)) != 200:
         raise RuntimeError(f"API error: code={data.get('code')} message={data.get('message')}")
 
@@ -321,7 +320,7 @@ def search_material_filtering_list(
             "desc":    str(r.get("dsc") or ""),
         })
     return out
-
+import logging
 import paramiko
 from pathlib import Path
 import hashlib
@@ -342,21 +341,36 @@ SFTP_PASSWORD = "!gnew007"
 REMOTE_TMP_DIR   = "/disk1/explainSystem/tmp"  # 임시
 REMOTE_FINAL_DIR = "/disk1/explainSystem/img"  # 최종
 
-def _ensure_remote_dir(sftp: paramiko.SFTPClient, path: str) -> None:
+def _ensure_remote_dir(sftp: paramiko.SFTPClient, remote_dir: str) -> None:
     """
-    SFTP 상에서 주어진 디렉터리가 없으면 계층적으로 생성.
+    SFTP 상의 지정 디렉터리가 없으면 중첩으로 생성.
+    예: /data/incoming 와 같이 여러 단계 경로를 안전하게 만든다.
     """
-    # Path.as_posix() 로 / 기반 path 로 맞춤
-    parts = Path(path).as_posix().split("/")
-    current = ""
+    remote_dir = remote_dir.rstrip("/")
+    if not remote_dir:
+        return
+
+    parts = remote_dir.split("/")
+    path = ""
     for part in parts:
-        if not part:
+        if part == "":
+            # 루트(/) 처리
+            path = "/"
             continue
-        current += "/" + part
+
+        if path == "/":
+            path = f"/{part}"
+        else:
+            path = f"{path}/{part}"
+
         try:
-            sftp.listdir(current)
+            sftp.listdir(path)
         except IOError:
-            sftp.mkdir(current)
+            try:
+                sftp.mkdir(path)
+            except Exception as e:
+                logging.exception(f"원격 디렉터리 생성 실패: {path} ({e})")
+                raise
 
 
 def sftp_upload_then_move(
@@ -368,13 +382,17 @@ def sftp_upload_then_move(
     username: str = SFTP_USER,
     password: str = SFTP_PASSWORD,
     target_filename: Optional[str] = None,
+    delete_local: bool = False,
 ) -> str:
     """
     1) 로컬 파일을 SFTP 임시 경로(remote_tmp_dir)에 업로드
     2) 업로드 성공 시 최종 경로(remote_final_dir)로 rename
-    3) 최종 원격 경로를 문자열로 반환
+    3) (옵션) 업로드/이동이 모두 성공하면 로컬 파일 삭제(delete_local=True)
+    4) 최종 원격 경로를 문자열로 반환
 
-    예: /data/incoming/abc.mat -> /data/final/abc.mat
+    예:
+        /data/local/abc.mat  ->  /data/incoming/abc.mat  (put)
+                              ->  /data/final/abc.mat    (rename)
     """
     local_path = Path(local_path)
     if not local_path.exists():
@@ -391,7 +409,7 @@ def sftp_upload_then_move(
     sftp = paramiko.SFTPClient.from_transport(transport)
 
     try:
-        # 디렉터리 보장
+        # 0. 임시/최종 디렉터리 존재 보장
         _ensure_remote_dir(sftp, remote_tmp_dir)
         _ensure_remote_dir(sftp, remote_final_dir)
 
@@ -401,10 +419,25 @@ def sftp_upload_then_move(
         # 2. 최종 경로로 rename (move)
         sftp.rename(remote_tmp_path, remote_final_path)
 
+        # 3. (선택) 로컬 파일 삭제
+        if delete_local:
+            try:
+                local_path.unlink()
+            except Exception as e:
+                # 삭제 실패해도 업로드는 이미 완료된 상태이므로 경고만 남김
+                logging.warning(f"로컬 파일 삭제 실패: {local_path} ({e})")
+
         return remote_final_path
+
     finally:
-        sftp.close()
-        transport.close()
+        try:
+            sftp.close()
+        except Exception:
+            pass
+        try:
+            transport.close()
+        except Exception:
+            pass
 
 def image_check_and_save(
     check_url: str,
@@ -543,8 +576,9 @@ def image_check_and_save(
                 f"API error (save_url): code={data.get('status_code')}, "
                 f"message={data.get('message')}"
             )
-        result = data.get("result") or {}
-        img_cd = result.get("img_cd")
+        
+        result = data.get("result")
+        img_cd = result[0].get("img_cd")
         if img_cd is None:
             raise RuntimeError("save_url response missing 'img_cd' in 'result'")
         return img_cd

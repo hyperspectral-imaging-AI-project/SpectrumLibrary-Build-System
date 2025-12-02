@@ -317,7 +317,6 @@ class UnmixingDock(QtWidgets.QDockWidget):
 
             # 새 옵션(self._class_options)을 반영해서 콤보박스를 다시 채운다
             self.set_endmember_table(rows)
-
         
     def _collect_class_mapping(self) -> Dict[int, int]:
         """
