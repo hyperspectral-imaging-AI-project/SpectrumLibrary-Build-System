@@ -848,11 +848,11 @@ class MainWindow(QtWidgets.QMainWindow):
             logging.exception("[Unmixing] dialog run failed")
             QtWidgets.QMessageBox.critical(self, "오류", f"분광 혼합 분석 다이얼로그 실행 중 오류가 발생했습니다: {e}")
 
+    @QtCore.pyqtSlot(dict)
     def _on_unmixing_requested(self, params: dict):
         """분광 혼합 분석 실행 요청 처리 + Classmap 생성"""
         try:
             endmember_count = int(params.get("endmember_count", 3))
-            # Dialog에서는 0.0~1.0으로 받지만, 혹시 80 같은 값이 들어와도 퍼센트로 처리
             raw_thr = params.get("threshold", 0.8)
             try:
                 raw_thr = float(raw_thr)
@@ -880,10 +880,14 @@ class MainWindow(QtWidgets.QMainWindow):
             if rect is not None and rect.isValid():
                 st_x = int(rect.x())
                 st_y = int(rect.y())
-                ed_x = st_x + int(rect.width())
-                ed_y = st_y + int(rect.height())
+                # QRect.width/height는 (right - left + 1)이므로, ed_x/y는 [start, end) 형태로 맞춘다
+                roi_w = int(rect.width())
+                roi_h = int(rect.height())
+                ed_x = st_x + roi_w
+                ed_y = st_y + roi_h
             else:
                 st_x, st_y = 0, 0
+                roi_w, roi_h = W, H
                 ed_x, ed_y = W, H
 
             # 1) image_cd, base_url 준비
@@ -916,19 +920,48 @@ class MainWindow(QtWidgets.QMainWindow):
             self.unmixing_endmembers = np.asarray(endmembers, dtype=np.float32)
             A = np.asarray(abundance_map, dtype=np.float32)
 
-            # abundance_map shape 정규화: (H, W, K)로 맞추기
-            if A.ndim == 3:
-                if A.shape[0] == H and A.shape[1] == W:
-                    # (H, W, K)
-                    self.unmixing_abundance_map = A
-                elif A.shape[1] == H and A.shape[2] == W:
-                    # (K, H, W) → (H, W, K)
-                    self.unmixing_abundance_map = np.moveaxis(A, 0, 2)
-                else:
-                    raise RuntimeError(f"abundance_map shape 예상과 다름: {A.shape}, 이미지=({H},{W})")
-            else:
+            # ---- abundance_map shape 정규화 (전체/ROI 모두 지원) ----
+            if A.ndim != 3:
                 raise RuntimeError(f"abundance_map ndim=3이 아님: {A.shape}")
 
+            # K 축 위치 추정
+            # (H, W, K) 또는 (h, w, K) 또는 (K, H, W) / (K, h, w) 를 예상
+            if A.shape[0] in (H, roi_h) and A.shape[1] in (W, roi_w):
+                # (h, w, K) 또는 (H, W, K)
+                sub_h, sub_w, K = A.shape
+                if sub_h == H and sub_w == W:
+                    # 전체 이미지 크기와 동일
+                    full_A = A
+                else:
+                    # ROI 크기(h, w)만 온 경우 → 전체 (H,W,K)에 끼워넣기
+                    full_A = np.zeros((H, W, K), dtype=A.dtype)
+                    full_A[st_y:st_y + sub_h, st_x:st_x + sub_w, :] = A
+
+            elif A.shape[1] in (H, roi_h) and A.shape[2] in (W, roi_w):
+                # (K, H, W) 또는 (K, h, w) 형태
+                K, sh, sw = A.shape
+                # (K, H, W) → (H, W, K)
+                sub_A = np.moveaxis(A, 0, 2)  # (H, W, K) 또는 (h, w, K)
+                sub_h, sub_w, K2 = sub_A.shape
+
+                if sub_h == H and sub_w == W:
+                    full_A = sub_A
+                elif sub_h == roi_h and sub_w == roi_w:
+                    full_A = np.zeros((H, W, K2), dtype=sub_A.dtype)
+                    full_A[st_y:st_y + sub_h, st_x:st_x + sub_w, :] = sub_A
+                else:
+                    raise RuntimeError(
+                        f"abundance_map ROI/전체 크기 불일치: A={A.shape}, "
+                        f"expected (H,W,K)=({H},{W},?), ROI=({roi_h},{roi_w})"
+                    )
+            else:
+                # 전혀 예상과 맞지 않는 경우
+                raise RuntimeError(
+                    f"abundance_map shape 예상과 다름: {A.shape}, "
+                    f"expected (H,W,K)=({H},{W},?), ROI=({roi_h},{roi_w})"
+                )
+
+            self.unmixing_abundance_map = full_A
             self.unmixing_threshold = threshold
 
             logging.info(
@@ -937,8 +970,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 getattr(self.unmixing_abundance_map, "shape", None),
             )
 
-            # 4) Unmixing classmap 생성/등록
-            # 4) Unmixing classmap 생성/등록
+            # 4) Unmixing classmap 생성/등록 (항상 전체 크기 기준)
             self._build_unmixing_classmap_from_abundance(threshold)
 
             # 5) Unmixing Dock 표시 + 클래스 옵션 + 결과 전달
@@ -954,7 +986,7 @@ class MainWindow(QtWidgets.QMainWindow):
                         class_options = []
 
                     # 5-2) Dock에 클래스 옵션 넘기기 (Class 콤보박스 채우기)
-                    if class_options and hasattr(self.unmixingDock, "set_class_options"):
+                    if hasattr(self.unmixingDock, "set_class_options"):
                         self.unmixingDock.set_class_options(class_options)
 
                     # 5-3) 파장 정보도 Dock으로 전달 (EndmemberDetailDialog에서 사용)
@@ -965,14 +997,13 @@ class MainWindow(QtWidgets.QMainWindow):
                         except Exception:
                             logging.exception("[Unmixing] set_wavelengths to dock failed")
 
-                    # 5-4) Unmixing 결과 전달
+                    # 5-4) Unmixing 결과 전달 (전체 크기의 abundance_map)
                     if hasattr(self.unmixingDock, "set_results"):
                         self.unmixingDock.set_results(
                             endmembers=self.unmixing_endmembers,
                             abundance_map=self.unmixing_abundance_map,
                             threshold=threshold,
                         )
-
             except Exception:
                 logging.exception("[Unmixing] set_results/set_class_options to dock failed")
 
@@ -989,6 +1020,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self, "오류",
                 f"분광 혼합 분석 실행 중 오류가 발생했습니다:\n{e}"
             )
+
 
     def _init_unmixing_dock(self):
         """UnmixingDock 생성 및 초기화"""
