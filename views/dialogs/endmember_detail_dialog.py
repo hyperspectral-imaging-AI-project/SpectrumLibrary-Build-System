@@ -685,7 +685,7 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
         try:
             # TODO: 경로는 프로젝트 구조에 맞게 수정
             text_prompt = load_prompt(
-                prompt_path=r"C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\prompt\vlm_prompt.md"
+                prompt_path=r"prompt/vlm_prompt.md"
             )
         except Exception as e:
             QtWidgets.QMessageBox.warning(self, "VLM", f"프롬프트 템플릿 로드 실패: {e}")
