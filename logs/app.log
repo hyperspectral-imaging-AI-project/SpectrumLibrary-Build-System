@@ -16446,3 +16446,50 @@ AttributeError: 'QTableWidgetItem' object has no attribute 'setTextElideMode'
 2025-12-19 10:29:49,025 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
 2025-12-19 10:29:49,027 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
 2025-12-19 10:29:49,355 INFO: [Analysis] 분석 영역 초기화 완료
+2025-12-19 10:43:32,719 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-19 10:43:32,742 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-19 10:43:32,743 INFO: icon.rcc not found (skip)
+2025-12-19 10:43:40,799 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 18
+2025-12-19 10:43:40,835 INFO: [ResampleCache] cached result loaded
+2025-12-19 10:43:40,836 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=18, label_cr=18
+2025-12-19 10:43:40,836 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-19 10:43:40,845 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-19 10:43:40,845 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-19 10:43:40,855 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-19 10:43:40,856 INFO: [_norm_entries] label_raw: input list/tuple with 18 items
+2025-12-19 10:43:40,856 INFO: [_norm_entries] label_raw: output 18 classes, 18 total samples
+2025-12-19 10:43:40,856 INFO: [_norm_entries] label_cr: input list/tuple with 18 items
+2025-12-19 10:43:40,857 INFO: [_norm_entries] label_cr: output 18 classes, 18 total samples
+2025-12-19 10:43:40,857 INFO: [rebuild] after _norm_entries: label_raw_norm=18 classes, label_cr_norm=18 classes
+2025-12-19 10:43:40,867 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=18, label_cr=18, lib=1827
+2025-12-19 10:43:40,868 INFO: [rebuild] label_raw=18 classes / 18 samples, label_cr=18 classes / 18 samples, lib=1827 classes / 3654 samples
+2025-12-19 10:43:40,921 INFO: [Rebuild] lib=1827 classes, labeling_lib=18 classes
+2025-12-19 10:43:40,922 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:18, label_cr:18
+2025-12-19 10:43:54,777 INFO: [AnalysisDialog] Found 3 comboboxes: ['cb_intermediate_target', 'cb_class_range', 'comboBox']
+2025-12-19 10:43:54,777 ERROR: [class combo] cbClassRange not found in UI
+2025-12-19 10:43:54,778 WARNING: [AnalysisDialog] Found cb_class_range by alternative method
+2025-12-19 10:43:54,888 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-12-19 10:43:54,970 INFO: [MainWindow] (pixel mode) connecting analysisMaskChanged signal
+2025-12-19 10:43:54,970 INFO: [MainWindow] (pixel mode) analysisMaskChanged signal connected
+2025-12-19 10:43:54,970 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-12-19 10:43:54,971 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-12-19 10:43:54,971 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-12-19 10:43:54,971 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-12-19 10:43:55,141 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(500, 500)
+2025-12-19 10:43:55,142 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-19 10:43:55,144 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-12-19 10:43:55,144 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-12-19 10:43:55,150 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-12-19 10:43:58,188 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(138, 265, 16, 13)
+2025-12-19 10:43:58,189 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=208, rect=PyQt5.QtCore.QRect(138, 265, 16, 13)
+2025-12-19 10:43:58,190 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(138, 265, 16, 13)
+2025-12-19 10:43:58,194 INFO: [hist_apply] source=combo-populate, cid=2177
+2025-12-19 10:43:58,195 INFO: [AnalysisDialog] update_histogram start: cid=2177, mask_set=True, topk_set=True, mode=combo
+2025-12-19 10:43:58,897 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=208
+2025-12-19 10:43:58,897 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=208, shape=(500, 500)
+2025-12-19 10:43:58,897 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-19 10:44:03,604 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-12-19 10:44:03,604 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-12-19 10:44:03,604 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-19 10:44:03,605 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-12-19 10:44:03,799 INFO: [Analysis] 분석 영역 초기화 완료

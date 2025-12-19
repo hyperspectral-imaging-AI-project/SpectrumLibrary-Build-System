@@ -1434,7 +1434,11 @@ class AnalysisSelectionDialog(QDialog):
 
             for cid in sorted(by_cls_label.keys()):
                 name = self._id_to_name.get(cid, str(cid)) if self._id_to_name else str(cid)
-                top = QtWidgets.QTreeWidgetItem([f"Class {cid} ({name})"])
+
+                # ✅ 최상위(Class) 노드
+                top_text = f"Class {cid} ({name})"
+                top = QtWidgets.QTreeWidgetItem([top_text])
+                top.setToolTip(0, top_text)  # ✅ 길면 툴팁으로 전체 표시
                 top.setFlags(top.flags() | Qt.ItemIsUserCheckable)
                 top.setCheckState(0, Qt.Checked)
                 top.setData(0, Qt.UserRole + 1, Qt.Checked)
@@ -1457,9 +1461,7 @@ class AnalysisSelectionDialog(QDialog):
                     label_stats.append((label_id, idx_list, mean_sim))
 
                 # ★ 2) 평균 SAD 기준 오름차순 정렬 (None 은 맨 뒤)
-                label_stats.sort(
-                    key=lambda t: (t[2] is None, t[2])  # (mean_sim is None?, mean_sim)
-                )
+                label_stats.sort(key=lambda t: (t[2] is None, t[2]))
 
                 # ★ 3) 정렬된 순서로 Label 노드 생성
                 for (label_id, idx_list, mean_sim) in label_stats:
@@ -1469,12 +1471,12 @@ class AnalysisSelectionDialog(QDialog):
                         label_prefix = f"Label {label_id}"
 
                     if mean_sim is not None:
-                        # 소수점 2자리까지
                         label_text = f"{label_prefix} ({len(idx_list)}, {mean_sim:.2f})"
                     else:
                         label_text = f"{label_prefix} ({len(idx_list)}, -)"
 
                     label_item = QtWidgets.QTreeWidgetItem([label_text])
+                    label_item.setToolTip(0, label_text)  # ✅ 툴팁
                     label_item.setFlags(label_item.flags() | Qt.ItemIsUserCheckable)
                     label_item.setCheckState(0, Qt.Checked)
                     label_item.setData(0, Qt.UserRole + 1, Qt.Checked)
@@ -1483,10 +1485,9 @@ class AnalysisSelectionDialog(QDialog):
                         c = QtGui.QColor(self._palette[cid]); c.setAlpha(220)
                         label_item.setForeground(0, QtGui.QBrush(c))
 
-                    # 3) 픽셀 단위 leaf — "SAD : 0.076 (y,x)" 형식
+                    # 3) 픽셀 단위 leaf — "SAD : 0.076 (x,y)" 형식
                     def _pixel_sad(idx: int) -> float:
                         v = self._pixel_data[idx].get("sad", self._pixel_data[idx].get("value"))
-                        # None 이면 맨 뒤로
                         if v is None:
                             return float("inf")
                         try:
@@ -1496,7 +1497,7 @@ class AnalysisSelectionDialog(QDialog):
 
                     sorted_idx_list = sorted(idx_list, key=_pixel_sad)
 
-                    # ★ 2) 정렬된 순서대로 픽셀 노드 생성
+                    # ★ 4) 정렬된 순서대로 픽셀 노드 생성
                     for idx in sorted_idx_list:
                         rec = self._pixel_data[idx]
                         y, x = int(rec["y"]), int(rec["x"])
@@ -1508,6 +1509,7 @@ class AnalysisSelectionDialog(QDialog):
                             txt = f"({x},{y})"
 
                         ch = QtWidgets.QTreeWidgetItem([txt])
+                        ch.setToolTip(0, txt)  # ✅ 툴팁
                         ch.setFlags(ch.flags() | Qt.ItemIsUserCheckable)
                         ch.setCheckState(0, Qt.Checked)
                         ch.setData(0, Qt.UserRole + 1, Qt.Checked)
@@ -1524,10 +1526,12 @@ class AnalysisSelectionDialog(QDialog):
                 self.twSelected.addTopLevelItem(top)
 
             self.twSelected.expandAll()
+
         finally:
             self.twSelected.blockSignals(False)
 
         self._refresh_spectra_from_tree()
+
                 
     def _on_selected_tree_changed(self, item: QtWidgets.QTreeWidgetItem, col: int):
         """
