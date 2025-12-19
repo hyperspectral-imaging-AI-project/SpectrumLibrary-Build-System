@@ -1760,52 +1760,6 @@ class AnalysisSelectionDialog(QDialog):
             logging.exception("[AnalysisDialog] _update_class_layer failed")
             if self.twSelected: self.twSelected.clear()
             self._pixel_data = []
-
-    def _rebuild_selected_tree_from_pixel_data(self):
-        """self._pixel_data → tw_selected에 'Class → (y,x)' 체크 트리 구성."""
-        if not self.twSelected:
-            return
-
-        self.twSelected.blockSignals(True)
-        try:
-            self.twSelected.clear()
-
-            # cid별 묶기
-            buckets: Dict[int, list[int]] = {}
-            for idx, rec in enumerate(self._pixel_data):
-                buckets.setdefault(int(rec["cid"]), []).append(idx)
-
-            for cid in sorted(buckets.keys()):
-                name = self._id_to_name.get(cid, str(cid)) if self._id_to_name else str(cid)
-                top = QtWidgets.QTreeWidgetItem([f"Class {cid} ({name})"])
-                top.setFlags(top.flags() | Qt.ItemIsUserCheckable)
-                top.setCheckState(0, Qt.Checked)
-                top.setData(0, Qt.UserRole + 1, Qt.Checked)   # ★ 현재 체크 상태 기록
-
-                # 팔레트 색이 있으면 적용
-                if self._palette and (cid in self._palette):
-                    top.setForeground(0, QtGui.QBrush(self._palette[cid]))
-
-                for idx in buckets[cid]:
-                    r = self._pixel_data[idx]
-                    ch = QtWidgets.QTreeWidgetItem([f"({r['y']},{r['x']})"])
-                    ch.setFlags(ch.flags() | Qt.ItemIsUserCheckable)
-                    ch.setCheckState(0, Qt.Checked)
-                    ch.setData(0, Qt.UserRole + 1, Qt.Checked)    # ★ 현재 체크 상태 기록
-
-                    # child에는 _idx 저장(스펙/그래프 갱신용)
-                    ch.setData(0, Qt.UserRole, int(idx))
-                    # 연한 텍스트 컬러
-                    if self._palette and (cid in self._palette):
-                        c = QtGui.QColor(self._palette[cid]); c.setAlpha(220)
-                        ch.setForeground(0, QtGui.QBrush(c))
-                    top.addChild(ch)
-
-                self.twSelected.addTopLevelItem(top)
-
-            self.twSelected.expandAll()
-        finally:
-            self.twSelected.blockSignals(False)
             
     def set_label_provider(self, provider):
         """

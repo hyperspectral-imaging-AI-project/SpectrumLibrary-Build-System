@@ -372,7 +372,6 @@ def _ensure_remote_dir(sftp: paramiko.SFTPClient, remote_dir: str) -> None:
                 logging.exception(f"원격 디렉터리 생성 실패: {path} ({e})")
                 raise
 
-
 def sftp_upload_then_move(
     local_path: str,
     remote_tmp_dir: str = REMOTE_TMP_DIR,
@@ -669,7 +668,11 @@ def call_unmixing(
     if not resp.ok:
         raise RuntimeError(f"HTTP {resp.status_code} 에러: {resp.text}")
 
-    data = resp.json()
+    # JSON 파싱 시도
+    try:
+        data = resp.json()
+    except ValueError as e:
+        raise RuntimeError(f"JSON 파싱 실패: {e}, 응답 내용: {resp.text[:500]}")
 
     # 명세서 기준 응답 구조:
     # {
@@ -683,9 +686,17 @@ def call_unmixing(
     #   ]
     # }
     
-
-    if data.get("status_code") != 200:
-        raise RuntimeError(f"API 처리 실패(code={data.get('code')}): {data.get('message')}")
+    # 디버깅: 응답 구조 확인
+    status_code = data.get("status_code")
+    code = data.get("code")
+    message = data.get("message")
+    
+    if status_code != 200:
+        # 응답 구조를 상세히 로깅하여 문제 파악
+        raise RuntimeError(
+            f"API 처리 실패 - status_code={status_code}, code={code}, message={message}, "
+            f"전체 응답: {data}"
+        )
     
     elif data.get("status_code") == 200:
         return data['result'][0]['endmember'], data['result'][0]['abondance_map']

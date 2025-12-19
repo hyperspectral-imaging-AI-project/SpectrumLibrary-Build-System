@@ -46,8 +46,21 @@ class PixelClassificationDock(QtWidgets.QDockWidget):
         # --- UI 로드 ---
         app_dir = Path(getattr(parent, "app_dir", Path(__file__).resolve().parents[2]))
         ui_dir = Path(ui_dir) if ui_dir else (app_dir / "ui")
+
         self._root = uic.loadUi(str(ui_dir / ui_filename))
-        self.setWidget(self._root)
+
+        # ✅ (핵심) Dock 전체를 ScrollArea로 감싸서, Dock이 작아도 아래 컨텐츠가 "잘리지 않고" 스크롤로 접근 가능하게
+        scroll = QtWidgets.QScrollArea(self)
+        scroll.setWidgetResizable(True)
+        scroll.setFrameShape(QtWidgets.QFrame.NoFrame)
+        scroll.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        scroll.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)  # 필요하면 가로도
+        scroll.setWidget(self._root)
+        self.setWidget(scroll)
+
+        # (선택) 너무 작아져서 UI가 붕괴되지 않도록 최소 크기 가드
+        self.setMinimumWidth(360)
+        self.setMinimumHeight(420)
 
         # --- 상태 ---
         self._class_palette_ref: Optional[Dict[int, QColor]] = None
@@ -82,22 +95,8 @@ class PixelClassificationDock(QtWidgets.QDockWidget):
         self._val_mid    = self._find(QtWidgets.QLabel, "valMid")
         self._val_little = self._find(QtWidgets.QLabel, "valLittle")
 
-        # ROI/분석 버튼 (지정 영역 분석 기능 제거됨 - 버튼들은 찾지 않음)
-        # self._btn_pick = self._find(QtWidgets.QPushButton, "btnPickPixel")
-        # self._btn_rect = self._find(QtWidgets.QPushButton, "btnRectROI") or self._find(QtWidgets.QToolButton, "rectToolButton")
-        # self._btn_free = self._find(QtWidgets.QPushButton, "btnFreeROI")  or self._find(QtWidgets.QToolButton, "freehandToolButton")
-        # if self._btn_free:
-        #     self._btn_free.setEnabled(False)  # 자유형 제외
-
-        # "+" / "-" → 연산자 (제거됨)
-        # self._btn_union = self._find(QtWidgets.QPushButton, "btnZoomIn")
-        # self._btn_sub   = self._find(QtWidgets.QPushButton, "btnZoomOut")
-
         # '선택한 영역 분석' 버튼 (유지)
         self._btn_view_details = self._find(QtWidgets.QPushButton, "btnViewAnalysisDetails") or self._find(QtWidgets.QPushButton, "viewDetailsButton")
-        
-        # '지정 영역 분석' 그룹의 '초기화' 버튼 (제거됨)
-        # self._btn_reset_analysis = self._find(QtWidgets.QPushButton, "pushButton")
 
         # --- 기본값/표시 초기화 ---
         if self._sp_tau and self._sp_tau.value() <= 0:
@@ -114,6 +113,24 @@ class PixelClassificationDock(QtWidgets.QDockWidget):
             self._table.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
             self._table.itemSelectionChanged.connect(self._on_viewer_row_selected)
 
+            # ✅ 작은 폭에서도 컬럼이 최대한 보이게(Count/Detail이 밀려서 안 보이는 현상 완화)
+            try:
+                hdr = self._table.horizontalHeader()
+                # Color(0), Count(2), Detail(3)은 내용 기반
+                hdr.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+                hdr.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+                hdr.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
+                # Class(1)는 남은 공간을 먹게
+                hdr.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+
+                self._table.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+                self._table.setWordWrap(False)
+
+                # (선택) 상세보기 버튼 컬럼 폭이 들쑥날쑥하면 고정
+                # self._table.setColumnWidth(3, 90)
+            except Exception:
+                pass
+
         if self._btn_class_reset:
             self._btn_class_reset.clicked.connect(self._on_click_class_reset)
 
@@ -125,40 +142,17 @@ class PixelClassificationDock(QtWidgets.QDockWidget):
         if self._btn_init:
             self._btn_init.clicked.connect(self._on_click_reset_params)
 
-        # 연산자 버튼 연결 제거 (지정 영역 분석 기능 제거됨)
-        # if self._btn_union:
-        #     self._btn_union.setCheckable(True)
-        #     self._btn_union.toggled.connect(self._on_union_toggled)
-        # if self._btn_sub:
-        #     self._btn_sub.setCheckable(True)
-        #     self._btn_sub.toggled.connect(self._on_subtract_toggled)
-
-        # 선택 모드 버튼 연결 제거 (지정 영역 분석 기능 제거됨)
-        # if self._btn_pick:
-        #     self._btn_pick.setCheckable(True)
-        #     self._btn_pick.toggled.connect(self._on_pick_toggled)
-        # if self._btn_rect:
-        #     self._btn_rect.setCheckable(True)
-        #     self._btn_rect.toggled.connect(self._on_rect_toggled)
-
-        # 분석 영역 초기화 버튼 제거 (지정 영역 분석 기능 제거됨)
-        # if self._btn_reset_analysis:
-        #     self._btn_reset_analysis.clicked.connect(self._on_click_reset_analysis_region)
-
-        # (선택) 폴리곤 버튼은 비활성 (제거됨)
-        # self._btn_poly = self._find(QtWidgets.QToolButton, "polygonToolButton")
-        # if self._btn_poly:
-        #     self._btn_poly.setEnabled(False)
-
+        # Reset 버튼들(기존 유지)
         self.btnReset = self.findChild(QtWidgets.QPushButton, "btnReset") \
                         or self.findChild(QtWidgets.QPushButton, "btnInit") \
                         or self.findChild(QtWidgets.QPushButton, "btnResetParams")
 
         if self.btnReset:
             self.btnReset.clicked.connect(self._on_click_reset)
-            
+
         if self._btn_view_details:
             self._btn_view_details.clicked.connect(self._on_click_view_analysis)
+
             
     # ---------- 유틸 ----------
     def _find(self, cls, name: str):
@@ -233,8 +227,17 @@ class PixelClassificationDock(QtWidgets.QDockWidget):
             btn.clicked.connect(lambda _=None, c=cid_i: self._on_click_class_detail(c))
             tv.setCellWidget(r, 3, btn)
 
-        tv.resizeColumnsToContents()
-        tv.horizontalHeader().setStretchLastSection(True)
+        hdr = tv.horizontalHeader()
+
+        # ✅ 작은 폭에서도 보기 좋게: Color/Count/Detail은 내용 기반, Class는 남은 폭을 먹게
+        hdr.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)  # Color
+        hdr.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)  # Count
+        hdr.setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)  # Detail(Button)
+        hdr.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)           # Class
+
+        # 가로 스크롤 필요시 자동
+        tv.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        tv.setWordWrap(False)
 
     def _lookup_meta_for(self, cid: int, id_to_name: Optional[Any]) -> Tuple[Optional[str], Optional[str]]:
         name = None; desc = None

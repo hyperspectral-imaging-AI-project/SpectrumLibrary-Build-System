@@ -4728,13 +4728,54 @@ class MainWindow(QtWidgets.QMainWindow):
         table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         table.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         table.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+
+        # ✅ 툴팁이 hover에서 잘 뜨도록 mouse tracking ON
+        table.setMouseTracking(True)
+        table.viewport().setMouseTracking(True)
+
+        # ✅ 말줄임표 + 툴팁 강제 표시 Delegate
+        class ElideAndTooltipDelegate(QtWidgets.QStyledItemDelegate):
+            def initStyleOption(self, option, index):
+                super().initStyleOption(option, index)
+                option.textElideMode = QtCore.Qt.ElideRight  # 말줄임표 유지
+
+            def helpEvent(self, event, view, option, index):
+                if event is not None and event.type() == QtCore.QEvent.ToolTip:
+                    text = index.data(QtCore.Qt.DisplayRole)
+                    if text:
+                        # HTML로 감싸면 긴 텍스트도 보기 좋게 줄바꿈 가능
+                        QtWidgets.QToolTip.showText(
+                            event.globalPos(),
+                            f"<div style='white-space:pre-wrap; max-width:600px;'>{text}</div>",
+                            view
+                        )
+                        return True
+                return super().helpEvent(event, view, option, index)
+
+        # Description 컬럼(4)에만 적용
+        table.setItemDelegateForColumn(4, ElideAndTooltipDelegate(table))
+
+        # 컬럼별 너비 전략
+        table.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)  # Rank
+        table.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)  # Class
+        table.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)  # Score
+        table.horizontalHeader().setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)  # Material Name
+        table.setColumnWidth(3, 200)
         table.horizontalHeader().setStretchLastSection(True)
-        table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
+        table.horizontalHeader().setSectionResizeMode(4, QtWidgets.QHeaderView.Stretch)  # Description
 
         for r, (rank, cid, score_str, name, desc) in enumerate(rows):
-            for c, val in enumerate([str(rank), str(cid), str(score_str), str(name), str(desc)]):
+            vals = [str(rank), str(cid), str(score_str), str(name), str(desc)]
+            for c, val in enumerate(vals):
                 it = QtWidgets.QTableWidgetItem(val)
                 it.setFlags(it.flags() ^ QtCore.Qt.ItemIsEditable)
+
+                # ✅ Description 컬럼은 tooltip도 같이 세팅(Delegate + 이중 안전장치)
+                if c == 4:
+                    it.setTextAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+                    if val.strip():
+                        it.setToolTip(val)
+
                 table.setItem(r, c, it)
 
         layout.addWidget(table)
@@ -4743,6 +4784,7 @@ class MainWindow(QtWidgets.QMainWindow):
         layout.addWidget(btn)
         dlg.setLayout(layout)
         dlg.exec_()
+
         
     # MainWindow 클래스 내부에 추가
     def _apply_confidence_overlay_to_mapview(self, strict_val: float, base_val: float):
