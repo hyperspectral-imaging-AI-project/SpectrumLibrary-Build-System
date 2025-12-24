@@ -86,19 +86,9 @@
             </property>
            </spacer>
           </item>
-          <item>
-           <widget class="QPushButton" name="btnCreateNewClass">
-            <property name="minimumSize">
-             <size>
-              <width>140</width>
-              <height>32</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>신규 클래스 생성</string>
-            </property>
-           </widget>
-          </item>
+
+          <!-- btnCreateNewClass 제거됨 -->
+
           <item>
            <spacer name="spBottomRight">
             <property name="orientation">

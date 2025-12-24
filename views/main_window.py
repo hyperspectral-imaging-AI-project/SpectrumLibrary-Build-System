@@ -6966,12 +6966,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self._augment_palette_for(used_cids, push_renderer=True, push_dock=True)
 
-        # id_to_name는 기존 스펙트럼 라이브러리 이름 맵을 사용
-        id_to_name = self._norm_id_to_name()
+        # ✅ 여기
+        id_to_name = self._build_id_to_name_for_cids(used_cids)
+
         self._register_map_semantics("unmixing", metric="abundance", distance=False)
 
-        # 기존 unmixing 레이어를 지우고 다시 등록
-        # (아예 Layer/Map에서 지우고 다시 저장하는 방식)
         try:
             self.layer_manager.remove("unmixing")
         except Exception:
@@ -6982,20 +6981,14 @@ class MainWindow(QtWidgets.QMainWindow):
             classmap_i32=classmap,
             class_ids=used_cids,
             visible=True,
-            id_to_name=id_to_name,
+            id_to_name=id_to_name,    # ✅ mtrl_nm이 Layer 표시명으로 들어감
         )
 
         self.unmixing_classmap = classmap
-
-            
+                
     @QtCore.pyqtSlot(float)
     def _on_unmixing_threshold_changed(self, new_thr: float):
-        """
-        UnmixingDock에서 임계값을 바꿀 때 호출되는 슬롯.
-        new_thr: 0~1 (또는 0~100, 둘 다 처리)
-        """
         try:
-            # 퍼센트 값도 허용 (예: 80 → 0.8)
             thr = float(new_thr)
             thr = thr / 100.0 if thr > 1.0 else thr
             thr = max(0.0, min(1.0, thr))
@@ -7005,7 +6998,11 @@ class MainWindow(QtWidgets.QMainWindow):
                 return
 
             self.unmixing_threshold = thr
-            self._build_unmixing_classmap_from_abundance(thr)
+
+            # ✅ mapping 유지
+            mapping = getattr(self, "unmixing_class_mapping", {}) or {}
+            self._build_unmixing_classmap_from_abundance(thr, mapping=mapping)
+
         except Exception:
             logging.exception("[Unmixing] threshold changed handler failed")
             
@@ -7018,6 +7015,88 @@ class MainWindow(QtWidgets.QMainWindow):
         self.unmixing_class_mapping = {int(k): int(v) for k, v in mapping.items()}
         thr = getattr(self, "unmixing_threshold", 0.8)
         self._build_unmixing_classmap_from_abundance(thr, mapping=self.unmixing_class_mapping)
+        
+    def _build_id_to_name_for_cids(self, cids: List[int]) -> Dict[int, str]:
+        """
+        주어진 CID 목록에 대해 {cid: mtrl_nm} 형태의 id_to_name을 만든다.
+        우선순위:
+        1) self._mtrl_meta[cid]["name" or "mtrl_nm"]
+        2) self._last_id_to_name (dict 또는 list[dict]) 기반
+        3) (server일 때) material_filtering_url API로 누락 채움
+        4) fallback: str(cid)
+        """
+        cids = [int(c) for c in (cids or []) if int(c) >= 0]
+        out: Dict[int, str] = {}
+
+        # 1) _mtrl_meta
+        meta = getattr(self, "_mtrl_meta", {}) or {}
+        if isinstance(meta, dict):
+            for cid in cids:
+                m = meta.get(cid) or meta.get(str(cid)) or {}
+                if isinstance(m, dict):
+                    nm = m.get("mtrl_nm") or m.get("name")
+                    if nm:
+                        out[cid] = str(nm)
+
+        # 2) _last_id_to_name
+        raw = getattr(self, "_last_id_to_name", {}) or {}
+        if isinstance(raw, dict):
+            for cid in cids:
+                if cid in out:
+                    continue
+                v = raw.get(cid) or raw.get(str(cid))
+                if isinstance(v, dict):
+                    nm = v.get("mtrl_nm") or v.get("name")
+                    if nm:
+                        out[cid] = str(nm)
+                elif v:
+                    out[cid] = str(v)
+
+        elif isinstance(raw, (list, tuple)):
+            # [{"mtrl_cd":..,"mtrl_nm":..}, ...] 형태
+            for rec in raw:
+                if not isinstance(rec, dict):
+                    continue
+                try:
+                    cid2 = int(rec.get("mtrl_cd"))
+                except Exception:
+                    continue
+                if cid2 in out:
+                    continue
+                nm = rec.get("mtrl_nm") or rec.get("name")
+                if nm:
+                    out[cid2] = str(nm)
+
+        # 3) server면 API로 부족분 채움
+        missing = [cid for cid in cids if cid not in out]
+        if missing and getattr(self, "user_type", "server") != "personal":
+            try:
+                base_url = os.getenv("material_filtering_url")
+                if base_url:
+                    recs = search_material_filtering_list(base_url=base_url, mtrl_ids=missing)
+                    for rec in (recs or []):
+                        if not isinstance(rec, dict):
+                            continue
+                        try:
+                            cid2 = int(rec.get("mtrl_cd"))
+                        except Exception:
+                            continue
+                        nm = rec.get("mtrl_nm") or rec.get("name")
+                        if nm:
+                            out[cid2] = str(nm)
+                            # _mtrl_meta에도 저장해 재사용
+                            meta[cid2] = {"mtrl_nm": str(nm), "desc": rec.get("desc", rec.get("dsc", ""))}
+                    self._mtrl_meta = meta
+            except Exception:
+                logging.exception("[Unmixing] build_id_to_name API fill failed")
+
+        # 4) fallback
+        for cid in cids:
+            out.setdefault(cid, str(cid))
+
+        return out
+
+        
 # 단독 실행 테스트용(선택)
 if __name__ == "__main__":
     import sys

@@ -11,11 +11,12 @@ import numpy as np
 
 # LabelingCandidateReviewDialog 에서 사용 중인 유틸 가져오기
 from views.dialogs.labeling_candidate_review import (
-    SAM, SID, SCC,                 # get_metric 기반 SAM/SID/SCC distance
+    SAM, SID, SCC,
     _build_class_lib,
     _build_labeling_lib,
     _merge_lib_dicts,
     _as_dict_lib,
+    _apply_cr_batch,              # ✅ 추가 (CR batch 적용)
     VLMResultWindow,
     VLMStreamWorker,
 )
@@ -149,6 +150,8 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
     - # 컬럼의 체크박스로 선택된 후보 스펙트럼을 오른쪽 그래프에 겹쳐서 표시
     - VLM 버튼: Top-18 결과를 요약해서 VLM 스트리밍 분석 호출
     """
+    apply_to_unmixing_requested = QtCore.pyqtSignal(dict)
+
 
     def __init__(self, parent=None, ui_dir: Optional[Path] = None):
         super().__init__(parent)
@@ -202,6 +205,8 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
         self._top_rows_cache: List[Tuple[int, str, float, str, str]] = []
         self._suppress_item_changed: bool = False
 
+        self.btnApplyLabel: QtWidgets.QPushButton = self.findChild(QtWidgets.QPushButton, "btnApplyLabel")
+
         # 테이블 초기화
         if self.tableResults:
             self.tableResults.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
@@ -243,7 +248,9 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
 
         if self.pushButtonVLM:
             self.pushButtonVLM.clicked.connect(self._on_vlm_clicked)
-
+            
+        if self.btnApplyLabel:
+            self.btnApplyLabel.clicked.connect(self._on_apply_label_clicked)
     # ------------------------------------------------------------------
     # 외부에서 호출: 엔드멤버 스펙트럼 설정 + Top-18 계산/표시
     # ------------------------------------------------------------------
@@ -326,52 +333,80 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
     def _compute_top18(self, target: np.ndarray, top_each: int = 3) -> List[Dict[str, Any]]:
         """
         요구사항: raw에서 SAM/SID/SCC 각 3개, cr에서 SAM/SID/SCC 각 3개 ⇒ 총 18개
-        - Metric 컬럼에 'SAM (raw)' 형태로 표기
-        - 값은 '작을수록 유사' 기준(거리형) 오름차순
+        - CR 비교는 반드시 (target_cr) vs (refs_cr)로 수행
         """
         rows: List[Dict[str, Any]] = []
-
-        if target is None or target.size == 0:
+        if target is None or np.asarray(target).size == 0:
             return rows
 
-        if self._cube is not None:
-            expect_c = self._cube.shape[2]
-        else:
-            expect_c = target.shape[0]
+        target_raw = np.asarray(target, dtype=np.float32).ravel()
+
+        # expect_c 결정
+        expect_c = int(self._cube.shape[2]) if self._cube is not None else int(target_raw.shape[0])
+
+        # wavelength 준비 (CR 계산용)
+        wavelength = None
+        if self._wavelengths is not None:
+            try:
+                w = np.asarray(self._wavelengths, dtype=np.float32).ravel()
+                if w.size == expect_c:
+                    wavelength = w
+            except Exception:
+                wavelength = None
+
+        # target_cr 준비 (없으면 raw로 fallback)
+        target_cr = None
+        if wavelength is not None:
+            try:
+                from core.resampling_service import perform_continuum_removal
+                cr1d, _ = perform_continuum_removal(target_raw, wavelength, mode="reflectance")
+                target_cr = np.asarray(cr1d, dtype=np.float32).ravel()
+            except Exception:
+                target_cr = None
 
         # 1) 라이브러리(raw/cr) + 라벨링(raw/cr) 빌드/병합
         class_lib_raw = _build_class_lib(self._spec_lib_raw, None, expect_c)
-        class_lib_cr = _build_class_lib(None, self._spec_lib_cr, expect_c)
+        class_lib_cr  = _build_class_lib(None, self._spec_lib_cr, expect_c)
         label_lib_raw = _build_labeling_lib(self._label_raw, None, expect_c)
-        label_lib_cr = _build_labeling_lib(None, self._label_cr, expect_c)
+        label_lib_cr  = _build_labeling_lib(None, self._label_cr, expect_c)
 
-        # 라벨링 포함해서 raw/cr 별로 병합
+        # raw/cr 별로 병합
         class_lib_raw = _merge_lib_dicts(class_lib_raw, label_lib_raw, expect_c=expect_c)
-        class_lib_cr = _merge_lib_dicts(class_lib_cr, label_lib_cr, expect_c=expect_c)
+        class_lib_cr  = _merge_lib_dicts(class_lib_cr,  label_lib_cr,  expect_c=expect_c)
 
         # 이후 그래프/VLM에서도 재사용할 수 있도록 보관
         self._class_lib_raw = class_lib_raw
-        self._class_lib_cr = class_lib_cr
+        self._class_lib_cr  = class_lib_cr
         self._label_lib_raw = label_lib_raw
-        self._label_lib_cr = label_lib_cr
+        self._label_lib_cr  = label_lib_cr
 
-        def _min_dists_for_lib(L: Dict[int, np.ndarray]) -> Dict[int, Tuple[float, float, float]]:
-            """cid -> (sam_min, sid_min, scc_min)"""
+        def _min_dists_for_lib(
+            L: Dict[int, np.ndarray],
+            target_vec: np.ndarray,
+            *,
+            apply_cr: bool,
+            wavelength: Optional[np.ndarray],
+        ) -> Dict[int, Tuple[float, float, float]]:
+            """cid -> (sam_min, sid_min, scc_min). apply_cr=True면 refs도 CR 적용 후 비교."""
             out: Dict[int, Tuple[float, float, float]] = {}
             L = _as_dict_lib(L)
             if not isinstance(L, dict) or len(L) == 0:
                 return out
 
-            tvec = target.astype(float, copy=False)
+            tvec = np.asarray(target_vec, dtype=np.float32).ravel()
 
             for cid, refs in L.items():
-                A = np.asarray(refs, dtype=float)
+                A = np.asarray(refs, dtype=np.float32)
                 if A.ndim == 1:
                     A = A[None, :]
                 if A.ndim != 2 or A.shape[1] != tvec.shape[0]:
                     continue
 
-                # SAM/SID/SCC 거리 (core.metrics 기반)
+                if apply_cr:
+                    if wavelength is None:
+                        continue
+                    A = _apply_cr_batch(A, wavelength)  # ✅ refs도 CR 적용
+
                 sam_vals = SAM(A, tvec)
                 sid_vals = SID(A, tvec)
                 scc_vals = SCC(A, tvec)
@@ -383,8 +418,15 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
                 )
             return out
 
-        d_raw = _min_dists_for_lib(class_lib_raw)
-        d_cr = _min_dists_for_lib(class_lib_cr)
+        # raw 비교: raw vs raw
+        d_raw = _min_dists_for_lib(class_lib_raw, target_raw, apply_cr=False, wavelength=None)
+
+        # cr 비교: target_cr vs refs_cr (가능할 때만)
+        d_cr: Dict[int, Tuple[float, float, float]] = {}
+        if (target_cr is not None) and (wavelength is not None):
+            d_cr = _min_dists_for_lib(class_lib_cr, target_cr, apply_cr=True, wavelength=wavelength)
+        else:
+            logging.warning("[EndmemberDetail] CR 비교 불가: wavelength 또는 target_cr 없음")
 
         # 2) 재료 메타 보강
         meta_map = self._mtrl_meta or {}
@@ -393,9 +435,8 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
             missing = [cid for cid in all_cids if cid not in meta_map]
             if missing:
                 from data.db import search_material_filtering_list
-
                 base_url = os.getenv("material_filtering_url")
-                if base_url and missing:
+                if base_url:
                     recs = search_material_filtering_list(base_url=base_url, mtrl_ids=list(missing))
                     for rec in (recs or []):
                         try:
@@ -425,7 +466,7 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
                 cand = [(cid, vals[mi]) for cid, vals in dmap.items()]
                 cand.sort(key=lambda x: x[1])
                 for cid, val in cand[:top_each]:
-                    name, desc = _meta(cid)
+                    name, desc = _meta(int(cid))
                     rows.append(
                         {
                             "class": int(cid),
@@ -437,7 +478,7 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
                     )
 
         _pick_top("raw", d_raw)
-        _pick_top("cr", d_cr)
+        _pick_top("cr",  d_cr)
 
         return rows
 
@@ -542,7 +583,7 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
     # VLM 분석 (LabelingCandidateReviewDialog._on_detail_analysis 기반 간소 버전)
     # ------------------------------------------------------------------
     def _on_vlm_clicked(self):
-        """VLM 분석 버튼 클릭 핸들러"""
+        """VLM 분석 버튼 클릭 핸들러 (CR은 CR 적용 후 비교)"""
         if not self._top_rows_cache:
             QtWidgets.QMessageBox.information(self, "안내", "분석 데이터가 없습니다. 먼저 엔드멤버를 설정하세요.")
             return
@@ -558,7 +599,7 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
                 for (cid, metric_src, val, name, desc) in self._top_rows_cache
                 if metric_tag in metric_src
             ]
-            rows.sort(key=lambda r: r[2])
+            rows.sort(key=lambda r: r[2])  # value 오름차순(거리형)
             return rows[:top_k]
 
         def _desc_lines_for_metric(metric_tag: str):
@@ -582,17 +623,34 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
         # ---------- 2) CSV: 엔드멤버 + 각 metric별 top-3 대표 스펙트럼 ----------
         csv_text = ""
         try:
-            # 파장
-            n_band = self._endmember_spectrum.shape[0]
-            wave = None
-            if self._wavelengths is not None and self._wavelengths.shape[0] == n_band:
-                wave = np.asarray(self._wavelengths, dtype=float)
+            # 2-1) 파장
+            n_band = int(self._endmember_spectrum.shape[0])
+            if self._wavelengths is not None and np.asarray(self._wavelengths).shape[0] == n_band:
+                wave = np.asarray(self._wavelengths, dtype=float).ravel()
             else:
                 wave = np.arange(n_band, dtype=float)
 
-            target_vec = self._endmember_spectrum.astype(np.float32, copy=False)
+            # 2-2) target_raw / target_cr 준비
+            target_raw = np.asarray(self._endmember_spectrum, dtype=np.float32).ravel()
+
+            wavelength = None
+            if self._wavelengths is not None:
+                w = np.asarray(self._wavelengths, dtype=np.float32).ravel()
+                if w.size == n_band:
+                    wavelength = w
+
+            target_cr = None
+            if wavelength is not None:
+                try:
+                    from core.resampling_service import perform_continuum_removal
+                    cr1d, _ = perform_continuum_removal(target_raw, wavelength, mode="reflectance")
+                    target_cr = np.asarray(cr1d, dtype=np.float32).ravel()
+                except Exception:
+                    target_cr = None
+
             expect_c = n_band
 
+            # 2-3) 라이브러리(스펙트럼 + 라벨링) 재구성
             class_lib_raw = _merge_lib_dicts(
                 _build_class_lib(self._spec_lib_raw, None, expect_c),
                 _build_labeling_lib(self._label_raw, None, expect_c),
@@ -607,43 +665,67 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
             metric_fn_map = {"SAM": SAM, "SID": SID, "SCC": SCC}
 
             def _best_ref_for_row(row_info):
+                """
+                row_info: (cid, metric_src, val, name, desc)
+                return: 1D np.ndarray or None
+
+                - raw 행: target_raw vs refs_raw
+                - cr  행: target_cr  vs refs_cr (refs는 _apply_cr_batch로 CR 적용)
+                """
                 cid, metric_src, _, _, _ = row_info
-                cid = int(cid)
                 try:
-                    if "SAM" in metric_src:
-                        metric_name = "SAM"
-                    elif "SID" in metric_src:
-                        metric_name = "SID"
-                    elif "SCC" in metric_src:
-                        metric_name = "SCC"
-                    else:
-                        return None
-                    metric_fn = metric_fn_map.get(metric_name)
-                    if metric_fn is None:
-                        return None
-                    source_tag = "raw"
-                    if "cr" in metric_src.lower():
-                        source_tag = "cr"
-                    lib = class_lib_raw if source_tag == "raw" else class_lib_cr
-                    refs = lib.get(cid, None)
-                    if refs is None:
-                        return None
-                    refs = np.asarray(refs, dtype=np.float32)
-                    if refs.ndim == 1:
-                        refs = refs[None, :]
-                    if refs.ndim != 2 or refs.shape[1] != target_vec.shape[0]:
-                        return None
-                    try:
-                        dists = metric_fn(refs, target_vec)
-                    except Exception:
-                        dists = np.asarray([metric_fn(refs[i, :], target_vec) for i in range(refs.shape[0])])
-                    if dists.size == 0:
-                        return None
-                    best_idx = int(np.argmin(dists))
-                    return refs[best_idx, :].astype(np.float32, copy=False)
+                    cid_i = int(cid)
                 except Exception:
-                    logging.exception("[Endmember VLM] _best_ref_for_row failed")
                     return None
+
+                # metric name 파싱
+                if "SAM" in metric_src:
+                    metric_name = "SAM"
+                elif "SID" in metric_src:
+                    metric_name = "SID"
+                elif "SCC" in metric_src:
+                    metric_name = "SCC"
+                else:
+                    return None
+
+                metric_fn = metric_fn_map.get(metric_name)
+                if metric_fn is None:
+                    return None
+
+                is_cr = ("cr" in (metric_src or "").lower())
+
+                # 라이브러리 선택(입력 raw/cr)
+                lib = class_lib_cr if is_cr else class_lib_raw
+                refs = lib.get(cid_i, None)
+                if refs is None:
+                    return None
+
+                refs = np.asarray(refs, dtype=np.float32)
+                if refs.ndim == 1:
+                    refs = refs[None, :]
+                if refs.ndim != 2 or refs.shape[1] != n_band:
+                    return None
+
+                # ✅ CR 비교: target_cr vs refs_cr
+                if is_cr:
+                    if wavelength is None or target_cr is None:
+                        return None
+                    tvec = target_cr
+                    refs = _apply_cr_batch(refs, wavelength)  # ★ refs도 CR 적용
+                else:
+                    tvec = target_raw
+
+                # 거리 계산
+                try:
+                    dists = metric_fn(refs, tvec)
+                except Exception:
+                    dists = np.asarray([metric_fn(refs[i, :], tvec) for i in range(refs.shape[0])], dtype=float)
+
+                if dists.size == 0:
+                    return None
+
+                best_idx = int(np.argmin(dists))
+                return refs[best_idx, :].astype(np.float32, copy=False)
 
             def _best_specs_for_metric(metric_tag: str):
                 rows = _top_by_metric(metric_tag, top_k=3)
@@ -659,7 +741,9 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
             scc_specs = _best_specs_for_metric("SCC")
 
             spectra_rows: List[Tuple[str, Optional[np.ndarray]]] = []
-            spectra_rows.append(("endmember", target_vec))
+            spectra_rows.append(("endmember_raw", target_raw))
+            spectra_rows.append(("endmember_cr", target_cr if target_cr is not None else None))
+
             for i, spec in enumerate(sam_specs, start=1):
                 spectra_rows.append((f"SAM_top{i}", spec))
             for i, spec in enumerate(sid_specs, start=1):
@@ -671,22 +755,22 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
             lines = [",".join(header_cols)]
             for name, spec in spectra_rows:
                 row_vals = [name]
-                if spec is None or spec.shape[0] != n_band:
+                if spec is None or np.asarray(spec).shape[0] != n_band:
                     row_vals += ["" for _ in range(n_band)]
                 else:
-                    row_vals += [f"{float(v):.6f}" for v in spec]
+                    row_vals += [f"{float(v):.6f}" for v in np.asarray(spec).ravel()]
                 lines.append(",".join(row_vals))
+
             csv_text = "\n".join(lines)
+
         except Exception:
             logging.exception("[Endmember VLM] CSV 생성 실패")
             csv_text = ""
 
         # ---------- 3) 프롬프트 템플릿 로드 + 치환 ----------
         try:
-            # TODO: 경로는 프로젝트 구조에 맞게 수정
-            text_prompt = load_prompt(
-                prompt_path=r"prompt/vlm_prompt.md"
-            )
+            # TODO: 실제 프로젝트 경로로 맞추세요
+            text_prompt = load_prompt(prompt_path=r"prompt/vlm_prompt.md")
         except Exception as e:
             QtWidgets.QMessageBox.warning(self, "VLM", f"프롬프트 템플릿 로드 실패: {e}")
             return
@@ -697,22 +781,24 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
 
         prompt_text = text_prompt
         prompt_text = _safe_replace(prompt_text, "csv", csv_text)
+
         prompt_text = _safe_replace(prompt_text, "sam_top1", sam_top1)
         prompt_text = _safe_replace(prompt_text, "sam_top2", sam_top2)
         prompt_text = _safe_replace(prompt_text, "sam_top3", sam_top3)
+
         prompt_text = _safe_replace(prompt_text, "sid_top1", sid_top1)
         prompt_text = _safe_replace(prompt_text, "sid_top2", sid_top2)
         prompt_text = _safe_replace(prompt_text, "sid_top3", sid_top3)
+
         prompt_text = _safe_replace(prompt_text, "scc_top1", scc_top1)
         prompt_text = _safe_replace(prompt_text, "scc_top2", scc_top2)
         prompt_text = _safe_replace(prompt_text, "scc_top3", scc_top3)
 
         QtWidgets.QApplication.clipboard().setText(prompt_text)
 
-        # 여기서는 엔드멤버 자체라 별도의 RGB 패치 이미지는 없다고 보고, img_url은 빈 문자열로 둠
+        # ---------- 4) VLM 스트리밍 (엔드멤버는 RGB 패치가 없으므로 img_url 빈 문자열) ----------
         img_url = ""
 
-        # ---------- 4) VLM 스트리밍 창 + 워커 실행 ----------
         self._vlm_text_win = VLMResultWindow("VLM 스트리밍 결과", parent=self)
         self._vlm_text_win.set_text("[VLM 분석 시작]\n결과가 순차적으로 표시됩니다.\n\n")
         self._vlm_text_win.show()
@@ -751,6 +837,7 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
 
         self._vlm_thread.start()
 
+
     def _name_for_cid(self, cid: int) -> str:
         """CID → 물질명 문자열로 변환 (없으면 CID 그대로)"""
         try:
@@ -771,3 +858,100 @@ class EndmemberDetailDialog(QtWidgets.QDialog):
 
         # 3) 전부 없으면 CID 문자열로
         return str(cid_i)
+
+    def _on_apply_label_clicked(self):
+        if self.tableResults is None:
+            return
+
+        sel = self.tableResults.selectionModel().selectedRows() if self.tableResults.selectionModel() else []
+        if len(sel) != 1:
+            QtWidgets.QMessageBox.information(self, "안내", "테이블에서 후보를 1개만 선택하세요.")
+            return
+
+        row = int(sel[0].row())
+
+        item_cid = self.tableResults.item(row, 1)
+        item_metric = self.tableResults.item(row, 2)
+        item_value = self.tableResults.item(row, 3)
+        item_name = self.tableResults.item(row, 4)
+        item_desc = self.tableResults.item(row, 5)
+
+        if item_cid is None or item_metric is None or item_value is None:
+            QtWidgets.QMessageBox.warning(self, "경고", "선택한 행의 데이터가 올바르지 않습니다.")
+            return
+
+        try:
+            cid = int(item_cid.text())
+        except Exception:
+            QtWidgets.QMessageBox.warning(self, "경고", "Class ID를 파싱할 수 없습니다.")
+            return
+
+        metric_src = item_metric.text() or ""
+        try:
+            value = float(item_value.text())
+        except Exception:
+            value = float("nan")
+
+        source = "cr" if "cr" in metric_src.lower() else "raw"
+        if "SAM" in metric_src:
+            metric = "SAM"
+        elif "SID" in metric_src:
+            metric = "SID"
+        else:
+            metric = "SCC"
+
+        mtrl_name = item_name.text() if item_name is not None else self._name_for_cid(cid)
+        mtrl_desc = item_desc.text() if item_desc is not None else ""
+
+        if self._endmember_spectrum is None:
+            QtWidgets.QMessageBox.warning(self, "경고", "엔드멤버 스펙트럼이 없습니다.")
+            return
+
+        expect_c = int(np.asarray(self._endmember_spectrum).ravel().shape[0])
+
+        lib_raw_all = _merge_lib_dicts(self._class_lib_raw, self._label_lib_raw, expect_c=expect_c)
+        lib_cr_all  = _merge_lib_dicts(self._class_lib_cr,  self._label_lib_cr,  expect_c=expect_c)
+        lib = lib_cr_all if source == "cr" else lib_raw_all
+
+        refs = lib.get(cid)
+        if refs is None:
+            QtWidgets.QMessageBox.warning(self, "경고", "선택 클래스의 후보 스펙트럼(refs)을 찾지 못했습니다.")
+            return
+
+        refs = np.asarray(refs, dtype=np.float32)
+        if refs.ndim == 1:
+            refs = refs[None, :]
+        if refs.ndim != 2 or refs.shape[1] != expect_c:
+            QtWidgets.QMessageBox.warning(self, "경고", "후보 스펙트럼(refs) shape이 올바르지 않습니다.")
+            return
+
+        ref_spec = refs.mean(axis=0).astype(np.float32, copy=False)
+        target_spec = np.asarray(self._endmember_spectrum, dtype=np.float32).ravel()
+
+        wv = None
+        if self._wavelengths is not None:
+            try:
+                w = np.asarray(self._wavelengths, dtype=np.float32).ravel()
+                if w.size == expect_c:
+                    wv = w
+            except Exception:
+                wv = None
+
+        payload = {
+            "endmember_index": self._endmember_index,
+            "cid": cid,
+            "mtrl_name": mtrl_name,
+            "mtrl_desc": mtrl_desc,
+            "metric": metric,
+            "source": source,
+            "value": value,
+            "target_spec": target_spec,
+            "ref_spec": ref_spec,
+            "wavelength": wv,
+        }
+
+        # ✅ 1) Dock 반영 요청
+        self.apply_to_unmixing_requested.emit(payload)
+
+        # ✅ 2) Dialog 닫기
+        self.accept()   # 또는 self.close()

@@ -33,6 +33,10 @@ class PixelClassificationDialog(QtWidgets.QDialog):
         self._root.lineEdit_threshold.setText("0.05")
         self._root.lineEdit_margin.setText("0.03")
         
+        # 임계값/마진값 변경 시 결정 규칙 텍스트 업데이트
+        self._root.lineEdit_threshold.textChanged.connect(self._update_decision_rules)
+        self._root.lineEdit_margin.textChanged.connect(self._update_decision_rules)
+        
         # 버튼 연결
         self._root.pushButton_save.clicked.connect(self._on_save_map)
         self._root.pushButton_cancel.clicked.connect(self.reject)
@@ -42,6 +46,14 @@ class PixelClassificationDialog(QtWidgets.QDialog):
         self._metric_group.addButton(self._root.radioButton_sad, 0)
         self._metric_group.addButton(self._root.radioButton_sid, 1)
         self._metric_group.addButton(self._root.radioButton_scc, 2)
+        
+        # 라디오 버튼 변경 시 결정 규칙 텍스트 업데이트
+        self._root.radioButton_sad.toggled.connect(self._update_decision_rules)
+        self._root.radioButton_sid.toggled.connect(self._update_decision_rules)
+        self._root.radioButton_scc.toggled.connect(self._update_decision_rules)
+        
+        # 초기 결정 규칙 텍스트 설정
+        self._update_decision_rules()
         
     def get_metric(self) -> str:
         """선택된 유사도 지표 반환"""
@@ -119,3 +131,61 @@ class PixelClassificationDialog(QtWidgets.QDialog):
         
         # 맵 이름 설정
         self._root.lineEdit_map_name.setText(params.get("map_name", "classification1"))
+        
+        # 결정 규칙 텍스트 업데이트
+        self._update_decision_rules()
+    
+    def _update_decision_rules(self):
+        """선택된 메트릭에 따라 결정 규칙 텍스트 업데이트"""
+        metric = self.get_metric()
+        
+        # plainTextEdit_rules 위젯 찾기
+        rules_widget = None
+        try:
+            rules_widget = self._root.findChild(QtWidgets.QPlainTextEdit, "plainTextEdit_rules")
+        except Exception:
+            pass
+        
+        if rules_widget is None:
+            return
+        
+        # 현재 임계값과 마진값 가져오기
+        try:
+            tau = float(self._root.lineEdit_threshold.text())
+            delta = float(self._root.lineEdit_margin.text())
+        except ValueError:
+            tau = 0.05
+            delta = 0.03
+        
+        # 메트릭별 결정 규칙 텍스트 생성
+        if metric == "SAD":
+            rules_text = f"""Unknown : 각도 > τ ({tau:.3f})
+  → 가장 유사한 클래스와의 각도가 임계값보다 크면 미분류
+
+c_i : 각도 ≤ τ ({tau:.3f}) AND (각도차 ≥ δ ({delta:.3f}))
+  → 각도가 임계값 이하이고, 1등과 2등의 각도 차이가 마진 이상이면 단일 클래스
+
+multiple : 그 외
+  → 위 조건에 해당하지 않으면 중복 클래스"""
+        
+        elif metric == "SID":
+            rules_text = f"""Unknown : 거리 > τ ({tau:.3f})
+  → 가장 유사한 클래스와의 정보 거리가 임계값보다 크면 미분류
+
+c_i : 거리 ≤ τ ({tau:.3f}) AND (거리차 ≥ δ ({delta:.3f}))
+  → 거리가 임계값 이하이고, 1등과 2등의 거리 차이가 마진 이상이면 단일 클래스
+
+multiple : 그 외
+  → 위 조건에 해당하지 않으면 중복 클래스"""
+        
+        else:  # SCC
+            rules_text = f"""Unknown : 거리 > τ ({tau:.3f})
+  → 가장 유사한 클래스와의 상관 거리가 임계값보다 크면 미분류
+
+c_i : 거리 ≤ τ ({tau:.3f}) AND (거리차 ≥ δ ({delta:.3f}))
+  → 거리가 임계값 이하이고, 1등과 2등의 거리 차이가 마진 이상이면 단일 클래스
+
+multiple : 그 외
+  → 위 조건에 해당하지 않으면 중복 클래스"""
+        
+        rules_widget.setPlainText(rules_text)

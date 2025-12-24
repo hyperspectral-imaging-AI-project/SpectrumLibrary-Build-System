@@ -75,6 +75,10 @@ class UnmixingDock(QtWidgets.QDockWidget):
         if self.pushButtonReset:
             self.pushButtonReset.clicked.connect(self._on_reset_clicked)
         self._class_options: List[tuple[int, str]] = []  # ← 추가
+        # ✅ Dock이 처음 켜질 때 너무 좁으면 Detail 컬럼이 잘림 → 기본 폭 확보
+        self.setMinimumWidth(520)          # 환경에 따라 480~650 사이로 조절
+        self._preferred_width = 620        # 첫 표시 때 목표 폭
+
 
     def _find(self, cls, name: str):
         """위젯 찾기 헬퍼"""
@@ -288,6 +292,8 @@ class UnmixingDock(QtWidgets.QDockWidget):
                 spectrum=endmember_spectrum,
                 wavelengths=self._wavelengths,
             )
+            if hasattr(dlg, "apply_to_unmixing_requested"):
+                dlg.apply_to_unmixing_requested.connect(self._on_apply_from_endmember_detail)
             
             # 모델리스로 표시
             dlg.setModal(False)
@@ -347,3 +353,95 @@ class UnmixingDock(QtWidgets.QDockWidget):
                 if cid is not None:
                     mapping[row] = int(cid)  # row == endmember index
         return mapping
+
+    def _on_apply_from_endmember_detail(self, payload: dict):
+        """
+        EndmemberDetailDialog의 '선택 라벨로 변경' 버튼 클릭 결과를 받아
+        UnmixingDock 테이블의 (endmember_index 행) Class 콤보박스 선택을 변경한다.
+        payload 예:
+        {
+            "endmember_index": 0,
+            "cid": 123,
+            "mtrl_name": "...",
+            ...
+        }
+        """
+        try:
+            em_idx = payload.get("endmember_index", None)
+            cid = payload.get("cid", None)
+
+            if em_idx is None or cid is None:
+                QtWidgets.QMessageBox.warning(self, "경고", "적용 정보가 부족합니다. (endmember_index/cid)")
+                return
+
+            em_idx = int(em_idx)   # 0-based
+            cid = int(cid)
+
+            ok = self._set_endmember_class_combo(em_idx, cid)
+            if not ok:
+                QtWidgets.QMessageBox.warning(self, "경고", f"Dock 반영 실패: endmember={em_idx}, cid={cid}")
+                return
+
+            # (선택) 사용자가 바로 보게끔 해당 row 선택
+            if self.tableEndmember:
+                self.tableEndmember.selectRow(em_idx)
+
+            # (선택) 즉시 MainWindow에 매핑을 보내고 싶다면 아래 한 줄을 켜세요.
+            # self.classMappingApplied.emit({em_idx: cid})
+
+        except Exception as e:
+            logging.exception(f"[UnmixingDock] apply from detail failed: {e}")
+            QtWidgets.QMessageBox.critical(self, "오류", f"Dock 반영 중 오류: {e}")
+
+    def _set_endmember_class_combo(self, endmember_index: int, cid: int) -> bool:
+        """
+        tableEndmember의 endmember_index 행(0-based)에서
+        Class 콤보박스를 찾아 cid로 선택을 바꾼다.
+        """
+        if not self.tableEndmember:
+            return False
+
+        row_count = self.tableEndmember.rowCount()
+        if endmember_index < 0 or endmember_index >= row_count:
+            return False
+
+        combo = self.tableEndmember.cellWidget(endmember_index, 1)
+        if not isinstance(combo, QtWidgets.QComboBox):
+            return False
+
+        idx = combo.findData(cid)
+        if idx >= 0:
+            combo.setCurrentIndex(idx)
+            return True
+
+        # 콤보 옵션에 cid가 없는 경우(메타가 아직 로드되지 않았거나 옵션 누락)
+        # 1) 옵션이 전혀 없으면 그냥 실패 처리
+        # 2) 옵션이 있는데 특정 cid만 없으면 임시로 추가 후 선택
+        # 여기서는 "임시 추가" 전략을 사용
+        display_name = str(cid)
+        try:
+            # payload에 name이 있으면 그걸 쓰고 싶지만 여기선 combo만 다루므로 cid 표시만
+            pass
+        except Exception:
+            pass
+
+        combo.addItem(display_name, cid)
+        combo.setCurrentIndex(combo.count() - 1)
+        return True
+
+    def showEvent(self, event):
+        super().showEvent(event)
+        try:
+            # 처음 열릴 때 한 번만 폭 키우기 (사용자가 이후 조절한 폭은 존중)
+            if getattr(self, "_did_autosize_once", False):
+                return
+            self._did_autosize_once = True
+
+            # dock이 floating이 아니면, 도킹 영역에서 최소 폭을 확보
+            w = int(getattr(self, "_preferred_width", 620))
+            self.resize(w, self.height())
+
+            # 테이블 컬럼도 같이 맞춤
+            QtCore.QTimer.singleShot(0, self._ensure_detail_column_visible)
+        except Exception:
+            logging.exception("[UnmixingDock] showEvent autosize failed")
