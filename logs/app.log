@@ -17610,3 +17610,1932 @@ ModuleNotFoundError: No module named 'numpy._core.multiarray'
 2025-12-24 10:17:29,046 INFO: [UserLabeling] server 사용자: API 호출 시도
 2025-12-24 10:17:32,296 INFO: [LabelingCandidate] 타겟 스펙트럼 CR 적용 완료
 2025-12-24 10:22:26,235 INFO: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-24 10:27:45,562 INFO: [UserLabeling] 초기 클래스 로드(server): 3312개
+2025-12-24 10:27:50,801 INFO: [UserLabeling] server 사용자: API 호출 시도
+2025-12-24 10:27:53,814 INFO: [LabelingCandidate] 타겟 스펙트럼 CR 적용 완료
+2025-12-24 10:32:46,601 INFO: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-24 10:34:44,626 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-24 10:34:44,662 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-24 10:34:44,663 INFO: icon.rcc not found (skip)
+2025-12-24 10:35:12,790 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 18
+2025-12-24 10:35:12,848 INFO: [ResampleCache] cached result loaded
+2025-12-24 10:35:12,849 INFO: [ResampleCache] loaded: splib_raw=1841, splib_cr=1841, label_raw=0, label_cr=0
+2025-12-24 10:35:12,849 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-24 10:35:12,849 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-24 10:35:12,850 INFO: [_norm_entries] splib_raw: input list/tuple with 1841 items
+2025-12-24 10:35:12,857 INFO: [_norm_entries] splib_raw: output 1840 classes, 1840 total samples
+2025-12-24 10:35:12,858 INFO: [_norm_entries] splib_cr: input list/tuple with 1841 items
+2025-12-24 10:35:12,867 INFO: [_norm_entries] splib_cr: output 1840 classes, 1840 total samples
+2025-12-24 10:35:12,868 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-24 10:35:12,869 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-24 10:35:12,869 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-24 10:35:12,869 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-24 10:35:12,870 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-24 10:35:12,879 INFO: [rebuild] classes: splib_raw=1840, splib_cr=1840, label_raw=0, label_cr=0, lib=1840
+2025-12-24 10:35:12,879 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1840 classes / 3680 samples
+2025-12-24 10:35:12,935 INFO: [Rebuild] lib=1840 classes, labeling_lib=0 classes
+2025-12-24 10:35:12,936 INFO: Resampling 완료 — splib_raw:1841, splib_cr:1841, label_raw:0, label_cr:0
+2025-12-24 10:39:19,257 ERROR: [Classification] class label fetch failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 207, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPConnection object at 0x0000021AA88CBEB0>, 'Connection to 183.98.149.222 timed out. (connect timeout=10.0)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000021AA88CBEB0>, 'Connection to 183.98.149.222 timed out. (connect timeout=10.0)'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 297, in search_material_filtering_list
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 688, in send
+    raise ConnectTimeout(e, request=request)
+requests.exceptions.ConnectTimeout: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000021AA88CBEB0>, 'Connection to 183.98.149.222 timed out. (connect timeout=10.0)'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3695, in _on_pixel_classify
+    id_to_name = search_material_filtering_list(base_url=base_url, mtrl_ids=mtrl_ids)
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 301, in search_material_filtering_list
+    raise RuntimeError(f"HTTP error: {e}") from e
+RuntimeError: HTTP error: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000021AA88CBEB0>, 'Connection to 183.98.149.222 timed out. (connect timeout=10.0)'))
+2025-12-24 10:39:40,049 ERROR: [ClassDetail] dialog show failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 207, in _new_conn
+    raise ConnectTimeoutError(
+urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPConnection object at 0x0000021AA8946980>, 'Connection to 183.98.149.222 timed out. (connect timeout=10.0)')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000021AA8946980>, 'Connection to 183.98.149.222 timed out. (connect timeout=10.0)'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 297, in search_material_filtering_list
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 688, in send
+    raise ConnectTimeout(e, request=request)
+requests.exceptions.ConnectTimeout: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000021AA8946980>, 'Connection to 183.98.149.222 timed out. (connect timeout=10.0)'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\docks\pixel_classification_dock.py", line 428, in _show_class_detail_dialog
+    api_result = search_material_filtering_list(api_url, [cid]) if api_url else []
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 301, in search_material_filtering_list
+    raise RuntimeError(f"HTTP error: {e}") from e
+RuntimeError: HTTP error: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x0000021AA8946980>, 'Connection to 183.98.149.222 timed out. (connect timeout=10.0)'))
+2025-12-24 10:44:55,061 ERROR: [TopK] server: material_filtering_list failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0000021AA8946FB0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000021AA8946FB0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 297, in search_material_filtering_list
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000021AA8946FB0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 4650, in _show_pixel_topk
+    recs = search_material_filtering_list(base_url=base_url, mtrl_ids=missing)
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 301, in search_material_filtering_list
+    raise RuntimeError(f"HTTP error: {e}") from e
+RuntimeError: HTTP error: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000021AA8946FB0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 10:46:04,079 ERROR: [TopK] server: material_filtering_list failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0000021AA89465F0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000021AA89465F0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 297, in search_material_filtering_list
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000021AA89465F0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 4650, in _show_pixel_topk
+    recs = search_material_filtering_list(base_url=base_url, mtrl_ids=missing)
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 301, in search_material_filtering_list
+    raise RuntimeError(f"HTTP error: {e}") from e
+RuntimeError: HTTP error: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000021AA89465F0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 10:46:13,046 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-24 10:46:13,070 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-24 10:46:13,070 INFO: icon.rcc not found (skip)
+2025-12-24 10:46:25,952 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0000015DB1675C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000015DB1675C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 480, in image_check_and_save
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000015DB1675C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3246, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 484, in image_check_and_save
+    raise RuntimeError(f"HTTP error (check_url): {e}") from e
+RuntimeError: HTTP error (check_url): HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000015DB1675C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 10:46:26,039 INFO: [ResampleCache] cached result loaded
+2025-12-24 10:46:26,040 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-24 10:46:26,040 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-24 10:46:26,040 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-24 10:46:26,041 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-24 10:46:26,048 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-24 10:46:26,049 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-24 10:46:26,056 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-24 10:46:26,056 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-24 10:46:26,057 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-24 10:46:26,057 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-24 10:46:26,057 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-24 10:46:26,058 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-24 10:46:26,065 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-24 10:46:26,066 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-24 10:46:26,119 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-24 10:46:26,120 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-24 10:46:30,562 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-24 10:46:30,581 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-24 10:46:30,582 INFO: icon.rcc not found (skip)
+2025-12-24 10:46:46,260 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0000017814235C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000017814235C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 480, in image_check_and_save
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000017814235C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3246, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 484, in image_check_and_save
+    raise RuntimeError(f"HTTP error (check_url): {e}") from e
+RuntimeError: HTTP error (check_url): HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000017814235C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 10:46:46,305 INFO: [ResampleCache] cached result loaded
+2025-12-24 10:46:46,305 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-24 10:46:46,305 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-24 10:46:46,306 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-24 10:46:46,306 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-24 10:46:46,314 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-24 10:46:46,315 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-24 10:46:46,322 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-24 10:46:46,323 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-24 10:46:46,324 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-24 10:46:46,324 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-24 10:46:46,324 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-24 10:46:46,325 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-24 10:46:46,334 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-24 10:46:46,335 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-24 10:46:46,392 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-24 10:46:46,392 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-24 10:46:50,654 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-24 10:46:50,674 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-24 10:46:50,675 INFO: icon.rcc not found (skip)
+2025-12-24 10:47:16,273 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x00000277A5879C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000277A5879C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 480, in image_check_and_save
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000277A5879C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3246, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 484, in image_check_and_save
+    raise RuntimeError(f"HTTP error (check_url): {e}") from e
+RuntimeError: HTTP error (check_url): HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000277A5879C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 10:47:16,317 INFO: [ResampleCache] cached result loaded
+2025-12-24 10:47:16,317 INFO: [ResampleCache] loaded: splib_raw=1810, splib_cr=1810, label_raw=0, label_cr=0
+2025-12-24 10:47:16,318 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-24 10:47:16,318 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-24 10:47:16,318 INFO: [_norm_entries] splib_raw: input list/tuple with 1810 items
+2025-12-24 10:47:16,325 INFO: [_norm_entries] splib_raw: output 1809 classes, 1809 total samples
+2025-12-24 10:47:16,326 INFO: [_norm_entries] splib_cr: input list/tuple with 1810 items
+2025-12-24 10:47:16,333 INFO: [_norm_entries] splib_cr: output 1809 classes, 1809 total samples
+2025-12-24 10:47:16,333 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-24 10:47:16,334 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-24 10:47:16,334 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-24 10:47:16,334 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-24 10:47:16,335 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-24 10:47:16,344 INFO: [rebuild] classes: splib_raw=1809, splib_cr=1809, label_raw=0, label_cr=0, lib=1809
+2025-12-24 10:47:16,345 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1809 classes / 3618 samples
+2025-12-24 10:47:16,401 INFO: [Rebuild] lib=1809 classes, labeling_lib=0 classes
+2025-12-24 10:47:16,402 INFO: Resampling 완료 — splib_raw:1810, splib_cr:1810, label_raw:0, label_cr:0
+2025-12-24 10:47:22,374 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-24 10:47:22,396 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-24 10:47:22,396 INFO: icon.rcc not found (skip)
+2025-12-24 10:47:34,108 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0000012800BC9C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800BC9C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 480, in image_check_and_save
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800BC9C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3246, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 484, in image_check_and_save
+    raise RuntimeError(f"HTTP error (check_url): {e}") from e
+RuntimeError: HTTP error (check_url): HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800BC9C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 10:47:34,247 INFO: [ResampleCache] cached result loaded
+2025-12-24 10:47:34,247 INFO: [ResampleCache] loaded: splib_raw=1841, splib_cr=1841, label_raw=0, label_cr=0
+2025-12-24 10:47:34,248 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-24 10:47:34,248 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-24 10:47:34,249 INFO: [_norm_entries] splib_raw: input list/tuple with 1841 items
+2025-12-24 10:47:34,266 INFO: [_norm_entries] splib_raw: output 1840 classes, 1840 total samples
+2025-12-24 10:47:34,267 INFO: [_norm_entries] splib_cr: input list/tuple with 1841 items
+2025-12-24 10:47:34,287 INFO: [_norm_entries] splib_cr: output 1840 classes, 1840 total samples
+2025-12-24 10:47:34,288 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-24 10:47:34,289 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-24 10:47:34,289 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-24 10:47:34,290 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-24 10:47:34,290 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-24 10:47:34,310 INFO: [rebuild] classes: splib_raw=1840, splib_cr=1840, label_raw=0, label_cr=0, lib=1840
+2025-12-24 10:47:34,310 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1840 classes / 3680 samples
+2025-12-24 10:47:34,370 INFO: [Rebuild] lib=1840 classes, labeling_lib=0 classes
+2025-12-24 10:47:34,372 INFO: Resampling 완료 — splib_raw:1841, splib_cr:1841, label_raw:0, label_cr:0
+2025-12-24 10:50:57,224 ERROR: [Classification] class label fetch failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0000012800E211B0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800E211B0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 297, in search_material_filtering_list
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800E211B0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3695, in _on_pixel_classify
+    id_to_name = search_material_filtering_list(base_url=base_url, mtrl_ids=mtrl_ids)
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 301, in search_material_filtering_list
+    raise RuntimeError(f"HTTP error: {e}") from e
+RuntimeError: HTTP error: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800E211B0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 10:51:24,185 ERROR: [TopK] server: material_filtering_list failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0000012800FB5270>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800FB5270>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 297, in search_material_filtering_list
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800FB5270>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 4650, in _show_pixel_topk
+    recs = search_material_filtering_list(base_url=base_url, mtrl_ids=missing)
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 301, in search_material_filtering_list
+    raise RuntimeError(f"HTTP error: {e}") from e
+RuntimeError: HTTP error: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800FB5270>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 10:52:23,088 ERROR: [TopK] server: material_filtering_list failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0000012800FB6E30>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800FB6E30>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 297, in search_material_filtering_list
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800FB6E30>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 4650, in _show_pixel_topk
+    recs = search_material_filtering_list(base_url=base_url, mtrl_ids=missing)
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 301, in search_material_filtering_list
+    raise RuntimeError(f"HTTP error: {e}") from e
+RuntimeError: HTTP error: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800FB6E30>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 10:53:52,419 ERROR: [TopK] server: material_filtering_list failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0000012800FB66E0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800FB66E0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 297, in search_material_filtering_list
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800FB66E0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 4650, in _show_pixel_topk
+    recs = search_material_filtering_list(base_url=base_url, mtrl_ids=missing)
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 301, in search_material_filtering_list
+    raise RuntimeError(f"HTTP error: {e}") from e
+RuntimeError: HTTP error: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800FB66E0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 10:54:36,474 ERROR: [TopK] server: material_filtering_list failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x0000012800FB71F0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800FB71F0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 297, in search_material_filtering_list
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800FB71F0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 4650, in _show_pixel_topk
+    recs = search_material_filtering_list(base_url=base_url, mtrl_ids=missing)
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 301, in search_material_filtering_list
+    raise RuntimeError(f"HTTP error: {e}") from e
+RuntimeError: HTTP error: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000012800FB71F0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 10:58:50,927 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-24 10:58:50,948 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-24 10:58:50,949 INFO: icon.rcc not found (skip)
+2025-12-24 10:59:00,339 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001A6E8BB9C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6E8BB9C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 480, in image_check_and_save
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6E8BB9C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3246, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 484, in image_check_and_save
+    raise RuntimeError(f"HTTP error (check_url): {e}") from e
+RuntimeError: HTTP error (check_url): HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6E8BB9C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 10:59:00,384 INFO: [ResampleCache] cached result loaded
+2025-12-24 10:59:00,384 INFO: [ResampleCache] loaded: splib_raw=1841, splib_cr=1841, label_raw=0, label_cr=0
+2025-12-24 10:59:00,385 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-24 10:59:00,385 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-24 10:59:00,385 INFO: [_norm_entries] splib_raw: input list/tuple with 1841 items
+2025-12-24 10:59:00,392 INFO: [_norm_entries] splib_raw: output 1840 classes, 1840 total samples
+2025-12-24 10:59:00,393 INFO: [_norm_entries] splib_cr: input list/tuple with 1841 items
+2025-12-24 10:59:00,401 INFO: [_norm_entries] splib_cr: output 1840 classes, 1840 total samples
+2025-12-24 10:59:00,402 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-24 10:59:00,402 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-24 10:59:00,402 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-24 10:59:00,402 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-24 10:59:00,403 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-24 10:59:00,411 INFO: [rebuild] classes: splib_raw=1840, splib_cr=1840, label_raw=0, label_cr=0, lib=1840
+2025-12-24 10:59:00,412 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1840 classes / 3680 samples
+2025-12-24 10:59:00,470 INFO: [Rebuild] lib=1840 classes, labeling_lib=0 classes
+2025-12-24 10:59:00,472 INFO: Resampling 완료 — splib_raw:1841, splib_cr:1841, label_raw:0, label_cr:0
+2025-12-24 11:03:28,022 ERROR: [Classification] class label fetch failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001A6E8E111B0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6E8E111B0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 297, in search_material_filtering_list
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6E8E111B0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3695, in _on_pixel_classify
+    id_to_name = search_material_filtering_list(base_url=base_url, mtrl_ids=mtrl_ids)
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 301, in search_material_filtering_list
+    raise RuntimeError(f"HTTP error: {e}") from e
+RuntimeError: HTTP error: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6E8E111B0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 11:19:21,337 INFO: [UserLabeling] 초기 클래스 로드(server): 3312개
+2025-12-24 11:19:27,195 INFO: [UserLabeling] server 사용자: API 호출 시도
+2025-12-24 11:19:30,743 INFO: [LabelingCandidate] 타겟 스펙트럼 CR 적용 완료
+2025-12-24 11:21:44,106 INFO: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-24 11:49:31,885 ERROR: [ClassDetail] dialog show failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001A6EF8C7820>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6EF8C7820>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 297, in search_material_filtering_list
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6EF8C7820>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\docks\pixel_classification_dock.py", line 428, in _show_class_detail_dialog
+    api_result = search_material_filtering_list(api_url, [cid]) if api_url else []
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 301, in search_material_filtering_list
+    raise RuntimeError(f"HTTP error: {e}") from e
+RuntimeError: HTTP error: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6EF8C7820>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 11:49:34,006 ERROR: [ClassDetail] dialog show failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001A6EF8800D0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6EF8800D0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 297, in search_material_filtering_list
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6EF8800D0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\docks\pixel_classification_dock.py", line 428, in _show_class_detail_dialog
+    api_result = search_material_filtering_list(api_url, [cid]) if api_url else []
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 301, in search_material_filtering_list
+    raise RuntimeError(f"HTTP error: {e}") from e
+RuntimeError: HTTP error: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6EF8800D0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 11:49:36,164 ERROR: [ClassDetail] dialog show failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001A6EF880940>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6EF880940>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 297, in search_material_filtering_list
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6EF880940>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\docks\pixel_classification_dock.py", line 428, in _show_class_detail_dialog
+    api_result = search_material_filtering_list(api_url, [cid]) if api_url else []
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 301, in search_material_filtering_list
+    raise RuntimeError(f"HTTP error: {e}") from e
+RuntimeError: HTTP error: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6EF880940>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 11:49:38,347 ERROR: [ClassDetail] dialog show failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001A6EF8811B0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6EF8811B0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 297, in search_material_filtering_list
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6EF8811B0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\docks\pixel_classification_dock.py", line 428, in _show_class_detail_dialog
+    api_result = search_material_filtering_list(api_url, [cid]) if api_url else []
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 301, in search_material_filtering_list
+    raise RuntimeError(f"HTTP error: {e}") from e
+RuntimeError: HTTP error: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/material-filtering-list (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001A6EF8811B0>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 11:50:43,559 INFO: [Unmixing] Requested: endmember_count=20, threshold=0.800
+2025-12-24 11:50:51,806 INFO: [Unmixing] Requested: endmember_count=20, threshold=0.800
+2025-12-24 11:51:07,541 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-24 11:51:07,565 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-24 11:51:07,566 INFO: icon.rcc not found (skip)
+2025-12-24 11:51:19,725 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001D98A899C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001D98A899C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 480, in image_check_and_save
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001D98A899C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3246, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 484, in image_check_and_save
+    raise RuntimeError(f"HTTP error (check_url): {e}") from e
+RuntimeError: HTTP error (check_url): HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001D98A899C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 11:51:19,765 INFO: [ResampleCache] cached result loaded
+2025-12-24 11:51:19,766 INFO: [ResampleCache] loaded: splib_raw=1841, splib_cr=1841, label_raw=0, label_cr=0
+2025-12-24 11:51:19,766 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-24 11:51:19,766 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-24 11:51:19,766 INFO: [_norm_entries] splib_raw: input list/tuple with 1841 items
+2025-12-24 11:51:19,773 INFO: [_norm_entries] splib_raw: output 1840 classes, 1840 total samples
+2025-12-24 11:51:19,774 INFO: [_norm_entries] splib_cr: input list/tuple with 1841 items
+2025-12-24 11:51:19,781 INFO: [_norm_entries] splib_cr: output 1840 classes, 1840 total samples
+2025-12-24 11:51:19,782 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-24 11:51:19,782 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-24 11:51:19,782 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-24 11:51:19,783 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-24 11:51:19,783 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-24 11:51:19,791 INFO: [rebuild] classes: splib_raw=1840, splib_cr=1840, label_raw=0, label_cr=0, lib=1840
+2025-12-24 11:51:19,791 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1840 classes / 3680 samples
+2025-12-24 11:51:19,847 INFO: [Rebuild] lib=1840 classes, labeling_lib=0 classes
+2025-12-24 11:51:19,849 INFO: Resampling 완료 — splib_raw:1841, splib_cr:1841, label_raw:0, label_cr:0
+2025-12-24 11:51:23,768 INFO: [Unmixing] Requested: endmember_count=20, threshold=0.800
+2025-12-24 11:51:29,199 INFO: [Unmixing] Requested: endmember_count=25, threshold=0.800
+2025-12-24 11:52:04,027 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-24 11:52:04,047 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-24 11:52:04,048 INFO: icon.rcc not found (skip)
+2025-12-24 11:52:13,183 ERROR: image_check_and_save failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 85, in create_connection
+    raise err
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 494, in request
+    self.endheaders()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 1038, in _send_output
+    self.send(msg)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\http\client.py", line 976, in send
+    self.connect()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 325, in connect
+    self.sock = self._new_conn()
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x000001EA5CEC9C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\urllib3\util\retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001EA5CEC9C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 480, in image_check_and_save
+    resp = requests.post(url, json=payload, headers=_headers, timeout=timeout)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\pde15\anaconda3\envs\hsi_crop_env\lib\site-packages\requests\adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001EA5CEC9C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 3246, in _apply_loaded_hsi_cfg
+    image_cd = image_check_and_save(
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\data\db.py", line 484, in image_check_and_save
+    raise RuntimeError(f"HTTP error (check_url): {e}") from e
+RuntimeError: HTTP error (check_url): HTTPConnectionPool(host='183.98.149.222', port=18000): Max retries exceeded with url: /program-service/image-exist (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001EA5CEC9C60>: Failed to establish a new connection: [WinError 10061] 대상 컴퓨터에서 연결을 거부했으므로 연결하지 못했습니다'))
+2025-12-24 11:52:13,227 INFO: [ResampleCache] cached result loaded
+2025-12-24 11:52:13,227 INFO: [ResampleCache] loaded: splib_raw=1841, splib_cr=1841, label_raw=0, label_cr=0
+2025-12-24 11:52:13,227 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-24 11:52:13,228 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-24 11:52:13,228 INFO: [_norm_entries] splib_raw: input list/tuple with 1841 items
+2025-12-24 11:52:13,234 INFO: [_norm_entries] splib_raw: output 1840 classes, 1840 total samples
+2025-12-24 11:52:13,234 INFO: [_norm_entries] splib_cr: input list/tuple with 1841 items
+2025-12-24 11:52:13,241 INFO: [_norm_entries] splib_cr: output 1840 classes, 1840 total samples
+2025-12-24 11:52:13,242 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-24 11:52:13,242 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-24 11:52:13,242 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-24 11:52:13,243 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-24 11:52:13,243 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-24 11:52:13,251 INFO: [rebuild] classes: splib_raw=1840, splib_cr=1840, label_raw=0, label_cr=0, lib=1840
+2025-12-24 11:52:13,251 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1840 classes / 3680 samples
+2025-12-24 11:52:13,302 INFO: [Rebuild] lib=1840 classes, labeling_lib=0 classes
+2025-12-24 11:52:13,303 INFO: Resampling 완료 — splib_raw:1841, splib_cr:1841, label_raw:0, label_cr:0
+2025-12-24 11:52:23,976 INFO: [Unmixing] Requested: endmember_count=25, threshold=0.800
+2025-12-24 11:53:01,202 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-24 11:53:01,221 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-24 11:53:01,222 INFO: icon.rcc not found (skip)
+2025-12-24 13:18:48,572 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-24 13:18:48,616 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-24 13:18:48,617 INFO: icon.rcc not found (skip)
+2025-12-24 13:19:11,013 INFO: [ResampleCache] 캐시 파일이 없습니다. primary=E:\시연\3dlabs\Area2_1500-2000x500-1000.mat
+2025-12-24 13:19:11,014 INFO: [Resampling] personal 사용자: 캐시 파일에서 데이터 로드 (API resampling 없음)
+2025-12-24 13:19:11,014 INFO: [Resampling] personal user: loaded from cache (no API resampling)
+2025-12-24 13:19:11,014 INFO: [ResampleCache] 저장 시도: npz_path=E:\시연\3dlabs\Area2_1500-2000x500-1000.mat.resample.npz, label_raw=0 classes, label_cr=0 classes
+2025-12-24 13:19:11,027 INFO: [ResampleCache] .npz 파일 저장 완료: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat.resample.npz (크기: 2009 bytes)
+2025-12-24 13:19:11,030 INFO: [ResampleCache] .info 파일 저장 완료: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat.resample.info (classes: 0개)
+2025-12-24 13:19:11,030 INFO: [ResampleCache] 빈 캐시 파일 생성 완료 (personal user)
+2025-12-24 13:19:11,031 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-24 13:19:11,031 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-24 13:19:11,032 INFO: [_norm_entries] splib_raw: input dict with 0 keys
+2025-12-24 13:19:11,033 WARNING: [_norm_entries] splib_raw: output is empty!
+2025-12-24 13:19:11,034 INFO: [_norm_entries] splib_cr: input dict with 0 keys
+2025-12-24 13:19:11,035 WARNING: [_norm_entries] splib_cr: output is empty!
+2025-12-24 13:19:11,036 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-24 13:19:11,036 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-24 13:19:11,037 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-24 13:19:11,037 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-24 13:19:11,038 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-24 13:19:11,038 INFO: [rebuild] classes: splib_raw=0, splib_cr=0, label_raw=0, label_cr=0, lib=0
+2025-12-24 13:19:11,039 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=0 classes / 0 samples
+2025-12-24 13:19:11,039 INFO: [Rebuild] lib=0 classes, labeling_lib=0 classes
+2025-12-24 13:19:11,042 INFO: Resampling 완료 — splib_raw:0, splib_cr:0, label_raw:0, label_cr:0
+2025-12-24 13:19:21,455 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-24 13:19:21,478 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-24 13:19:21,479 INFO: icon.rcc not found (skip)
+2025-12-24 13:19:45,196 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 18
+2025-12-24 13:19:45,197 INFO: [ResampleCache] 캐시 파일이 없습니다. primary=E:\시연\3dlabs\Area2_1500-2000x500-1000.mat
+2025-12-24 13:22:05,538 INFO: [Resampling] API+compute 140.34s
+2025-12-24 13:22:05,539 INFO: [ResampleCache] 저장 시도: npz_path=E:\시연\3dlabs\Area2_1500-2000x500-1000.mat.resample.npz, label_raw=0 classes, label_cr=0 classes
+2025-12-24 13:22:05,619 INFO: [ResampleCache] .npz 파일 저장 완료: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat.resample.npz (크기: 4617531 bytes)
+2025-12-24 13:22:05,621 INFO: [ResampleCache] .info 파일 저장 완료: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat.resample.info (classes: 0개)
+2025-12-24 13:22:05,621 INFO: [ResampleCache] resampling 결과를 캐시에 저장했습니다.
+2025-12-24 13:22:05,622 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-24 13:22:05,622 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-24 13:22:05,622 INFO: [_norm_entries] splib_raw: input list/tuple with 1841 items
+2025-12-24 13:22:05,663 INFO: [_norm_entries] splib_raw: output 1840 classes, 1840 total samples
+2025-12-24 13:22:05,665 INFO: [_norm_entries] splib_cr: input list/tuple with 1841 items
+2025-12-24 13:22:05,706 INFO: [_norm_entries] splib_cr: output 1840 classes, 1840 total samples
+2025-12-24 13:22:05,707 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-24 13:22:05,708 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-24 13:22:05,708 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-24 13:22:05,709 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-24 13:22:05,709 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-24 13:22:05,739 INFO: [rebuild] classes: splib_raw=1840, splib_cr=1840, label_raw=0, label_cr=0, lib=1840
+2025-12-24 13:22:05,740 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1840 classes / 3680 samples
+2025-12-24 13:22:05,761 INFO: [Rebuild] lib=1840 classes, labeling_lib=0 classes
+2025-12-24 13:22:05,765 INFO: Resampling 완료 — splib_raw:1841, splib_cr:1841, label_raw:0, label_cr:0
+2025-12-24 13:22:06,090 INFO: [RegionGrowing] HSI data set: (500, 500, 150)
+2025-12-24 13:22:06,091 INFO: [RegionGrowing] Service initialized with HSI data
+2025-12-24 14:34:05,485 INFO: [UserLabeling] 초기 클래스 로드(server): 3343개
+2025-12-24 14:34:11,478 INFO: [UserLabeling] server 사용자: API 호출 시도
+2025-12-24 14:34:13,504 INFO: [LabelingCandidate] 타겟 스펙트럼 CR 적용 완료
+2025-12-24 14:37:33,999 INFO: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-24 14:38:07,394 INFO: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-24 14:40:20,655 INFO: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-24 14:51:34,717 INFO: [LabelingCandidate] 타겟 스펙트럼 CR 적용 완료
+2025-12-24 14:55:56,918 INFO: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-24 15:00:59,600 INFO: [AnalysisDialog] Found 3 comboboxes: ['cb_intermediate_target', 'cb_class_range', 'comboBox']
+2025-12-24 15:00:59,600 ERROR: [class combo] cbClassRange not found in UI
+2025-12-24 15:00:59,601 WARNING: [AnalysisDialog] Found cb_class_range by alternative method
+2025-12-24 15:00:59,706 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-12-24 15:00:59,755 INFO: [MainWindow] (pixel mode) connecting analysisMaskChanged signal
+2025-12-24 15:00:59,756 INFO: [MainWindow] (pixel mode) analysisMaskChanged signal connected
+2025-12-24 15:00:59,756 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-12-24 15:00:59,757 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-12-24 15:00:59,757 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-12-24 15:00:59,757 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-12-24 15:00:59,887 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(500, 500)
+2025-12-24 15:00:59,887 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 15:00:59,923 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-12-24 15:00:59,924 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-12-24 15:00:59,929 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-12-24 15:01:02,002 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(138, 264, 12, 10)
+2025-12-24 15:01:02,003 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=120, rect=PyQt5.QtCore.QRect(138, 264, 12, 10)
+2025-12-24 15:01:02,004 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(138, 264, 12, 10)
+2025-12-24 15:01:02,009 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-12-24 15:01:02,010 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-12-24 15:01:02,019 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-12-24 15:01:02,545 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=120
+2025-12-24 15:01:02,546 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=120, shape=(500, 500)
+2025-12-24 15:01:02,546 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 15:01:04,753 INFO: [Analysis] labeling_raw_lib 에 cid=-1 데이터가 없습니다.
+2025-12-24 15:01:05,554 INFO: [Analysis] labeling_raw_lib 에 cid=-1 데이터가 없습니다.
+2025-12-24 15:01:06,154 INFO: [Analysis] labeling_raw_lib 에 cid=-1 데이터가 없습니다.
+2025-12-24 15:01:06,804 INFO: [Analysis] labeling_raw_lib 에 cid=-2 데이터가 없습니다.
+2025-12-24 15:01:07,374 INFO: [Analysis] labeling_raw_lib 에 cid=-2 데이터가 없습니다.
+2025-12-24 15:01:08,031 INFO: [Analysis] labeling_raw_lib 에 cid=-1 데이터가 없습니다.
+2025-12-24 15:01:08,513 INFO: [Analysis] labeling_raw_lib 에 cid=-1 데이터가 없습니다.
+2025-12-24 15:01:09,115 INFO: [Analysis] labeling_raw_lib 에 cid=-1 데이터가 없습니다.
+2025-12-24 15:01:09,619 INFO: [Analysis] labeling_raw_lib 에 cid=-1 데이터가 없습니다.
+2025-12-24 15:01:10,158 INFO: [Analysis] labeling_raw_lib 에 cid=-1 데이터가 없습니다.
+2025-12-24 15:01:27,959 INFO: [Analysis] labeling_raw_lib 에 cid=-1 데이터가 없습니다.
+2025-12-24 15:01:28,700 INFO: [Analysis] labeling_raw_lib 에 cid=-2 데이터가 없습니다.
+2025-12-24 15:01:29,226 INFO: [Analysis] labeling_raw_lib 에 cid=-1 데이터가 없습니다.
+2025-12-24 15:01:29,806 INFO: [Analysis] labeling_raw_lib 에 cid=-1 데이터가 없습니다.
+2025-12-24 15:01:30,328 INFO: [Analysis] labeling_raw_lib 에 cid=-1 데이터가 없습니다.
+2025-12-24 15:01:32,448 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-12-24 15:01:32,465 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-12-24 15:01:32,487 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-12-24 15:01:32,497 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-12-24 15:01:33,395 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-12-24 15:01:33,410 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-12-24 15:01:33,427 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-12-24 15:01:33,436 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-12-24 15:01:33,457 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-12-24 15:01:33,468 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-12-24 15:01:33,523 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-12-24 15:01:33,536 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-12-24 15:01:36,858 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-12-24 15:01:36,858 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-12-24 15:01:36,858 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 15:01:36,860 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-12-24 15:01:36,999 INFO: [Analysis] 분석 영역 초기화 완료
+2025-12-24 15:01:46,453 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-12-24 15:01:46,511 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-12-24 15:01:46,511 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-12-24 15:01:46,522 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-12-24 15:01:47,789 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-12-24 15:01:47,790 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-12-24 15:01:47,790 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 15:01:47,790 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-12-24 15:01:47,930 INFO: [Analysis] 분석 영역 초기화 완료
+2025-12-24 15:34:11,695 INFO: [Unmixing] Requested: endmember_count=20, threshold=0.800
+2025-12-24 15:35:01,195 INFO: [Unmixing] API done: endmembers.shape=(20, 150), abundance_map.shape=(500, 500, 20)
+2025-12-24 15:35:01,659 ERROR: [UnmixingDock] showEvent autosize failed
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\docks\unmixing_dock.py", line 445, in showEvent
+    QtCore.QTimer.singleShot(0, self._ensure_detail_column_visible)
+NameError: name 'QtCore' is not defined
+2025-12-24 15:55:03,539 INFO: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-24 17:14:48,087 INFO: [UserLabeling] 초기 클래스 로드(server): 3445개
+2025-12-24 17:16:14,187 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-24 17:16:14,220 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-24 17:16:14,221 INFO: icon.rcc not found (skip)
+2025-12-24 17:16:26,043 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 18
+2025-12-24 17:16:26,098 INFO: [ResampleCache] cached result loaded
+2025-12-24 17:16:26,098 INFO: [ResampleCache] loaded: splib_raw=1841, splib_cr=1841, label_raw=0, label_cr=0
+2025-12-24 17:16:26,099 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-24 17:16:26,099 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-24 17:16:26,099 INFO: [_norm_entries] splib_raw: input list/tuple with 1841 items
+2025-12-24 17:16:26,107 INFO: [_norm_entries] splib_raw: output 1840 classes, 1840 total samples
+2025-12-24 17:16:26,107 INFO: [_norm_entries] splib_cr: input list/tuple with 1841 items
+2025-12-24 17:16:26,118 INFO: [_norm_entries] splib_cr: output 1840 classes, 1840 total samples
+2025-12-24 17:16:26,119 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-24 17:16:26,119 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-24 17:16:26,119 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-24 17:16:26,120 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-24 17:16:26,120 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-24 17:16:26,129 INFO: [rebuild] classes: splib_raw=1840, splib_cr=1840, label_raw=0, label_cr=0, lib=1840
+2025-12-24 17:16:26,130 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1840 classes / 3680 samples
+2025-12-24 17:16:26,190 INFO: [Rebuild] lib=1840 classes, labeling_lib=0 classes
+2025-12-24 17:16:26,191 INFO: Resampling 완료 — splib_raw:1841, splib_cr:1841, label_raw:0, label_cr:0
+2025-12-24 17:16:53,139 INFO: [AnalysisDialog] Found 3 comboboxes: ['cb_intermediate_target', 'cb_class_range', 'comboBox']
+2025-12-24 17:16:53,141 ERROR: [class combo] cbClassRange not found in UI
+2025-12-24 17:16:53,141 WARNING: [AnalysisDialog] Found cb_class_range by alternative method
+2025-12-24 17:16:53,249 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-12-24 17:16:53,303 INFO: [MainWindow] (pixel mode) connecting analysisMaskChanged signal
+2025-12-24 17:16:53,304 INFO: [MainWindow] (pixel mode) analysisMaskChanged signal connected
+2025-12-24 17:16:53,304 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-12-24 17:16:53,304 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-12-24 17:16:53,305 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-12-24 17:16:53,305 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-12-24 17:16:53,442 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(500, 500)
+2025-12-24 17:16:53,442 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 17:16:53,444 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-12-24 17:16:53,445 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-12-24 17:16:53,450 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-12-24 17:16:58,406 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(163, 278, 7, 6)
+2025-12-24 17:16:58,407 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=42, rect=PyQt5.QtCore.QRect(163, 278, 7, 6)
+2025-12-24 17:16:58,408 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(163, 278, 7, 6)
+2025-12-24 17:16:58,415 INFO: [hist_apply] source=combo-populate, cid=2232
+2025-12-24 17:16:58,416 INFO: [AnalysisDialog] update_histogram start: cid=2232, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:16:58,791 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=42
+2025-12-24 17:16:58,791 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=42, shape=(500, 500)
+2025-12-24 17:16:58,792 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 17:17:50,526 INFO: [Analysis] labeling_raw_lib 에 cid=2446 데이터가 없습니다.
+2025-12-24 17:17:51,320 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:17:51,760 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:17:52,921 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:17:53,497 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:17:53,822 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:17:54,899 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:17:55,408 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:17:56,440 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:17:57,158 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:17:57,780 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:20:01,939 INFO: [hist_apply] source=combo-set, cid=2446
+2025-12-24 17:20:01,939 INFO: [AnalysisDialog] update_histogram start: cid=2446, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:20:02,242 INFO: [Analysis] labeling_raw_lib 에 cid=2446 데이터가 없습니다.
+2025-12-24 17:20:04,842 INFO: [hist_apply] source=combo-set, cid=2232
+2025-12-24 17:20:04,843 INFO: [AnalysisDialog] update_histogram start: cid=2232, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:20:05,127 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:20:11,323 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-12-24 17:20:11,324 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-12-24 17:20:11,324 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 17:20:11,325 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-12-24 17:20:11,473 INFO: [Analysis] 분석 영역 초기화 완료
+2025-12-24 17:20:24,423 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-12-24 17:20:24,475 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-12-24 17:20:24,475 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-12-24 17:20:24,485 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-12-24 17:20:27,357 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-12-24 17:20:27,357 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-12-24 17:20:27,358 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect()
+2025-12-24 17:20:27,358 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-12-24 17:20:27,487 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=0, shape=(500, 500)
+2025-12-24 17:20:27,488 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 17:20:30,889 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(166, 287, 1, 1)
+2025-12-24 17:20:30,890 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=1, rect=PyQt5.QtCore.QRect(166, 287, 1, 1)
+2025-12-24 17:20:30,890 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(166, 287, 1, 1)
+2025-12-24 17:20:30,893 INFO: [hist_apply] source=combo-populate, cid=2446
+2025-12-24 17:20:30,893 INFO: [AnalysisDialog] update_histogram start: cid=2446, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:20:31,217 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=1
+2025-12-24 17:20:31,217 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=1, shape=(500, 500)
+2025-12-24 17:20:31,217 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 17:20:31,557 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(166, 282, 3, 6)
+2025-12-24 17:20:31,558 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=2, rect=PyQt5.QtCore.QRect(166, 282, 3, 6)
+2025-12-24 17:20:31,558 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(166, 282, 3, 6)
+2025-12-24 17:20:31,561 INFO: [hist_apply] source=combo-populate, cid=2446
+2025-12-24 17:20:31,562 INFO: [AnalysisDialog] update_histogram start: cid=2446, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:20:31,881 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=2
+2025-12-24 17:20:31,881 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=2, shape=(500, 500)
+2025-12-24 17:20:31,881 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 17:20:33,438 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(166, 282, 3, 6)
+2025-12-24 17:20:33,439 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=3, rect=PyQt5.QtCore.QRect(166, 282, 3, 6)
+2025-12-24 17:20:33,440 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(166, 282, 3, 6)
+2025-12-24 17:20:33,445 INFO: [hist_apply] source=combo-populate, cid=2446
+2025-12-24 17:20:33,446 INFO: [AnalysisDialog] update_histogram start: cid=2446, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:20:33,767 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=3
+2025-12-24 17:20:33,768 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=3, shape=(500, 500)
+2025-12-24 17:20:33,768 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 17:20:34,774 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(166, 282, 3, 6)
+2025-12-24 17:20:34,775 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=4, rect=PyQt5.QtCore.QRect(166, 282, 3, 6)
+2025-12-24 17:20:34,776 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(166, 282, 3, 6)
+2025-12-24 17:20:34,779 INFO: [hist_apply] source=combo-populate, cid=2446
+2025-12-24 17:20:34,780 INFO: [AnalysisDialog] update_histogram start: cid=2446, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:20:35,157 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=4
+2025-12-24 17:20:35,158 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=4, shape=(500, 500)
+2025-12-24 17:20:35,158 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 17:20:42,728 INFO: [Analysis] labeling_raw_lib 에 cid=-2 데이터가 없습니다.
+2025-12-24 17:20:44,489 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:20:46,409 INFO: [Analysis] labeling_raw_lib 에 cid=2446 데이터가 없습니다.
+2025-12-24 17:20:47,263 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:20:48,057 INFO: [Analysis] labeling_raw_lib 에 cid=2446 데이터가 없습니다.
+2025-12-24 17:20:49,819 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:20:51,700 INFO: [Analysis] labeling_raw_lib 에 cid=-1 데이터가 없습니다.
+2025-12-24 17:20:54,149 INFO: [Analysis] labeling_raw_lib 에 cid=-2 데이터가 없습니다.
+2025-12-24 17:20:55,016 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-12-24 17:20:55,017 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-12-24 17:20:55,017 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 17:20:55,018 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-12-24 17:20:55,155 INFO: [Analysis] 분석 영역 초기화 완료
+2025-12-24 17:23:46,873 INFO: [Analysis] dialog opened: HxW=500x500, mask_sum=0
+2025-12-24 17:23:47,017 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-12-24 17:23:47,017 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-12-24 17:23:47,027 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-12-24 17:23:51,369 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(137, 281, 9, 5)
+2025-12-24 17:23:51,370 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=45, rect=PyQt5.QtCore.QRect(137, 281, 9, 5)
+2025-12-24 17:23:51,370 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(137, 281, 9, 5)
+2025-12-24 17:23:51,377 INFO: [hist_apply] source=combo-populate, cid=-1
+2025-12-24 17:23:51,377 INFO: [AnalysisDialog] update_histogram start: cid=None, mask_set=True, topk_set=True, mode=checked
+2025-12-24 17:23:51,387 INFO: [AnalysisDialog] update_histogram aborted: current_hist_cid=None
+2025-12-24 17:23:51,816 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=45
+2025-12-24 17:23:51,817 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=45, shape=(500, 500)
+2025-12-24 17:23:51,817 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 17:23:55,154 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(137, 275, 9, 11)
+2025-12-24 17:23:55,155 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=46, rect=PyQt5.QtCore.QRect(137, 275, 9, 11)
+2025-12-24 17:23:55,155 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(137, 275, 9, 11)
+2025-12-24 17:23:55,160 INFO: [hist_apply] source=combo-populate, cid=2229
+2025-12-24 17:23:55,160 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:23:55,522 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=46
+2025-12-24 17:23:55,523 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=46, shape=(500, 500)
+2025-12-24 17:23:55,523 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 17:24:02,841 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(137, 275, 30, 13)
+2025-12-24 17:24:02,842 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=47, rect=PyQt5.QtCore.QRect(137, 275, 30, 13)
+2025-12-24 17:24:02,842 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(137, 275, 30, 13)
+2025-12-24 17:24:02,847 INFO: [hist_apply] source=combo-populate, cid=2229
+2025-12-24 17:24:02,847 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:24:03,226 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=47
+2025-12-24 17:24:03,226 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=47, shape=(500, 500)
+2025-12-24 17:24:03,226 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 17:24:05,270 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=PyQt5.QtCore.QRect(137, 275, 31, 13)
+2025-12-24 17:24:05,271 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=48, rect=PyQt5.QtCore.QRect(137, 275, 31, 13)
+2025-12-24 17:24:05,272 INFO: [Analysis] _on_analysis_mask_changed_from_ctrl called: mask=True, rect=PyQt5.QtCore.QRect(137, 275, 31, 13)
+2025-12-24 17:24:05,278 INFO: [hist_apply] source=combo-populate, cid=2229
+2025-12-24 17:24:05,278 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:24:05,717 INFO: [AnalysisDialog] mask updated: shape=(500, 500), sum=48
+2025-12-24 17:24:05,717 INFO: [Analysis] ★ dialog mask updated: visible=True, mask_sum=48, shape=(500, 500)
+2025-12-24 17:24:05,718 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 17:25:12,012 INFO: [hist_apply] source=combo-set, cid=2229
+2025-12-24 17:25:12,012 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:25:12,373 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-12-24 17:25:14,092 INFO: [hist_apply] source=combo-set, cid=2446
+2025-12-24 17:25:14,093 INFO: [AnalysisDialog] update_histogram start: cid=2446, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:25:14,440 INFO: [Analysis] labeling_raw_lib 에 cid=2446 데이터가 없습니다.
+2025-12-24 17:25:15,100 INFO: [hist_apply] source=combo-set, cid=2232
+2025-12-24 17:25:15,101 INFO: [AnalysisDialog] update_histogram start: cid=2232, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:25:15,441 INFO: [Analysis] labeling_raw_lib 에 cid=2232 데이터가 없습니다.
+2025-12-24 17:25:17,267 INFO: [hist_apply] source=combo-set, cid=2446
+2025-12-24 17:25:17,267 INFO: [AnalysisDialog] update_histogram start: cid=2446, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:25:17,687 INFO: [Analysis] labeling_raw_lib 에 cid=2446 데이터가 없습니다.
+2025-12-24 17:25:18,501 INFO: [hist_apply] source=combo-set, cid=2229
+2025-12-24 17:25:18,502 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:25:18,849 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-12-24 17:25:20,195 INFO: [hist_apply] source=combo-set, cid=2446
+2025-12-24 17:25:20,195 INFO: [AnalysisDialog] update_histogram start: cid=2446, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:25:20,586 INFO: [Analysis] labeling_raw_lib 에 cid=2446 데이터가 없습니다.
+2025-12-24 17:25:21,092 INFO: [hist_apply] source=combo-set, cid=2229
+2025-12-24 17:25:21,093 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:25:21,438 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-12-24 17:25:22,908 INFO: [hist_apply] source=combo-set, cid=2229
+2025-12-24 17:25:22,909 INFO: [AnalysisDialog] update_histogram start: cid=2229, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:25:23,240 INFO: [Analysis] labeling_raw_lib 에 cid=2229 데이터가 없습니다.
+2025-12-24 17:25:26,028 INFO: [hist_apply] source=combo-set, cid=2446
+2025-12-24 17:25:26,029 INFO: [AnalysisDialog] update_histogram start: cid=2446, mask_set=True, topk_set=True, mode=combo
+2025-12-24 17:25:26,446 INFO: [Analysis] labeling_raw_lib 에 cid=2446 데이터가 없습니다.
+2025-12-24 17:30:06,270 INFO: [AnalysisSel] _emit_mask_changed called: mask=True, rect=None
+2025-12-24 17:30:06,270 INFO: [AnalysisSel] emitting analysisMaskChanged: mask sum=0, rect=PyQt5.QtCore.QRect()
+2025-12-24 17:30:06,272 INFO: [AnalysisSel] analysisMaskChanged signal emitted successfully
+2025-12-24 17:30:06,273 INFO: [AnalysisDialog] update_mask: empty mask, clearing data
+2025-12-24 17:30:06,496 INFO: [Analysis] 분석 영역 초기화 완료
+2025-12-29 14:13:22,499 INFO: Fallback logging configured (utils.logging_setup not found)
+2025-12-29 14:13:22,552 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2025-12-29 14:13:22,553 INFO: icon.rcc not found (skip)
+2025-12-29 14:13:45,480 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\시연\3dlabs\Area2_1500-2000x500-1000.mat -> 18
+2025-12-29 14:13:45,547 INFO: [ResampleCache] cached result loaded
+2025-12-29 14:13:45,547 INFO: [ResampleCache] loaded: splib_raw=1841, splib_cr=1841, label_raw=0, label_cr=0
+2025-12-29 14:13:45,547 INFO: [rebuild] label_raw input: 0 classes, samples={}
+2025-12-29 14:13:45,548 INFO: [rebuild] label_cr input: 0 classes, samples={}
+2025-12-29 14:13:45,548 INFO: [_norm_entries] splib_raw: input list/tuple with 1841 items
+2025-12-29 14:13:45,557 INFO: [_norm_entries] splib_raw: output 1840 classes, 1840 total samples
+2025-12-29 14:13:45,559 INFO: [_norm_entries] splib_cr: input list/tuple with 1841 items
+2025-12-29 14:13:45,574 INFO: [_norm_entries] splib_cr: output 1840 classes, 1840 total samples
+2025-12-29 14:13:45,574 INFO: [_norm_entries] label_raw: input dict with 0 keys
+2025-12-29 14:13:45,575 WARNING: [_norm_entries] label_raw: output is empty!
+2025-12-29 14:13:45,576 INFO: [_norm_entries] label_cr: input dict with 0 keys
+2025-12-29 14:13:45,577 WARNING: [_norm_entries] label_cr: output is empty!
+2025-12-29 14:13:45,577 INFO: [rebuild] after _norm_entries: label_raw_norm=0 classes, label_cr_norm=0 classes
+2025-12-29 14:13:45,588 INFO: [rebuild] classes: splib_raw=1840, splib_cr=1840, label_raw=0, label_cr=0, lib=1840
+2025-12-29 14:13:45,589 INFO: [rebuild] label_raw=0 classes / 0 samples, label_cr=0 classes / 0 samples, lib=1840 classes / 3680 samples
+2025-12-29 14:13:45,659 INFO: [Rebuild] lib=1840 classes, labeling_lib=0 classes
+2025-12-29 14:13:45,661 INFO: Resampling 완료 — splib_raw:1841, splib_cr:1841, label_raw:0, label_cr:0

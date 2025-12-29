@@ -337,7 +337,6 @@ class ImageLoadDialog(QtWidgets.QDialog):
 
         try:
             data = get_camera_list(base_url = url, st_wv = s_wl, ed_wv = e_wl)
-            print(data)
         except Exception as e:
             QtWidgets.QMessageBox.critical(self, "요청 실패", f"FastAPI 요청 실패:\n{e}")
             return
