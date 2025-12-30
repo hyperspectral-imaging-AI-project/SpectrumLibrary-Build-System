@@ -334,7 +334,7 @@ from PIL import Image
 
 # === 환경 설정 ===
 SFTP_HOST = "gnew-office.tplinkdns.com"
-SFTP_PORT = 22
+SFTP_PORT = 51022
 SFTP_USER = "shjung"
 SFTP_PASSWORD = "!gnew007"
 
