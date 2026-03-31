@@ -608,8 +608,11 @@ def material_add(api_base:str, mtrl_nm:str, dsc : str, timeout :float = 10.0):
     url = api_base
     headers = {"Content-Type": "application/json"}
     payload = {'target':[{"mtrl_nm":mtrl_nm, "dsc":dsc}]}
+    
+    print(payload)
 
     resp = requests.post(url, json=payload, headers=headers, timeout=timeout)
+    print(resp)
     # 실패 코드면 예외 발생시켜 상위에서 처리하거나 여기서 메시지 반환하도록 선택
     resp.raise_for_status()
     mtrl_cd = resp.json()['result'][0]['mtrl_cd']

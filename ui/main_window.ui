@@ -60,6 +60,7 @@
     </property>
     <addaction name="action_4"/>
     <addaction name="action_5"/>
+    <addaction name="action_9"/>
    </widget>
    <widget class="QMenu" name="menuOthers">
     <property name="title">
@@ -140,6 +141,11 @@
   <action name="action_8">
    <property name="text">
     <string>분광 혼합 분석 맵 생성</string>
+   </property>
+  </action>
+  <action name="action_9">
+   <property name="text">
+    <string>객체 라벨링</string>
    </property>
   </action>
  </widget>

@@ -12,6 +12,7 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import pyqtSignal
 from data.db import send_label_add
 from views.dialogs.labeling_candidate_review import LabelingCandidateReviewDialog
+from views.dialogs.material_add_dialog import MaterialAddDialog
 
 class PixelLabelingDialog(QDialog):
     """
@@ -47,6 +48,8 @@ class PixelLabelingDialog(QDialog):
         self.btnUserLabeling: QPushButton = self.findChild(QPushButton, "btnUserLabeling")
         self.btnClassmapLabeling: QPushButton = self.findChild(QPushButton, "btnClassmapLabeling")
         self.btnRecommendLabeling: QPushButton = self.findChild(QPushButton, "btnRecommendLabeling")
+        # "신규 라벨 등록" 버튼 (ui에서 objectName이 pushButton로 되어 있음)
+        self.btnNewMaterial: QPushButton = self.findChild(QPushButton, "pushButton")
         self.btnRegister: QPushButton = self.findChild(QPushButton, "btnRegister")
         self.btnCancel: QPushButton = self.findChild(QPushButton, "btnCancel")
         self.tableSelectedPixels: QTableWidget = self.findChild(QTableWidget, "tableSelectedPixels")
@@ -56,6 +59,7 @@ class PixelLabelingDialog(QDialog):
             ("btnUserLabeling", self.btnUserLabeling),
             ("btnClassmapLabeling", self.btnClassmapLabeling),
             ("btnRecommendLabeling", self.btnRecommendLabeling),
+            ("pushButton(new material)", self.btnNewMaterial),
             ("btnRegister", self.btnRegister),
             ("btnCancel", self.btnCancel),
             ("tableSelectedPixels", self.tableSelectedPixels),
@@ -135,6 +139,7 @@ class PixelLabelingDialog(QDialog):
         self.btnClassmapLabeling.toggled.connect(self._on_classmap_labeling_toggled)
 
         self.btnRecommendLabeling.clicked.connect(self._on_recommend_clicked)
+        self.btnNewMaterial.clicked.connect(self._on_new_material_clicked)
 
         self.btnRegister.clicked.connect(self._on_register_clicked)
         self.btnCancel.clicked.connect(self.reject)
@@ -167,6 +172,65 @@ class PixelLabelingDialog(QDialog):
     def _on_recommend_clicked(self):
         """추천 픽셀 라벨링 버튼 클릭 시"""
         self.recommend_labeling_requested.emit({})
+
+    def _on_new_material_clicked(self):
+        """'신규 라벨 등록' 클릭 → MaterialAddDialog 연결."""
+        try:
+            parent = self.parent()
+            app_dir = getattr(parent, "app_dir", None) if parent else None
+            ui_dir = (app_dir / "ui") if app_dir else None
+
+            dlg = MaterialAddDialog(parent=self, ui_dir=ui_dir)
+
+            def _on_created(payload: dict):
+                try:
+                    cid = int(payload.get("mtrl_cd"))
+                    nm = str(payload.get("name") or "").strip()
+                    if not nm:
+                        nm = f"Class {cid}"
+
+                    # 1) 내부 캐시 업데이트
+                    self._cid_to_name[int(cid)] = nm
+                    # 중복 제거 후 정렬
+                    cur = {int(c): str(n) for c, n in (getattr(self, "_class_options", []) or [])}
+                    cur[int(cid)] = nm
+                    self._class_options = sorted(cur.items(), key=lambda x: x[0])
+
+                    # 2) 현재 표의 모든 콤보박스에 옵션 추가(있으면 스킵)
+                    tbl = self.tableSelectedPixels
+                    for r in range(tbl.rowCount()):
+                        w = tbl.cellWidget(r, 3)
+                        if not isinstance(w, QComboBox):
+                            continue
+                        if w.findData(int(cid)) < 0:
+                            w.addItem(nm, int(cid))
+
+                    # 3) 가능하면 .info에도 기록(개인 사용자)
+                    try:
+                        from services.resampling_cache import update_class_in_info
+                        if parent and hasattr(parent, "_cache_primary_path"):
+                            primary = parent._cache_primary_path(getattr(parent, "cfg", {}) or {})
+                        else:
+                            primary = None
+                        if (not primary) and parent and hasattr(parent, "_extract_src_path"):
+                            primary = parent._extract_src_path(getattr(parent, "cfg", {}) or {})
+                        if primary:
+                            update_class_in_info(primary, mtrl_cd=int(cid), mtrl_nm=nm, description=payload.get("description"))
+                    except Exception:
+                        import logging
+                        logging.exception("[PixelLabeling] update_class_in_info failed")
+
+                except Exception:
+                    import logging
+                    logging.exception("[PixelLabeling] apply created material failed")
+
+            dlg.material_created.connect(_on_created)
+            dlg.exec_()
+
+        except Exception:
+            import logging
+            logging.exception("[PixelLabeling] new material dialog failed")
+            QtWidgets.QMessageBox.critical(self, "오류", "신규 라벨 등록 창을 열 수 없습니다.")
 
     def _on_label_selected_clicked(self):
         row = self.tableSelectedPixels.currentRow()
@@ -210,16 +274,24 @@ class PixelLabelingDialog(QDialog):
             uniq = {}
             for rec in checked:
                 y, x = int(rec["y"]), int(rec["x"])
+                cid = int(rec.get("cid", -1))
+                if cid <= 0:
+                    continue
                 if 0 <= y < H and 0 <= x < W:
-                    uniq[(y, x)] = int(rec.get("cid", -1))  # 마지막 cid 기준으로 덮어쓰기
+                    uniq[(y, x)] = {
+                        "cid": cid,
+                        "mtrl_nm": rec.get("mtrl_nm", None),
+                    }
 
             if not uniq:
                 QtWidgets.QMessageBox.warning(self, "알림", "유효한 좌표가 없습니다.")
                 return
 
-            ys = np.fromiter((p[0] for p in uniq.keys()), dtype=int)
-            xs = np.fromiter((p[1] for p in uniq.keys()), dtype=int)
-            cids = np.fromiter((uniq[p] for p in uniq.keys()), dtype=int)
+            pts = list(uniq.keys())
+            ys = np.fromiter((p[0] for p in pts), dtype=int)
+            xs = np.fromiter((p[1] for p in pts), dtype=int)
+            cids = [uniq[p]["cid"] for p in pts]
+            mtrl_nms = [uniq[p].get("mtrl_nm", None) for p in pts]
 
             # --- 배치 스펙트럼 추출 ---
             spectra = cube[ys, xs, :]  # (N, C)
@@ -228,14 +300,27 @@ class PixelLabelingDialog(QDialog):
 
             # --- rows 페이로드 구성 ---
             rows = []
-            for (y, x), cid, rfl in zip(uniq.keys(), cids.tolist(), spectra):
+            for (y, x), cid, rfl, mtrl_nm in zip(pts, cids, spectra, mtrl_nms):
                 rows.append({
                     "img_cd": int(img_cd),
                     "mtrl_cd": int(cid),
                     "img_x": int(x),
                     "img_y": int(y),
                     "rfl": rfl.astype(float).tolist(),
+                    "mtrl_nm": mtrl_nm,
                 })
+
+            # 저장 payload에 들어간 cid 점검(중복은 제거해서 로그량 최소화)
+            try:
+                import logging
+                from collections import Counter
+                cid_counts = Counter([int(r.get("mtrl_cd", -1)) for r in rows])
+                logging.info(
+                    "[PixelLabeling] Register payload cid counts: %s",
+                    {k: v for k, v in sorted(cid_counts.items(), key=lambda kv: kv[0])},
+                )
+            except Exception:
+                pass
                 
             if not rows:
                 QtWidgets.QMessageBox.warning(self, "알림", "등록할 유효한 픽셀이 없습니다.")
@@ -343,6 +428,11 @@ class PixelLabelingDialog(QDialog):
             # (3) 클래스 - 물질명 콤보박스
             combo_class = QComboBox()
 
+            # 콤보박스에는 기본적으로 "미지정(-1)"이 항상 존재해야,
+            # default_cid=-1 인 경우에도 currentData()가 예측 가능하게 -1이 나오고
+            # Qt가 내부적으로 다른 항목(보통 0)을 남겨 저장되는 일을 막을 수 있습니다.
+            combo_class.addItem("미지정", -1)
+
             # 전체 클래스 넣기 (표시: 물질명, 데이터: CID)
             existed_cids = set()
             for cid_opt, name_opt in class_options:
@@ -351,17 +441,27 @@ class PixelLabelingDialog(QDialog):
                 display_name = self._cid_to_name.get(cid_i, str(name_opt))
                 combo_class.addItem(display_name, cid_i)
 
-            # 현재 CID가 목록에 없으면 별도로 추가 (이름이 없으므로 cid 숫자로 표시)
-            if cid not in existed_cids:
-                display_name_missing = self._cid_to_name.get(cid, str(cid))
-                combo_class.insertItem(0, display_name_missing, cid)
-
             # ★ 기본값 결정: user_labeling_dialog에서 선택한 값이 있으면 우선 사용, 없으면 현재 CID
-            default_cid = self._default_cid if self._default_cid is not None and self._default_cid in existed_cids else cid
+            # _default_cid가 있으면(미지정 포함) 무조건 그 값을 우선한다.
+            # 이렇게 해야 global이 '미지정(-1)'일 때 행의 CID가 0으로 남아 Register payload에 섞이는 문제를 방지할 수 있다.
+            default_cid = self._default_cid if self._default_cid is not None else cid
+            if default_cid == 0:
+                default_cid = -1
+
+            if default_cid > 0 and default_cid not in existed_cids:
+                display_name_missing = self._cid_to_name.get(default_cid, str(default_cid))
+                combo_class.addItem(display_name_missing, default_cid)
             
             # 기본 CID 선택
             idx = combo_class.findData(default_cid)
-            combo_class.setCurrentIndex(idx if idx >= 0 else 0)
+            # idx<0이면 "선택 안됨"으로 둬야 합니다.
+            # 기존 구현은 idx<0일 때 0번째 항목(CID가 보통 0)을 강제로 선택해
+            # 잘못된 CID가 Register payload에 들어가는 원인이 될 수 있습니다.
+            if idx >= 0:
+                combo_class.setCurrentIndex(idx)
+            else:
+                # 방어: 그래도 못 찾으면 -1 선택으로 폴백
+                combo_class.setCurrentIndex(combo_class.findData(-1))
 
             # row 캡쳐 주의: 기본 인자로 row 고정
             combo_class.currentIndexChanged.connect(
@@ -403,7 +503,7 @@ class PixelLabelingDialog(QDialog):
 
     def get_checked_pixels(self):
         """
-        체크된 행만 수집하여 [{"y","x","cid","row"}...] 반환.
+        체크된 행만 수집하여 [{"y","x","cid","row","mtrl_nm"}...] 반환.
         - 좌표는 2열 "(x, y)"에서 파싱
         - 클래스는 3열: QComboBox면 currentData(), 아니면 item.text()
         """
@@ -433,18 +533,33 @@ class PixelLabelingDialog(QDialog):
 
             # cid 추출 (콤보/아이템 둘 다 지원)
             cid = -1
+            mtrl_nm = None
             w = tbl.cellWidget(r, 3)
             if isinstance(w, QComboBox):
                 data = w.currentData()
                 cid = int(data) if data is not None else -1
+                try:
+                    mtrl_nm = w.currentText()
+                except Exception:
+                    mtrl_nm = None
             else:
                 cid_item = tbl.item(r, 3)
                 if cid_item:
                     txt_c = (cid_item.text() or "").strip()
                     if txt_c.lstrip("-").isdigit():
                         cid = int(txt_c)
+                    # class name이 텍스트로 표시되는 경우가 있으므로 그대로 반영
+                    mtrl_nm = cid_item.text() if cid_item.text() else None
 
-            out.append({"y": int(y), "x": int(x), "cid": int(cid), "row": int(r)})
+            out.append(
+                {
+                    "y": int(y),
+                    "x": int(x),
+                    "cid": int(cid),
+                    "row": int(r),
+                    "mtrl_nm": mtrl_nm,
+                }
+            )
 
         return out
 
@@ -483,7 +598,6 @@ class PixelLabelingDialog(QDialog):
             app_dir = getattr(parent, "app_dir", None)
             ui_dir = (app_dir / "ui") if app_dir else None
             # 3) 검증 다이얼로그 실행
-            from views.dialogs.labeling_candidate_review import LabelingCandidateReviewDialog
             self._review_dlg = LabelingCandidateReviewDialog(parent=parent, ui_dir=ui_dir)
 
             # ★ 시그널 연결(반드시 필요)
@@ -952,20 +1066,36 @@ class PixelLabelingDialog(QDialog):
             import logging
             logging.exception("[PixelLabelingDialog] _on_class_combo_changed failed")
 
-    def set_class_options(self, items: list[tuple[int, str]]) -> None:
-        """MainWindow에서 주입하는 전체 클래스 목록 저장."""
+    def set_class_options(self, items) -> None:
+        """
+        MainWindow에서 주입하는 전체 클래스 목록 저장.
+        통일 포맷: [(cid, mtrl_nm, desc), ...] 이지만 호환을 위해 [(cid, mtrl_nm), ...]도 허용합니다.
+        """
         try:
             cleaned: list[tuple[int, str]] = []
             self._cid_to_name.clear()
-            for cid, name in (items or []):
+            for rec in (items or []):
                 try:
-                    cid_i = int(cid)
-                    name_s = str(name)
+                    # tuple/list 형태: (cid, name[, desc])
+                    if isinstance(rec, (list, tuple)):
+                        if len(rec) < 2:
+                            continue
+                        cid_val, name_val = rec[0], rec[1]
+                    # dict 형태: {"mtrl_cd":..., "mtrl_nm":...}
+                    elif isinstance(rec, dict):
+                        cid_val = rec.get("mtrl_cd") if "mtrl_cd" in rec else rec.get("cid") if "cid" in rec else rec.get("class_id")
+                        name_val = rec.get("mtrl_nm") or rec.get("name")
+                    else:
+                        continue
+
+                    cid_i = int(cid_val)
+                    name_s = str(name_val)
                 except Exception:
                     continue
                 cleaned.append((cid_i, name_s))
                 self._cid_to_name[cid_i] = name_s
             self._class_options = cleaned
+            print("[DEBUG] pixel_labeling set_class_options cleaned =", cleaned[:30])
         except Exception:
             self._class_options = []
             self._cid_to_name.clear()

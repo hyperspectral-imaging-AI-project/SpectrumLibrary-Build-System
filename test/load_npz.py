@@ -3,11 +3,14 @@ import numpy as np
 # path = r"C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\map_sample\classification1.npz"
 # path = r'E:\시연\BG\C3\C3-1.hdr.resample.npz'
 # path = r'E:\시연\BG\C3\C3-1.hdr.resample.npz'
-path = r'E:\시연\FM_vec\C1-3_vec.hdr.resample.npz'
+path = r'E:\\3dlabs_data\\sample\\sample.mat.resample.npz'
 with np.load(path, allow_pickle=True) as z:  # 권장: context manager
     print(z.files)                  # ['data', 'image_code', 'kind', 'height', 'width', ...]
-    print(z["label_raw"].item())
-
+    
+    for i in z.files:
+        
+        if i == 'label_raw':
+            print(z[i])
 
     # print(z['label_coords'].item())
     

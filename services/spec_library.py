@@ -152,11 +152,18 @@ def norm_any_to_dict(
             # cid
             try: cid = int(k)
             except Exception:
-                # 값이 dict인 경우 안에서 cid를 구할 수 있으면 시도
+                # 값이 dict인 경우 안에서 cid를 구할 수 있으면 시도 (mtrl_cd==0 은 or 체인으로 누락 방지)
                 if isinstance(v, dict):
-                    cid2 = v.get("mtrl_cd") or v.get("cid")
-                    try: cid = int(cid2)
-                    except Exception: 
+                    cid2 = None
+                    if "mtrl_cd" in v:
+                        cid2 = v.get("mtrl_cd")
+                    elif "cid" in v:
+                        cid2 = v.get("cid")
+                    try:
+                        cid = int(cid2) if cid2 is not None else None
+                    except Exception:
+                        cid = None
+                    if cid is None:
                         continue
                 else:
                     continue
@@ -248,10 +255,15 @@ def norm_any_to_dict(
         out = {}
         H, W, _ = np.asarray(cube).shape
         for idx, r in enumerate(x):
-            # 1) cid
-            cid = r.get("mtrl_cd", r.get("cid"))
+            # 1) cid (mtrl_cd==0 이 falsy로 cid에 안 들어가지 않게 키 존재 순서로 읽음)
+            if "mtrl_cd" in r:
+                cid_raw = r.get("mtrl_cd")
+            elif "cid" in r:
+                cid_raw = r.get("cid")
+            else:
+                cid_raw = None
             try:
-                cid = int(cid)
+                cid = int(cid_raw)
             except Exception:
                 raise FormatError(f"[{src_name}] rows[{idx}] cid 변환 실패")
 

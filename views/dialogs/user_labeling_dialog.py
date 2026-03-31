@@ -78,6 +78,14 @@ class UserLabelingDialog(QtWidgets.QDialog):
         # 버튼 연결
         self._combo_global = self._root.comboBox   # 아래 콤보박스
         self._combo_global.clear()
+        # 기본값은 "미지정(-1)"이어야 합니다.
+        # 그렇지 않으면 전역 콤보의 첫 항목(CID가 보통 0)이 기본 선택으로 잡혀
+        # MainWindow에서 default_cid=0으로 전달될 수 있습니다.
+        try:
+            self._combo_global.addItem("미지정", -1)
+            self._combo_global.setCurrentIndex(0)
+        except Exception:
+            pass
 
         self._root.btnRegisterCandidates.clicked.connect(self._on_register_candidates)
         self._root.btnCancel.clicked.connect(self.reject)
@@ -98,6 +106,25 @@ class UserLabelingDialog(QtWidgets.QDialog):
         - name은 mtrl_nm(물질 이름)으로 간주하고 캐시에 저장
         """
         # 1) 안전 캐스팅 + 정렬
+        def _sanitize_display_name(name_val: object, cid_int: int) -> str:
+            """
+            UI 표시용 물질명 방어.
+            - 숫자(int/float) 또는 숫자 문자열('0','5',...)이면 Class {cid_int}로 폴백
+            - None/빈 문자열도 Class {cid_int}로 폴백
+            """
+            if name_val is None:
+                return f"Class {cid_int}"
+            if isinstance(name_val, (int, float)):
+                return f"Class {cid_int}"
+            if isinstance(name_val, str):
+                s = name_val.strip()
+                if not s:
+                    return f"Class {cid_int}"
+                if s.lstrip("-").isdigit():
+                    return f"Class {cid_int}"
+                return s
+            return f"Class {cid_int}"
+
         cleaned = []
         for rec in (items or []):
             try:
@@ -114,7 +141,7 @@ class UserLabelingDialog(QtWidgets.QDialog):
                     continue
 
                 cid = int(cid_val)
-                name = str(name_val)
+                name = _sanitize_display_name(name_val, cid)
                 cleaned.append((cid, name))
                 self._cid_to_name_cache[cid] = name
             except Exception:
@@ -128,11 +155,25 @@ class UserLabelingDialog(QtWidgets.QDialog):
         if hasattr(self, "_combo_global") and self._combo_global is not None:
             self._combo_global.blockSignals(True)
             self._combo_global.clear()
+            # placeholder를 맨 앞에 추가해 기본 선택이 -1이 되도록 합니다.
+            try:
+                self._combo_global.addItem("미지정", -1)
+                self._combo_global.setCurrentIndex(0)
+            except Exception:
+                pass
             for cid_opt, name_opt in self._class_options:
                 # 캐시에서 mtrl_nm 가져오기 (없으면 name_opt 사용)
-                display_name = self._cid_to_name_cache.get(int(cid_opt), name_opt)
+                cid_i = int(cid_opt)
+                display_name = self._cid_to_name_cache.get(cid_i, name_opt)
+                display_name = _sanitize_display_name(display_name, cid_i)
                 self._combo_global.addItem(display_name, cid_opt)  # mtrl_nm 기준으로 표시, 내부 데이터는 CID
             self._combo_global.blockSignals(False)
+
+        # ===== DEBUG: set_class_options 정제 결과 =====
+        try:
+            print("[DEBUG] set_class_options cleaned =", cleaned[:30])
+        except Exception:
+            pass
 
 
     def set_palette(self, cid_to_qcolor: Dict[int, QColor]):
@@ -331,7 +372,12 @@ class UserLabelingDialog(QtWidgets.QDialog):
                 # 콤보박스에 클래스 옵션 추가
                 for cid_opt, name_opt in self._class_options:
                     # 캐시에서 mtrl_nm 가져오기 (없으면 name_opt 사용)
-                    display_name = self._cid_to_name_cache.get(int(cid_opt), name_opt)
+                    cid_i = int(cid_opt)
+                    display_name = self._cid_to_name_cache.get(cid_i, name_opt)
+                    if isinstance(display_name, str):
+                        s = display_name.strip()
+                        if not s or s.lstrip("-").isdigit():
+                            display_name = f"Class {cid_i}"
                     cb.addItem(display_name, cid_opt)  # mtrl_nm 기준으로 표시, 내부 데이터는 CID
                 
                 # 기존 cid 선택 복원
@@ -372,10 +418,9 @@ class UserLabelingDialog(QtWidgets.QDialog):
 
         # 전역 콤보에서 CID 가져와 전체 행에 일괄 적용
         cid = self._get_global_cid()
-        if cid == -1:
-            QtWidgets.QMessageBox.warning(self, "경고", "하단 콤보에서 클래스를 먼저 선택하세요.")
+        if cid <= 0:
+            QtWidgets.QMessageBox.warning(self, "경고", "하단 콤보에서 유효한 클래스를 먼저 선택하세요.")
             return
-
         # 전체 행에 적용
         for i in range(len(self._pixel_labels)):
             y, x, _ = self._pixel_labels[i]
@@ -580,6 +625,19 @@ class UserLabelingDialog(QtWidgets.QDialog):
         import logging
         class_options: list[tuple[int, str]] = []
 
+        def _sanitize_loaded_name(name_val: object, cid_int: int) -> str:
+            """로딩 단계에서 숫자 문자열('0') 같은 값이 UI에 그대로 노출되지 않게 방어."""
+            if name_val is None:
+                return f"Class {cid_int}"
+            if isinstance(name_val, (int, float)):
+                return f"Class {cid_int}"
+            if isinstance(name_val, str):
+                s = name_val.strip()
+                if not s or s.lstrip("-").isdigit():
+                    return f"Class {cid_int}"
+                return s
+            return f"Class {cid_int}"
+
         try:
             if user_type == "personal":
                 # personal: .info 파일에서 클래스 목록 로드
@@ -591,7 +649,9 @@ class UserLabelingDialog(QtWidgets.QDialog):
                             try:
                                 if isinstance(rec, (list, tuple)) and len(rec) >= 2:
                                     cid_i = int(rec[0])
-                                    name_s = str(rec[1])
+                                    if cid_i <= 0:
+                                        continue
+                                    name_s = _sanitize_loaded_name(rec[1], cid_i)
                                     class_options.append((cid_i, name_s))
                             except Exception:
                                 continue
@@ -611,7 +671,8 @@ class UserLabelingDialog(QtWidgets.QDialog):
                             try:
                                 cid = int(rec.get("mtrl_cd", -1))
                                 name = str(rec.get("mtrl_nm", f"Class {cid}")).strip()
-                                if cid >= 0 and name:
+                                name = _sanitize_loaded_name(name, cid)
+                                if cid > 0 and name:
                                     class_options.append((cid, name))
                             except Exception:
                                 continue
@@ -627,6 +688,14 @@ class UserLabelingDialog(QtWidgets.QDialog):
         except Exception as e:
             logging.exception(f"[UserLabeling] 초기 클래스 로드 중 예외: {e}")
             class_options = []
+
+        # ===== DEBUG: 클래스 로드 원본(콤보 소스) =====
+        try:
+            print("[DEBUG] user_type =", user_type)
+            print("[DEBUG] primary_path =", primary_path)
+            print("[DEBUG] loaded class_options =", class_options[:30])
+        except Exception:
+            pass
 
         # 정리 & 세팅
         if class_options:

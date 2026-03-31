@@ -784,7 +784,9 @@ class MainWindow(QtWidgets.QMainWindow):
                         # user_labeling_dialog의 전역 콤보박스에서 선택된 CID 가져오기
                         if hasattr(self._user_labeling_dialog, "_get_global_cid"):
                             default_cid = self._user_labeling_dialog._get_global_cid()
-                            if default_cid is not None and default_cid >= 0:
+                            # global 콤보가 "미지정(-1)"이어도 PixelLabelingDialog에 전달해서
+                            # 행별 CID가 강제로 0 등으로 남는 것을 막는다.
+                            if default_cid is not None:
                                 if hasattr(dlg, "set_default_cid"):
                                     dlg.set_default_cid(default_cid)
                                     import logging
@@ -1134,6 +1136,117 @@ class MainWindow(QtWidgets.QMainWindow):
 
         return out
 
+    def _log_cid_zero_trace(self, stage: str, **sources: Any) -> None:
+        """
+        클래스 ID 0이 어느 소스 dict에 있는지 추적([CID0_TRACE]).
+        - 키가 정수 0으로 해석되거나
+        - 값이 dict이고 mtrl_cd/cid/class_id가 0인 경우
+        """
+        try:
+            parts: list[str] = []
+            for name, d in sources.items():
+                if d is None:
+                    parts.append(f"{name}=None")
+                    continue
+                if not isinstance(d, dict):
+                    parts.append(f"{name}=<{type(d).__name__}>")
+                    continue
+                hits: list[str] = []
+                for k, v in d.items():
+                    key_zero = False
+                    try:
+                        key_zero = int(k) == 0
+                    except (TypeError, ValueError):
+                        pass
+                    nested_zero = False
+                    if isinstance(v, dict):
+                        for fld in ("mtrl_cd", "cid", "class_id"):
+                            if fld not in v:
+                                continue
+                            fv = v.get(fld)
+                            try:
+                                if fv is not None and int(fv) == 0:
+                                    nested_zero = True
+                                    break
+                            except (TypeError, ValueError):
+                                pass
+                    if key_zero:
+                        if hasattr(v, "shape"):
+                            hits.append(
+                                f"key0->shape={getattr(v, 'shape', '?')} dtype={getattr(v, 'dtype', '')}"
+                            )
+                        elif isinstance(v, dict):
+                            hits.append("key0->value_is_dict")
+                        else:
+                            hits.append(f"key0->{type(v).__name__}")
+                    elif nested_zero:
+                        hits.append(f"nested_cid0@outer_key={k!r}")
+                if hits:
+                    parts.append(f"{name}:[{'; '.join(hits)}]")
+                else:
+                    parts.append(f"{name}:no_cid0(n={len(d)})")
+            logging.info("[CID0_TRACE] %s: %s", stage, " | ".join(parts))
+        except Exception:
+            logging.debug("[CID0_TRACE] logging failed at stage=%s", stage, exc_info=True)
+
+    def _trace_cid_record_pick(
+        self,
+        stage: str,
+        rec: Any,
+        picked_cid: Any,
+        *,
+        name_fields: tuple[str, ...] = ("mtrl_nm", "name", "label", "desc"),
+    ) -> None:
+        """
+        [방법1] '어떤 key에서 cid가 뽑히는지'를 record(dict) 단위로 추적합니다.
+
+        특히 mtrl_cd==0 처럼 falsy 값이 `or` 체인에서 누락되는 케이스를 잡기 위해
+        mtrl_cd/cid/class_id의 존재/원값과 picked_cid 결과를 함께 찍습니다.
+        """
+        try:
+            if not isinstance(rec, dict):
+                return
+
+            has_mtrl_cd = "mtrl_cd" in rec
+            mtrl_cd_val = rec.get("mtrl_cd", None)
+            has_cid = "cid" in rec
+            cid_val = rec.get("cid", None)
+            has_class_id = "class_id" in rec
+            class_id_val = rec.get("class_id", None)
+
+            # 잡고 싶은 대표 케이스: mtrl_cd 키가 있고 값이 0일 때
+            should_log = has_mtrl_cd and mtrl_cd_val == 0
+            # 보조: picked_cid가 None인데 record에 값이 있을 때
+            if picked_cid is None and (has_mtrl_cd or has_cid or has_class_id):
+                should_log = True
+
+            if not should_log:
+                return
+
+            # 이름 후보(있으면)
+            name_val = None
+            for nf in name_fields:
+                if nf in rec:
+                    name_val = rec.get(nf)
+                    break
+
+            logging.info(
+                "[CID_REC_PICK] %s has(mtrl_cd=%s,cid=%s,class_id=%s) vals(mtrl_cd=%r,cid=%r,class_id=%r) "
+                "picked_cid=%r rec_name=%r rec_keys=%s",
+                stage,
+                has_mtrl_cd,
+                has_cid,
+                has_class_id,
+                mtrl_cd_val,
+                cid_val,
+                class_id_val,
+                picked_cid,
+                name_val,
+                list(rec.keys()),
+            )
+        except Exception:
+            logging.debug("[CID_REC_PICK] trace failed stage=%s", stage, exc_info=True)
+
     # --- [추가] 공용 헬퍼: 스펙트럼 라이브러리 재구성 ---
     def _rebuild_lib(self) -> None:
         try:
@@ -1205,19 +1318,35 @@ class MainWindow(QtWidgets.QMainWindow):
 
                 out: dict[int, list[np.ndarray]] = {}
 
+                def _cid_from_entry(k: Any, v: Any) -> Optional[int]:
+                    """dict 키 또는 값 내부에서 cid 추출. mtrl_cd==0 은 or 체인으로 누락되지 않게 처리."""
+                    try:
+                        return int(k)
+                    except Exception:
+                        pass
+                    if isinstance(v, dict):
+                        if "mtrl_cd" in v:
+                            try:
+                                return int(v["mtrl_cd"])
+                            except (TypeError, ValueError):
+                                return None
+                        if "cid" in v:
+                            try:
+                                return int(v["cid"])
+                            except (TypeError, ValueError):
+                                return None
+                        if "class_id" in v:
+                            try:
+                                return int(v["class_id"])
+                            except (TypeError, ValueError):
+                                return None
+                    return None
+
                 if isinstance(e, dict):
                     for k, v in e.items():
-                        # cid 결정
-                        try:
-                            cid = int(k)
-                        except Exception:
-                            # 값이 dict이면 그 안에서 cid를 꺼냄
-                            if isinstance(v, dict):
-                                cid = v.get("mtrl_cd") or v.get("cid") or v.get("class_id")
-                                try: cid = int(cid)
-                                except Exception: continue
-                            else:
-                                continue
+                        cid = _cid_from_entry(k, v)
+                        if cid is None:
+                            continue
 
                         # 데이터 추출
                         a = v
@@ -1251,9 +1380,17 @@ class MainWindow(QtWidgets.QMainWindow):
                     if isinstance(e, (list, tuple)):
                         for rec in (e or []):
                             if not isinstance(rec, dict): continue
-                            cid = rec.get("mtrl_cd") or rec.get("cid") or rec.get("_norm_entriesclass_id")
-                            try: cid = int(cid)
-                            except Exception: continue
+                            cid_o: Any = None
+                            if "mtrl_cd" in rec:
+                                cid_o = rec.get("mtrl_cd")
+                            elif "cid" in rec:
+                                cid_o = rec.get("cid")
+                            else:
+                                cid_o = rec.get("_norm_entriesclass_id")
+                            try:
+                                cid = int(cid_o)
+                            except Exception:
+                                continue
                             a = rec.get(prefer_key, None)
                             if a is None:
                                 a = rec.get("ref", None)
@@ -1315,8 +1452,8 @@ class MainWindow(QtWidgets.QMainWindow):
             logging.info("[rebuild] after _norm_entries: label_raw_norm=%d classes, label_cr_norm=%d classes", 
                         len(label_raw_norm), len(label_cr_norm))
 
-            # 2) 라벨 전용
-            self.labeling_lib = _stack_by_class(label_raw_norm, label_cr_norm)
+            # 2) 라벨 전용: 분류/큐브는 raw(cfg["data"]) 기준이므로 라벨도 raw만 스택(CR 혼입 방지)
+            self.labeling_lib = _stack_by_class(label_raw_norm)
             
             # ✅ raw 라벨링만 따로 보관 (BR에서 사용할 전용 dict)
             self.labeling_raw_lib = label_raw_norm
@@ -1324,8 +1461,29 @@ class MainWindow(QtWidgets.QMainWindow):
             # spectrum library의 raw 데이터만 저장
             self.splib_raw_norm = splib_raw_norm
             
-            # 3) 통합 라이브러리(스펙 + 라벨)
-            self.lib = _stack_by_class(splib_raw_norm, splib_cr_norm, label_raw_norm, label_cr_norm)
+            # 3) 통합 라이브러리: 픽셀 분류는 raw 큐브 대비 → splib_raw + label_raw 만 병합
+            #    (splib_cr/label_cr 를 같이 쌓으면 동일 cid 내 raw·CR 혼합으로 거리 메트릭이 깨짐)
+            self.lib = _stack_by_class(splib_raw_norm, label_raw_norm)
+            self.merged_lib_cr = _stack_by_class(splib_cr_norm, label_cr_norm)
+            try:
+                raw_cids = set(map(int, self.lib.keys()))
+                cr_only = set(map(int, self.merged_lib_cr.keys())) - raw_cids
+                if cr_only:
+                    logging.warning(
+                        "[rebuild] CR 전용 cid는 분류 lib(self.lib)에 포함되지 않음: %s",
+                        sorted(cr_only),
+                    )
+            except Exception:
+                logging.debug("[rebuild] merged_lib_cr vs lib cid diff log failed", exc_info=True)
+
+            self._log_cid_zero_trace(
+                "rebuild_lib_after_norm",
+                splib_raw_norm=splib_raw_norm,
+                splib_cr_norm=splib_cr_norm,
+                label_raw_norm=label_raw_norm,
+                label_cr_norm=label_cr_norm,
+                lib=self.lib,
+            )
 
             splib_raw_c, splib_raw_n = self._count_classes_and_samples(splib_raw_norm)
             splib_raw_c, splib_raw_n = self._count_classes_and_samples(splib_cr_norm)
@@ -1333,8 +1491,16 @@ class MainWindow(QtWidgets.QMainWindow):
             lab_raw_c, lab_raw_n = self._count_classes_and_samples(label_raw_norm)
             lab_cr_c,  lab_cr_n  = self._count_classes_and_samples(label_cr_norm)
             lib_c,     lib_n     = self._count_classes_and_samples(self.lib)
-            logging.info("[rebuild] classes: splib_raw=%d, splib_cr=%d, label_raw=%d, label_cr=%d, lib=%d",
-                        len(splib_raw_norm), len(splib_cr_norm), len(label_raw_norm), len(label_cr_norm), len(self.lib))
+            logging.info(
+                "[rebuild] classes: splib_raw=%d, splib_cr=%d, label_raw=%d, label_cr=%d, "
+                "lib(raw+splib+label raw)=%d, merged_lib_cr=%d",
+                len(splib_raw_norm),
+                len(splib_cr_norm),
+                len(label_raw_norm),
+                len(label_cr_norm),
+                len(self.lib),
+                len(self.merged_lib_cr),
+            )
 
             logging.info(
                 "[rebuild] label_raw=%d classes / %d samples, label_cr=%d classes / %d samples, lib=%d classes / %d samples",
@@ -1612,6 +1778,15 @@ class MainWindow(QtWidgets.QMainWindow):
             self.label_raw = _merge_dict(self.label_raw, add_raw)
             if add_cr:
                 self.label_cr = _merge_dict(self.label_cr, add_cr)
+
+            self._log_cid_zero_trace(
+                "label_register_after_merge",
+                splib_raw=self.splib_raw,
+                splib_cr=self.splib_cr,
+                label_raw=self.label_raw,
+                label_cr=self.label_cr,
+                add_raw=add_raw if isinstance(add_raw, dict) else {},
+            )
             
             # --- 2-1) 라벨링 데이터 좌표 정보 저장 (패치 이미지 표시용) ---
             # 좌표 정보를 별도로 저장: {cid: [(img_x, img_y, img_cd), ...]} - 배열 순서와 동일
@@ -1657,6 +1832,58 @@ class MainWindow(QtWidgets.QMainWindow):
                 classes_meta = self._collect_class_metadata_for_cache(
                     self.label_raw, self.label_cr, primary_path=primary
                 )
+
+                # cid=0 표시/이름 추적(원인 파악용)
+                try:
+                    if isinstance(classes_meta, dict) and 0 in classes_meta:
+                        logging.info(
+                            "[LabelRegister] classes_meta[0]=%s",
+                            {"cid": classes_meta[0].get("cid"), "mtrl_nm": classes_meta[0].get("mtrl_nm")},
+                        )
+                except Exception:
+                    pass
+
+                # payload(rows)에 mtrl_nm이 포함되어 있으면, cid별 mtrl_nm을 classes_meta에 덮어쓴다.
+                # 이렇게 하면 기존 .resample.info에 cid=0의 mtrl_nm이 누락/오염되어
+                # 기본값("Class 0")이 다시 들어오는 현상을 방어할 수 있다.
+                try:
+                    cid_to_payload_name: dict[int, str] = {}
+                    for rr in rows:
+                        if not isinstance(rr, dict):
+                            continue
+                        cid_val = rr.get("mtrl_cd", None) if "mtrl_cd" in rr else rr.get("cid", None)
+                        if cid_val is None:
+                            continue
+                        cid_int = int(cid_val)
+                        nm = rr.get("mtrl_nm", None) or rr.get("name", None)
+                        if nm is None:
+                            continue
+                        nm_s = str(nm).strip()
+                        if not nm_s:
+                            continue
+                        cid_to_payload_name[cid_int] = nm_s
+
+                    if 0 in cid_to_payload_name:
+                        logging.info(
+                            "[LabelRegister] payload mtrl_nm for cid=0: %r",
+                            cid_to_payload_name.get(0),
+                        )
+
+                    def _sanitize_for_payload(raw_nm: str, cid_int: int) -> str:
+                        if raw_nm is None:
+                            return f"Class {cid_int}"
+                        s = str(raw_nm).strip()
+                        if not s:
+                            return f"Class {cid_int}"
+                        if s.lstrip("-").isdigit():
+                            return f"Class {cid_int}"
+                        return s
+
+                    for cid_int, raw_nm in cid_to_payload_name.items():
+                        if cid_int in classes_meta:
+                            classes_meta[cid_int]["mtrl_nm"] = _sanitize_for_payload(raw_nm, cid_int)
+                except Exception:
+                    logging.exception("[LabelRegister] payload mtrl_nm -> classes_meta 덮어쓰기 실패")
                 
                 # 저장 전 상태 로그
                 lr_c_before = len(self.label_raw or {})
@@ -1674,8 +1901,8 @@ class MainWindow(QtWidgets.QMainWindow):
                         getattr(self, "label_coords", None),
                         meta_extra={"mode": "overwrite"},
                         classes_metadata=classes_meta,
-                        write_info=False,
-                    )
+                        # 라벨 등록(Register) 시 클래스명이 `.resample.info`에도 갱신되도록 한다.
+                        write_info=True)
                     # 저장 성공 확인
                     import os
                     info_path, npz_path = resample_cache_paths(primary)
@@ -1838,7 +2065,15 @@ class MainWindow(QtWidgets.QMainWindow):
                     if isinstance(rec, (list, tuple)) and len(rec) >= 2:
                         cid, name = rec[0], rec[1]
                     elif isinstance(rec, dict):
-                        cid = rec.get("mtrl_cd") or rec.get("cid") or rec.get("class_id")
+                        # 로그 기준: 서버 응답의 클래스 키는 mtrl_cd를 사용
+                        # (mtrl_cd=0 이 falsy여도 누락되지 않게 key 존재 기준으로 읽는다)
+                        cid = rec.get("mtrl_cd") if "mtrl_cd" in rec else None
+                        # [방법1] 어떤 key에서 cid가 선택되는지 추적
+                        self._trace_cid_record_pick(
+                            "UserLabeling._normalize_class_options[mtrl_cd_only]",
+                            rec,
+                            cid,
+                        )
                         name = rec.get("name") or rec.get("mtrl_nm") or rec.get("label")
                     else:
                         # 문자열(헤더 등) 또는 기타형식은 스킵
@@ -3055,16 +3290,28 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         # 모든 cid 수집
         cids = set()
-        
+
         if isinstance(label_raw, dict):
-            cids.update(int(k) for k in label_raw.keys() if isinstance(k, (int, str)))
+            for k in label_raw.keys():
+                try:
+                    cid = int(k)
+                except Exception:
+                    continue
+                if cid > 0:
+                    cids.add(cid)
+
         if isinstance(label_cr, dict):
-            cids.update(int(k) for k in label_cr.keys() if isinstance(k, (int, str)))
-        
+            for k in label_cr.keys():
+                try:
+                    cid = int(k)
+                except Exception:
+                    continue
+                if cid > 0:
+                    cids.add(cid)
+
         if not cids:
             return {}
-        
-        # 기본값으로 초기화
+
         class_meta: Dict[int, Dict[str, Any]] = {
             cid: {
                 "cid": int(cid),
@@ -3073,6 +3320,27 @@ class MainWindow(QtWidgets.QMainWindow):
             }
             for cid in cids
         }
+
+        debug_zero = 0 in cids
+
+        def _sanitize_mtrl_nm(raw_nm: Any, cid_int: int) -> str:
+            """저장/표시용 물질명 방어.
+            - raw_nm이 숫자(int/float) 또는 숫자 문자열("0")이면 Class {cid}로 폴백
+            - None/빈문자열이면 Class {cid}로 폴백
+            """
+            if raw_nm is None:
+                return f"Class {cid_int}"
+            if isinstance(raw_nm, (int, float)):
+                return f"Class {cid_int}"
+            if isinstance(raw_nm, str):
+                s = raw_nm.strip()
+                if not s:
+                    return f"Class {cid_int}"
+                if s.lstrip("-").isdigit():
+                    return f"Class {cid_int}"
+                return s
+            # 예상치 못한 타입은 안전하게 폴백
+            return f"Class {cid_int}"
         
         user_type = getattr(self, "user_type", "server")
         
@@ -3091,15 +3359,27 @@ class MainWindow(QtWidgets.QMainWindow):
                             try:
                                 cid_int = int(cid_str)
                                 if cid_int in class_meta:
+                                    raw_nm = info.get("mtrl_nm", None)
+                                    if raw_nm is None:
+                                        raw_nm = info.get("name", None) or info.get("mtrl_name", None)
+                                    if debug_zero and cid_int == 0:
+                                        logging.info(
+                                            "[ClassMeta] personal cid=0 raw_nm=%r info_keys=%s -> mtrl_nm=%s",
+                                            raw_nm,
+                                            list(info.keys()) if isinstance(info, dict) else [],
+                                            _sanitize_mtrl_nm(raw_nm, cid_int),
+                                        )
                                     class_meta[cid_int] = {
                                         "cid": cid_int,
-                                        "mtrl_nm": str(info.get("mtrl_nm", f"Class {cid_int}")),
+                                        "mtrl_nm": _sanitize_mtrl_nm(raw_nm, cid_int),
                                         "desc": str(info.get("desc", "")),
                                     }
                             except (TypeError, ValueError):
                                 continue
             except Exception:
                 logging.debug("[MainWindow] failed to read class metadata from .info file")
+                if debug_zero:
+                    logging.info("[ClassMeta] personal cid=0: read .info failed (using defaults)")
         
         # server 사용자: API 호출
         elif user_type == "server":
@@ -3123,9 +3403,19 @@ class MainWindow(QtWidgets.QMainWindow):
                             try:
                                 cid_int = int(cid)
                                 if cid_int in class_meta:
+                                    if debug_zero and cid_int == 0:
+                                        logging.info(
+                                            "[ClassMeta] server cid=0 raw mtrl_nm=%r name=%r -> mtrl_nm=%s",
+                                            rec.get("mtrl_nm", None),
+                                            rec.get("name", None),
+                                            _sanitize_mtrl_nm(rec.get("mtrl_nm", rec.get("name", None)), cid_int),
+                                        )
                                     class_meta[cid_int] = {
                                         "cid": cid_int,
-                                        "mtrl_nm": str(rec.get("mtrl_nm", f"Class {cid_int}")),
+                                        "mtrl_nm": _sanitize_mtrl_nm(
+                                            rec.get("mtrl_nm", rec.get("name", None)),
+                                            cid_int,
+                                        ),
                                         "desc": str(rec.get("desc", rec.get("dsc", ""))),
                                     }
                             except (TypeError, ValueError):
@@ -3133,7 +3423,16 @@ class MainWindow(QtWidgets.QMainWindow):
             except Exception:
                 # API 호출 실패 시 기본값 유지 (조용히 실패)
                 logging.debug("[MainWindow] class metadata API call failed, using defaults")
+                if debug_zero:
+                    logging.info("[ClassMeta] server cid=0: API failed (using defaults)")
         
+        # ===== DEBUG: _collect_class_metadata_for_cache 최종 상태 =====
+        try:
+            print("[DEBUG] class_meta keys =", sorted(class_meta.keys())[:50])
+            print("[DEBUG] class_meta[0] =", class_meta.get(0))
+        except Exception:
+            pass
+
         return class_meta
     
     @staticmethod
@@ -3407,6 +3706,14 @@ class MainWindow(QtWidgets.QMainWindow):
             self.splib_cr  = spec_cr_dict
             self.label_raw = label_raw_dict
             self.label_cr  = label_cr_dict
+
+            self._log_cid_zero_trace(
+                "apply_hsi_after_cache_bind",
+                splib_raw=self.splib_raw,
+                splib_cr=self.splib_cr,
+                label_raw=self.label_raw,
+                label_cr=self.label_cr,
+            )
 
             # ===== 5) ★ LabelStore는 사용하지 않음 (.npz가 주 저장소) =====
             # 주의: 사용자 라벨링 데이터는 .npz에 저장되므로, LabelStore는 더 이상 사용하지 않음
@@ -6880,7 +7187,16 @@ class MainWindow(QtWidgets.QMainWindow):
                 name = v
                 if isinstance(v, dict):
                     name = v.get("mtrl_nm") or v.get("name") or v.get("label") or v.get("desc")
-                name_str = str(name).strip() if name not in (None, "") else f"Class {cid}"
+                # API가 숫자(특히 0)로 name을 내려주는 경우를 방어
+                if isinstance(name, (int, float)):
+                    name_str = f"Class {cid}"
+                else:
+                    name_candidate = str(name).strip() if name not in (None, "") else ""
+                    # "0" 같은 숫자 문자열은 이름으로 보지 않고 Class {cid}로 대체
+                    if not name_candidate or name_candidate.lstrip("-").isdigit():
+                        name_str = f"Class {cid}"
+                    else:
+                        name_str = name_candidate
                 id_to_name[cid] = name_str
         elif isinstance(raw, (list, tuple)):
             for rec in raw:
@@ -6888,7 +7204,15 @@ class MainWindow(QtWidgets.QMainWindow):
                 if isinstance(rec, (list, tuple)) and len(rec) >= 2:
                     cid, name = rec[0], rec[1]
                 elif isinstance(rec, dict):
-                    cid = rec.get("mtrl_cd") or rec.get("cid") or rec.get("class_id")
+                    # 로그 기준: 서버 응답의 클래스 키는 mtrl_cd를 사용
+                    # (mtrl_cd=0 이 falsy여도 누락되지 않게 key 존재 기준으로 읽는다)
+                    cid = rec.get("mtrl_cd") if "mtrl_cd" in rec else None
+                    # [방법1] 어떤 key에서 cid가 선택되는지 추적
+                    self._trace_cid_record_pick(
+                        "PixelLabeling._build_class_options_for_labeling[mtrl_cd_only]",
+                        rec,
+                        cid,
+                    )
                     name = rec.get("mtrl_nm") or rec.get("name") or rec.get("label") or rec.get("desc")
                 else:
                     continue
@@ -6897,7 +7221,16 @@ class MainWindow(QtWidgets.QMainWindow):
                     cid_int = int(str(cid).strip())
                 except Exception:
                     continue
-                name_str = str(name).strip() if name not in (None, "") else f"Class {cid_int}"
+                # API가 숫자(특히 0)로 name을 내려주는 경우를 방어
+                if isinstance(name, (int, float)):
+                    name_str = f"Class {cid_int}"
+                else:
+                    name_candidate = str(name).strip() if name not in (None, "") else ""
+                    # "0" 같은 숫자 문자열은 이름으로 보지 않고 Class {cid}로 대체
+                    if not name_candidate or name_candidate.lstrip("-").isdigit():
+                        name_str = f"Class {cid_int}"
+                    else:
+                        name_str = name_candidate
                 id_to_name[cid_int] = name_str
 
         # 2) 라이브러리에 있는 CID 전체를 포함시키기 (이름 없으면 cid 자체를 이름으로 사용)
@@ -6905,17 +7238,23 @@ class MainWindow(QtWidgets.QMainWindow):
         if lib:
             for cid in sorted(map(int, lib.keys())):
                 if cid not in id_to_name:
-                    id_to_name[cid] = str(cid)
+                    # lib에만 있는 cid는 최소한 "0" 같은 숫자 표시 대신 Class {cid}로 표현
+                    id_to_name[cid] = f"Class {cid}"
 
         # 3) (cid, name) 리스트로 반환
         options = sorted(id_to_name.items(), key=lambda x: x[0])
         return options
 
-    def _resolve_current_class_options(self) -> list[tuple[int, str]]:
-        """user_type에 따라 personal(.info) 또는 server(API) 클래스 목록을 반환."""
+    def _resolve_current_class_options(self) -> list[tuple[int, str, str]]:
+        """
+        user_type(personal/server)에 상관없이 동일한 포맷 반환:
+        [(cid, mtrl_nm, desc), ...]
+        - personal: .info(classes)에서 desc까지 로드 (이미 3-튜플)
+        - server: desc는 API 결과/라이브러리 기준으로 없으므로 ""로 채움
+        """
         user_type = getattr(self, "user_type", "server")
         if user_type == "personal":
-            class_options: list[tuple[int, str]] = []
+            class_options: list[tuple[int, str, str]] = []
             try:
                 primary = self._cache_primary_path(self.cfg) if hasattr(self, "cfg") else None
                 if not primary and hasattr(self, "_extract_src_path"):
@@ -6934,8 +7273,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 class_options = []
             return class_options
 
-        # server 사용자: API + 라이브러리 기반
-        return self._build_class_options_for_labeling()
+        # server 사용자: API + 라이브러리 기반 (desc는 없으므로 ""로 통일)
+        options_2 = self._build_class_options_for_labeling()  # [(cid, name), ...]
+        return [(int(cid), str(name), "") for cid, name in (options_2 or [])]
 
     def _build_unmixing_classmap_from_abundance(self, threshold: float, mapping: Optional[Dict[int, int]] = None):
         A = self.unmixing_abundance_map  # (H, W, K)

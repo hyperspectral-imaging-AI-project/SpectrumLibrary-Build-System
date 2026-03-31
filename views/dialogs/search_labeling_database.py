@@ -405,48 +405,100 @@ class SearchLabelingDatabaseDialog(QtWidgets.QDialog):
                 self._material_cache[cid] = result[cid]
             return result
         
-        # 캐시에 없는 cid만 필터링
-        missing_cids = [cid for cid in cids if cid not in self._material_cache]
+        # MainWindow의 캐시를 먼저 확인 (server 모드)
+        if self._main_window:
+            # 1) _build_id_to_name_for_cids 메서드 사용 (가장 우선)
+            if hasattr(self._main_window, '_build_id_to_name_for_cids'):
+                try:
+                    id_to_name = self._main_window._build_id_to_name_for_cids(cids)
+                    found_count = 0
+                    for cid in cids:
+                        name = id_to_name.get(cid)
+                        if name and name != str(cid):  # 기본값이 아닌 경우만 사용
+                            result[cid] = {"name": name, "description": ""}
+                            self._material_cache[cid] = result[cid]
+                            found_count += 1
+                    if found_count > 0:
+                        logging.debug(f"[SearchLabelingDatabase] MainWindow _build_id_to_name_for_cids에서 {found_count}개 클래스명 찾음")
+                except Exception as e:
+                    logging.exception(f"[SearchLabelingDatabase] MainWindow _build_id_to_name_for_cids 실패: {e}")
+            
+            # 2) _mtrl_meta 직접 확인
+            if hasattr(self._main_window, '_mtrl_meta'):
+                try:
+                    mtrl_meta = getattr(self._main_window, '_mtrl_meta', {}) or {}
+                    if isinstance(mtrl_meta, dict):
+                        found_count = 0
+                        for cid in cids:
+                            if cid in result:  # 이미 설정된 경우 스킵
+                                continue
+                            meta = mtrl_meta.get(cid) or mtrl_meta.get(str(cid)) or {}
+                            if isinstance(meta, dict):
+                                name = meta.get("mtrl_nm") or meta.get("name")
+                                if name:
+                                    desc = meta.get("desc") or meta.get("description") or ""
+                                    result[cid] = {"name": str(name), "description": str(desc)}
+                                    self._material_cache[cid] = result[cid]
+                                    found_count += 1
+                        if found_count > 0:
+                            logging.debug(f"[SearchLabelingDatabase] MainWindow _mtrl_meta에서 {found_count}개 클래스명 찾음")
+                except Exception as e:
+                    logging.exception(f"[SearchLabelingDatabase] MainWindow _mtrl_meta 확인 실패: {e}")
         
-        # 기본값 설정 (캐시에 있는 것도 포함)
+        # 내부 캐시에 있는 것 추가
         for cid in cids:
-            if cid in self._material_cache:
+            if cid not in result and cid in self._material_cache:
                 result[cid] = self._material_cache[cid]
-            else:
-                result[cid] = {"name": f"Class {cid}", "description": ""}
+        
+        # 캐시에 없는 cid만 필터링
+        missing_cids = [cid for cid in cids if cid not in result]
+        
+        # 기본값 설정 (아직 설정되지 않은 것만)
+        for cid in missing_cids:
+            result[cid] = {"name": f"Class {cid}", "description": ""}
         
         # API 호출 (캐시에 없는 것만)
-        if missing_cids and API_AVAILABLE:
-            try:
-                api_base = os.getenv('material_filtering_url')
-                if api_base:
-                    api_result = search_material_filtering_list(base_url=api_base, mtrl_ids=missing_cids)
-                    
-                    # API 결과를 딕셔너리로 변환
-                    api_dict = {}
-                    for item in api_result:
-                        mtrl_cd = item.get("mtrl_cd")
-                        if mtrl_cd is not None:
-                            api_dict[int(mtrl_cd)] = {
-                                "name": item.get("mtrl_nm", f"Class {mtrl_cd}"),
-                                "description": item.get("desc", "")
-                            }
-                    
-                    # 결과 업데이트 및 캐시 저장
+        if missing_cids:
+            if API_AVAILABLE:
+                try:
+                    api_base = os.getenv('material_filtering_url')
+                    if api_base:
+                        logging.debug(f"[SearchLabelingDatabase] API 호출 시도: {len(missing_cids)}개 클래스 (CIDs: {missing_cids})")
+                        api_result = search_material_filtering_list(base_url=api_base, mtrl_ids=missing_cids)
+                        
+                        # API 결과를 딕셔너리로 변환
+                        api_dict = {}
+                        for item in api_result:
+                            mtrl_cd = item.get("mtrl_cd")
+                            if mtrl_cd is not None:
+                                api_dict[int(mtrl_cd)] = {
+                                    "name": item.get("mtrl_nm", f"Class {mtrl_cd}"),
+                                    "description": item.get("desc", "")
+                                }
+                        
+                        # 결과 업데이트 및 캐시 저장
+                        found_count = 0
+                        for cid in missing_cids:
+                            if cid in api_dict:
+                                result[cid] = api_dict[cid]
+                                self._material_cache[cid] = api_dict[cid]
+                                found_count += 1
+                            else:
+                                # API에서 못 찾은 경우 기본값 유지 및 캐시 저장
+                                self._material_cache[cid] = result[cid]
+                        
+                        if found_count > 0:
+                            logging.debug(f"[SearchLabelingDatabase] API에서 {found_count}개 클래스명 찾음")
+                    else:
+                        logging.warning(f"[SearchLabelingDatabase] material_filtering_url 환경 변수가 설정되지 않음")
+                except Exception as e:
+                    logging.exception(f"[SearchLabelingDatabase] 배치 Material 정보 가져오기 실패: {e}")
+                    # 실패한 경우 기본값 캐시에 저장
                     for cid in missing_cids:
-                        if cid in api_dict:
-                            result[cid] = api_dict[cid]
-                            self._material_cache[cid] = api_dict[cid]
-                        else:
-                            # API에서 못 찾은 경우 기본값 유지
+                        if cid not in self._material_cache:
                             self._material_cache[cid] = result[cid]
-                            
-            except Exception as e:
-                logging.exception(f"[SearchLabelingDatabase] 배치 Material 정보 가져오기 실패: {e}")
-                # 실패한 경우 기본값 캐시에 저장
-                for cid in missing_cids:
-                    if cid not in self._material_cache:
-                        self._material_cache[cid] = result[cid]
+            else:
+                logging.debug(f"[SearchLabelingDatabase] API 사용 불가능, 기본값 사용: {len(missing_cids)}개 클래스")
         
         return result
 
@@ -551,8 +603,9 @@ class SearchLabelingDatabaseDialog(QtWidgets.QDialog):
 
         for cid in sorted_ids:
             material_info = material_info_dict.get(cid, {})
+            print(material_info)
             name = material_info.get("name", f"Class {cid}")
-            combo.addItem(f"{cid} - {name}", cid)
+            combo.addItem(name, cid)
 
         if combo.count() > 0:
             combo.setCurrentIndex(0)

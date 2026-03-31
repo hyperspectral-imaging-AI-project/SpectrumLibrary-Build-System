@@ -448,7 +448,36 @@ def load_classes_from_info(
         for cid_str, info in classes_info.items():
             try:
                 cid_int = int(cid_str)
-                mtrl_nm = str(info.get("mtrl_nm", f"Class {cid_int}"))
+                # mtrl_nm이 숫자(특히 0)로 저장된 케이스를 방어
+                # - JSON에서 실수/정수로 들어오면 str() 결과가 "0"이 되어 UI에 그대로 노출될 수 있음
+                raw_nm = info.get("mtrl_nm", None)
+                if raw_nm is None:
+                    raw_nm = info.get("name", None) or info.get("mtrl_name", None)
+
+                if isinstance(raw_nm, (int, float)):
+                    raw_nm = None
+
+                # raw_nm이 문자열 숫자("0", "5" 등)로 들어오는 경우도 방어
+                if isinstance(raw_nm, str):
+                    s = raw_nm.strip()
+                    # 공백/빈문자 처리
+                    if not s:
+                        raw_nm = None
+                    else:
+                        # "0" 같은 순수 숫자면 이름으로 간주하지 않음
+                        try:
+                            if s.lstrip("-").isdigit():
+                                raw_nm = None
+                        except Exception:
+                            pass
+
+                if raw_nm is None:
+                    mtrl_nm = f"Class {cid_int}"
+                else:
+                    mtrl_nm = str(raw_nm)
+                    if not mtrl_nm.strip():
+                        mtrl_nm = f"Class {cid_int}"
+
                 desc = info.get("desc", info.get("dsc", ""))
                 result.append((cid_int, mtrl_nm, desc))
             except (TypeError, ValueError):
