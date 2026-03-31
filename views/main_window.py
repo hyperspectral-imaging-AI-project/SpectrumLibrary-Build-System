@@ -480,13 +480,18 @@ class MainWindow(QtWidgets.QMainWindow):
             path, _ = QtWidgets.QFileDialog.getSaveFileName(
                 self, "합친 클래스맵 저장",
                 str(self._last_open_dir / f"{out_name}.npz"),
-                "NumPy Zip (*.npz)"
+                "NumPy Zip (*.npz);;MATLAB File (*.mat)"
             )
             if path:
                 # LM 안쪽 저장소에서 바로 꺼내 저장
                 cm = self.layer_manager.get_classmap(out_name)
                 if cm is not None:
-                    self._save_npz_with_meta(path, data=cm.astype(np.int32, copy=False), kind="classmap")
+                    self._save_npz_with_meta(
+                        path,
+                        data=cm.astype(np.int32, copy=False),
+                        kind="classmap",
+                        classmap_name=out_name,
+                    )
                     self.statusBar().showMessage(f"합친 클래스맵 저장: {path}", 4000)
                 else:
                     QtWidgets.QMessageBox.warning(self, "경고", "결과 클래스맵을 찾을 수 없습니다.")
@@ -2958,7 +2963,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     QtWidgets.QMessageBox.information(self, "안내", "저장할 작업 영역(ROI)이 없습니다.")
                     return
                 path, _ = QtWidgets.QFileDialog.getSaveFileName(
-                    self, "ROI 저장", str(self._last_open_dir / "roi.npz"), "NumPy Zip (*.npz)"
+                    self, "ROI 저장", str(self._last_open_dir / "roi.npz"), "NumPy Zip (*.npz);;MATLAB File (*.mat)"
                 )
                 if not path:
                     return
@@ -2985,7 +2990,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     return
 
                 path, _ = QtWidgets.QFileDialog.getSaveFileName(
-                    self, "마스크 저장", str(self._last_open_dir / "mask.npz"), "NumPy Zip (*.npz)"
+                    self, "마스크 저장", str(self._last_open_dir / "mask.npz"), "NumPy Zip (*.npz);;MATLAB File (*.mat)"
                 )
                 if not path:
                     return
@@ -3013,10 +3018,15 @@ class MainWindow(QtWidgets.QMainWindow):
                 return
 
             path, _ = QtWidgets.QFileDialog.getSaveFileName(
-                self, "분류맵 저장", str(self._last_open_dir / f"{name}.npz"), "NumPy Zip (*.npz)"
+                self, "분류맵 저장", str(self._last_open_dir / f"{name}.npz"), "NumPy Zip (*.npz);;MATLAB File (*.mat)"
             )
             if not path: return
-            self._save_npz_with_meta(path, data=cm2d.astype(np.int32, copy=False), kind="classmap")
+            self._save_npz_with_meta(
+                path,
+                data=cm2d.astype(np.int32, copy=False),
+                kind="classmap",
+                classmap_name=name,
+            )
             self.statusBar().showMessage(f"저장됨: {path}", 3000)
 
         except Exception:
@@ -3026,8 +3036,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.pyqtSlot(list)
     def _on_load_files_req(self, paths: list):
         """
-        LayersDock에 .npz 파일 드롭 → 자동 로드
-        - .npz: image_code 검증 필수 (self._load_npz_with_check 사용)
+        LayersDock에 .npz/.mat 파일 드롭 → 자동 로드
+        - image_code 검증 필수 (self._load_labeled_file_with_check 사용)
         kind: 'classmap' | 'roi' | 'mask'
         """
         try:
@@ -3040,13 +3050,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
             for p in paths:
                 # 1) 확장자 검사
-                if Path(p).suffix.lower() != ".npz":
-                    QtWidgets.QMessageBox.warning(self, "경고", f"{p}: .npz만 지원합니다. (image_code 검증 필요)")
+                ext = Path(p).suffix.lower()
+                if ext not in (".npz", ".mat"):
+                    QtWidgets.QMessageBox.warning(self, "경고", f"{p}: .npz/.mat만 지원합니다. (image_code 검증 필요)")
                     continue
 
                 # 2) image_code 검증 + kind/data 로드
                 try:
-                    kind, arr = self._load_npz_with_check(p)  # ← 여기서 파일의 image_code == self.image_cd 검증
+                    kind, arr, id_to_name = self._load_labeled_file_with_check(p)
                 except Exception as e:
                     QtWidgets.QMessageBox.warning(self, "경고", f"{p}: 로드 거부 — {e}")
                     continue
@@ -3076,8 +3087,10 @@ class MainWindow(QtWidgets.QMainWindow):
                         classmap_i32=cm,
                         class_ids=present,
                         visible=True,
-                        id_to_name=self._norm_id_to_name(),
+                        id_to_name=(id_to_name or self._norm_id_to_name()),
                     )
+                    if id_to_name:
+                        self._last_id_to_name = id_to_name
                     self.statusBar().showMessage(f"분류맵 로드: {p}", 3000)
                     continue
 
@@ -3112,7 +3125,44 @@ class MainWindow(QtWidgets.QMainWindow):
         ic = getattr(self, "image_cd", None)
         return str(ic) if ic is not None else None
 
-    def _save_npz_with_meta(self, path: str, *, data: np.ndarray, kind: str) -> None:
+    def _current_hsi_channels(self) -> int:
+        """
+        현재 로드된 HSI cube의 채널 수를 반환.
+        없거나 3D가 아니면 -1.
+        """
+        try:
+            cfg = getattr(self, "cfg", None)
+            if isinstance(cfg, dict) and "data" in cfg:
+                cube = np.asarray(cfg["data"])
+                if cube.ndim == 3:
+                    return int(cube.shape[2])
+        except Exception:
+            logging.exception("[NPZ] failed to get current HSI channels")
+        return -1
+
+    def _current_hsi_shape(self) -> tuple[int, int, int]:
+        """
+        현재 로드된 HSI cube에서 (height, width, channels) 반환.
+        없으면 (-1, -1, -1).
+        """
+        try:
+            cfg = getattr(self, "cfg", None)
+            if isinstance(cfg, dict) and "data" in cfg:
+                cube = np.asarray(cfg["data"])
+                if cube.ndim == 3:
+                    return int(cube.shape[0]), int(cube.shape[1]), int(cube.shape[2])
+        except Exception:
+            logging.exception("[NPZ] failed to get current HSI shape")
+        return -1, -1, -1
+
+    def _save_npz_with_meta(
+        self,
+        path: str,
+        *,
+        data: np.ndarray,
+        kind: str,
+        classmap_name: str | None = None,
+    ) -> None:
         """
         .npz로 저장: data + image_code + kind + shape
         kind: 'classmap' | 'roi' | 'mask'
@@ -3121,12 +3171,112 @@ class MainWindow(QtWidgets.QMainWindow):
         if img_code is None:
             QtWidgets.QMessageBox.warning(self, "경고", "현재 이미지의 image_code가 없습니다. 먼저 HSI를 로드하세요.")
             return
-        h = int(data.shape[0]) if data.ndim >= 2 else None
-        w = int(data.shape[1]) if data.ndim >= 2 else None
-        c = int(data.shape[2]) if data.ndim == 3 else None
-        np.savez(path, data=data, image_code=img_code, kind=kind, height=h, width=w, channels=c)
+        # 메타는 우선 현재 로드된 HSI(cfg["data"]) 기준으로 저장
+        h_cfg, w_cfg, c_cfg = self._current_hsi_shape()
+        h_data = int(data.shape[0]) if data.ndim >= 2 else -1
+        w_data = int(data.shape[1]) if data.ndim >= 2 else -1
+        c_data = int(data.shape[2]) if data.ndim == 3 else -1
 
-    def _load_npz_with_check(self, path: str) -> tuple[str, np.ndarray]:
+        h = h_cfg if h_cfg > 0 else h_data
+        w = w_cfg if w_cfg > 0 else w_data
+        c = c_cfg if c_cfg > 0 else c_data
+        extra: dict[str, object] = {}
+        if kind == "classmap":
+            # allow_pickle=False로도 읽을 수 있도록 JSON 문자열로 저장
+            try:
+                # 1) classmap별 라벨맵(가장 정확) → 2) 최근 분류 결과 → 3) 기본값
+                id_to_name = None
+                if classmap_name and hasattr(self, "layer_manager") and hasattr(self.layer_manager, "get_class_label_map"):
+                    try:
+                        id_to_name = self.layer_manager.get_class_label_map(classmap_name)
+                    except Exception:
+                        id_to_name = None
+                if not id_to_name:
+                    id_to_name = getattr(self, "_last_id_to_name", None) or self._norm_id_to_name()
+                if isinstance(id_to_name, dict) and id_to_name:
+                    norm_map: dict[int, str] = {}
+                    for k, v in id_to_name.items():
+                        try:
+                            cid = int(k)
+                        except (TypeError, ValueError):
+                            continue
+                        if isinstance(v, dict):
+                            nm = v.get("mtrl_nm") or v.get("name") or v.get("label")
+                            if nm:
+                                norm_map[cid] = str(nm)
+                        elif v is not None and str(v).strip():
+                            norm_map[cid] = str(v)
+
+                    # npz 포맷에서 바로 보이도록 명시적 필드 추가
+                    if norm_map:
+                        present_vals = sorted(int(i) for i in np.unique(np.asarray(data)))
+                        # -1/-2 포함 (미분류/중복 클래스도 class_map에 포함)
+                        present_ids = [cid for cid in present_vals if cid in norm_map]
+                        if present_ids:
+                            extra["class_ids"] = np.asarray(
+                                [cid for cid in present_ids if cid >= 0], dtype=np.int32
+                            )
+                            # NumPy 2.0+: np.unicode_ 제거됨 -> np.str_ 사용
+                            extra["class_names"] = np.asarray(
+                                [str(norm_map[cid]) for cid in present_ids if cid >= 0], dtype=np.str_
+                            )
+                            extra["classmap_name"] = str(classmap_name or Path(path).stem)
+
+                            # 요청: [('8','...'), ...] 형태를 class_map key로 저장
+                            # - npz: allow_pickle=False 유지 위해 JSON 문자열로 저장
+                            class_pairs = [(str(cid), str(norm_map[cid])) for cid in present_ids]
+                            extra["class_map"] = json.dumps(class_pairs, ensure_ascii=False)
+
+                    extra["id_to_name_json"] = json.dumps(id_to_name, ensure_ascii=False)
+            except Exception:
+                logging.exception("[NPZ] failed to serialize id_to_name")
+
+        ext = Path(path).suffix.lower()
+        payload = {
+            "data": data,
+            "image_code": str(img_code),
+            "kind": str(kind),
+            "height": int(h),
+            "width": int(w),
+            "channels": int(c),
+            **extra,
+        }
+
+        if ext == ".mat":
+            try:
+                from scipy.io import savemat  # type: ignore
+                # scipy.io.savemat은 문자열 ndarray를 "char matrix"로 저장하는 경우가 많아서,
+                # class_names는 MATLAB에서 다루기 쉬운 cellstr(object array)로 저장한다.
+                if "class_names" in payload and isinstance(payload.get("class_names"), np.ndarray):
+                    cn = payload["class_names"]
+                    try:
+                        if getattr(cn.dtype, "kind", "") in ("U", "S"):
+                            payload["class_names"] = np.asarray(cn.tolist(), dtype=object)
+                    except Exception:
+                        pass
+                # class_map(JSON 문자열)를 MATLAB에서 "리스트(튜플)"처럼 보이도록 Nx1 cell(각 셀=1x2)로 변환
+                if "class_map" in payload and isinstance(payload.get("class_map"), str):
+                    try:
+                        pairs = json.loads(payload["class_map"])
+                        if isinstance(pairs, list) and pairs:
+                            cm_cell = np.empty((len(pairs), 1), dtype=object)
+                            for idx, row in enumerate(pairs):
+                                if isinstance(row, (list, tuple)) and len(row) >= 2:
+                                    cm_cell[idx, 0] = (str(row[0]), str(row[1]))
+                                else:
+                                    cm_cell[idx, 0] = (str(row), "")
+                            payload["class_map"] = cm_cell
+                    except Exception:
+                        pass
+                savemat(path, payload, do_compression=True)
+            except Exception:
+                logging.exception("[MAT] save failed")
+                QtWidgets.QMessageBox.critical(self, "오류", ".mat 저장 중 오류가 발생했습니다.")
+                return
+        else:
+            np.savez(path, **payload)
+
+    def _load_npz_with_check(self, path: str) -> tuple[str, np.ndarray, dict | None]:
         """
         .npz 열고 image_code 검증. ok면 (kind, data) 반환.
         """
@@ -3141,7 +3291,136 @@ class MainWindow(QtWidgets.QMainWindow):
             raise ValueError("현재 image_code가 없습니다. 먼저 HSI를 로드하세요.")
         if code != cur:
             raise ValueError(f"image_code 불일치: 파일={code}, 현재={cur}")
-        return kind, arr
+        id_to_name: dict | None = None
+        if kind == "classmap" and "id_to_name_json" in z:
+            try:
+                raw = z["id_to_name_json"]
+                # np scalar/array -> python str
+                s = str(raw.item() if hasattr(raw, "item") else raw)
+                parsed = json.loads(s) if s else None
+                if isinstance(parsed, dict):
+                    id_to_name = parsed
+            except Exception:
+                logging.exception("[NPZ] failed to parse id_to_name_json")
+                id_to_name = None
+
+        return kind, arr, id_to_name
+
+    @staticmethod
+    def _mat_scalar_to_str(value: Any) -> str:
+        if isinstance(value, np.ndarray):
+            if value.size == 0:
+                return ""
+            try:
+                if value.dtype.kind in ("U", "S"):
+                    return str(value.item()) if value.size == 1 else str(value.ravel()[0])
+                return str(value.item()) if value.size == 1 else str(value.ravel()[0])
+            except Exception:
+                return str(value)
+        return str(value)
+
+    @staticmethod
+    def _decode_class_map_any(raw: Any) -> dict[int, str]:
+        """
+        class_map(id,name) 표현을 {cid: name} 딕셔너리로 변환.
+        - JSON 문자열
+        - MATLAB object ndarray (Nx2 / Nx1(cell of tuple))
+        """
+        out: dict[int, str] = {}
+        if raw is None:
+            return out
+
+        # JSON string
+        if isinstance(raw, str):
+            try:
+                parsed = json.loads(raw)
+                if isinstance(parsed, list):
+                    for row in parsed:
+                        if isinstance(row, (list, tuple)) and len(row) >= 2:
+                            try:
+                                out[int(str(row[0]).strip())] = str(row[1])
+                            except Exception:
+                                continue
+                return out
+            except Exception:
+                return out
+
+        if isinstance(raw, np.ndarray):
+            arr = raw
+            if arr.dtype == object:
+                # Nx2
+                if arr.ndim >= 2 and arr.shape[-1] == 2:
+                    for row in arr.reshape(-1, 2).tolist():
+                        try:
+                            out[int(MainWindow._mat_scalar_to_str(row[0]))] = MainWindow._mat_scalar_to_str(row[1])
+                        except Exception:
+                            continue
+                    return out
+                # Nx1 (each cell tuple/list/array)
+                if arr.ndim == 2 and arr.shape[1] == 1:
+                    for cell in arr[:, 0].tolist():
+                        try:
+                            if isinstance(cell, (list, tuple)) and len(cell) >= 2:
+                                out[int(MainWindow._mat_scalar_to_str(cell[0]))] = MainWindow._mat_scalar_to_str(cell[1])
+                            elif isinstance(cell, np.ndarray) and cell.size >= 2:
+                                flat = cell.ravel().tolist()
+                                out[int(MainWindow._mat_scalar_to_str(flat[0]))] = MainWindow._mat_scalar_to_str(flat[1])
+                        except Exception:
+                            continue
+            return out
+
+        return out
+
+    def _load_mat_with_check(self, path: str) -> tuple[str, np.ndarray, dict | None]:
+        """
+        .mat 열고 image_code 검증. ok면 (kind, data, id_to_name) 반환.
+        """
+        from scipy.io import loadmat  # type: ignore
+
+        m = loadmat(path)
+        d = {k: v for k, v in m.items() if not str(k).startswith("__")}
+        if "data" not in d or "image_code" not in d or "kind" not in d:
+            raise ValueError("필수 키(data, image_code, kind) 누락")
+
+        arr = np.asarray(d["data"])
+        code = self._mat_scalar_to_str(d["image_code"])
+        kind = self._mat_scalar_to_str(d["kind"])
+        cur = self._current_image_code()
+        if cur is None:
+            raise ValueError("현재 image_code가 없습니다. 먼저 HSI를 로드하세요.")
+        if code != cur:
+            raise ValueError(f"image_code 불일치: 파일={code}, 현재={cur}")
+
+        id_to_name: dict | None = None
+        if kind == "classmap":
+            try:
+                if "id_to_name_json" in d:
+                    raw = self._mat_scalar_to_str(d["id_to_name_json"])
+                    parsed = json.loads(raw) if raw else None
+                    if isinstance(parsed, dict):
+                        id_to_name = {}
+                        for k, v in parsed.items():
+                            try:
+                                id_to_name[int(k)] = str(v)
+                            except Exception:
+                                continue
+                if not id_to_name and "class_map" in d:
+                    parsed_map = self._decode_class_map_any(d["class_map"])
+                    if parsed_map:
+                        id_to_name = parsed_map
+            except Exception:
+                logging.exception("[MAT] failed to parse class labels")
+                id_to_name = None
+
+        return kind, arr, id_to_name
+
+    def _load_labeled_file_with_check(self, path: str) -> tuple[str, np.ndarray, dict | None]:
+        ext = Path(path).suffix.lower()
+        if ext == ".npz":
+            return self._load_npz_with_check(path)
+        if ext == ".mat":
+            return self._load_mat_with_check(path)
+        raise ValueError(f"지원하지 않는 확장자: {ext}")
 
     def _init_recent_menu(self):
         """

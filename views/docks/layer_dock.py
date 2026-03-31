@@ -20,7 +20,7 @@ class _LayerTree(QTreeWidget):
 
     def dragEnterEvent(self, e):
         md = e.mimeData()
-        ACCEPT = (".npz", ".npy")
+        ACCEPT = (".npz", ".mat")
         if md and md.hasUrls():
             for u in md.urls():
                 if u.isLocalFile() and u.toLocalFile().lower().endswith(ACCEPT):
@@ -29,8 +29,8 @@ class _LayerTree(QTreeWidget):
         super().dragEnterEvent(e)
 
     def dropEvent(self, e):
-        """외부 파일(.npz/.npy) 드롭은 on_ext로 전달, 내부 재정렬은 부모 로직 처리."""
-        ACCEPT = (".npz", ".npy")
+        """외부 파일(.npz/.mat) 드롭은 on_ext로 전달, 내부 재정렬은 부모 로직 처리."""
+        ACCEPT = (".npz", ".mat")
         md = e.mimeData()
         # 1) 외부 파일 드롭 처리
         if md and md.hasUrls() and callable(self._on_ext):
@@ -67,7 +67,7 @@ from PyQt5.QtCore import QObject, QEvent
 
 class _ExternalNpyDropFilter(QObject):
     """
-    QTreeWidget(또는 임의의 위젯)에 부착해서 외부 파일 드롭(.npz/.npy)을 가로채고,
+    QTreeWidget(또는 임의의 위젯)에 부착해서 외부 파일 드롭(.npz/.mat)을 가로채고,
     허용 확장자만 골라 콜백(on_ext)으로 경로 리스트를 넘겨주는 필터.
 
     사용 예)
@@ -78,13 +78,13 @@ class _ExternalNpyDropFilter(QObject):
     참고:
       - DragEnter/DragMove 에서는 허용 확장자가 하나라도 보이면 acceptProposedAction().
       - Drop 시에는 허용 파일 경로만 추출해 on_ext(paths) 호출.
-      - 기본 허용 확장자는 (".npz", ".npy"), 생성자에서 변경 가능.
+      - 기본 허용 확장자는 (".npz", ".mat"), 생성자에서 변경 가능.
     """
-    def __init__(self, on_ext, accept_exts=(".npz", ".npy")):
+    def __init__(self, on_ext, accept_exts=(".npz", ".mat")):
         super().__init__()
         self._on_ext = on_ext
         # 소문자로 비교
-        self._accept_exts = tuple(e.lower() for e in (accept_exts or (".npz", ".npy")))
+        self._accept_exts = tuple(e.lower() for e in (accept_exts or (".npz", ".mat")))
 
     # --- 내부 유틸 ---
     def _iter_local_files(self, mime):
@@ -211,7 +211,7 @@ class LayersDock(QDockWidget):
                 )
                 self.tree.installEventFilter(self._drop_hook)
 
-            # ★★★ 외부 .npy 드롭 허용 + 필터 설치 (UI 트리 경로에 추가) ★★★
+            # ★★★ 외부 .npz/.mat 드롭 허용 + 필터 설치 (UI 트리 경로에 추가) ★★★
             self.tree.setAcceptDrops(True)
             self._ext_filter = _ExternalNpyDropFilter(lambda paths: self.requestLoadPaths.emit(paths))
             self.tree.installEventFilter(self._ext_filter)

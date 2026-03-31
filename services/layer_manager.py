@@ -535,6 +535,27 @@ class LayerManager:
     def get_classmap(self, parent_name: str):
         return getattr(self, "_classmap_store", {}).get(parent_name)
 
+    def get_class_label_map(self, parent_name: str) -> Dict[int, str]:
+        """
+        Return class label mapping for a classmap parent.
+        The mapping is maintained by register_classmap(..., id_to_name=...).
+        """
+        raw = getattr(self, "_class_label_map", {}).get(parent_name, {})
+        if not isinstance(raw, dict):
+            return {}
+        out: Dict[int, str] = {}
+        for k, v in raw.items():
+            try:
+                cid = int(k)
+            except (TypeError, ValueError):
+                continue
+            if v is None:
+                continue
+            s = str(v).strip()
+            if s:
+                out[cid] = s
+        return out
+
     def _merge_two_classmaps(self, a: np.ndarray, b: np.ndarray) -> np.ndarray:
         """픽셀 규칙: >=0 라벨 / -1 Unknown / -2 Multiple"""
         a = a.astype(np.int32, copy=False); b = b.astype(np.int32, copy=False)
