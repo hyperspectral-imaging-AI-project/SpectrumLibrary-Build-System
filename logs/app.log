@@ -393,3 +393,36 @@ AttributeError: `np.unicode_` was removed in the NumPy 2.0 release. Use `np.str_
 2026-03-31 17:53:12,617 INFO: [CID_REC_PICK] UserLabeling._normalize_class_options[mtrl_cd_only] has(mtrl_cd=True,cid=False,class_id=False) vals(mtrl_cd=0,cid=None,class_id=None) picked_cid=0 rec_name='알리자린 크림슨 (진한색)' rec_keys=['mtrl_cd', 'mtrl_nm']
 2026-03-31 17:53:26,986 INFO: [UserLabeling] server 사용자: API 호출 시도
 2026-03-31 17:53:27,232 INFO: [CID_REC_PICK] PixelLabeling._build_class_options_for_labeling[mtrl_cd_only] has(mtrl_cd=True,cid=False,class_id=False) vals(mtrl_cd=0,cid=None,class_id=None) picked_cid=0 rec_name='알리자린 크림슨 (진한색)' rec_keys=['mtrl_cd', 'mtrl_nm']
+2026-04-01 11:52:23,946 INFO: Fallback logging configured (utils.logging_setup not found)
+2026-04-01 11:52:23,982 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2026-04-01 11:52:23,983 INFO: icon.rcc not found (skip)
+2026-04-01 11:52:27,478 ERROR: MainWindow import failed: No module named 'services.transparency_service'
+Traceback (most recent call last):
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\app.py", line 102, in main
+    from views.main_window import MainWindow  # type: ignore
+  File "C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\views\main_window.py", line 31, in <module>
+    from services.transparency_service import TransparencyService
+ModuleNotFoundError: No module named 'services.transparency_service'
+2026-04-01 11:54:43,931 INFO: Fallback logging configured (utils.logging_setup not found)
+2026-04-01 11:54:43,953 INFO: Loaded .env from C:\Users\pde15\Desktop\hsi_crop_preprcoessing\pyqt_code\third_pixel_classification_tool\.env
+2026-04-01 11:54:43,954 INFO: icon.rcc not found (skip)
+2026-04-01 11:54:59,984 INFO: [MainWindow] image_cd를 .info 파일에 저장: E:\3dlabs_data\sample\sample.mat -> 20
+2026-04-01 11:55:00,039 INFO: [ResampleCache] cached result loaded
+2026-04-01 11:55:00,040 INFO: [ResampleCache] loaded: splib_raw=2462, splib_cr=2462, label_raw=2, label_cr=2
+2026-04-01 11:55:00,042 INFO: [CID0_TRACE] apply_hsi_after_cache_bind: splib_raw:[key0->shape=(1, 150) dtype=float32] | splib_cr:[key0->shape=(1, 150) dtype=float32] | label_raw:no_cid0(n=2) | label_cr:no_cid0(n=2)
+2026-04-01 11:55:00,043 INFO: [rebuild] label_raw input: 2 classes, samples={8: 2, 6: 2}
+2026-04-01 11:55:00,043 INFO: [rebuild] label_cr input: 2 classes, samples={8: 2, 6: 2}
+2026-04-01 11:55:00,043 INFO: [_norm_entries] splib_raw: input dict with 2462 keys
+2026-04-01 11:55:00,060 INFO: [_norm_entries] splib_raw: output 2462 classes, 2462 total samples
+2026-04-01 11:55:00,060 INFO: [_norm_entries] splib_cr: input dict with 2462 keys
+2026-04-01 11:55:00,074 INFO: [_norm_entries] splib_cr: output 2462 classes, 2462 total samples
+2026-04-01 11:55:00,075 INFO: [_norm_entries] label_raw: input dict with 2 keys
+2026-04-01 11:55:00,075 INFO: [_norm_entries] label_raw: output 2 classes, 4 total samples
+2026-04-01 11:55:00,076 INFO: [_norm_entries] label_cr: input dict with 2 keys
+2026-04-01 11:55:00,076 INFO: [_norm_entries] label_cr: output 2 classes, 4 total samples
+2026-04-01 11:55:00,077 INFO: [rebuild] after _norm_entries: label_raw_norm=2 classes, label_cr_norm=2 classes
+2026-04-01 11:55:00,143 INFO: [CID0_TRACE] rebuild_lib_after_norm: splib_raw_norm:[key0->shape=(1, 150) dtype=float32] | splib_cr_norm:[key0->shape=(1, 150) dtype=float32] | label_raw_norm:no_cid0(n=2) | label_cr_norm:no_cid0(n=2) | lib:[key0->shape=(1, 150) dtype=float32]
+2026-04-01 11:55:00,146 INFO: [rebuild] classes: splib_raw=2462, splib_cr=2462, label_raw=2, label_cr=2, lib(raw+splib+label raw)=2462, merged_lib_cr=2462
+2026-04-01 11:55:00,147 INFO: [rebuild] label_raw=2 classes / 4 samples, label_cr=2 classes / 4 samples, lib=2462 classes / 2466 samples
+2026-04-01 11:55:00,158 INFO: [Rebuild] lib=2462 classes, labeling_lib=2 classes
+2026-04-01 11:55:00,161 INFO: Resampling 완료 — splib_raw:2462, splib_cr:2462, label_raw:2, label_cr:2

@@ -1,2 +1,12 @@
 .env
 /logs
+*.tmp
+*.npy.tmp
+__pycache__/
+*.npy
+*.npz
+*.csv
+!map_sample/*.npz
+!map_sample/*.npy
+!label_local/*.npy
+!label_local/*.npz

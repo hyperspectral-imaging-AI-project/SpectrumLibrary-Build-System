@@ -28,7 +28,6 @@ from views.docks.pixel_classification_dock import PixelClassificationDock
 from services.pixel_knn import topk_for_pixel  # ★ 상단 import
 from controllers.pixel_click import PixelClickController, PixelClickDeps, ClickMode  # ★ 추가
 from services.opacity import compute_alpha_from_gmin, build_opacity_overlay_rgba
-from services.transparency_service import TransparencyService
 from services.region_growing_service import RegionGrowingService
 from controllers.class_roi_controller import ClassROIController
 from views.dialogs.diffusion_dialog import DiffusionDialog
@@ -132,7 +131,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # 3) ★ 서비스 생성·주입 + 렌더러에 팔레트 주입
         ps = PaletteService()
         cr = ClassmapRenderer(strict=True)
-        self.transparency_service = TransparencyService()  # ★ 투명도 서비스 추가
         # 수정 후
         self.region_growing_service = RegionGrowingService()  # ★ Region Growing 서비스 추가
         # MapView가 만들어진 뒤( _load_ui() 이후 ) 바로 참조 주입
